@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>de Lavalle</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
@@ -137,7 +137,7 @@ header.scrolled .nav-btn,header.scrolled .logo-text{color:var(--black);text-shad
 /* Women split layout — sticky image left, grid right — exact The Row */
 .women-layout{display:grid;grid-template-columns:48% 52%}
 .women-cat-img-col{position:sticky;top:56px;height:calc(100vh - 56px);overflow:hidden}
-.women-cat-img-fill{width:100%;height:100%;background:linear-gradient(160deg,#c0bbb4 0%,#989389 60%,#787268 100%)}
+.women-cat-img-fill{width:100%;height:100%;object-fit:cover}
 /* ── ADD CATEGORY IMAGE:
    Replace with: <img src="category.jpg" style="width:100%;height:100%;object-fit:cover">
 ── */
@@ -222,8 +222,8 @@ header.scrolled .nav-btn,header.scrolled .logo-text{color:var(--black);text-shad
 /* ─────────────────────────────────────
    GALERIE — photos only, no text
 ───────────────────────────────────── */
-#page-galerie{background:var(--white)}
-.galerie-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;padding:2px}
+#page-gallery{background:var(--white)}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;padding:2px}
 .g-cell{position:relative;overflow:hidden;cursor:pointer;background:var(--bg)}
 .g-cell-inner{width:100%;aspect-ratio:1/1;overflow:hidden}
 .g-cell-fill{width:100%;height:100%;transition:transform 0.6s ease}
@@ -399,7 +399,7 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:38px 3
 .bg-camel{background:linear-gradient(150deg,#c8a878,#b09060)}
 .bg-wood{background:linear-gradient(150deg,#c8b898,#a89878)}
 .bg-alpaca-p{background:linear-gradient(150deg,#e0dbd4,#c8c3bc)}
-/* galerie placeholders */
+/* gallery placeholders */
 .gp1{background:linear-gradient(145deg,#e0dbd4,#c8c3bc)}
 .gp2{background:linear-gradient(145deg,#c8c4bc,#a8a39c)}
 .gp3{background:linear-gradient(145deg,#d4cfc9,#b4afaa)}
@@ -537,6 +537,215 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:38px 3
 .conf-whatsapp{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;font-weight:300;color:var(--grey);margin-top:20px}
 .conf-whatsapp a{color:var(--black);text-decoration:underline;text-underline-offset:2px}
 
+
+/* ══════════════════════════════════
+   MOBILE — max 768px
+══════════════════════════════════ */
+@media screen and (max-width: 768px) {
+
+  /* Hide desktop nav */
+  .nav-left { display: none !important; }
+  .nav-right { display: none !important; }
+  .announce { display: none; }
+
+  /* Show hamburger */
+  .mobile-menu-btn { display: flex !important; }
+
+  /* Header */
+  .header-inner {
+    display: grid;
+    grid-template-columns: 48px 1fr 48px;
+    align-items: center;
+    padding: 0 16px;
+    height: 52px;
+  }
+  .logo-wrap {
+    grid-column: 2;
+    text-align: center;
+  }
+  .logo-text {
+    font-size: 11px;
+    letter-spacing: 0.35em;
+  }
+
+  /* Hero video */
+  .hero { height: 100svh; margin-top: 0; }
+  .hero video { object-position: center center; }
+
+  /* Women page */
+  .women-layout { grid-template-columns: 1fr !important; }
+  .women-cat-img-col { display: none !important; }
+  .women-grid { grid-template-columns: repeat(2, 1fr) !important; padding: 8px !important; gap: 2px !important; }
+  .women-topbar { padding: 10px 16px; flex-wrap: wrap; gap: 8px; }
+  .women-bc { font-size: 11px; }
+  .prod-count { font-size: 11px; padding: 8px 16px; }
+  .filter-inner { padding: 12px 16px; }
+  .chip { font-size: 10px; padding: 6px 12px; }
+
+  /* Product page */
+  .product-layout { grid-template-columns: 1fr !important; }
+  .gallery-col { height: 85vw !important; position: relative !important; top: 0 !important; }
+  .info-col { padding: 20px 16px 40px !important; border-left: none !important; border-top: 1px solid var(--border); }
+  .prod-title { font-size: 18px; }
+  .size-grid { gap: 4px; }
+  .sz { padding: 9px 12px; font-size: 11px; }
+  .add-bag-btn { font-size: 11px; padding: 15px; }
+
+  /* Gallery */
+  .gallery-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 1px !important; padding: 0 !important; }
+
+  /* Checkout */
+  .checkout-wrap { grid-template-columns: 1fr !important; }
+  .ch-left { padding: 24px 16px !important; }
+  .ch-right { display: none; }
+  .form-row { grid-template-columns: 1fr !important; }
+
+  /* Cart */
+  .cart { width: 100% !important; right: 0 !important; }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .footer-div { display: none !important; }
+  footer { padding: 32px 16px 24px !important; }
+
+  /* Home section */
+  .home-cat-strip { grid-template-columns: repeat(2, 1fr) !important; }
+  .home-sec-hero { height: 60vw !important; }
+
+  /* Saved page */
+  .saved-grid { grid-template-columns: repeat(2, 1fr) !important; padding: 0 16px 40px !important; }
+  .saved-header { padding: 20px 16px 16px !important; }
+
+  /* Auth panel */
+  .auth-panel { width: 100% !important; }
+  .auth-inner { padding: 72px 24px 40px !important; }
+
+  /* Search */
+  .search-box { width: 90vw !important; }
+}
+
+/* ══ HAMBURGER BUTTON ══ */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  grid-column: 1;
+}
+.mobile-menu-btn span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  transition: all 0.3s;
+}
+
+/* ══ MOBILE MENU — Full screen like The Row ══ */
+.mobile-overlay{display:none;position:fixed;inset:0;background:var(--white);z-index:490}
+.mobile-overlay.open{display:block}
+
+.mobile-menu{
+  position:fixed;
+  inset:0;
+  background:var(--white);
+  z-index:500;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.25s ease;
+  display:flex;
+  flex-direction:column;
+  overflow-y:auto;
+}
+.mobile-menu.open{opacity:1;pointer-events:all}
+
+.mobile-menu-close{
+  position:absolute;
+  top:18px;
+  right:20px;
+  background:none;
+  border:none;
+  font-size:13px;
+  font-weight:300;
+  letter-spacing:0.06em;
+  cursor:pointer;
+  color:var(--black);
+  font-family:var(--sans);
+  padding:4px 8px;
+}
+
+.mobile-nav{
+  padding:72px 28px 0;
+  flex:1;
+}
+.mobile-nav > button{
+  display:block;
+  width:100%;
+  text-align:left;
+  font-family:var(--sans);
+  font-size:18px;
+  font-weight:300;
+  letter-spacing:0.02em;
+  color:var(--black);
+  background:none;
+  border:none;
+  border-bottom:1px solid var(--border);
+  padding:20px 0;
+  cursor:pointer;
+}
+.mobile-sub{
+  overflow:hidden;
+  max-height:0;
+  transition:max-height 0.3s ease;
+}
+.mobile-sub.open{max-height:400px}
+.mobile-sub-item{
+  display:block!important;
+  width:100%;
+  text-align:left;
+  font-family:var(--sans);
+  font-size:13px;
+  font-weight:300;
+  letter-spacing:0.04em;
+  color:var(--grey);
+  background:none;
+  border:none;
+  border-bottom:1px solid var(--border);
+  padding:15px 0 15px 16px;
+  cursor:pointer;
+}
+.mobile-sub-item:hover{color:var(--black)}
+.mobile-nav-bottom{
+  padding:28px 28px 48px;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+.mobile-nav-bottom button,
+.mobile-nav-bottom a{
+  display:block;
+  font-family:var(--sans);
+  font-size:13px;
+  font-weight:300;
+  letter-spacing:0.04em;
+  color:var(--grey);
+  background:none;
+  border:none;
+  text-align:left;
+  padding:12px 0;
+  cursor:pointer;
+  text-decoration:none;
+  border-bottom:1px solid var(--border);
+}
+.mobile-nav-bottom button:hover,
+.mobile-nav-bottom a:hover{color:var(--black)}
+
 </style>
 </head>
 <body>
@@ -550,11 +759,12 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:38px 3
       <button class="nav-btn" onmouseenter="showDrop('women')" onclick="goWomen()">Women</button>
       <button class="nav-btn" onclick="goHomePage()">Home</button>
       
-      <button class="nav-btn" onclick="goGalerie()">Galerie</button>
+      <button class="nav-btn" onclick="goGalerie()">Gallery</button>
     </nav>
     <div class="logo-wrap" onclick="goLanding()">
       <span class="logo-text">de Lavalle</span>
     </div>
+    <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="openMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
     <nav class="nav-right">
       <button class="nav-btn" onclick="openSearch()">Search</button>
       
@@ -571,7 +781,7 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:38px 3
 <!-- ══════════ LANDING ══════════ -->
 <div class="page active" id="page-home">
   <div class="hero">
-    <video autoplay muted loop playsinline preload="auto">
+    <video autoplay muted loop playsinline preload="auto" webkit-playsinline playsinline>
       <source src="hero.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
@@ -715,9 +925,7 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:38px 3
   <div class="women-layout">
     <div class="women-cat-img-col">
       <div class="women-cat-img-fill" id="womenCatImg">
-        <!-- ADD YOUR CATEGORY PHOTO:
-        <img src="women-category.jpg" style="width:100%;height:100%;object-fit:cover">
-        -->
+        <img src="women-hero.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
       </div>
       <span class="women-cat-label-corner" id="womenCatImgLabel">women · new collection</span>
     </div>
@@ -780,7 +988,7 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:38px 3
 
 <!-- ══════════ GALERIE ══════════ -->
 <div class="page" id="page-galerie">
-  <div class="galerie-grid" id="galerieGrid"></div>
+  <div class="gallery-grid" id="galleryGrid"></div>
 
   <!-- Lightbox — no text, arrows only -->
   <div class="lightbox" id="lightbox">
@@ -810,7 +1018,7 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:38px 3
     <div class="coll-item" onclick="goWomen()"><div class="coll-item-img" style="background:linear-gradient(145deg,#c8c3bc,#a8a39c)"><div><p class="coll-item-name">Spring / Summer</p><p class="coll-item-year">2026</p></div></div></div>
     <div class="coll-item" onclick="goWomen()"><div class="coll-item-img" style="background:linear-gradient(145deg,#d8d3cc,#b8b3ac)"><div><p class="coll-item-name">Autumn / Winter</p><p class="coll-item-year">2025</p></div></div></div>
     <div class="coll-item" onclick="goHomePage()"><div class="coll-item-img" style="background:linear-gradient(145deg,#c8b898,#a89878)"><div><p class="coll-item-name">Home Objects</p><p class="coll-item-year">2026</p></div></div></div>
-    <div class="coll-item" onclick="goGalerie()"><div class="coll-item-img" style="background:linear-gradient(145deg,#e0dbd4,#c0bbb4)"><div><p class="coll-item-name">Galerie</p><p class="coll-item-year">Visual Archive</p></div></div></div>
+    <div class="coll-item" onclick="goGalerie()"><div class="coll-item-img" style="background:linear-gradient(145deg,#e0dbd4,#c0bbb4)"><div><p class="coll-item-name">Gallery</p><p class="coll-item-year">Visual Archive</p></div></div></div>
   </div>
   <footer>
     <div class="footer-grid">
@@ -981,22 +1189,25 @@ const PRODUCTS = [
   {id:10,name:'The Blanket',      shopifyHandle:'the-blanket',      cat:'Alpaca',      colour:'Ivory',  hex:'#e0d8cc', bg:'bg-alpaca-p',section:'home',  price:890,  sizes:['90×200cm'],            stock:{'90×200cm':6},           badge:'',          photo:null, desc:'100% baby alpaca blanket, hand-woven in Cusco. Extraordinarily soft.'},
   {id:11,name:'The Tray',         shopifyHandle:'the-tray',         cat:'Wood',        colour:'Walnut', hex:'#b89878', bg:'bg-wood',    section:'home',  price:280,  sizes:['One size'],            stock:{'One size':7},           badge:'New',       photo:null, desc:'Solid walnut serving tray with hand-finished edges.'},
   {id:12,name:'The Throw',        shopifyHandle:'the-throw',        cat:'Alpaca',      colour:'Stone',  hex:'#c8c4bc', bg:'bg-alpaca-p',section:'home',  price:650,  sizes:['130×180cm'],           stock:{'130×180cm':5},          badge:'',          photo:null, desc:'Lightweight baby alpaca throw. Perfect for cooler evenings.'},
+  {id:13,name:'The Gingham Short', shopifyHandle:'the-gingham-short', cat:'Pants & Shorts',colour:'Burgundy',hex:'#7a3b4a',bg:'bg-ecru',   section:'women', price:320,  sizes:['XS','S','M','L'],      stock:{XS:3,S:5,M:4,L:2},      badge:'New',       photo:'gingham1.jpg', photos:['gingham1.jpg','gingham2.jpg','gingham3.jpg'], desc:'Relaxed fit short in gingham cotton. Elastic waistband. 100% Pima Cotton. Made in Lima, Peru.'},
+  {id:14, name:'Inés Shirt', cat:'Shirts & Tops', colour:'Ivory', hex:'#f5f0e8', bg:'bg-ivory', section:'women', price:230, sizes:['S','M','L'], stock:{S:5,M:5,L:5}, badge:'New', photo:'ines3.jpg', photos:['ines3.jpg','ines4.jpg','ines1.jpg','ines2.jpg','ines5.jpg'], desc:'Relaxed fit shirt in lightweight pima cotton. Classic collar, mother-of-pearl buttons and wide cuffs. Available in Ivory, Beige and Light Blue. 100% Pima Cotton. Made in Lima, Peru.'},
+  {id:15, name:'Inés Shirt', cat:'Shirts & Tops', colour:'Beige', hex:'#d4c4a8', bg:'bg-sand', section:'women', price:230, sizes:['S','M','L'], stock:{S:5,M:5,L:5}, badge:'New', photo:'ines-beige1.jpg', photos:['ines-beige1.jpg','ines-beige2.jpg','ines-beige3.jpg','ines-beige4.jpg','ines-beige5.jpg'], desc:'Relaxed fit shirt in lightweight pima cotton. Classic collar, mother-of-pearl buttons and wide cuffs. Available in Ivory, Beige and Light Blue. 100% Pima Cotton. Made in Lima, Peru.'},
+  {id:16, name:'Inés Shirt', cat:'Shirts & Tops', colour:'Light Blue', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:230, sizes:['S','M','L'], stock:{S:5,M:5,L:5}, badge:'New', photo:'ines-blue1.jpg', photos:['ines-blue1.jpg','ines-blue2.jpg','ines-blue3.jpg','ines-blue4.jpg','ines-blue5.jpg'], desc:'Relaxed fit shirt in lightweight pima cotton. Classic collar, mother-of-pearl buttons and wide cuffs. Available in Ivory, Beige and Light Blue. 100% Pima Cotton. Made in Lima, Peru.'},
+  {id:17, name:'María Trousers', cat:'Pants & Shorts', colour:'Ivory', hex:'#f5f0e8', bg:'bg-ivory', section:'women', price:280, sizes:['S','M','L','XL'], stock:{S:5,M:5,L:5,XL:5}, badge:'', photo:'ines3.jpg', photos:['ines3.jpg','ines4.jpg','ines1.jpg','ines2.jpg','ines5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem. 75% Pima Cotton, 25% Linen. Made in Peru.'},
+  {id:18, name:'María Trousers', cat:'Pants & Shorts', colour:'Beige', hex:'#d4c4a8', bg:'bg-sand', section:'women', price:280, sizes:['S','M','L','XL'], stock:{S:5,M:5,L:5,XL:5}, badge:'', photo:'ines-beige1.jpg', photos:['ines-beige1.jpg','ines-beige2.jpg','ines-beige3.jpg','ines-beige4.jpg','ines-beige5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem. 75% Pima Cotton, 25% Linen. Made in Peru.'},
+  {id:19, name:'María Trousers', cat:'Pants & Shorts', colour:'Light Blue', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:280, sizes:['S','M','L','XL'], stock:{S:5,M:5,L:5,XL:5}, badge:'', photo:'ines-blue1.jpg', photos:['ines-blue1.jpg','ines-blue2.jpg','ines-blue3.jpg','ines-blue4.jpg','ines-blue5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem. 75% Pima Cotton, 25% Linen. Made in Peru.'},
 ];
 
-/* Galerie photos */
+/* Gallery photos */
 const PHOTOS = [
-  {id:1,bg:'gp1',caption:'Campaign SS26',cat:'women',photo:null},
-  {id:2,bg:'gp2',caption:'Margaux Coat',cat:'women',photo:null},
-  {id:3,bg:'gp3',caption:'The Carrier',cat:'home',photo:null},
-  {id:4,bg:'gp4',caption:'The Blanket',cat:'home',photo:null},
-  {id:5,bg:'gp5',caption:'Studio — Lima',cat:'behind',photo:null},
-  {id:6,bg:'gp6',caption:'SS26 Look 3',cat:'women',photo:null},
-  {id:7,bg:'gp7',caption:'Atelier',cat:'behind',photo:null},
-  {id:8,bg:'gp8',caption:'SS26 Look 7',cat:'women',photo:null},
-  {id:9,bg:'gp9',caption:'The Tray',cat:'home',photo:null},
-  {id:10,bg:'gp10',caption:'Baby Alpaca',cat:'home',photo:null},
-  {id:11,bg:'gp11',caption:'Backstage',cat:'behind',photo:null},
-  {id:12,bg:'gp12',caption:'Campaign',cat:'women',photo:null},
+  {id:1,bg:'gp1',photo:'g1.jpg'},
+  {id:2,bg:'gp2',photo:'g2.jpg'},
+  {id:3,bg:'gp3',photo:'g3.jpg'},
+  {id:4,bg:'gp4',photo:'g4.jpg'},
+  {id:5,bg:'gp5',photo:'g5.jpg'},
+  {id:6,bg:'gp6',photo:'g6.jpg'},
+  {id:7,bg:'gp7',photo:'g7.jpg'},
+  {id:8,bg:'gp8',photo:'g8.jpg'},
 ];
 
 /* ── STATE ── */
@@ -1029,11 +1240,33 @@ function goProd(id){
   document.getElementById('prodRefTxt').textContent='REF: DLV-00'+p.id+' · '+p.shopifyHandle;
   document.getElementById('accDetails').textContent=p.section==='home'
     ?(p.cat==='Alpaca'?'100% Baby Alpaca. Hand-woven in Cusco. Dry clean recommended.':'Solid hardwood. Hand-finished in Lima. Each piece unique.')
-    :'100% Merino Wool. Lining: 100% Silk. Dry clean only. Made in Lima, Peru.';
+    :'100% Pima Cotton. Made in Lima, Peru.';
   const gd=document.getElementById('galleryDisplay');
   if(p.photo){gd.innerHTML=`<img src="${p.photo}" style="width:100%;height:100%;object-fit:cover">`;gd.className='prod-display';}
   else{gd.className='prod-display '+p.bg;gd.innerHTML='';}
-  document.getElementById('colourLbl').textContent=p.colour;
+  // Render thumbnails if product has multiple photos
+  const thumbsRow=document.getElementById('galleryThumbs');
+  if(p.photos && p.photos.length>1){
+    thumbsRow.innerHTML=p.photos.map((src,i)=>`
+      <div class="g-thumb${i===0?' on':''}" onclick="pickThumb(this,'${p.bg}','${src}')">
+        <img src="${src}" style="width:100%;height:100%;object-fit:cover">
+      </div>`).join('');
+    thumbsRow.style.display='flex';
+  } else {
+    thumbsRow.innerHTML='';
+    thumbsRow.style.display='none';
+  }
+  // Build colour swatches from all variants of same product name
+  document.getElementById('colourLbl').textContent = p.colour;
+  const variants = PRODUCTS.filter(x => x.name === p.name && x.section === p.section);
+  const cr = document.getElementById('colourRow');
+  if(variants.length > 1){
+    cr.innerHTML = variants.map(v =>
+      `<div class="swatch${v.colour === p.colour ? ' on' : ''}" style="background:${v.hex}" onclick="pickColour(this,'${v.colour}','${v.bg}')"></div>`
+    ).join('') + `<span class="colour-lbl" id="colourLbl">${p.colour}</span>`;
+  } else {
+    cr.innerHTML = `<div class="swatch on" style="background:${p.hex}"></div><span class="colour-lbl" id="colourLbl">${p.colour}</span>`;
+  }
   document.getElementById('sizeGrid').innerHTML=p.sizes.map((s,i)=>{
     const q=p.stock[s]||0,oos=q===0;
     return`<button class="sz${i===0&&!oos?' on':''}${oos?' oos':''}"${oos?' disabled':''} onclick="pickSz(this,'${s}')">${s}</button>`;
@@ -1051,7 +1284,15 @@ let dt;
 function showDrop(k){clearTimeout(dt);const d=DROP[k];if(!d)return;document.getElementById('dropCols').innerHTML=d.map(c=>`<div class="drop-col"><h4 onclick="filterCat('${c.head}')">${c.head}</h4>${c.sub.map(s=>`<a onclick="filterCat('${s}')">${s}</a>`).join('')}</div>`).join('');document.getElementById('dropdown').classList.add('open')}
 function hideDrop(){dt=setTimeout(()=>document.getElementById('dropdown').classList.remove('open'),100)}
 document.getElementById('dropdown').addEventListener('mouseenter',()=>clearTimeout(dt));
-function filterCat(cat){hideDrop();wf.cat=cat;wVisible=applyLogic();renderWomenGrid();showPage('women')}
+function filterCat(cat){
+  hideDrop();
+  // 'Ready to Wear' = show all women products
+  wf.cat = (cat === 'Ready to Wear') ? 'All' : cat;
+  wVisible = applyLogic();
+  renderWomenGrid();
+  document.getElementById('womenCatLabel').textContent = cat;
+  showPage('women');
+}
 
 /* ── WOMEN GRID ── */
 function renderWomenGrid(){
@@ -1110,7 +1351,18 @@ function clearFilters(){wf={cat:'All',col:[],sz:[],avail:'All'};wVisible=PRODUCT
 function sortWomen(v){if(v==='price-asc')wVisible.sort((a,b)=>a.price-b.price);if(v==='price-desc')wVisible.sort((a,b)=>b.price-a.price);if(v==='name')wVisible.sort((a,b)=>a.name.localeCompare(b.name));renderWomenGrid()}
 
 /* ── PRODUCT ── */
-function pickColour(el,n,bg){document.querySelectorAll('.swatch').forEach(s=>s.classList.remove('on'));el.classList.add('on');document.getElementById('colourLbl').textContent=n;const gd=document.getElementById('galleryDisplay');gd.className='prod-display '+bg;gd.innerHTML=''}
+function pickColour(el, colourName, bg){
+  // Find the variant of the same product name with this colour
+  const variant = PRODUCTS.find(p => p.name === currentProd.name && p.colour === colourName);
+  if(variant){
+    goProd(variant.id);
+  } else {
+    // Fallback: just change the swatch display
+    document.querySelectorAll('.swatch').forEach(s=>s.classList.remove('on'));
+    el.classList.add('on');
+    document.getElementById('colourLbl').textContent = colourName;
+  }
+}
 function pickSz(el,sz){document.querySelectorAll('.sz').forEach(s=>s.classList.remove('on'));el.classList.add('on');updateStockInfo(sz)}
 function updateStockInfo(sz){
   if(!currentProd)return;
@@ -1131,7 +1383,7 @@ function addToBag(){
 /* ── GALERIE ── */
 function renderGalerie(){
   lbPhotos=PHOTOS;
-  document.getElementById('galerieGrid').innerHTML=lbPhotos.map((p,i)=>`
+  document.getElementById('galleryGrid').innerHTML=lbPhotos.map((p,i)=>`
     <div class="g-cell" onclick="openLb(${i})">
       <div class="g-cell-inner">
         ${p.photo?`<img src="${p.photo}" alt="">`:`<div class="g-cell-fill ${p.bg}"></div>`}
@@ -1485,6 +1737,24 @@ document.addEventListener('keydown',e=>{
 // Init on load
 updateNavForUser();
 
+
+function openMobileMenu(){
+  document.getElementById('mobileMenu').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeMobileMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.body.style.overflow='';
+  // Close all subs
+  document.querySelectorAll('.mobile-sub').forEach(s=>s.classList.remove('open'));
+}
+function toggleMobileSub(btn){
+  const sub = btn.querySelector('.mobile-sub');
+  if(!sub) return;
+  sub.classList.toggle('open');
+}
+
+
 </script>
 
 <!-- ══ SAVED PAGE ══ -->
@@ -1630,6 +1900,34 @@ updateNavForUser();
       <span>Questions? Contact us on</span>
       <a href="https://wa.me/34650565927" target="_blank">WhatsApp</a>
     </div>
+  </div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="closeMobileMenu()">&#215; Close</button>
+  <nav class="mobile-nav">
+    <button onclick="toggleMobileSub(this)">
+      Women
+      <div class="mobile-sub">
+        <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Ready to Wear')">Ready to Wear</button>
+        <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Outerwear')">Outerwear</button>
+        <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Shirts & Tops')">Shirts &amp; Tops</button>
+        <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Dresses')">Dresses</button>
+        <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Skirts')">Skirts</button>
+        <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Pants & Shorts')">Pants &amp; Shorts</button>
+      </div>
+    </button>
+    <button onclick="closeMobileMenu();goHomePage()">Home</button>
+    <button onclick="closeMobileMenu();goGalerie()">Gallery</button>
+  </nav>
+  <div class="mobile-nav-bottom">
+    <button onclick="closeMobileMenu();openSearch()">Search</button>
+    <button onclick="closeMobileMenu();goSaved()">Saved</button>
+    <button onclick="closeMobileMenu();openAuth()">Login</button>
+    <a href="https://wa.me/34650565927" target="_blank">Contact Us</a>
+    <a href="https://instagram.com/de.lavalle" target="_blank">Instagram</a>
   </div>
 </div>
 </body>
