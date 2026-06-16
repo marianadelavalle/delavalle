@@ -235,7 +235,7 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
    GALERIE — photos only, no text
 ───────────────────────────────────── */
 #page-gallery{background:var(--white)}
-.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;padding:2px}
+.gallery-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;padding:2px}
 .g-cell{position:relative;overflow:hidden;cursor:pointer;background:var(--bg)}
 .g-cell-inner{width:100%;aspect-ratio:1/1;overflow:hidden}
 .g-cell-fill{width:100%;height:100%;transition:transform 0.6s ease}
@@ -811,7 +811,7 @@ header.scrolled .logo-text {
   <div class="dropdown" id="dropdown" onmouseleave="hideDrop()">
     <div class="drop-inner">
       <div class="drop-cats" id="dropCols"></div>
-      <div class="drop-image" id="dropImage"></div>
+      <div id="dropImage"><!-- DO NOT ADD CONTENT HERE --></div>
     </div>
   </div>
 </header>
@@ -830,9 +830,9 @@ header.scrolled .logo-text {
     <div class="footer-grid">
       <div class="footer-lang"><span class="lbl">Language</span><br>English<br><br><span class="lbl">Country</span><br>Peru</div>
       <div class="footer-div"></div>
-      <div class="footer-col"><a href="#">About the Brand</a><a href="#">Stores</a><a href="#">Architecture</a><a href="#">Contact Us</a></div>
-      <div class="footer-col"><a href="#">Instagram</a><a href="#">Shipping</a><a href="#">Return Policy</a><a href="#">Start a Return</a></div>
-      <div class="footer-col"><a href="#">FAQ</a><a href="#">Legal &amp; Privacy</a><a href="#">Accessibility</a></div>
+      <div class="footer-col"><a href="#" onclick="goAbout()">About the Brand</a><a href="https://wa.me/34650565927" target="_blank">Contact Us</a></div>
+      <div class="footer-col"><a href="https://instagram.com/de.lavalle" target="_blank">Instagram</a></div>
+      <div class="footer-col"></div>
       <div><p class="nl-title">Subscribe to our Newsletter</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email address"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I have read and understood the <u>Privacy Policy</u></span></label></div>
     </div>
     <div class="footer-bottom">de Lavalle &copy; 2026</div>
@@ -894,9 +894,11 @@ header.scrolled .logo-text {
     <div class="footer-grid">
       <div class="footer-lang"><span class="lbl">Language</span><br>English<br><br><span class="lbl">Country</span><br>Peru</div>
       <div class="footer-div"></div>
-      <div class="footer-col"><a href="#">About the Brand</a><a href="#">Stores</a><a href="#">Contact</a></div>
-      <div class="footer-col"><a href="#">Instagram</a><a href="#">Shipping</a><a href="#">Returns</a></div>
-      <div class="footer-col"><a href="#">FAQ</a><a href="#">Legal &amp; Privacy</a></div>
+      <div class="footer-col"><a href="#" onclick="goAbout()">About the Brand</a><a href="https://wa.me/34650565927" target="_blank">Contact Us</a></div>
+      <div class="footer-col"><a href="https://instagram.com/de.lavalle" target="_blank">Instagram</a></div>
+      <div class="footer-col"></div>
+      <div><p class="nl-title">Subscribe to our Newsletter</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email address"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I have read and understood the <u>Privacy Policy</u></span></label></div>
+    </div>
       <div><p class="nl-title">Subscribe</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I accept the <u>Privacy Policy</u></span></label></div>
     </div>
     <div class="footer-bottom">de Lavalle &copy; 2026</div>
@@ -978,9 +980,11 @@ header.scrolled .logo-text {
     <div class="footer-grid">
       <div class="footer-lang"><span class="lbl">Language</span><br>English<br><br><span class="lbl">Country</span><br>Peru</div>
       <div class="footer-div"></div>
-      <div class="footer-col"><a href="#">About the Brand</a><a href="#">Stores</a><a href="#">Contact</a></div>
-      <div class="footer-col"><a href="#">Instagram</a><a href="#">Shipping</a><a href="#">Return Policy</a></div>
-      <div class="footer-col"><a href="#">FAQ</a><a href="#">Legal &amp; Privacy</a></div>
+      <div class="footer-col"><a href="#" onclick="goAbout()">About the Brand</a><a href="https://wa.me/34650565927" target="_blank">Contact Us</a></div>
+      <div class="footer-col"><a href="https://instagram.com/de.lavalle" target="_blank">Instagram</a></div>
+      <div class="footer-col"></div>
+      <div><p class="nl-title">Subscribe to our Newsletter</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email address"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I have read and understood the <u>Privacy Policy</u></span></label></div>
+    </div>
       <div><p class="nl-title">Subscribe</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I accept the <u>Privacy Policy</u></span></label></div>
     </div>
     <div class="footer-bottom">de Lavalle &copy; 2026</div>
@@ -1041,9 +1045,11 @@ header.scrolled .logo-text {
     <div class="footer-grid">
       <div class="footer-lang"><span class="lbl">Language</span><br>English<br><br><span class="lbl">Country</span><br>Peru</div>
       <div class="footer-div"></div>
-      <div class="footer-col"><a href="#">About</a><a href="#">Stores</a><a href="#">Contact</a></div>
-      <div class="footer-col"><a href="#">Instagram</a><a href="#">Shipping</a></div>
-      <div class="footer-col"><a href="#">FAQ</a><a href="#">Legal &amp; Privacy</a></div>
+      <div class="footer-col"><a href="#" onclick="goAbout()">About the Brand</a><a href="https://wa.me/34650565927" target="_blank">Contact Us</a></div>
+      <div class="footer-col"><a href="https://instagram.com/de.lavalle" target="_blank">Instagram</a></div>
+      <div class="footer-col"></div>
+      <div><p class="nl-title">Subscribe to our Newsletter</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email address"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I have read and understood the <u>Privacy Policy</u></span></label></div>
+    </div>
       <div><p class="nl-title">Subscribe</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email"><button class="nl-send">›</button></div></div>
     </div>
     <div class="footer-bottom">de Lavalle &copy; 2026</div>
@@ -1063,9 +1069,11 @@ header.scrolled .logo-text {
     <div class="footer-grid">
       <div class="footer-lang"><span class="lbl">Language</span><br>English<br><br><span class="lbl">Country</span><br>Peru</div>
       <div class="footer-div"></div>
-      <div class="footer-col"><a href="#">About</a><a href="#">Stores</a></div>
-      <div class="footer-col"><a href="#">Instagram</a><a href="#">Shipping</a></div>
-      <div class="footer-col"><a href="#">FAQ</a><a href="#">Legal &amp; Privacy</a></div>
+      <div class="footer-col"><a href="#" onclick="goAbout()">About the Brand</a><a href="https://wa.me/34650565927" target="_blank">Contact Us</a></div>
+      <div class="footer-col"><a href="https://instagram.com/de.lavalle" target="_blank">Instagram</a></div>
+      <div class="footer-col"></div>
+      <div><p class="nl-title">Subscribe to our Newsletter</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email address"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I have read and understood the <u>Privacy Policy</u></span></label></div>
+    </div>
       <div><p class="nl-title">Subscribe</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email"><button class="nl-send">›</button></div></div>
     </div>
     <div class="footer-bottom">de Lavalle &copy; 2026</div>
@@ -1252,6 +1260,18 @@ const PHOTOS = [
   {id:6,bg:'gp6',photo:'g6.jpg'},
   {id:7,bg:'gp7',photo:'g7.jpg'},
   {id:8,bg:'gp8',photo:'g8.jpg'},
+  {id:9,bg:'gp1',photo:'g9.jpg'},
+  {id:10,bg:'gp2',photo:'g10.jpg'},
+  {id:11,bg:'gp3',photo:'g11.jpg'},
+  {id:12,bg:'gp4',photo:'g12.jpg'},
+  {id:13,bg:'gp5',photo:'g13.jpg'},
+  {id:14,bg:'gp6',photo:'g14.jpg'},
+  {id:15,bg:'gp7',photo:'g15.jpg'},
+  {id:16,bg:'gp8',photo:'g16.jpg'},
+  {id:17,bg:'gp1',photo:'g17.jpg'},
+  {id:18,bg:'gp2',photo:'g18.jpg'},
+  {id:19,bg:'gp3',photo:'g19.jpg'},
+  {id:20,bg:'gp4',photo:'g20.jpg'},
 ];
 
 /* ── STATE ── */
@@ -1274,6 +1294,7 @@ function goHomePage(){showPage('home-section')}
 function goWomen(){renderWomenGrid();showPage('women')}
 function goGalerie(){renderGalerie();showPage('galerie')}
 function goCollections(){showPage('collections')}
+function goAbout(){showPage('about')}
 function goCheckout(){closeCart();buildSummary();showPage('checkout')}
 function goProd(id){
   const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
@@ -1336,8 +1357,7 @@ function showDrop(k){
   let html=`<p class="drop-cat-title" onclick="filterCat('${cats.head}')">${cats.head}</p>`;
   html+=cats.sub.map(s=>`<a class="drop-cat-link" onclick="filterCat('${s}')">${s}</a>`).join('');
   document.getElementById('dropCols').innerHTML=html;
-  const img=document.getElementById('dropImage');
-  img.innerHTML=`<img src="women-hero.jpg" alt="">`;
+  // dropImage is intentionally always empty - DO NOT SET innerHTML here
   const dd=document.getElementById('dropdown');
   const onHome=document.getElementById('page-home').classList.contains('active');
   dd.classList.toggle('transparent', onHome);
@@ -1991,5 +2011,14 @@ function toggleMobileSub(btn){
     <a href="https://instagram.com/de.lavalle" target="_blank">Instagram</a>
   </div>
 </div>
+<!-- ══════════ ABOUT ══════════ -->
+<div class="page" id="page-about">
+  <div style="min-height:100vh;padding:120px 80px 80px;background:var(--white)">
+    <p style="font-family:var(--sans);font-size:11px;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;color:var(--grey);margin-bottom:48px;cursor:pointer" onclick="goLanding()">← Back</p>
+    <h1 style="font-family:var(--serif);font-size:32px;font-weight:300;letter-spacing:0.04em;color:var(--black);margin-bottom:32px">About the Brand</h1>
+    <p style="font-family:var(--sans);font-size:13px;font-weight:300;color:var(--grey);line-height:1.8;max-width:600px">Coming soon.</p>
+  </div>
+</div>
+
 </body>
 </html>
