@@ -39,7 +39,7 @@ header.scrolled{border-bottom-color:var(--border);background:rgba(255,255,255,0.
 header.scrolled .nav-btn,header.scrolled .logo-text{color:var(--black);text-shadow:none}.header-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 32px;height:56px}
 .nav-left,.nav-right{display:flex;align-items:center;gap:24px}
 .nav-right{justify-content:flex-end}
-.nav-btn{font-size:12px;letter-spacing:0.05em;font-weight:300;color:var(--black);padding:0;white-space:nowrap;transition:opacity 0.2s}
+.nav-btn{font-size:13px;letter-spacing:0.05em;font-weight:300;color:var(--black);padding:0;white-space:nowrap;transition:opacity 0.2s}
 .nav-btn:hover{opacity:0.5}
 .logo-wrap{display:flex;align-items:center;justify-content:center;cursor:pointer}
 .logo-text{font-family:var(--sans);font-size:17px;font-weight:200;letter-spacing:0.42em;text-transform:uppercase;color:var(--black);white-space:nowrap;padding-right:0.42em;transition:color 0.3s}
@@ -49,9 +49,20 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 /* ─────────────────────────────────────
    DROPDOWN
 ───────────────────────────────────── */
-.dropdown{display:none;position:absolute;top:56px;left:0;right:0;background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:26px 32px 32px;z-index:250}
+.dropdown{display:none;position:absolute;top:56px;left:0;right:0;background:rgba(255,255,255,0.5);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,0.3);border-bottom:1px solid rgba(255,255,255,0.3);z-index:250}
+.dropdown.transparent{background:transparent;border-color:transparent;backdrop-filter:none}
 .dropdown.open{display:block;animation:fd 0.16s ease}
 @keyframes fd{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.drop-inner{display:grid;grid-template-columns:280px 1fr;min-height:260px;max-height:340px}
+.drop-cats{padding:28px 40px;display:flex;flex-direction:column;justify-content:flex-start}
+.drop-cat-title{font-size:11px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:18px;color:var(--black);cursor:pointer}
+.drop-cat-title:hover{opacity:0.5}
+.drop-cat-link{display:block;font-size:13px;font-weight:300;color:var(--grey);margin-bottom:11px;cursor:pointer;transition:color 0.15s;letter-spacing:0.02em}
+.drop-cat-link:hover{color:var(--black)}
+.drop-image{position:relative;overflow:hidden;background:transparent}
+.dropdown.transparent .drop-cat-title,
+.dropdown.transparent .drop-cat-link{color:var(--black)}
+.dropdown.transparent .drop-cat-link:hover{color:var(--black);opacity:0.5}
 .drop-cols{display:flex;gap:52px}
 .drop-col h4{font-size:12px;font-weight:400;letter-spacing:0.06em;margin-bottom:13px;cursor:pointer}
 .drop-col h4:hover{text-decoration:underline;text-underline-offset:3px}
@@ -68,7 +79,7 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
    HOME — video hero, header overlaps
 ═══════════════════════════════════ */
 #page-home{background:var(--black)}
-.hero{width:100%;height:100vh;position:relative;overflow:hidden;background:var(--black);display:flex;align-items:center;justify-content:center;margin-top:0}
+.hero{width:100%;height:115vh;position:relative;overflow:hidden;background:var(--black);display:flex;align-items:center;justify-content:center;margin-top:0}
 .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.18);pointer-events:none}
 .slide-dots{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:10}
@@ -798,15 +809,19 @@ header.scrolled .logo-text {
     </nav>
   </div>
   <div class="dropdown" id="dropdown" onmouseleave="hideDrop()">
-    <div class="drop-cols" id="dropCols"></div>
+    <div class="drop-inner">
+      <div class="drop-cats" id="dropCols"></div>
+      <div class="drop-image" id="dropImage"></div>
+    </div>
   </div>
 </header>
 
 <!-- ══════════ LANDING ══════════ -->
 <div class="page active" id="page-home">
   <div class="hero">
-    <video autoplay muted loop playsinline preload="auto" webkit-playsinline playsinline>
-      <source src="hero.mp4" type="video/mp4">
+    <video autoplay muted loop playsinline preload="auto" webkit-playsinline id="heroVideo">
+      <source src="hero-desktop.mp4" type="video/mp4" media="(min-width:768px)">
+      <source src="hero-mobile.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
     <div class="slide-dots"><button class="dot on"></button><button class="dot"></button><button class="dot"></button></div>
@@ -1313,7 +1328,21 @@ const DROP={women:[
   {head:'Ready to Wear',sub:['Outerwear','Shirts & Tops','Dresses','Skirts','Pants & Shorts']},
 ]};
 let dt;
-function showDrop(k){clearTimeout(dt);const d=DROP[k];if(!d)return;document.getElementById('dropCols').innerHTML=d.map(c=>`<div class="drop-col"><h4 onclick="filterCat('${c.head}')">${c.head}</h4>${c.sub.map(s=>`<a onclick="filterCat('${s}')">${s}</a>`).join('')}</div>`).join('');document.getElementById('dropdown').classList.add('open')}
+function showDrop(k){
+  clearTimeout(dt);
+  const d=DROP[k];
+  if(!d)return;
+  const cats=d[0];
+  let html=`<p class="drop-cat-title" onclick="filterCat('${cats.head}')">${cats.head}</p>`;
+  html+=cats.sub.map(s=>`<a class="drop-cat-link" onclick="filterCat('${s}')">${s}</a>`).join('');
+  document.getElementById('dropCols').innerHTML=html;
+  const img=document.getElementById('dropImage');
+  img.innerHTML=`<img src="women-hero.jpg" alt="">`;
+  const dd=document.getElementById('dropdown');
+  const onHome=document.getElementById('page-home').classList.contains('active');
+  dd.classList.toggle('transparent', onHome);
+  dd.classList.add('open');
+}
 function hideDrop(){dt=setTimeout(()=>document.getElementById('dropdown').classList.remove('open'),100)}
 document.getElementById('dropdown').addEventListener('mouseenter',()=>clearTimeout(dt));
 function filterCat(cat){
