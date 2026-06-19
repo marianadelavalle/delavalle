@@ -121,7 +121,7 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 .women-hero-fill{width:100%;height:100%;background:linear-gradient(160deg,#e8e4de 0%,#d0cbc4 60%,#b8b2aa 100%)}
 /* ── ADD WOMEN HERO PHOTO:
    Replace women-hero-fill div with:
-   <img src="women-hero.jpg" style="width:100%;height:100%;object-fit:cover">
+   <img src="women-hero.jpg" style="width:100%;height:100%;object-fit:contain">
 ── */
 .women-topbar{display:flex;align-items:center;justify-content:space-between;padding:13px 32px;border:none;background:var(--white);margin-top:56px}
 .breadcrumb{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--black);font-family:var(--sans);font-weight:300;letter-spacing:0.02em}
@@ -189,10 +189,10 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 ═══════════════════════════════════ */
 #page-product{background:var(--white)}
 .product-layout{display:grid;grid-template-columns:55% 45%;min-height:calc(100vh - 56px)}
-.gallery-col{background:var(--white);position:sticky;top:56px;height:calc(100vh - 56px);display:flex;flex-direction:column;overflow:hidden}
-.gallery-main{flex:1;display:flex;align-items:center;justify-content:center;padding:32px 40px;overflow:hidden}
-.prod-display{width:100%;height:100%;max-width:520px;aspect-ratio:2/3;transition:background 0.35s;flex-shrink:0}
-.prod-display img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery-col{background:var(--white);position:sticky;top:56px;height:calc(100vh - 56px);display:flex;flex-direction:column;overflow-y:auto}
+.gallery-main{display:flex;align-items:flex-start;justify-content:center;padding:32px 40px 0}
+.prod-display{width:100%;max-width:480px;aspect-ratio:2/3;transition:background 0.35s;flex-shrink:0}
+.prod-display img{width:100%;height:100%;object-fit:contain;display:block}
 .gallery-thumbs-row{display:flex;justify-content:center;gap:8px;padding:14px 20px}
 .g-thumb{width:46px;height:60px;cursor:pointer;border:1px solid transparent;transition:border-color 0.2s;flex-shrink:0;overflow:hidden}
 .g-thumb.on{border-color:var(--black)}
@@ -1024,7 +1024,7 @@ header.scrolled .logo-text {
       <div class="size-grid" id="sizeGrid"></div>
       <div class="stock-info-line" id="stockInfoLine"></div>
       <button class="add-bag-btn" id="addBagBtn" onclick="addToBag()">Add to Bag</button>
-      <button class="save-lnk">Save</button>
+      <button class="save-lnk" id="saveLnk" onclick="toggleSave()">Save</button>
       <p class="prod-desc-txt" id="prodDescTxt"></p>
       <p class="prod-ref-txt" id="prodRefTxt"></p>
       <div class="acc"><button class="acc-btn" onclick="toggleAcc(this)">Details <span class="acc-icon">+</span></button><div class="acc-body" id="accDetails"></div></div>
@@ -1172,7 +1172,7 @@ header.scrolled .logo-text {
         <input class="promo-input" type="text" id="promoCode" placeholder="Gift card or discount code">
         <button class="promo-btn" onclick="applyPromo()">Apply</button>
       </div>
-      <button class="place-btn" onclick="placeOrder()">Place Order</button>
+      <button class="place-btn" id="orderBtn" onclick="placeOrder()">Place Order</button>
     </div>
     <div class="ch-right">
       <p class="sum-title">Order Summary</p>
@@ -1318,14 +1318,14 @@ function goProd(id){
     :(p.name==='The Short'?'100% Pima Cotton. Made in Perú.'
     :'100% Pima Cotton. Made in Lima, Peru.')));
   const gd=document.getElementById('galleryDisplay');
-  if(p.photo){gd.innerHTML=`<img src="${p.photo}" style="width:100%;height:100%;object-fit:cover">`;gd.className='prod-display';}
+  if(p.photo){gd.innerHTML=`<img src="${p.photo}" style="width:100%;height:100%;object-fit:contain">`;gd.className='prod-display';}
   else{gd.className='prod-display '+p.bg;gd.innerHTML='';}
   // Render thumbnails if product has multiple photos
   const thumbsRow=document.getElementById('galleryThumbs');
   if(p.photos && p.photos.length>1){
     thumbsRow.innerHTML=p.photos.map((src,i)=>`
       <div class="g-thumb${i===0?' on':''}" onclick="pickThumb(this,'${p.bg}','${src}')">
-        <img src="${src}" style="width:100%;height:100%;object-fit:cover">
+        <img src="${src}" style="width:100%;height:100%;object-fit:contain">
       </div>`).join('');
     thumbsRow.style.display='flex';
   } else {
@@ -1488,7 +1488,7 @@ function updateStockInfo(sz){
   if(q===0){info.textContent='';btn.disabled=true;btn.textContent='Add to Bag';}
   else{info.textContent='';btn.disabled=false;btn.textContent='Add to Bag';}
 }
-function pickThumb(el,bg,src){document.querySelectorAll('.g-thumb').forEach(t=>t.classList.remove('on'));el.classList.add('on');const gd=document.getElementById('galleryDisplay');if(src){gd.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:cover">`;gd.className='prod-display';}else{gd.className='prod-display '+bg;gd.innerHTML='';}}
+function pickThumb(el,bg,src){document.querySelectorAll('.g-thumb').forEach(t=>t.classList.remove('on'));el.classList.add('on');const gd=document.getElementById('galleryDisplay');if(src){gd.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:contain">`;gd.className='prod-display';}else{gd.className='prod-display '+bg;gd.innerHTML='';}}
 function toggleAcc(btn){const b=btn.nextElementSibling,i=btn.querySelector('.acc-icon');b.classList.toggle('open');i.textContent=b.classList.contains('open')?'−':'+';}
 function addToBag(){
   if(!currentProd)return;
