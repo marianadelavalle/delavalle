@@ -35,7 +35,7 @@ img{display:block;max-width:100%}
 header{background:var(--white);position:fixed;top:0;left:0;right:0;z-index:300;border-bottom:1px solid transparent;transition:border-color 0.3s,background 0.3s}
 header.transparent{background:transparent;border-bottom-color:transparent}
 header.transparent .nav-btn,header.transparent .logo-text{color:var(--white);text-shadow:0 1px 3px rgba(0,0,0,0.3)}
-header.scrolled{border-bottom-color:var(--border);background:rgba(255,255,255,0.98);backdrop-filter:blur(8px)}
+header.scrolled{border-bottom-color:transparent;background:rgba(255,255,255,0.98);backdrop-filter:blur(8px)}
 header.scrolled .nav-btn,header.scrolled .logo-text{color:var(--black);text-shadow:none}.header-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 32px;height:56px}
 .nav-left,.nav-right{display:flex;align-items:center;gap:24px}
 .nav-right{justify-content:flex-end}
@@ -116,24 +116,26 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 /* ═══════════════════════════════════
    WOMEN — transparent hero like The Row
 ═══════════════════════════════════ */
-#page-women{background:var(--bg)}
+#page-women{background:var(--white)}
 .women-hero{width:100%;height:calc(100vh - 56px);position:relative;overflow:hidden;background:var(--bg)}
 .women-hero-fill{width:100%;height:100%;background:linear-gradient(160deg,#e8e4de 0%,#d0cbc4 60%,#b8b2aa 100%)}
 /* ── ADD WOMEN HERO PHOTO:
    Replace women-hero-fill div with:
    <img src="women-hero.jpg" style="width:100%;height:100%;object-fit:cover">
 ── */
-.women-topbar{display:flex;align-items:center;justify-content:space-between;padding:13px 32px;border-bottom:1px solid var(--border);background:var(--white)}
-.breadcrumb{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--grey)}
-.breadcrumb span{cursor:pointer;transition:color 0.15s}
-.breadcrumb span:hover,.breadcrumb .cur{color:var(--black)}
+.women-topbar{display:flex;align-items:center;justify-content:space-between;padding:13px 32px;border:none;background:var(--white);margin-top:56px}
+.breadcrumb{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--black);font-family:var(--sans);font-weight:300;letter-spacing:0.02em}
+.breadcrumb span{cursor:pointer;transition:opacity 0.15s;color:var(--black)}
+.breadcrumb span:hover{opacity:0.5}
+.breadcrumb .cur{color:var(--black)}
+.breadcrumb .sep{color:var(--black);font-weight:300}
 .topbar-right{display:flex;align-items:center;gap:20px}
 .sort-sel{font-family:var(--sans);font-size:11px;font-weight:300;letter-spacing:0.04em;outline:none;cursor:pointer;color:var(--black);-webkit-appearance:none;background:none;border:none}
 .filter-toggle-btn{font-size:11px;font-weight:300;letter-spacing:0.04em;display:flex;align-items:center;gap:5px;color:var(--black)}
 .filter-toggle-btn:hover{text-decoration:underline;text-underline-offset:2px}
 
 /* Filter drawer */
-.filter-drawer{background:var(--white);border-bottom:1px solid var(--border);max-height:0;overflow:hidden;transition:max-height 0.35s ease}
+.filter-drawer{background:var(--white);border-bottom:none;max-height:0;overflow:hidden;transition:max-height 0.35s ease}
 .filter-drawer.open{max-height:300px}
 .filter-inner{padding:22px 32px;display:flex;flex-direction:column;gap:18px}
 .filter-groups{display:flex;gap:48px;flex-wrap:wrap}
@@ -146,22 +148,20 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 .f-apply{background:var(--black);color:var(--white);border:none;padding:9px 26px;font-family:var(--sans);font-size:11px;letter-spacing:0.09em;text-transform:uppercase;font-weight:400}
 .f-clear{font-size:11px;font-weight:300;color:var(--grey);text-decoration:underline;text-underline-offset:2px;font-family:var(--sans)}
 
-/* Women split layout — sticky image left, grid right — exact The Row */
-.women-layout{display:grid;grid-template-columns:48% 52%}
-.women-cat-img-col{position:sticky;top:56px;height:calc(100vh - 56px);overflow:hidden}
+/* Women split layout — same 4-col grid throughout */
+.women-layout{display:grid;grid-template-columns:2fr 1fr 1fr;align-items:start;column-gap:24px;row-gap:0;padding:0 32px}
+.women-cat-img-col{overflow:hidden;background:var(--bg);grid-row:1/3}
 .women-cat-img-fill{width:100%;height:100%;object-fit:cover}
-/* ── ADD CATEGORY IMAGE:
-   Replace with: <img src="category.jpg" style="width:100%;height:100%;object-fit:cover">
-── */
 .women-cat-label-corner{position:absolute;bottom:32px;left:32px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.6);font-weight:300}
 
-/* Product grid — 2 col in right panel */
-.women-grid-col{overflow-y:auto}
-.women-grid{padding:20px 20px;display:grid;grid-template-columns:repeat(2,1fr);gap:2px;align-content:start}
+/* Product grid — right panel matches full grid columns */
+.women-grid-col{overflow-y:auto;display:contents}
+.women-grid{display:contents}
+.women-grid-full{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;width:100%;margin-top:24px;padding:0 32px 48px}
 
 /* Product card */
-.prod-card{cursor:pointer;padding-bottom:22px;background:transparent}
-.prod-img-wrap{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--bg)}
+.prod-card{cursor:pointer;padding-bottom:8px;background:transparent}
+.prod-img-wrap{position:relative;aspect-ratio:2/3;overflow:hidden;background:var(--bg)}
 .prod-img-swatch{width:100%;height:100%;transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94)}
 .prod-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);display:block}
 .prod-card:hover .prod-img-swatch,
@@ -189,11 +189,10 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 ═══════════════════════════════════ */
 #page-product{background:var(--white)}
 .product-layout{display:grid;grid-template-columns:55% 45%;min-height:calc(100vh - 56px)}
-.gallery-col{background:var(--white);position:sticky;top:56px;height:calc(100vh - 56px);display:flex;flex-direction:column;cursor:zoom-in;overflow:hidden}
-.gallery-main{flex:1;display:flex;align-items:center;justify-content:center;padding:44px;overflow:hidden}
-.prod-display{width:62%;max-width:340px;aspect-ratio:3/4;transition:background 0.35s,transform 0.6s ease}
-.gallery-col:hover .prod-display{transform:scale(1.1)}
-.prod-display img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease}
+.gallery-col{background:var(--white);position:sticky;top:56px;height:calc(100vh - 56px);display:flex;flex-direction:column;overflow:hidden}
+.gallery-main{flex:1;display:flex;align-items:center;justify-content:center;padding:32px 40px;overflow:hidden}
+.prod-display{width:100%;height:100%;max-width:520px;aspect-ratio:2/3;transition:background 0.35s;flex-shrink:0}
+.prod-display img{width:100%;height:100%;object-fit:cover;display:block}
 .gallery-thumbs-row{display:flex;justify-content:center;gap:8px;padding:14px 20px}
 .g-thumb{width:46px;height:60px;cursor:pointer;border:1px solid transparent;transition:border-color 0.2s;flex-shrink:0;overflow:hidden}
 .g-thumb.on{border-color:var(--black)}
@@ -235,7 +234,7 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
    GALERIE — photos only, no text
 ───────────────────────────────────── */
 #page-gallery{background:var(--white)}
-.gallery-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;padding:2px}
+.gallery-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;padding:2px;margin-top:56px}
 .g-cell{position:relative;overflow:hidden;cursor:pointer;background:var(--bg)}
 .g-cell-inner{width:100%;aspect-ratio:1/1;overflow:hidden}
 .g-cell-fill{width:100%;height:100%;transition:transform 0.6s ease}
@@ -602,9 +601,13 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:38px 3
   .chip { font-size: 10px; padding: 6px 12px; }
 
   /* Product page */
-  .product-layout { grid-template-columns: 1fr !important; }
-  .gallery-col { height: 85vw !important; position: relative !important; top: 0 !important; }
-  .info-col { padding: 20px 16px 40px !important; border-left: none !important; border-top: 1px solid var(--border); }
+  .product-layout { grid-template-columns: 1fr !important; display: block !important; }
+  .gallery-col { height: auto !important; position: relative !important; top: 0 !important; width: 100% !important; padding: 24px 20px; background: var(--white); }
+  .gallery-main { flex: none !important; display: flex !important; justify-content: center !important; padding: 0 !important; }
+  .prod-display { position: relative !important; inset: auto !important; width: 100% !important; max-width: 100% !important; height: auto !important; aspect-ratio: 2/3 !important; }
+  .prod-display img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
+  .gallery-thumbs-row { background: var(--white) !important; }
+  .info-col { padding: 24px 20px 60px !important; border-left: none !important; border-top: 1px solid var(--border); }
   .prod-title { font-size: 18px; }
   .size-grid { gap: 4px; }
   .sz { padding: 9px 12px; font-size: 11px; }
@@ -788,7 +791,7 @@ header.scrolled .logo-text {
 
 
 <!-- ══════════ HEADER ══════════ -->
-<header id="mainHeader">
+<header id="mainHeader" class="transparent">
   <div class="header-inner">
     <nav class="nav-left">
       <button class="nav-btn" onmouseenter="showDrop('women')" onclick="goWomen()">Women</button>
@@ -819,8 +822,10 @@ header.scrolled .logo-text {
 <!-- ══════════ LANDING ══════════ -->
 <div class="page active" id="page-home">
   <div class="hero">
-    <video autoplay muted loop playsinline preload="auto" webkit-playsinline id="heroVideo">
-      <source src="hero-desktop.mp4" type="video/mp4" media="(min-width:768px)">
+    <video autoplay muted loop playsinline preload="auto" webkit-playsinline id="heroDesktop" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.8s ease">
+      <source src="hero-desktop.mp4" type="video/mp4">
+    </video>
+    <video autoplay muted loop playsinline preload="auto" webkit-playsinline id="heroMobile" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.8s ease;opacity:0">
       <source src="hero-mobile.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
@@ -899,8 +904,6 @@ header.scrolled .logo-text {
       <div class="footer-col"></div>
       <div><p class="nl-title">Subscribe to our Newsletter</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email address"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I have read and understood the <u>Privacy Policy</u></span></label></div>
     </div>
-      <div><p class="nl-title">Subscribe</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I accept the <u>Privacy Policy</u></span></label></div>
-    </div>
     <div class="footer-bottom">de Lavalle &copy; 2026</div>
   </footer>
 </div>
@@ -909,7 +912,8 @@ header.scrolled .logo-text {
 <div class="page" id="page-women">
   <div class="women-topbar">
     <div class="breadcrumb">
-      <span onclick="goLanding()">Women</span><span>·</span>
+      <span onclick="goLanding()">Women</span><span class="sep">·</span>
+      <span style="cursor:default">Ready to Wear</span><span class="sep">·</span>
       <span class="cur" id="womenCatLabel">All</span>
     </div>
     <div class="topbar-right">
@@ -962,19 +966,22 @@ header.scrolled .logo-text {
     </div>
   </div>
 
-  <!-- The Row layout: sticky image left + product grid right -->
+  <!-- Top section: image left + first products right -->
   <div class="women-layout">
     <div class="women-cat-img-col">
       <div class="women-cat-img-fill" id="womenCatImg">
-        <img src="women-hero.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center center;">
+        <img src="women-cat.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;">
       </div>
       <span class="women-cat-label-corner" id="womenCatImgLabel">women · new collection</span>
     </div>
     <div class="women-grid-col">
-      <div class="women-grid" id="womenGrid"></div>
-      <div class="prod-count" id="womenCount"></div>
+      <div class="women-grid" id="womenGridTop"></div>
     </div>
   </div>
+
+  <!-- Full width grid for remaining products -->
+  <div class="women-grid-full" id="womenGrid"></div>
+  <div class="prod-count" id="womenCount"></div>
 
   <footer>
     <div class="footer-grid">
@@ -984,8 +991,6 @@ header.scrolled .logo-text {
       <div class="footer-col"><a href="https://instagram.com/de.lavalle" target="_blank">Instagram</a></div>
       <div class="footer-col"></div>
       <div><p class="nl-title">Subscribe to our Newsletter</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email address"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I have read and understood the <u>Privacy Policy</u></span></label></div>
-    </div>
-      <div><p class="nl-title">Subscribe</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I accept the <u>Privacy Policy</u></span></label></div>
     </div>
     <div class="footer-bottom">de Lavalle &copy; 2026</div>
   </footer>
@@ -1050,8 +1055,6 @@ header.scrolled .logo-text {
       <div class="footer-col"></div>
       <div><p class="nl-title">Subscribe to our Newsletter</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email address"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I have read and understood the <u>Privacy Policy</u></span></label></div>
     </div>
-      <div><p class="nl-title">Subscribe</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email"><button class="nl-send">›</button></div></div>
-    </div>
     <div class="footer-bottom">de Lavalle &copy; 2026</div>
   </footer>
 </div>
@@ -1073,8 +1076,6 @@ header.scrolled .logo-text {
       <div class="footer-col"><a href="https://instagram.com/de.lavalle" target="_blank">Instagram</a></div>
       <div class="footer-col"></div>
       <div><p class="nl-title">Subscribe to our Newsletter</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email address"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I have read and understood the <u>Privacy Policy</u></span></label></div>
-    </div>
-      <div><p class="nl-title">Subscribe</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email"><button class="nl-send">›</button></div></div>
     </div>
     <div class="footer-bottom">de Lavalle &copy; 2026</div>
   </footer>
@@ -1248,6 +1249,13 @@ const PRODUCTS = [
   {id:17, name:'María Trousers', cat:'Pants & Shorts', colour:'Ivory', hex:'#f5f0e8', bg:'bg-ivory', section:'women', price:280, sizes:['S','M','L','XL'], stock:{S:5,M:5,L:5,XL:5}, badge:'', photo:'ines1.jpg', photos:['ines1.jpg','ines2.jpg','ines3.jpg','ines4.jpg','ines5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem. 75% Pima Cotton, 25% Linen. Made in Peru.'},
   {id:18, name:'María Trousers', cat:'Pants & Shorts', colour:'Beige', hex:'#d4c4a8', bg:'bg-sand', section:'women', price:280, sizes:['S','M','L','XL'], stock:{S:5,M:5,L:5,XL:5}, badge:'', photo:'ines-beige2.jpg', photos:['ines-beige2.jpg','ines-beige1.jpg','ines-beige3.jpg','ines-beige4.jpg','ines-beige5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem. 75% Pima Cotton, 25% Linen. Made in Peru.'},
   {id:19, name:'María Trousers', cat:'Pants & Shorts', colour:'Light Blue', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:280, sizes:['S','M','L','XL'], stock:{S:5,M:5,L:5,XL:5}, badge:'', photo:'ines-blue2.jpg', photos:['ines-blue2.jpg','ines-blue1.jpg','ines-blue3.jpg','ines-blue4.jpg','ines-blue5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem. 75% Pima Cotton, 25% Linen. Made in Peru.'},
+  {id:25, name:'The Swimsuit', shopifyHandle:'swimsuit-red-stripe', cat:'Swim', colour:'Red Stripe', hex:'#b83232', bg:'bg-ecru', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:4,S:5,M:5,L:3}, badge:'New', photo:null, desc:'Scoop-neck one-piece in red narrow stripe. Fixed wide straps, front lining, deep open back, and high-cut leg. 80% polyamide / 20% elastane. Made in Lima.'},
+  {id:26, name:'The Swimsuit', shopifyHandle:'swimsuit-navy-stripe', cat:'Swim', colour:'Navy Stripe', hex:'#1a2740', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:4,S:5,M:5,L:3}, badge:'New', photo:null, desc:'Scoop-neck one-piece in navy narrow stripe. Fixed wide straps, front lining, deep open back, and high-cut leg. 80% polyamide / 20% elastane. Made in Lima.'},
+  {id:27, name:'The Swimsuit', shopifyHandle:'swimsuit-white-polka', cat:'Swim', colour:'White Polka Dot', hex:'#f5f5f5', bg:'bg-ivory', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:4,S:5,M:5,L:3}, badge:'New', photo:null, desc:'Scoop-neck one-piece in white polka dot. Fixed wide straps, front lining, deep open back, and high-cut leg. 80% polyamide / 20% elastane. Made in Lima.'},
+  {id:28, name:'The Swimsuit', shopifyHandle:'swimsuit-black-white-check', cat:'Swim', colour:'Black-White Check', hex:'#444440', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:4,S:5,M:5,L:3}, badge:'New', photo:null, desc:'Scoop-neck one-piece in black and white micro check. Fixed wide straps, front lining, deep open back, and high-cut leg. 80% polyamide / 20% elastane. Made in Lima.'},
+  {id:29, name:'The Swimsuit', shopifyHandle:'swimsuit-black-pin-dot', cat:'Swim', colour:'Black Pin Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:4,S:5,M:5,L:3}, badge:'New', photo:null, desc:'Scoop-neck one-piece in black pin dot. Fixed wide straps, front lining, deep open back, and high-cut leg. 80% polyamide / 20% elastane. Made in Lima.'},
+  {id:30, name:'The Swimsuit', shopifyHandle:'swimsuit-red-pin-dot', cat:'Swim', colour:'Red Pin Dot', hex:'#b83232', bg:'bg-ecru', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:4,S:5,M:5,L:3}, badge:'New', photo:null, desc:'Scoop-neck one-piece in red pin dot. Fixed wide straps, front lining, deep open back, and high-cut leg. 80% polyamide / 20% elastane. Made in Lima.'},
+  {id:31, name:'Rosario Dress', shopifyHandle:'rosario-dress', cat:'Dresses', colour:'Midnight Blue', hex:'#1a2340', bg:'bg-black-p', section:'women', price:890, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'The Rosario Dress. Made in Peru.'},
 ];
 
 /* Gallery photos */
@@ -1284,10 +1292,10 @@ function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   window.scrollTo(0,0);hideDrop();
-  // Header transparency only on landing with video
   const h=document.getElementById('mainHeader');
   if(id==='home'){h.classList.add('transparent');h.classList.remove('scrolled');}
   else{h.classList.remove('transparent');}
+  h.style.borderBottomColor=id==='women'?'transparent':'';
 }
 function goLanding(){showPage('home')}
 function goHomePage(){showPage('home-section')}
@@ -1344,9 +1352,20 @@ function goProd(id){
   updateSaveBtnState();
 }
 
-/* ── DROPDOWN ── */
+/* ── HERO VIDEO — smooth crossfade mobile/desktop ── */
+function setHeroVideo(){
+  const desktop=document.getElementById('heroDesktop');
+  const mobile=document.getElementById('heroMobile');
+  if(!desktop||!mobile)return;
+  const isMobile=window.innerWidth<768;
+  desktop.style.opacity=isMobile?'0':'1';
+  mobile.style.opacity=isMobile?'1':'0';
+}
+setHeroVideo();
+let heroResizeTimer;
+window.addEventListener('resize',()=>{clearTimeout(heroResizeTimer);heroResizeTimer=setTimeout(setHeroVideo,100)});
 const DROP={women:[
-  {head:'Ready to Wear',sub:['Outerwear','Shirts & Tops','Dresses','Skirts','Pants & Shorts']},
+  {head:'Ready to Wear',sub:['Outerwear','Shirts & Tops','Dresses','Skirts','Pants & Shorts','Swim']},
 ]};
 let dt;
 function showDrop(k){
@@ -1365,41 +1384,59 @@ function showDrop(k){
 }
 function hideDrop(){dt=setTimeout(()=>document.getElementById('dropdown').classList.remove('open'),100)}
 document.getElementById('dropdown').addEventListener('mouseenter',()=>clearTimeout(dt));
+const CAT_IMAGES={
+  'All':'women-cat.jpg',
+  'Ready to Wear':'women-cat.jpg',
+  'Outerwear':null,
+  'Shirts & Tops':'ines4.jpg',
+  'Dresses':'women-cat.jpg',
+  'Skirts':'women-cat.jpg',
+  'Pants & Shorts':'ines5.jpg',
+  'Swim':'women-cat.jpg',
+};
 function filterCat(cat){
   hideDrop();
-  // 'Ready to Wear' = show all women products
   wf.cat = (cat === 'Ready to Wear') ? 'All' : cat;
   wVisible = applyLogic();
   renderWomenGrid();
-  document.getElementById('womenCatLabel').textContent = cat;
+  document.getElementById('womenCatLabel').textContent = (cat === 'Ready to Wear') ? 'All' : cat;
+  const img=CAT_IMAGES[cat]||'women-cat.jpg';
+  document.getElementById('womenCatImg').innerHTML=`<img src="${img}" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;">`;
   showPage('women');
 }
 
 /* ── WOMEN GRID ── */
+function makeCard(p){
+  const so=Object.values(p.stock).every(v=>v===0);
+  const tot=Object.values(p.stock).reduce((a,b)=>a+b,0);
+  let badge='';
+  if(p.badge==='New') badge=`<span class="stock-badge badge-new">New In</span>`;
+  return`<div class="prod-card" onclick="goProd(${p.id})">
+    <div class="prod-img-wrap">
+      ${p.photo?`<img src="${p.photo}" alt="${p.name}">`:`<div class="prod-img-swatch ${p.bg}"></div>`}
+      ${badge}
+      <button class="quick-add-btn" onclick="event.stopPropagation();quickAdd(${p.id})">Quick Add</button>
+    </div>
+    <div class="prod-info">
+      <p class="prod-name">${p.name}</p>
+      <p class="prod-meta">${p.cat} &middot; ${p.colour}</p>
+      <p class="prod-price-tag">S/ ${p.price.toLocaleString()}</p>
+    </div>
+  </div>`;
+}
 function renderWomenGrid(){
+  const gTop=document.getElementById('womenGridTop');
   const g=document.getElementById('womenGrid');
   document.getElementById('womenCount').textContent=wVisible.length+' products';
-  if(!wVisible.length){g.innerHTML='<p style="padding:48px 0;font-size:12px;color:var(--grey);grid-column:1/-1;text-align:center">No products found.</p>';return}
-  g.innerHTML=wVisible.map(p=>{
-    const so=Object.values(p.stock).every(v=>v===0);
-    const tot=Object.values(p.stock).reduce((a,b)=>a+b,0);
-    let badge='';
-    if(so) badge=`<span class="stock-badge badge-sold">Sold Out</span>`;
-    else if(tot<=2) badge=`<span class="stock-badge badge-low">Only ${tot} left</span>`;
-    else if(p.badge==='New') badge=`<span class="stock-badge badge-new">New In</span>`;
-    return`<div class="prod-card" onclick="goProd(${p.id})">
-      <div class="prod-img-wrap">
-        ${p.photo?`<img src="${p.photo}" alt="${p.name}">`:`<div class="prod-img-swatch ${p.bg}"></div>`}
-        ${badge}
-        <button class="quick-add-btn" onclick="event.stopPropagation();quickAdd(${p.id})">Quick Add</button>
-      </div>
-      <div class="prod-info">
-        <p class="prod-name">${p.name}</p>
-        <p class="prod-meta">${p.cat} &middot; ${p.colour}</p>
-        <p class="prod-price-tag">${so?'<span style="color:var(--mid)">Sold Out</span>':'S/ '+p.price.toLocaleString()}</p>
-      </div>
-    </div>`;
-  }).join('');
+  if(!wVisible.length){
+    gTop.innerHTML='';
+    g.innerHTML='<p style="padding:48px 0;font-size:12px;color:var(--grey);grid-column:1/-1;text-align:center">No products found.</p>';
+    return;
+  }
+  const top=wVisible.slice(0,4);
+  const rest=wVisible.slice(4);
+  gTop.innerHTML=top.map(makeCard).join('');
+  g.innerHTML=rest.map(makeCard).join('');
 }
 renderWomenGrid();
 
@@ -1448,8 +1485,7 @@ function pickSz(el,sz){document.querySelectorAll('.sz').forEach(s=>s.classList.r
 function updateStockInfo(sz){
   if(!currentProd)return;
   const q=currentProd.stock[sz]||0,info=document.getElementById('stockInfoLine'),btn=document.getElementById('addBagBtn');
-  if(q===0){info.textContent='Sold out in this size';btn.disabled=true;btn.textContent='Sold Out';}
-  else if(q<=3){info.textContent=`Only ${q} left in this size`;btn.disabled=false;btn.textContent='Add to Bag';}
+  if(q===0){info.textContent='';btn.disabled=true;btn.textContent='Add to Bag';}
   else{info.textContent='';btn.disabled=false;btn.textContent='Add to Bag';}
 }
 function pickThumb(el,bg,src){document.querySelectorAll('.g-thumb').forEach(t=>t.classList.remove('on'));el.classList.add('on');const gd=document.getElementById('galleryDisplay');if(src){gd.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:cover">`;gd.className='prod-display';}else{gd.className='prod-display '+bg;gd.innerHTML='';}}
@@ -1998,6 +2034,7 @@ function toggleMobileSub(btn){
         <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Dresses')">Dresses</button>
         <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Skirts')">Skirts</button>
         <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Pants & Shorts')">Pants &amp; Shorts</button>
+        <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Swim')">Swim</button>
       </div>
     </button>
     <button onclick="closeMobileMenu();goHomePage()">Home</button>
