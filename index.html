@@ -386,19 +386,19 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 ───────────────────────────────────── */
 footer{background:var(--white);border-top:1px solid var(--border);padding:38px 32px 28px}
 .footer-grid{display:grid;grid-template-columns:160px 1px 1fr 1fr 1fr 260px;gap:28px;margin-bottom:26px;align-items:start}
-.footer-lang{font-size:12px;font-weight:300;line-height:2}
+
+.footer-lang{font-size:12px;font-weight:300;line-height:2;cursor:pointer;position:relative}
 .footer-lang .lbl{color:var(--grey)}
+.lang-current{display:flex;align-items:center;gap:6px}
+.lang-arrow{font-size:9px;color:var(--grey);transition:transform 0.2s}
+.lang-dropdown{display:none;position:absolute;bottom:calc(100% + 8px);left:0;background:var(--white);border:1px solid var(--border);min-width:200px;z-index:200;padding:8px 0}
+.lang-dropdown.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;background:none;border:none;font-family:var(--sans);font-size:12px;font-weight:300;color:var(--black);padding:8px 16px;cursor:pointer;white-space:nowrap}
+.lang-option:hover{background:var(--bg)}
+.lang-option.active{color:var(--grey)}
 .footer-div{background:var(--border);height:100%}
 .footer-col a{display:block;font-size:12px;font-weight:300;color:var(--grey);margin-bottom:9px;text-decoration:none}
 .footer-col a:hover{color:var(--black)}
-.nl-title{font-size:12px;font-weight:300;margin-bottom:12px}
-.nl-row{display:flex;border-bottom:1px solid var(--border);margin-bottom:11px}
-.nl-input{flex:1;background:none;border:none;font-family:var(--sans);font-size:12px;font-weight:300;padding:6px 0;outline:none;color:var(--black)}
-.nl-input::placeholder{color:var(--mid)}
-.nl-send{background:none;border:none;font-size:16px;color:var(--grey);padding:0 0 0 8px;cursor:pointer}
-.nl-send:hover{color:var(--black)}
-.nl-check{display:flex;align-items:flex-start;gap:7px;font-size:11px;font-weight:300;color:var(--grey)}
-.nl-check input{accent-color:var(--black);margin-top:2px;flex-shrink:0}
 .footer-bottom{text-align:center;font-size:11px;font-weight:300;color:var(--grey);padding-top:20px;border-top:1px solid var(--border)}
 
 /* colour swatch backgrounds */
@@ -594,6 +594,7 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:38px 3
   .women-layout { grid-template-columns: 1fr !important; }
   .women-cat-img-col { display: none !important; }
   .women-grid { grid-template-columns: repeat(2, 1fr) !important; padding: 8px !important; gap: 2px !important; }
+  .women-grid-full { grid-template-columns: repeat(2, 1fr) !important; padding: 8px !important; gap: 2px !important; margin-top: 0 !important; }
   .women-topbar { padding: 10px 16px; flex-wrap: wrap; gap: 8px; }
   .women-bc { font-size: 11px; }
   .prod-count { font-size: 11px; padding: 8px 16px; }
@@ -794,20 +795,20 @@ header.scrolled .logo-text {
 <header id="mainHeader" class="transparent">
   <div class="header-inner">
     <nav class="nav-left">
-      <button class="nav-btn" onmouseenter="showDrop('women')" onclick="goWomen()">Women</button>
-      <button class="nav-btn" onclick="goHomePage()">Home</button>
+      <button class="nav-btn" onmouseenter="showDrop('women')" onclick="goWomen()" data-i18n="nav_women">Women</button>
+      <button class="nav-btn" onclick="goHomePage()" data-i18n="nav_home">Home</button>
       
-      <button class="nav-btn" onclick="goGalerie()">Gallery</button>
+      <button class="nav-btn" onclick="goGalerie()" data-i18n="nav_gallery">Gallery</button>
     </nav>
     <div class="logo-wrap" onclick="goLanding()">
       <span class="logo-text">de Lavalle</span>
     </div>
     <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="openMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
     <nav class="nav-right">
-      <button class="nav-btn" onclick="openSearch()">Search</button>
+      <button class="nav-btn" onclick="openSearch()" data-i18n="nav_search">Search</button>
       
-      <button class="nav-btn" onclick="goSaved()">Saved</button>
-      <button class="nav-btn" id="loginBtn" onclick="openAuth()">Login</button>
+      <button class="nav-btn" onclick="goSaved()" data-i18n="nav_saved">Saved</button>
+      <button class="nav-btn" id="loginBtn" onclick="openAuth()" data-i18n="nav_login">Login</button>
       <button class="nav-btn" onclick="openCart()">Bag&nbsp;(<span id="bagCount">0</span>)</button>
     </nav>
   </div>
@@ -833,12 +834,32 @@ header.scrolled .logo-text {
   </div>
   <footer>
     <div class="footer-grid">
-      <div class="footer-lang"><span class="lbl">Language</span><br>English<br><br><span class="lbl">Country</span><br>Peru</div>
+      <div class="footer-lang">
+        <span class="lbl" data-i18n="lang_label">Language</span>
+        <div class="lang-current" onclick="toggleLangMenu(this)">
+          <span id="langLabel">English</span>
+          <span class="lang-arrow">▲</span>
+        </div>
+        <div class="lang-dropdown" id="langDropdown">
+          <button class="lang-option active" onclick="setLang('English',this)">English</button>
+          <button class="lang-option" onclick="setLang('Español',this)">Español</button>
+          <button class="lang-option" onclick="setLang('Français',this)">Français</button>
+          <button class="lang-option" onclick="setLang('Italiano',this)">Italiano</button>
+          <button class="lang-option" onclick="setLang('Deutsch',this)">Deutsch</button>
+          <button class="lang-option" onclick="setLang('Português',this)">Português</button>
+          <button class="lang-option" onclick="setLang('中文',this)">中文</button>
+          <button class="lang-option" onclick="setLang('日本語',this)">日本語</button>
+          <button class="lang-option" onclick="setLang('한국어',this)">한국어</button>
+          <button class="lang-option" onclick="setLang('العربية',this)">العربية</button>
+          <button class="lang-option" onclick="setLang('Русский',this)">Русский</button>
+        </div>
+        <br><span class="lbl" data-i18n="country_label">Country</span><br>Peru
+      </div>
       <div class="footer-div"></div>
-      <div class="footer-col"><a href="#" onclick="goAbout()">About the Brand</a><a href="https://wa.me/34650565927" target="_blank">Contact Us</a></div>
+      <div class="footer-col"><a href="#" onclick="goAbout()" data-i18n="footer_about">About the Brand</a><a href="https://wa.me/34650565927" target="_blank" data-i18n="footer_contact">Contact Us</a></div>
       <div class="footer-col"><a href="https://instagram.com/de.lavalle" target="_blank">Instagram</a></div>
       <div class="footer-col"></div>
-      <div><p class="nl-title">Subscribe to our Newsletter</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email address"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I have read and understood the <u>Privacy Policy</u></span></label></div>
+      
     </div>
     <div class="footer-bottom">de Lavalle &copy; 2026</div>
   </footer>
@@ -897,12 +918,32 @@ header.scrolled .logo-text {
 
   <footer>
     <div class="footer-grid">
-      <div class="footer-lang"><span class="lbl">Language</span><br>English<br><br><span class="lbl">Country</span><br>Peru</div>
+      <div class="footer-lang">
+        <span class="lbl" data-i18n="lang_label">Language</span>
+        <div class="lang-current" onclick="toggleLangMenu(this)">
+          <span id="langLabel">English</span>
+          <span class="lang-arrow">▲</span>
+        </div>
+        <div class="lang-dropdown" id="langDropdown">
+          <button class="lang-option active" onclick="setLang('English',this)">English</button>
+          <button class="lang-option" onclick="setLang('Español',this)">Español</button>
+          <button class="lang-option" onclick="setLang('Français',this)">Français</button>
+          <button class="lang-option" onclick="setLang('Italiano',this)">Italiano</button>
+          <button class="lang-option" onclick="setLang('Deutsch',this)">Deutsch</button>
+          <button class="lang-option" onclick="setLang('Português',this)">Português</button>
+          <button class="lang-option" onclick="setLang('中文',this)">中文</button>
+          <button class="lang-option" onclick="setLang('日本語',this)">日本語</button>
+          <button class="lang-option" onclick="setLang('한국어',this)">한국어</button>
+          <button class="lang-option" onclick="setLang('العربية',this)">العربية</button>
+          <button class="lang-option" onclick="setLang('Русский',this)">Русский</button>
+        </div>
+        <br><span class="lbl" data-i18n="country_label">Country</span><br>Peru
+      </div>
       <div class="footer-div"></div>
-      <div class="footer-col"><a href="#" onclick="goAbout()">About the Brand</a><a href="https://wa.me/34650565927" target="_blank">Contact Us</a></div>
+      <div class="footer-col"><a href="#" onclick="goAbout()" data-i18n="footer_about">About the Brand</a><a href="https://wa.me/34650565927" target="_blank" data-i18n="footer_contact">Contact Us</a></div>
       <div class="footer-col"><a href="https://instagram.com/de.lavalle" target="_blank">Instagram</a></div>
       <div class="footer-col"></div>
-      <div><p class="nl-title">Subscribe to our Newsletter</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email address"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I have read and understood the <u>Privacy Policy</u></span></label></div>
+      
     </div>
     <div class="footer-bottom">de Lavalle &copy; 2026</div>
   </footer>
@@ -912,25 +953,25 @@ header.scrolled .logo-text {
 <div class="page" id="page-women">
   <div class="women-topbar">
     <div class="breadcrumb">
-      <span onclick="goLanding()">Women</span><span class="sep">·</span>
+      <span onclick="goLanding()" data-i18n="nav_women">Women</span><span class="sep">·</span>
       <span style="cursor:default">Ready to Wear</span><span class="sep">·</span>
       <span class="cur" id="womenCatLabel">All</span>
     </div>
     <div class="topbar-right">
       <select class="sort-sel" onchange="sortWomen(this.value)">
-        <option value="">Sort by</option>
-        <option value="price-asc">Price: low to high</option>
-        <option value="price-desc">Price: high to low</option>
-        <option value="name">Name A–Z</option>
+        <option value="" data-i18n="sort_by">Sort by</option>
+        <option value="price-asc" data-i18n="sort_price_asc">Price: low to high</option>
+        <option value="price-desc" data-i18n="sort_price_desc">Price: high to low</option>
+        <option value="name" data-i18n="sort_name">Name A–Z</option>
       </select>
-      <button class="filter-toggle-btn" onclick="toggleFilters()">Filter By <span id="filterIcon">+</span></button>
+      <button class="filter-toggle-btn" onclick="toggleFilters()"data-i18n-filter="filter_by">Filter By <span id="filterIcon">+</span></button>
     </div>
   </div>
 
   <div class="filter-drawer" id="filterDrawer">
     <div class="filter-inner">
       <div class="filter-groups">
-        <div class="f-group"><h5>Category</h5><div class="chips" id="chipsCat">
+        <div class="f-group"><h5 data-i18n="filter_cat">Category</h5><div class="chips" id="chipsCat">
           <button class="chip on" onclick="pickChip(this,'cat')">All</button>
           <button class="chip" onclick="pickChip(this,'cat')">Coats</button>
           <button class="chip" onclick="pickChip(this,'cat')">Dresses</button>
@@ -938,7 +979,7 @@ header.scrolled .logo-text {
           <button class="chip" onclick="pickChip(this,'cat')">Trousers</button>
           <button class="chip" onclick="pickChip(this,'cat')">Accessories</button>
         </div></div>
-        <div class="f-group"><h5>Colour</h5><div class="chips" id="chipsCol">
+        <div class="f-group"><h5 data-i18n="filter_colour">Colour</h5><div class="chips" id="chipsCol">
           <button class="chip" onclick="pickChip(this,'col')">Black</button>
           <button class="chip" onclick="pickChip(this,'col')">Ivory</button>
           <button class="chip" onclick="pickChip(this,'col')">Sand</button>
@@ -946,22 +987,22 @@ header.scrolled .logo-text {
           <button class="chip" onclick="pickChip(this,'col')">Stone</button>
           <button class="chip" onclick="pickChip(this,'col')">Ecru</button>
         </div></div>
-        <div class="f-group"><h5>Size</h5><div class="chips" id="chipsSz">
+        <div class="f-group"><h5 data-i18n="filter_size">Size</h5><div class="chips" id="chipsSz">
           <button class="chip" onclick="pickChip(this,'sz')">XS</button>
           <button class="chip" onclick="pickChip(this,'sz')">S</button>
           <button class="chip" onclick="pickChip(this,'sz')">M</button>
           <button class="chip" onclick="pickChip(this,'sz')">L</button>
           <button class="chip" onclick="pickChip(this,'sz')">XL</button>
         </div></div>
-        <div class="f-group"><h5>Availability</h5><div class="chips" id="chipsAvail">
+        <div class="f-group"><h5 data-i18n="filter_avail">Availability</h5><div class="chips" id="chipsAvail">
           <button class="chip on" onclick="pickChip(this,'avail')">All</button>
           <button class="chip" onclick="pickChip(this,'avail')">In Stock</button>
           <button class="chip" onclick="pickChip(this,'avail')">New In</button>
         </div></div>
       </div>
       <div class="filter-actions">
-        <button class="f-apply" onclick="applyFilters()">Apply</button>
-        <button class="f-clear" onclick="clearFilters()">Clear filters</button>
+        <button class="f-apply" onclick="applyFilters()" data-i18n="filter_apply">Apply</button>
+        <button class="f-clear" onclick="clearFilters()" data-i18n="filter_clear">Clear filters</button>
       </div>
     </div>
   </div>
@@ -972,7 +1013,7 @@ header.scrolled .logo-text {
       <div class="women-cat-img-fill" id="womenCatImg">
         <img src="women-cat.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;">
       </div>
-      <span class="women-cat-label-corner" id="womenCatImgLabel">women · new collection</span>
+      <span class="women-cat-label-corner" id="womenCatImgLabel" data-i18n="women_new_collection">women · new collection</span>
     </div>
     <div class="women-grid-col">
       <div class="women-grid" id="womenGridTop"></div>
@@ -985,12 +1026,32 @@ header.scrolled .logo-text {
 
   <footer>
     <div class="footer-grid">
-      <div class="footer-lang"><span class="lbl">Language</span><br>English<br><br><span class="lbl">Country</span><br>Peru</div>
+      <div class="footer-lang">
+        <span class="lbl" data-i18n="lang_label">Language</span>
+        <div class="lang-current" onclick="toggleLangMenu(this)">
+          <span id="langLabel">English</span>
+          <span class="lang-arrow">▲</span>
+        </div>
+        <div class="lang-dropdown" id="langDropdown">
+          <button class="lang-option active" onclick="setLang('English',this)">English</button>
+          <button class="lang-option" onclick="setLang('Español',this)">Español</button>
+          <button class="lang-option" onclick="setLang('Français',this)">Français</button>
+          <button class="lang-option" onclick="setLang('Italiano',this)">Italiano</button>
+          <button class="lang-option" onclick="setLang('Deutsch',this)">Deutsch</button>
+          <button class="lang-option" onclick="setLang('Português',this)">Português</button>
+          <button class="lang-option" onclick="setLang('中文',this)">中文</button>
+          <button class="lang-option" onclick="setLang('日本語',this)">日本語</button>
+          <button class="lang-option" onclick="setLang('한국어',this)">한국어</button>
+          <button class="lang-option" onclick="setLang('العربية',this)">العربية</button>
+          <button class="lang-option" onclick="setLang('Русский',this)">Русский</button>
+        </div>
+        <br><span class="lbl" data-i18n="country_label">Country</span><br>Peru
+      </div>
       <div class="footer-div"></div>
-      <div class="footer-col"><a href="#" onclick="goAbout()">About the Brand</a><a href="https://wa.me/34650565927" target="_blank">Contact Us</a></div>
+      <div class="footer-col"><a href="#" onclick="goAbout()" data-i18n="footer_about">About the Brand</a><a href="https://wa.me/34650565927" target="_blank" data-i18n="footer_contact">Contact Us</a></div>
       <div class="footer-col"><a href="https://instagram.com/de.lavalle" target="_blank">Instagram</a></div>
       <div class="footer-col"></div>
-      <div><p class="nl-title">Subscribe to our Newsletter</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email address"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I have read and understood the <u>Privacy Policy</u></span></label></div>
+      
     </div>
     <div class="footer-bottom">de Lavalle &copy; 2026</div>
   </footer>
@@ -1013,23 +1074,23 @@ header.scrolled .logo-text {
       <div class="prod-bc"><span onclick="goWomen()">Women</span><span>·</span><span id="prodBcCat" onclick="goWomen()">Ready to Wear</span></div>
       <h1 class="prod-title" id="prodTitle">—</h1>
       <p class="prod-price-lg" id="prodPrice">—</p>
-      <p class="f-label">Colour</p>
+      <p class="f-label" data-i18n="prod_colour">Colour</p>
       <div class="colour-row" id="colourRow">
         <div class="swatch on" style="background:#e8e0d0" onclick="pickColour(this,'Ecru','bg-ecru')"></div>
         <div class="swatch" style="background:#aca8a0" onclick="pickColour(this,'Stone','bg-stone')"></div>
         <div class="swatch" style="background:#181610" onclick="pickColour(this,'Black','bg-black-p')"></div>
         <span class="colour-lbl" id="colourLbl">—</span>
       </div>
-      <div class="size-hd"><p class="f-label" style="margin:0">Size</p><span class="size-guide-lnk">Size Guide</span></div>
+      <div class="size-hd"><p class="f-label" style="margin:0" data-i18n="prod_size">Size</p><span class="size-guide-lnk" data-i18n="prod_size_guide">Size Guide</span></div>
       <div class="size-grid" id="sizeGrid"></div>
       <div class="stock-info-line" id="stockInfoLine"></div>
-      <button class="add-bag-btn" id="addBagBtn" onclick="addToBag()">Add to Bag</button>
-      <button class="save-lnk" id="saveLnk" onclick="toggleSave()">Save</button>
+      <button class="add-bag-btn" id="addBagBtn" onclick="addToBag()" data-i18n="prod_add_bag">Add to Bag</button>
+      <button class="save-lnk" id="saveLnk" onclick="toggleSave()" data-i18n="prod_save">Save</button>
       <p class="prod-desc-txt" id="prodDescTxt"></p>
       <p class="prod-ref-txt" id="prodRefTxt"></p>
-      <div class="acc"><button class="acc-btn" onclick="toggleAcc(this)">Details <span class="acc-icon">+</span></button><div class="acc-body" id="accDetails"></div></div>
-      <div class="acc"><button class="acc-btn" onclick="toggleAcc(this)">Size &amp; Fit <span class="acc-icon">+</span></button><div class="acc-body">Model is 5'9" and wears size S. Relaxed silhouette. We recommend selecting your usual size.</div></div>
-      <div class="acc"><button class="acc-btn" onclick="toggleAcc(this)">Shipping &amp; Returns <span class="acc-icon">+</span></button><div class="acc-body">Complimentary shipping on all orders. Returns accepted within 14 days of receipt.</div></div>
+      <div class="acc"><button class="acc-btn" onclick="toggleAcc(this)"data-i18n-btn="prod_details">Details <span class="acc-icon">+</span></button><div class="acc-body" id="accDetails"></div></div>
+      <div class="acc"><button class="acc-btn" onclick="toggleAcc(this)"data-i18n-btn="prod_size_fit">Size &amp; Fit <span class="acc-icon">+</span></button><div class="acc-body"><span data-i18n="prod_size_fit_body">Model is 5'9" and wears size S. Relaxed silhouette. We recommend selecting your usual size.</span></div></div>
+      <div class="acc"><button class="acc-btn" onclick="toggleAcc(this)"data-i18n-btn="prod_shipping">Shipping &amp; Returns <span class="acc-icon">+</span></button><div class="acc-body"><span data-i18n="prod_shipping_body">Complimentary shipping on all orders. Returns accepted within 14 days of receipt.</span></div></div>
     </div>
   </div>
 </div>
@@ -1048,12 +1109,32 @@ header.scrolled .logo-text {
 
   <footer>
     <div class="footer-grid">
-      <div class="footer-lang"><span class="lbl">Language</span><br>English<br><br><span class="lbl">Country</span><br>Peru</div>
+      <div class="footer-lang">
+        <span class="lbl" data-i18n="lang_label">Language</span>
+        <div class="lang-current" onclick="toggleLangMenu(this)">
+          <span id="langLabel">English</span>
+          <span class="lang-arrow">▲</span>
+        </div>
+        <div class="lang-dropdown" id="langDropdown">
+          <button class="lang-option active" onclick="setLang('English',this)">English</button>
+          <button class="lang-option" onclick="setLang('Español',this)">Español</button>
+          <button class="lang-option" onclick="setLang('Français',this)">Français</button>
+          <button class="lang-option" onclick="setLang('Italiano',this)">Italiano</button>
+          <button class="lang-option" onclick="setLang('Deutsch',this)">Deutsch</button>
+          <button class="lang-option" onclick="setLang('Português',this)">Português</button>
+          <button class="lang-option" onclick="setLang('中文',this)">中文</button>
+          <button class="lang-option" onclick="setLang('日本語',this)">日本語</button>
+          <button class="lang-option" onclick="setLang('한국어',this)">한국어</button>
+          <button class="lang-option" onclick="setLang('العربية',this)">العربية</button>
+          <button class="lang-option" onclick="setLang('Русский',this)">Русский</button>
+        </div>
+        <br><span class="lbl" data-i18n="country_label">Country</span><br>Peru
+      </div>
       <div class="footer-div"></div>
-      <div class="footer-col"><a href="#" onclick="goAbout()">About the Brand</a><a href="https://wa.me/34650565927" target="_blank">Contact Us</a></div>
+      <div class="footer-col"><a href="#" onclick="goAbout()" data-i18n="footer_about">About the Brand</a><a href="https://wa.me/34650565927" target="_blank" data-i18n="footer_contact">Contact Us</a></div>
       <div class="footer-col"><a href="https://instagram.com/de.lavalle" target="_blank">Instagram</a></div>
       <div class="footer-col"></div>
-      <div><p class="nl-title">Subscribe to our Newsletter</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email address"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I have read and understood the <u>Privacy Policy</u></span></label></div>
+      
     </div>
     <div class="footer-bottom">de Lavalle &copy; 2026</div>
   </footer>
@@ -1070,12 +1151,32 @@ header.scrolled .logo-text {
   </div>
   <footer>
     <div class="footer-grid">
-      <div class="footer-lang"><span class="lbl">Language</span><br>English<br><br><span class="lbl">Country</span><br>Peru</div>
+      <div class="footer-lang">
+        <span class="lbl" data-i18n="lang_label">Language</span>
+        <div class="lang-current" onclick="toggleLangMenu(this)">
+          <span id="langLabel">English</span>
+          <span class="lang-arrow">▲</span>
+        </div>
+        <div class="lang-dropdown" id="langDropdown">
+          <button class="lang-option active" onclick="setLang('English',this)">English</button>
+          <button class="lang-option" onclick="setLang('Español',this)">Español</button>
+          <button class="lang-option" onclick="setLang('Français',this)">Français</button>
+          <button class="lang-option" onclick="setLang('Italiano',this)">Italiano</button>
+          <button class="lang-option" onclick="setLang('Deutsch',this)">Deutsch</button>
+          <button class="lang-option" onclick="setLang('Português',this)">Português</button>
+          <button class="lang-option" onclick="setLang('中文',this)">中文</button>
+          <button class="lang-option" onclick="setLang('日本語',this)">日本語</button>
+          <button class="lang-option" onclick="setLang('한국어',this)">한국어</button>
+          <button class="lang-option" onclick="setLang('العربية',this)">العربية</button>
+          <button class="lang-option" onclick="setLang('Русский',this)">Русский</button>
+        </div>
+        <br><span class="lbl" data-i18n="country_label">Country</span><br>Peru
+      </div>
       <div class="footer-div"></div>
-      <div class="footer-col"><a href="#" onclick="goAbout()">About the Brand</a><a href="https://wa.me/34650565927" target="_blank">Contact Us</a></div>
+      <div class="footer-col"><a href="#" onclick="goAbout()" data-i18n="footer_about">About the Brand</a><a href="https://wa.me/34650565927" target="_blank" data-i18n="footer_contact">Contact Us</a></div>
       <div class="footer-col"><a href="https://instagram.com/de.lavalle" target="_blank">Instagram</a></div>
       <div class="footer-col"></div>
-      <div><p class="nl-title">Subscribe to our Newsletter</p><div class="nl-row"><input class="nl-input" type="email" placeholder="Your email address"><button class="nl-send">›</button></div><label class="nl-check"><input type="checkbox"><span>I have read and understood the <u>Privacy Policy</u></span></label></div>
+      
     </div>
     <div class="footer-bottom">de Lavalle &copy; 2026</div>
   </footer>
@@ -1087,9 +1188,9 @@ header.scrolled .logo-text {
     <div class="ch-left">
       <span class="ch-logo" onclick="goLanding()">de Lavalle</span>
       <div class="ch-steps">
-        <span class="ch-step on">Contact</span><span class="ch-sep">›</span>
-        <span class="ch-step">Shipping</span><span class="ch-sep">›</span>
-        <span class="ch-step">Payment</span>
+        <span class="ch-step on" data-i18n="ch_contact">Contact</span><span class="ch-sep">›</span>
+        <span class="ch-step" data-i18n="ch_shipping">Shipping</span><span class="ch-sep">›</span>
+        <span class="ch-step" data-i18n="ch_payment">Payment</span>
       </div>
 
       <!-- SHOPIFY NOTE -->
@@ -1172,7 +1273,7 @@ header.scrolled .logo-text {
         <input class="promo-input" type="text" id="promoCode" placeholder="Gift card or discount code">
         <button class="promo-btn" onclick="applyPromo()">Apply</button>
       </div>
-      <button class="place-btn" id="orderBtn" onclick="placeOrder()">Place Order</button>
+      <button class="place-btn" id="orderBtn" onclick="placeOrder()" data-i18n="ch_place_order">Place Order</button>
     </div>
     <div class="ch-right">
       <p class="sum-title">Order Summary</p>
@@ -1191,11 +1292,11 @@ header.scrolled .logo-text {
 <!-- CART -->
 <div class="cart-ov" id="cartOv" onclick="closeCart()"></div>
 <div class="cart" id="cartDrawer">
-  <div class="cart-hd"><span class="cart-hd-title">Your Bag</span><button class="cart-x" onclick="closeCart()">×</button></div>
+  <div class="cart-hd"><span class="cart-hd-title" data-i18n="cart_title">Your Bag</span><button class="cart-x" onclick="closeCart()">×</button></div>
   <div class="cart-body" id="cartBody"></div>
   <div class="cart-ft" id="cartFt" style="display:none">
     <div class="cart-sub"><span>Subtotal</span><span id="cartSub">S/ 0</span></div>
-    <button class="cart-checkout-btn" onclick="goCheckout()">Checkout</button>
+    <button class="cart-checkout-btn" onclick="goCheckout()" data-i18n="cart_checkout">Checkout</button>
     <button class="cart-cont" onclick="closeCart()">Continue Shopping</button>
   </div>
 </div>
@@ -1255,6 +1356,16 @@ const PRODUCTS = [
   {id:28, name:'The Swimsuit', shopifyHandle:'swimsuit-black-white-check', cat:'Swim', colour:'Black-White Check', hex:'#444440', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:4,S:5,M:5,L:3}, badge:'New', photo:null, desc:'Scoop-neck one-piece in black and white micro check. Fixed wide straps, front lining, deep open back, and high-cut leg. 80% polyamide / 20% elastane. Made in Lima.'},
   {id:29, name:'The Swimsuit', shopifyHandle:'swimsuit-black-pin-dot', cat:'Swim', colour:'Black Pin Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:4,S:5,M:5,L:3}, badge:'New', photo:null, desc:'Scoop-neck one-piece in black pin dot. Fixed wide straps, front lining, deep open back, and high-cut leg. 80% polyamide / 20% elastane. Made in Lima.'},
   {id:30, name:'The Swimsuit', shopifyHandle:'swimsuit-red-pin-dot', cat:'Swim', colour:'Red Pin Dot', hex:'#b83232', bg:'bg-ecru', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:4,S:5,M:5,L:3}, badge:'New', photo:null, desc:'Scoop-neck one-piece in red pin dot. Fixed wide straps, front lining, deep open back, and high-cut leg. 80% polyamide / 20% elastane. Made in Lima.'},
+  {id:32, name:'The Shirt', shopifyHandle:'sleep-shirt-crudo', cat:'Sleep', colour:'Crudo', hex:'#f0ece0', bg:'bg-ivory', section:'women', price:420, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs. Made in Lima.'},
+  {id:33, name:'The Shirt', shopifyHandle:'sleep-shirt-avena', cat:'Sleep', colour:'Avena', hex:'#e8dfc8', bg:'bg-sand', section:'women', price:420, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs. Made in Lima.'},
+  {id:34, name:'The Shirt', shopifyHandle:'sleep-shirt-navy-stripe', cat:'Sleep', colour:'Navy Stripe', hex:'#1a2740', bg:'bg-black-p', section:'women', price:420, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs. Made in Lima.'},
+  {id:35, name:'The Shirt', shopifyHandle:'sleep-shirt-sage-stripe', cat:'Sleep', colour:'Sage Stripe', hex:'#b8c8b0', bg:'bg-stone', section:'women', price:420, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs. Made in Lima.'},
+  {id:36, name:'The Shirt', shopifyHandle:'sleep-shirt-lavender-stripe', cat:'Sleep', colour:'Lavender Stripe', hex:'#c8c0d8', bg:'bg-ecru', section:'women', price:420, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs. Made in Lima.'},
+  {id:37, name:'The Pant', shopifyHandle:'sleep-pant-crudo', cat:'Sleep', colour:'Crudo', hex:'#f0ece0', bg:'bg-ivory', section:'women', price:380, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits. Made in Lima.'},
+  {id:38, name:'The Pant', shopifyHandle:'sleep-pant-avena', cat:'Sleep', colour:'Avena', hex:'#e8dfc8', bg:'bg-sand', section:'women', price:380, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits. Made in Lima.'},
+  {id:39, name:'The Pant', shopifyHandle:'sleep-pant-navy-stripe', cat:'Sleep', colour:'Navy Stripe', hex:'#1a2740', bg:'bg-black-p', section:'women', price:380, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits. Made in Lima.'},
+  {id:40, name:'The Pant', shopifyHandle:'sleep-pant-sage-stripe', cat:'Sleep', colour:'Sage Stripe', hex:'#b8c8b0', bg:'bg-stone', section:'women', price:380, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits. Made in Lima.'},
+  {id:41, name:'The Pant', shopifyHandle:'sleep-pant-lavender-stripe', cat:'Sleep', colour:'Lavender Stripe', hex:'#c8c0d8', bg:'bg-ecru', section:'women', price:380, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits. Made in Lima.'},
   {id:31, name:'Rosario Dress', shopifyHandle:'rosario-dress', cat:'Dresses', colour:'Midnight Blue', hex:'#1a2340', bg:'bg-black-p', section:'women', price:890, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'The Rosario Dress. Made in Peru.'},
 ];
 
@@ -1365,7 +1476,7 @@ setHeroVideo();
 let heroResizeTimer;
 window.addEventListener('resize',()=>{clearTimeout(heroResizeTimer);heroResizeTimer=setTimeout(setHeroVideo,100)});
 const DROP={women:[
-  {head:'Ready to Wear',sub:['Outerwear','Shirts & Tops','Dresses','Skirts','Pants & Shorts','Swim']},
+  {head:'Ready to Wear',sub:['Outerwear','Shirts & Tops','Dresses','Skirts','Pants & Shorts','Swim','Sleep']},
 ]};
 let dt;
 function showDrop(k){
@@ -1388,6 +1499,7 @@ const CAT_IMAGES={
   'All':'women-cat.jpg',
   'Ready to Wear':'women-cat.jpg',
   'Outerwear':null,
+  'Sleep':null,
   'Shirts & Tops':'ines4.jpg',
   'Dresses':'women-cat.jpg',
   'Skirts':'women-cat.jpg',
@@ -1872,12 +1984,316 @@ function toggleMobileSub(btn){
 }
 
 
+
+
+/* ══════════════════════════════════════
+   I18N — TRANSLATION SYSTEM
+══════════════════════════════════════ */
+const TRANSLATIONS = {
+  en: {
+    nav_women:'Women', nav_home:'Home', nav_gallery:'Gallery',
+    nav_search:'Search', nav_saved:'Saved', nav_login:'Login',
+    footer_about:'About the Brand', footer_contact:'Contact Us',
+    lang_label:'Language', country_label:'Country',
+    prod_colour:'Colour', prod_size:'Size', prod_size_guide:'Size Guide',
+    prod_add_bag:'Add to Bag', prod_save:'Save',
+    prod_details:'Details', prod_size_fit:'Size & Fit', prod_shipping:'Shipping & Returns',
+    prod_size_fit_body:"Model is 5'9\" and wears size S. Relaxed silhouette. We recommend selecting your usual size.",
+    prod_shipping_body:'Complimentary shipping on all orders. Returns accepted within 14 days of receipt.',
+    filter_apply:'Apply', filter_clear:'Clear filters',
+    filter_cat:'Category', filter_colour:'Colour', filter_size:'Size', filter_avail:'Availability',
+    filter_by:'Filter By',
+    sort_by:'Sort by', sort_price_asc:'Price: low to high', sort_price_desc:'Price: high to low', sort_name:'Name A–Z',
+    cart_title:'Your Bag', cart_checkout:'Checkout',
+    saved_title:'Saved Items',
+    ch_contact:'Contact', ch_shipping:'Shipping', ch_payment:'Payment', ch_place_order:'Place Order',
+    women_new_collection:'women · new collection',
+    quick_add:'Quick Add', size_guide:'Size Guide',
+    about_brand:'About the Brand', contact_us:'Contact Us',
+  },
+  es: {
+    nav_women:'Mujer', nav_home:'Inicio', nav_gallery:'Galería',
+    nav_search:'Buscar', nav_saved:'Guardado', nav_login:'Iniciar sesión',
+    footer_about:'Sobre la Marca', footer_contact:'Contáctanos',
+    lang_label:'Idioma', country_label:'País',
+    prod_colour:'Color', prod_size:'Talla', prod_size_guide:'Guía de tallas',
+    prod_add_bag:'Añadir a la bolsa', prod_save:'Guardar',
+    prod_details:'Detalles', prod_size_fit:'Talla y ajuste', prod_shipping:'Envío y devoluciones',
+    prod_size_fit_body:"La modelo mide 1,75 m y usa talla S. Silueta relajada. Recomendamos elegir tu talla habitual.",
+    prod_shipping_body:'Envío gratuito en todos los pedidos. Devoluciones aceptadas en un plazo de 14 días.',
+    filter_apply:'Aplicar', filter_clear:'Borrar filtros',
+    filter_cat:'Categoría', filter_colour:'Color', filter_size:'Talla', filter_avail:'Disponibilidad',
+    filter_by:'Filtrar por',
+    sort_by:'Ordenar por', sort_price_asc:'Precio: menor a mayor', sort_price_desc:'Precio: mayor a menor', sort_name:'Nombre A–Z',
+    cart_title:'Tu bolsa', cart_checkout:'Finalizar compra',
+    saved_title:'Artículos guardados',
+    ch_contact:'Contacto', ch_shipping:'Envío', ch_payment:'Pago', ch_place_order:'Realizar pedido',
+    women_new_collection:'mujer · nueva colección',
+    quick_add:'Añadir rápido',
+  },
+  fr: {
+    nav_women:'Femme', nav_home:'Accueil', nav_gallery:'Galerie',
+    nav_search:'Rechercher', nav_saved:'Sauvegardé', nav_login:'Connexion',
+    footer_about:'À propos', footer_contact:'Nous contacter',
+    lang_label:'Langue', country_label:'Pays',
+    prod_colour:'Couleur', prod_size:'Taille', prod_size_guide:'Guide des tailles',
+    prod_add_bag:'Ajouter au panier', prod_save:'Sauvegarder',
+    prod_details:'Détails', prod_size_fit:'Taille & ajustement', prod_shipping:'Livraison & retours',
+    prod_size_fit_body:"Le mannequin mesure 1,75 m et porte une taille S. Silhouette décontractée. Nous recommandons de choisir votre taille habituelle.",
+    prod_shipping_body:'Livraison offerte sur toutes les commandes. Retours acceptés dans les 14 jours.',
+    filter_apply:'Appliquer', filter_clear:'Effacer les filtres',
+    filter_cat:'Catégorie', filter_colour:'Couleur', filter_size:'Taille', filter_avail:'Disponibilité',
+    filter_by:'Filtrer par',
+    sort_by:'Trier par', sort_price_asc:'Prix : croissant', sort_price_desc:'Prix : décroissant', sort_name:'Nom A–Z',
+    cart_title:'Votre panier', cart_checkout:'Commander',
+    saved_title:'Articles sauvegardés',
+    ch_contact:'Contact', ch_shipping:'Livraison', ch_payment:'Paiement', ch_place_order:'Passer la commande',
+    women_new_collection:'femme · nouvelle collection',
+    quick_add:'Ajout rapide',
+  },
+  it: {
+    nav_women:'Donna', nav_home:'Home', nav_gallery:'Galleria',
+    nav_search:'Cerca', nav_saved:'Salvati', nav_login:'Accedi',
+    footer_about:'Sul brand', footer_contact:'Contattaci',
+    lang_label:'Lingua', country_label:'Paese',
+    prod_colour:'Colore', prod_size:'Taglia', prod_size_guide:'Guida alle taglie',
+    prod_add_bag:'Aggiungi alla borsa', prod_save:'Salva',
+    prod_details:'Dettagli', prod_size_fit:'Taglia & vestibilità', prod_shipping:'Spedizione & resi',
+    prod_size_fit_body:"La modella è alta 1,75 m e indossa una taglia S. Silhouette rilassata. Consigliamo di scegliere la taglia abituale.",
+    prod_shipping_body:'Spedizione gratuita su tutti gli ordini. Resi accettati entro 14 giorni.',
+    filter_apply:'Applica', filter_clear:'Cancella filtri',
+    filter_cat:'Categoria', filter_colour:'Colore', filter_size:'Taglia', filter_avail:'Disponibilità',
+    filter_by:'Filtra per',
+    sort_by:'Ordina per', sort_price_asc:'Prezzo: crescente', sort_price_desc:'Prezzo: decrescente', sort_name:'Nome A–Z',
+    cart_title:'La tua borsa', cart_checkout:'Acquista',
+    saved_title:'Articoli salvati',
+    ch_contact:'Contatto', ch_shipping:'Spedizione', ch_payment:'Pagamento', ch_place_order:'Effettua ordine',
+    women_new_collection:'donna · nuova collezione',
+    quick_add:'Aggiungi rapido',
+  },
+  de: {
+    nav_women:'Damen', nav_home:'Startseite', nav_gallery:'Galerie',
+    nav_search:'Suchen', nav_saved:'Gespeichert', nav_login:'Anmelden',
+    footer_about:'Über die Marke', footer_contact:'Kontakt',
+    lang_label:'Sprache', country_label:'Land',
+    prod_colour:'Farbe', prod_size:'Größe', prod_size_guide:'Größenguide',
+    prod_add_bag:'In die Tasche', prod_save:'Speichern',
+    prod_details:'Details', prod_size_fit:'Größe & Passform', prod_shipping:'Versand & Rückgabe',
+    prod_size_fit_body:"Das Modell ist 1,75 m groß und trägt Größe S. Entspannte Silhouette. Wir empfehlen, die übliche Größe zu wählen.",
+    prod_shipping_body:'Kostenloser Versand auf alle Bestellungen. Rückgaben innerhalb von 14 Tagen möglich.',
+    filter_apply:'Anwenden', filter_clear:'Filter löschen',
+    filter_cat:'Kategorie', filter_colour:'Farbe', filter_size:'Größe', filter_avail:'Verfügbarkeit',
+    filter_by:'Filtern nach',
+    sort_by:'Sortieren nach', sort_price_asc:'Preis: aufsteigend', sort_price_desc:'Preis: absteigend', sort_name:'Name A–Z',
+    cart_title:'Ihre Tasche', cart_checkout:'Zur Kasse',
+    saved_title:'Gespeicherte Artikel',
+    ch_contact:'Kontakt', ch_shipping:'Versand', ch_payment:'Zahlung', ch_place_order:'Bestellung aufgeben',
+    women_new_collection:'damen · neue kollektion',
+    quick_add:'Schnell hinzufügen',
+  },
+  pt: {
+    nav_women:'Mulher', nav_home:'Início', nav_gallery:'Galeria',
+    nav_search:'Pesquisar', nav_saved:'Guardado', nav_login:'Entrar',
+    footer_about:'Sobre a marca', footer_contact:'Fale connosco',
+    lang_label:'Idioma', country_label:'País',
+    prod_colour:'Cor', prod_size:'Tamanho', prod_size_guide:'Guia de tamanhos',
+    prod_add_bag:'Adicionar à bolsa', prod_save:'Guardar',
+    prod_details:'Detalhes', prod_size_fit:'Tamanho & ajuste', prod_shipping:'Envio & devoluções',
+    prod_size_fit_body:"A modelo tem 1,75 m e usa o tamanho S. Silhueta relaxada. Recomendamos escolher o seu tamanho habitual.",
+    prod_shipping_body:'Envio gratuito em todos os pedidos. Devoluções aceites em 14 dias.',
+    filter_apply:'Aplicar', filter_clear:'Limpar filtros',
+    filter_cat:'Categoria', filter_colour:'Cor', filter_size:'Tamanho', filter_avail:'Disponibilidade',
+    filter_by:'Filtrar por',
+    sort_by:'Ordenar por', sort_price_asc:'Preço: crescente', sort_price_desc:'Preço: decrescente', sort_name:'Nome A–Z',
+    cart_title:'A sua bolsa', cart_checkout:'Finalizar',
+    saved_title:'Artigos guardados',
+    ch_contact:'Contacto', ch_shipping:'Envio', ch_payment:'Pagamento', ch_place_order:'Fazer pedido',
+    women_new_collection:'mulher · nova coleção',
+    quick_add:'Adicionar rápido',
+  },
+  zh: {
+    nav_women:'女装', nav_home:'主页', nav_gallery:'画廊',
+    nav_search:'搜索', nav_saved:'已保存', nav_login:'登录',
+    footer_about:'关于品牌', footer_contact:'联系我们',
+    lang_label:'语言', country_label:'国家',
+    prod_colour:'颜色', prod_size:'尺码', prod_size_guide:'尺码指南',
+    prod_add_bag:'加入购物袋', prod_save:'保存',
+    prod_details:'详情', prod_size_fit:'尺码与版型', prod_shipping:'配送与退货',
+    prod_size_fit_body:'模特身高1.75米，穿着S码。宽松版型。建议选择您的常规尺码。',
+    prod_shipping_body:'所有订单免费配送。14天内接受退货。',
+    filter_apply:'应用', filter_clear:'清除筛选',
+    filter_cat:'类别', filter_colour:'颜色', filter_size:'尺码', filter_avail:'库存',
+    filter_by:'筛选',
+    sort_by:'排序', sort_price_asc:'价格：从低到高', sort_price_desc:'价格：从高到低', sort_name:'名称 A–Z',
+    cart_title:'您的购物袋', cart_checkout:'结账',
+    saved_title:'已保存商品',
+    ch_contact:'联系', ch_shipping:'配送', ch_payment:'付款', ch_place_order:'下单',
+    women_new_collection:'女装 · 新系列',
+    quick_add:'快速添加',
+  },
+  ja: {
+    nav_women:'ウィメンズ', nav_home:'ホーム', nav_gallery:'ギャラリー',
+    nav_search:'検索', nav_saved:'保存済み', nav_login:'ログイン',
+    footer_about:'ブランドについて', footer_contact:'お問い合わせ',
+    lang_label:'言語', country_label:'国',
+    prod_colour:'カラー', prod_size:'サイズ', prod_size_guide:'サイズガイド',
+    prod_add_bag:'バッグに追加', prod_save:'保存',
+    prod_details:'詳細', prod_size_fit:'サイズとフィット', prod_shipping:'配送と返品',
+    prod_size_fit_body:'モデルの身長は175cmで、Sサイズを着用しています。ゆったりとしたシルエット。通常のサイズをお選びください。',
+    prod_shipping_body:'全注文送料無料。14日以内の返品を受け付けます。',
+    filter_apply:'適用', filter_clear:'フィルターをクリア',
+    filter_cat:'カテゴリー', filter_colour:'カラー', filter_size:'サイズ', filter_avail:'在庫',
+    filter_by:'絞り込み',
+    sort_by:'並び替え', sort_price_asc:'価格：低い順', sort_price_desc:'価格：高い順', sort_name:'名前 A–Z',
+    cart_title:'バッグ', cart_checkout:'購入手続き',
+    saved_title:'保存済みアイテム',
+    ch_contact:'連絡先', ch_shipping:'配送', ch_payment:'支払い', ch_place_order:'注文する',
+    women_new_collection:'ウィメンズ · 新コレクション',
+    quick_add:'クイック追加',
+  },
+  ko: {
+    nav_women:'여성', nav_home:'홈', nav_gallery:'갤러리',
+    nav_search:'검색', nav_saved:'저장됨', nav_login:'로그인',
+    footer_about:'브랜드 소개', footer_contact:'문의하기',
+    lang_label:'언어', country_label:'국가',
+    prod_colour:'색상', prod_size:'사이즈', prod_size_guide:'사이즈 가이드',
+    prod_add_bag:'백에 추가', prod_save:'저장',
+    prod_details:'상세정보', prod_size_fit:'사이즈 & 핏', prod_shipping:'배송 & 반품',
+    prod_size_fit_body:'모델은 175cm이며 S사이즈를 착용합니다. 여유있는 실루엣. 평소 사이즈를 선택하세요.',
+    prod_shipping_body:'모든 주문 무료 배송. 14일 이내 반품 가능.',
+    filter_apply:'적용', filter_clear:'필터 지우기',
+    filter_cat:'카테고리', filter_colour:'색상', filter_size:'사이즈', filter_avail:'재고',
+    filter_by:'필터',
+    sort_by:'정렬', sort_price_asc:'가격: 낮은순', sort_price_desc:'가격: 높은순', sort_name:'이름 A–Z',
+    cart_title:'장바구니', cart_checkout:'결제',
+    saved_title:'저장된 상품',
+    ch_contact:'연락처', ch_shipping:'배송', ch_payment:'결제', ch_place_order:'주문하기',
+    women_new_collection:'여성 · 새 컬렉션',
+    quick_add:'빠른 추가',
+  },
+  ar: {
+    nav_women:'نساء', nav_home:'الرئيسية', nav_gallery:'معرض',
+    nav_search:'بحث', nav_saved:'المحفوظة', nav_login:'تسجيل الدخول',
+    footer_about:'عن العلامة', footer_contact:'تواصل معنا',
+    lang_label:'اللغة', country_label:'الدولة',
+    prod_colour:'اللون', prod_size:'المقاس', prod_size_guide:'دليل المقاسات',
+    prod_add_bag:'أضف إلى الحقيبة', prod_save:'حفظ',
+    prod_details:'تفاصيل', prod_size_fit:'المقاس والملاءمة', prod_shipping:'الشحن والإرجاع',
+    prod_size_fit_body:'المقاس S. مظهر مريح. نوصي باختيار مقاسك المعتاد.',
+    prod_shipping_body:'شحن مجاني على جميع الطلبات. يُقبل الإرجاع خلال 14 يومًا.',
+    filter_apply:'تطبيق', filter_clear:'مسح الفلاتر',
+    filter_cat:'الفئة', filter_colour:'اللون', filter_size:'المقاس', filter_avail:'التوفر',
+    filter_by:'تصفية حسب',
+    sort_by:'ترتيب حسب', sort_price_asc:'السعر: الأدنى أولاً', sort_price_desc:'السعر: الأعلى أولاً', sort_name:'الاسم أ-ي',
+    cart_title:'حقيبتك', cart_checkout:'إتمام الشراء',
+    saved_title:'العناصر المحفوظة',
+    ch_contact:'التواصل', ch_shipping:'الشحن', ch_payment:'الدفع', ch_place_order:'تأكيد الطلب',
+    women_new_collection:'نساء · مجموعة جديدة',
+    quick_add:'إضافة سريعة',
+  },
+  ru: {
+    nav_women:'Женщинам', nav_home:'Главная', nav_gallery:'Галерея',
+    nav_search:'Поиск', nav_saved:'Сохранённое', nav_login:'Войти',
+    footer_about:'О бренде', footer_contact:'Связаться с нами',
+    lang_label:'Язык', country_label:'Страна',
+    prod_colour:'Цвет', prod_size:'Размер', prod_size_guide:'Гид по размерам',
+    prod_add_bag:'Добавить в сумку', prod_save:'Сохранить',
+    prod_details:'Детали', prod_size_fit:'Размер и посадка', prod_shipping:'Доставка и возврат',
+    prod_size_fit_body:'Модель ростом 175 см носит размер S. Свободный силуэт. Рекомендуем выбирать свой обычный размер.',
+    prod_shipping_body:'Бесплатная доставка для всех заказов. Возврат принимается в течение 14 дней.',
+    filter_apply:'Применить', filter_clear:'Сбросить фильтры',
+    filter_cat:'Категория', filter_colour:'Цвет', filter_size:'Размер', filter_avail:'Наличие',
+    filter_by:'Фильтровать по',
+    sort_by:'Сортировка', sort_price_asc:'Цена: по возрастанию', sort_price_desc:'Цена: по убыванию', sort_name:'Название А–Я',
+    cart_title:'Ваша сумка', cart_checkout:'Оформить заказ',
+    saved_title:'Сохранённые товары',
+    ch_contact:'Контакт', ch_shipping:'Доставка', ch_payment:'Оплата', ch_place_order:'Разместить заказ',
+    women_new_collection:'женщинам · новая коллекция',
+    quick_add:'Быстро добавить',
+  },
+};
+
+const LANG_CODES = {
+  'English':'en','Español':'es','Français':'fr','Italiano':'it','Deutsch':'de',
+  'Português':'pt','中文':'zh','日本語':'ja','한국어':'ko','العربية':'ar','Русский':'ru'
+};
+
+let currentLang = 'en';
+
+function applyTranslations(lang){
+  const t = TRANSLATIONS[lang] || TRANSLATIONS.en;
+  // Static data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if(t[key]) el.textContent = t[key];
+  });
+  // Accordion buttons (have icon inside, preserve it)
+  document.querySelectorAll('[data-i18n-btn]').forEach(el => {
+    const key = el.getAttribute('data-i18n-btn');
+    if(t[key]){
+      const icon = el.querySelector('.acc-icon');
+      el.childNodes[0].textContent = t[key] + ' ';
+    }
+  });
+  // Filter By button (has filterIcon span inside)
+  document.querySelectorAll('[data-i18n-filter]').forEach(el => {
+    const key = el.getAttribute('data-i18n-filter');
+    if(t[key]){
+      const icon = el.querySelector('#filterIcon');
+      if(icon) el.firstChild.textContent = t[key] + ' ';
+    }
+  });
+  // RTL support for Arabic
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  // Update addToBag button text dynamically if shown
+  const addBtn = document.getElementById('addBagBtn');
+  if(addBtn && addBtn.textContent !== 'Sold Out') addBtn.textContent = t.prod_add_bag || 'Add to Bag';
+  const saveBtn = document.getElementById('saveLnk');
+  if(saveBtn){
+    const isSaved = saveBtn.textContent === TRANSLATIONS[currentLang]?.prod_save || saveBtn.textContent === 'Save' || saveBtn.textContent === 'Saved';
+  }
+}
+
+/* ── LANGUAGE SELECTOR ── */
+function toggleLangMenu(el){
+  document.querySelectorAll('.lang-dropdown').forEach(dd => {
+    if(dd !== el.nextElementSibling) dd.classList.remove('open');
+  });
+  el.nextElementSibling.classList.toggle('open');
+}
+function setLang(lang, btn){
+  currentLang = LANG_CODES[lang] || 'en';
+  document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
+  document.querySelectorAll('.lang-option').forEach(o => { if(o.textContent.trim() === lang) o.classList.add('active'); });
+  document.querySelectorAll('#langLabel').forEach(el => el.textContent = lang);
+  document.querySelectorAll('.lang-dropdown').forEach(dd => dd.classList.remove('open'));
+  applyTranslations(currentLang);
+  localStorage.setItem('dlLang', JSON.stringify({code:currentLang,label:lang}));
+}
+document.addEventListener('click', e => {
+  if(!e.target.closest('.footer-lang')) {
+    document.querySelectorAll('.lang-dropdown').forEach(dd => dd.classList.remove('open'));
+  }
+});
+// Restore saved language on load
+(function(){
+  const saved = JSON.parse(localStorage.getItem('dlLang') || 'null');
+  if(saved && TRANSLATIONS[saved.code]){
+    currentLang = saved.code;
+    document.querySelectorAll('#langLabel').forEach(el => el.textContent = saved.label);
+    document.querySelectorAll('.lang-option').forEach(o => {
+      o.classList.toggle('active', o.textContent.trim() === saved.label);
+    });
+    applyTranslations(currentLang);
+  }
+})();
+
 </script>
 
 <!-- ══ SAVED PAGE ══ -->
 <div class="page" id="page-saved">
   <div class="saved-header">
-    <span class="saved-title">Saved Items</span><span class="saved-count" id="savedCountLabel"></span>
+    <span class="saved-title" data-i18n="saved_title">Saved Items</span><span class="saved-count" id="savedCountLabel"></span>
   </div>
   <div id="savedContent"></div>
 </div>
@@ -2035,6 +2451,7 @@ function toggleMobileSub(btn){
         <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Skirts')">Skirts</button>
         <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Pants & Shorts')">Pants &amp; Shorts</button>
         <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Swim')">Swim</button>
+        <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Sleep')">Sleep</button>
       </div>
     </button>
     <button onclick="closeMobileMenu();goHomePage()">Home</button>
@@ -2044,7 +2461,7 @@ function toggleMobileSub(btn){
     <button onclick="closeMobileMenu();openSearch()">Search</button>
     <button onclick="closeMobileMenu();goSaved()">Saved</button>
     <button onclick="closeMobileMenu();openAuth()">Login</button>
-    <a href="https://wa.me/34650565927" target="_blank">Contact Us</a>
+    <a href="https://wa.me/34650565927" target="_blank" data-i18n="footer_contact">Contact Us</a>
     <a href="https://instagram.com/de.lavalle" target="_blank">Instagram</a>
   </div>
 </div>
