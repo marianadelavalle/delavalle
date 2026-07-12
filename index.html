@@ -804,6 +804,9 @@ header.scrolled .logo-text {
 .sg-close{position:absolute;top:16px;right:20px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--grey)}
 .sg-img{width:100%;height:auto;display:block}
 .sg-placeholder{width:100%;aspect-ratio:3/4;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey)}
+
+.mobile-nav-item{border-bottom:1px solid var(--border)}
+.mobile-nav-parent{font-family:var(--sans);font-size:18px;font-weight:300;letter-spacing:0.02em;color:var(--black);padding:20px 0;cursor:pointer;width:100%}
 </style>
 </head>
 <body>
@@ -2028,8 +2031,8 @@ function closeMobileMenu(){
   // Close all subs
   document.querySelectorAll('.mobile-sub').forEach(s=>s.classList.remove('open'));
 }
-function toggleMobileSub(btn){
-  const sub = btn.querySelector('.mobile-sub');
+function toggleMobileSub(el){
+  const sub = el.querySelector('.mobile-sub');
   if(!sub) return;
   sub.classList.toggle('open');
 }
@@ -2531,17 +2534,10 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape') closeSizeGuide();})
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-menu-close" onclick="closeMobileMenu()">&#215; Close</button>
   <nav class="mobile-nav">
-    <button onclick="toggleMobileSub(this)">
-      Women
-      <div class="mobile-sub">
-        <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Dresses')">Dresses</button>
-        <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Shirts & Tops')">Shirts &amp; Tops</button>
-        <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Pants & Shorts')">Pants &amp; Shorts</button>
-        <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Skirts')">Skirts</button>
-        <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Swim')">Swim</button>
-        <button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Sleep')">Sleep</button>
-      </div>
-    </button>
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-parent" onclick="toggleMobileSub(this.parentElement)">Women</div>
+      <div class="mobile-sub"><button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Dresses')">Dresses</button><button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Shirts &amp; Tops')">Shirts &amp; Tops</button><button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Pants &amp; Shorts')">Pants &amp; Shorts</button><button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Skirts')">Skirts</button><button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Swim')">Swim</button><button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Sleep')">Sleep</button></div>
+    </div>
     <button onclick="closeMobileMenu();goHomePage()">Home</button>
     <button onclick="closeMobileMenu();goGalerie()">Gallery</button>
   </nav>
