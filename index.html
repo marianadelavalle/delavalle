@@ -831,7 +831,7 @@ header.scrolled .logo-text {
       
       <button class="nav-btn" onclick="goSaved()" data-i18n="nav_saved">Saved</button>
       <button class="nav-btn" id="loginBtn" onclick="openAuth()" data-i18n="nav_login">Login</button>
-      <button class="nav-btn" onclick="openCart()">Bag&nbsp;(<span id="bagCount">0</span>)</button>
+      <button class="nav-btn" id="bagBtn" onclick="openCart()">Bag&nbsp;(<span id="bagCount">0</span>)</button>
     </nav>
   </div>
   <div class="dropdown" id="dropdown" onmouseleave="hideDrop()">
@@ -1302,7 +1302,7 @@ header.scrolled .logo-text {
   <div class="cart-body" id="cartBody"></div>
   <div class="cart-ft" id="cartFt" style="display:none">
     <div class="cart-sub"><span>Subtotal</span><span id="cartSub">S/ 0</span></div>
-    <button class="cart-checkout-btn" onclick="goCheckout()" data-i18n="cart_checkout">Checkout</button>
+    <button class="cart-checkout-btn" onclick="sendWhatsAppCart()">Order via WhatsApp</button>
     <button class="cart-cont" onclick="closeCart()">Continue Shopping</button>
   </div>
 </div>
@@ -2380,6 +2380,18 @@ function closeSizeGuide(){
   document.body.style.overflow='';
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape') closeSizeGuide();});
+
+
+/* ── WHATSAPP CART ── */
+function sendWhatsAppCart(){
+  if(cart.length === 0){toast('Your bag is empty');return;}
+  const lines = cart.map(i => `${i.name} — ${i.colour}, ${i.sz}`);
+  const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+  lines.push('');
+  lines.push(`Total: S/ ${total.toLocaleString()}`);
+  const msg = 'Hola, me gustaría hacer un pedido:\n\n' + lines.join('\n');
+  window.open('https://wa.me/34650565927?text=' + encodeURIComponent(msg), '_blank');
+}
 
 </script>
 
