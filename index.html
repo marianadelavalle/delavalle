@@ -2404,103 +2404,68 @@ function sendWhatsAppCart(){
 
 
 
-/* ── GITHUB PAGES REDIRECT HANDLER ── */
-(function(){
-  var redirect = new URLSearchParams(window.location.search).get('redirect');
-  if(redirect){
-    history.replaceState(null, '', redirect);
-  }
-})();
-
-/* ── HISTORY API — back/forward/refresh support ── */
-function pushState(path, state){
-  history.pushState(state, '', path);
-}
-
-// Override showPage to push history
+/* ── HASH ROUTER — back/forward/refresh support ── */
 const _showPage = showPage;
 showPage = function(id){
   _showPage(id);
-  const paths = {
-    'home': '/',
-    'home-section': '/home',
-    'women': '/women',
-    'galerie': '/gallery',
-    'saved': '/saved',
-    'checkout': '/checkout',
+  const hashes = {
+    'home':'#/', 'home-section':'#/home', 'women':'#/women',
+    'galerie':'#/gallery', 'saved':'#/saved', 'checkout':'#/checkout',
   };
-  const path = paths[id] || '/';
-  history.pushState({page: id}, '', path);
+  const h = hashes[id] || '#/';
+  history.pushState({page:id}, '', h);
 };
 
-// Override goProd to push history
 const _goProd = goProd;
 goProd = function(id){
   _goProd(id);
-  const p = PRODUCTS.find(x => x.id === id);
-  if(p) history.pushState({page: 'product', id: id}, '', '/product/' + p.shopifyHandle);
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(p) history.pushState({page:'product',id:id}, '', '#/product/'+p.shopifyHandle);
 };
 
-// Override filterCat to push history
 const _filterCat = filterCat;
 filterCat = function(cat){
   _filterCat(cat);
-  const slug = cat.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  history.pushState({page: 'women', cat: cat}, '', '/women/' + slug);
+  const slug = cat.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+  history.pushState({page:'women',cat:cat}, '', '#/women/'+slug);
 };
 
-// Handle back/forward
 window.addEventListener('popstate', function(e){
   const s = e.state;
-  if(!s){
-    _showPage('home');
-    return;
-  }
-  if(s.page === 'product'){
-    _goProd(s.id);
-  } else if(s.page === 'women' && s.cat){
-    wf.cat = s.cat;
-    wVisible = applyLogic();
-    renderWomenGrid();
-    document.getElementById('womenCatLabel').textContent = s.cat;
-    const catAsset = CAT_IMAGES[s.cat] || 'women-cat.jpg';
-    const catEl = document.getElementById('womenCatImg');
-    if(catAsset && typeof catAsset === 'object' && catAsset.video){
-      catEl.innerHTML = `<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><source src="${catAsset.video}" type="video/mp4"></video><img src="${catAsset.img}" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:none">`;
-    } else {
-      const src = typeof catAsset === 'object' ? catAsset.img : catAsset;
-      catEl.innerHTML = `<img src="${src}" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;">`;
-    }
+  if(!s){_showPage('home');return;}
+  if(s.page==='product') _goProd(s.id);
+  else if(s.page==='women'&&s.cat){
+    wf.cat=s.cat;wVisible=applyLogic();renderWomenGrid();
+    document.getElementById('womenCatLabel').textContent=s.cat;
+    const ca=CAT_IMAGES[s.cat]||'women-cat.jpg';
+    const ce=document.getElementById('womenCatImg');
+    if(ca&&typeof ca==='object'&&ca.video){ce.innerHTML=`<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block"><source src="${ca.video}" type="video/mp4"></video>`;}
+    else{const src=typeof ca==='object'?ca.img:ca;ce.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:cover;display:block">`;}
     _showPage('women');
-  } else if(s.page){
-    _showPage(s.page);
-  }
+  } else if(s.page) _showPage(s.page);
 });
 
-// Handle direct URL on load/refresh
+// Restore state on refresh
 (function(){
-  const path = window.location.pathname;
-  if(path === '/' || path === '') return;
-  
+  const h = window.location.hash;
+  if(!h||h==='#/'||h==='#') return;
+  const path = h.replace('#','');
   if(path.startsWith('/product/')){
-    const handle = path.replace('/product/', '');
-    const p = PRODUCTS.find(x => x.shopifyHandle === handle);
-    if(p){ _goProd(p.id); return; }
+    const handle=path.replace('/product/','');
+    const p=PRODUCTS.find(x=>x.shopifyHandle===handle);
+    if(p){_goProd(p.id);return;}
   }
   if(path.startsWith('/women/')){
-    const slug = path.replace('/women/', '');
-    const catMap = {
-      'dresses':'Dresses','shirts-tops':'Shirts & Tops','pants-shorts':'Pants & Shorts',
-      'skirts':'Skirts','swim':'Swim','sleep':'Sleep','ready-to-wear':'Ready to Wear'
-    };
-    const cat = catMap[slug];
-    if(cat){ filterCat(cat); return; }
-    _showPage('women'); return;
+    const slug=path.replace('/women/','');
+    const catMap={'dresses':'Dresses','shirts-tops':'Shirts & Tops','pants-shorts':'Pants & Shorts','skirts':'Skirts','swim':'Swim','sleep':'Sleep'};
+    const cat=catMap[slug];
+    if(cat){filterCat(cat);return;}
+    _showPage('women');return;
   }
-  if(path === '/home'){ _showPage('home-section'); return; }
-  if(path === '/women'){ goWomen(); return; }
-  if(path === '/gallery'){ goGalerie(); return; }
-  if(path === '/saved'){ goSaved(); return; }
+  if(path==='/home'){_showPage('home-section');return;}
+  if(path==='/women'){goWomen();return;}
+  if(path==='/gallery'){goGalerie();return;}
+  if(path==='/saved'){goSaved();return;}
 })();
 
 </script>
