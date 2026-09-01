@@ -1333,42 +1333,49 @@ header.scrolled .logo-text {
 ══════════════════════════════════════ */
 const PRODUCTS = [{id:9, name:'The Carrier',      shopifyHandle:'the-carrier',      cat:'Wood',        colour:'Natural',hex:'#c8b898', bg:'bg-wood',    section:'home',  price:320,  sizes:['One size'],            stock:{'One size':4},           badge:'',          photo:null, desc:'Firewood carrier in heavy-duty canvas with full-grain leather handles and brass rivets.'},
   {id:10, name:'The Blanket', shopifyHandle:'the-blanket', cat:'Alpaca', colour:'Ivory', hex:'#e0d8cc', bg:'bg-alpaca-p', section:'home', price:580, sizes:['90×200cm'], stock:{'90×200cm':6}, badge:'', photo:null, desc:'100% Baby Alpaca. Hand-woven in Peru. Extraordinarily soft.'},
-  {id:13, name:'The Short', shopifyHandle:'the-short-gingham', cat:'Pants & Shorts', colour:'Gingham', hex:'#7a3b4a', bg:'bg-ecru', section:'women', price:89, sizes:['XS','S','M','L'], stock:{XS:3,S:5,M:4,L:2}, badge:'New', photo:'gingham2.jpg', photos:['gingham2.jpg','gingham3.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
-  {id:20, name:'The Short', shopifyHandle:'the-short-chocolate', cat:'Pants & Shorts', colour:'Chocolate', hex:'#3b2416', bg:'bg-wood', section:'women', price:89, sizes:['XS','S','M','L'], stock:{XS:3,S:5,M:4,L:2}, badge:'New', photo:'short-chocolate-1.jpg', photos:['short-chocolate-1.jpg','short-chocolate-2.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
-  {id:21, name:'The Short', shopifyHandle:'the-short-swissdot', cat:'Pants & Shorts', colour:'White Polka Swiss Dot', hex:'#f5f5f5', bg:'bg-ivory', section:'women', price:89, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'New', photo:'short-swissdot-1.jpg', photos:['short-swissdot-1.jpg','short-swissdot-2.jpg','short-swissdot-3.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
-  {id:22, name:'The Short', shopifyHandle:'the-short-linen', cat:'Pants & Shorts', colour:'Ivory Linen', hex:'#ede8df', bg:'bg-ivory', section:'women', price:89, sizes:['XS','S','M','L'], stock:{XS:3,S:5,M:4,L:2}, badge:'New', photo:'short-linen-1.jpg', photos:['short-linen-1.jpg','short-linen-2.jpg','short-linen-3.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
-  {id:14, name:'Inés Shirt', cat:'Shirts & Tops', colour:'Ivory', hex:'#f5f0e8', bg:'bg-ivory', section:'women', price:290, sizes:['S','M','L'], stock:{S:5,M:5,L:5}, badge:'New', photo:'ines3.jpg', photos:['ines3.jpg','ines4.jpg','ines1.jpg','ines2.jpg','ines5.jpg'], desc:'Relaxed-fit shirt cut in a breathable cotton-linen blend, finished with a soft, structured collar.'},
-  {id:15, name:'Inés Shirt', cat:'Shirts & Tops', colour:'Beige', hex:'#d4c4a8', bg:'bg-sand', section:'women', price:290, sizes:['S','M','L'], stock:{S:5,M:5,L:5}, badge:'New', photo:'ines-beige1.jpg', photos:['ines-beige1.jpg','ines-beige2.jpg','ines-beige3.jpg','ines-beige4.jpg','ines-beige5.jpg'], desc:'Relaxed-fit shirt cut in a breathable cotton-linen blend, finished with a soft, structured collar.'},
-  {id:16, name:'Inés Shirt', cat:'Shirts & Tops', colour:'Light Blue', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:290, sizes:['S','M','L'], stock:{S:5,M:5,L:5}, badge:'New', photo:'ines-blue1.jpg', photos:['ines-blue1.jpg','ines-blue2.jpg','ines-blue3.jpg','ines-blue4.jpg','ines-blue5.jpg'], desc:'Relaxed-fit shirt cut in a breathable cotton-linen blend, finished with a soft, structured collar.'},
+  {id:13, name:'The Short', shopifyHandle:'the-short-gingham', cat:'Pants & Shorts', colour:'Gingham', hex:'#7a3b4a', bg:'bg-ecru', section:'women', price:89, sizes:['XS','S','M','L'], stock:{XS:3,S:5,M:4,L:2}, badge:'', photo:'gingham2.jpg', photos:['gingham2.jpg','gingham3.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
+  {id:20, name:'The Short', shopifyHandle:'the-short-chocolate', cat:'Pants & Shorts', colour:'Chocolate', hex:'#3b2416', bg:'bg-wood', section:'women', price:89, sizes:['XS','S','M','L'], stock:{XS:3,S:5,M:4,L:2}, badge:'', photo:'short-chocolate-1.jpg', photos:['short-chocolate-1.jpg','short-chocolate-2.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
+  {id:21, name:'The Short', shopifyHandle:'the-short-swissdot', cat:'Pants & Shorts', colour:'White Polka Swiss Dot', hex:'#f5f5f5', bg:'bg-ivory', section:'women', price:89, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'', photo:'short-swissdot-1.jpg', photos:['short-swissdot-1.jpg','short-swissdot-2.jpg','short-swissdot-3.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
+  {id:22, name:'The Short', shopifyHandle:'the-short-linen', cat:'Pants & Shorts', colour:'Ivory Linen', hex:'#ede8df', bg:'bg-ivory', section:'women', price:89, sizes:['XS','S','M','L'], stock:{XS:3,S:5,M:4,L:2}, badge:'', photo:'short-linen-1.jpg', photos:['short-linen-1.jpg','short-linen-2.jpg','short-linen-3.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
+  {id:14, name:'Inés Shirt', cat:'Shirts & Tops', colour:'Ivory', hex:'#f5f0e8', bg:'bg-ivory', section:'women', price:290, sizes:['S','M','L'], stock:{S:5,M:5,L:5}, badge:'', photo:'ines3.jpg', photos:['ines3.jpg','ines4.jpg','ines1.jpg','ines2.jpg','ines5.jpg'], desc:'Relaxed-fit shirt cut in a breathable cotton-linen blend, finished with a soft, structured collar.'},
+  {id:15, name:'Inés Shirt', cat:'Shirts & Tops', colour:'Beige', hex:'#d4c4a8', bg:'bg-sand', section:'women', price:290, sizes:['S','M','L'], stock:{S:5,M:5,L:5}, badge:'', photo:'ines-beige1.jpg', photos:['ines-beige1.jpg','ines-beige2.jpg','ines-beige3.jpg','ines-beige4.jpg','ines-beige5.jpg'], desc:'Relaxed-fit shirt cut in a breathable cotton-linen blend, finished with a soft, structured collar.'},
+  {id:16, name:'Inés Shirt', cat:'Shirts & Tops', colour:'Light Blue', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:290, sizes:['S','M','L'], stock:{S:5,M:5,L:5}, badge:'', photo:'ines-blue1.jpg', photos:['ines-blue1.jpg','ines-blue2.jpg','ines-blue3.jpg','ines-blue4.jpg','ines-blue5.jpg'], desc:'Relaxed-fit shirt cut in a breathable cotton-linen blend, finished with a soft, structured collar.'},
   {id:17, name:'María Trousers', cat:'Pants & Shorts', colour:'Ivory', hex:'#f5f0e8', bg:'bg-ivory', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines1.jpg', photos:['ines1.jpg','ines2.jpg','ines3.jpg','ines4.jpg','ines5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
   {id:18, name:'María Trousers', cat:'Pants & Shorts', colour:'Beige', hex:'#d4c4a8', bg:'bg-sand', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines-beige2.jpg', photos:['ines-beige2.jpg','ines-beige1.jpg','ines-beige3.jpg','ines-beige4.jpg','ines-beige5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
   {id:19, name:'María Trousers', cat:'Pants & Shorts', colour:'Light Blue', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines-blue2.jpg', photos:['ines-blue2.jpg','ines-blue1.jpg','ines-blue3.jpg','ines-blue4.jpg','ines-blue5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
-  {id:25, name:'The Swimsuit', shopifyHandle:'swimsuit-red-stripe', cat:'Swim', colour:'Red Stripe', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:5,M:0,L:0}, badge:'New', photo:'swim-red-stripe.jpg', photos:['swim-red-stripe.jpg','swim-red-stripe-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:26, name:'The Swimsuit', shopifyHandle:'swimsuit-navy-stripe', cat:'Swim', colour:'Navy Stripe', hex:'#1a2740', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'New', photo:'swim-navy-stripe.jpg', photos:['swim-navy-stripe.jpg','swim-navy-stripe-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:27, name:'The Swimsuit', shopifyHandle:'swimsuit-white-polka', cat:'Swim', colour:'White Polka Dot', hex:'#f5f5f5', bg:'bg-ivory', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'New', photo:'swim-white-polka.jpg', photos:['swim-white-polka.jpg','swim-white-polka-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:28, name:'The Swimsuit', shopifyHandle:'swimsuit-black-mini-dot', cat:'Swim', colour:'Black Mini Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:5,M:0,L:0}, badge:'New', photo:'swim-black-mini-dot.jpg', photos:['swim-black-mini-dot.jpg','swim-black-mini-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:29, name:'The Swimsuit', shopifyHandle:'swimsuit-black-pin-dot', cat:'Swim', colour:'Black Pin Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:5,M:0,L:0}, badge:'New', photo:'swim-black-dot.jpg', photos:['swim-black-dot.jpg','swim-black-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:30, name:'The Swimsuit', shopifyHandle:'swimsuit-red-pin-dot', cat:'Swim', colour:'Red Pin Dot', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'New', photo:'swim-red-dot.jpg', photos:['swim-red-dot.jpg','swim-red-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:32, name:'The Shirt', shopifyHandle:'sleep-shirt-marina-stripe', cat:'Sleep', colour:'Marina Stripe', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
-  {id:33, name:'The Shirt', shopifyHandle:'sleep-shirt-baby-blue-dobby', cat:'Sleep', colour:'Baby Blue Dobby', hex:'#b8ccd8', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
-  {id:34, name:'The Shirt', shopifyHandle:'sleep-shirt-riviera-stripe', cat:'Sleep', colour:'Riviera Stripe', hex:'#d0e4f0', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
-  {id:35, name:'The Shirt', shopifyHandle:'sleep-shirt-white-silk', cat:'Sleep', colour:'White Silk', hex:'#f8f6f2', bg:'bg-ivory', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
-  {id:36, name:'The Shirt', shopifyHandle:'sleep-shirt-black-silk', cat:'Sleep', colour:'Black Silk', hex:'#181610', bg:'bg-black-p', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
-  {id:37, name:'The Pant', shopifyHandle:'sleep-pant-marina-stripe', cat:'Sleep', colour:'Marina Stripe', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:38, name:'The Pant', shopifyHandle:'sleep-pant-baby-blue-dobby', cat:'Sleep', colour:'Baby Blue Dobby', hex:'#b8ccd8', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:39, name:'The Pant', shopifyHandle:'sleep-pant-riviera-stripe', cat:'Sleep', colour:'Riviera Stripe', hex:'#d0e4f0', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:40, name:'The Pant', shopifyHandle:'sleep-pant-white-silk', cat:'Sleep', colour:'White Silk', hex:'#f8f6f2', bg:'bg-ivory', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:41, name:'The Pant', shopifyHandle:'sleep-pant-black-silk', cat:'Sleep', colour:'Black Silk', hex:'#181610', bg:'bg-black-p', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
+  {id:25, name:'The Swimsuit', shopifyHandle:'swimsuit-red-stripe', cat:'Swim', colour:'Red Stripe', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:5,M:0,L:0}, badge:'', photo:'swim-red-stripe.jpg', photos:['swim-red-stripe.jpg','swim-red-stripe-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:26, name:'The Swimsuit', shopifyHandle:'swimsuit-navy-stripe', cat:'Swim', colour:'Navy Stripe', hex:'#1a2740', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'', photo:'swim-navy-stripe.jpg', photos:['swim-navy-stripe.jpg','swim-navy-stripe-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:27, name:'The Swimsuit', shopifyHandle:'swimsuit-white-polka', cat:'Swim', colour:'White Polka Dot', hex:'#f5f5f5', bg:'bg-ivory', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'', photo:'swim-white-polka.jpg', photos:['swim-white-polka.jpg','swim-white-polka-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:28, name:'The Swimsuit', shopifyHandle:'swimsuit-black-mini-dot', cat:'Swim', colour:'Black Mini Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:5,M:0,L:0}, badge:'', photo:'swim-black-mini-dot.jpg', photos:['swim-black-mini-dot.jpg','swim-black-mini-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:29, name:'The Swimsuit', shopifyHandle:'swimsuit-black-pin-dot', cat:'Swim', colour:'Black Pin Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:5,M:0,L:0}, badge:'', photo:'swim-black-dot.jpg', photos:['swim-black-dot.jpg','swim-black-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:51, name:'The Swimsuit', shopifyHandle:'swimsuit-black', cat:'Swim', colour:'Black', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-black-1.jpg', photos:['swim-black-1.jpg','swim-black-2.jpg','swim-black-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:52, name:'The Swimsuit', shopifyHandle:'swimsuit-red', cat:'Swim', colour:'Red', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-red-1.jpg', photos:['swim-red-1.jpg','swim-red-2.jpg','swim-red-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:53, name:'The Swimsuit', shopifyHandle:'swimsuit-ivory', cat:'Swim', colour:'Ivory', hex:'#f0ece0', bg:'bg-ivory', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-ivory-1.jpg', photos:['swim-ivory-1.jpg','swim-ivory-2.jpg','swim-ivory-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:54, name:'The Swimsuit', shopifyHandle:'swimsuit-red-polka', cat:'Swim', colour:'Red Polka Dot', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-red-polka-1.jpg', photos:['swim-red-polka-1.jpg','swim-red-polka-2.jpg','swim-red-polka-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:55, name:'The Swimsuit', shopifyHandle:'swimsuit-black-polka', cat:'Swim', colour:'Black Polka Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-white-black-polka-1.jpg', photos:['swim-white-black-polka-1.jpg','swim-white-black-polka-2.jpg','swim-white-black-polka-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:56, name:'The Swimsuit', shopifyHandle:'swimsuit-navy-blue', cat:'Swim', colour:'Navy Blue', hex:'#1a2740', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-navy-1.jpg', photos:['swim-navy-1.jpg','swim-navy-2.jpg','swim-navy-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:57, name:'The Swimsuit', shopifyHandle:'swimsuit-awning-stripe', cat:'Swim', colour:'Awning Stripe', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-red-marine-1.jpg', photos:['swim-red-marine-1.jpg','swim-red-marine-2.jpg','swim-red-marine-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:30, name:'The Swimsuit', shopifyHandle:'swimsuit-red-pin-dot', cat:'Swim', colour:'Red Pin Dot', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'', photo:'swim-red-dot.jpg', photos:['swim-red-dot.jpg','swim-red-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:32, name:'The Shirt', shopifyHandle:'sleep-shirt-marina-stripe', cat:'Sleep', colour:'Marina Stripe', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
+  {id:33, name:'The Shirt', shopifyHandle:'sleep-shirt-baby-blue-dobby', cat:'Sleep', colour:'Baby Blue Dobby', hex:'#b8ccd8', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
+  {id:34, name:'The Shirt', shopifyHandle:'sleep-shirt-riviera-stripe', cat:'Sleep', colour:'Riviera Stripe', hex:'#d0e4f0', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
+  {id:35, name:'The Shirt', shopifyHandle:'sleep-shirt-white-silk', cat:'Sleep', colour:'White Silk', hex:'#f8f6f2', bg:'bg-ivory', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
+  {id:36, name:'The Shirt', shopifyHandle:'sleep-shirt-black-silk', cat:'Sleep', colour:'Black Silk', hex:'#181610', bg:'bg-black-p', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
+  {id:37, name:'The Pant', shopifyHandle:'sleep-pant-marina-stripe', cat:'Sleep', colour:'Marina Stripe', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
+  {id:38, name:'The Pant', shopifyHandle:'sleep-pant-baby-blue-dobby', cat:'Sleep', colour:'Baby Blue Dobby', hex:'#b8ccd8', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
+  {id:39, name:'The Pant', shopifyHandle:'sleep-pant-riviera-stripe', cat:'Sleep', colour:'Riviera Stripe', hex:'#d0e4f0', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
+  {id:40, name:'The Pant', shopifyHandle:'sleep-pant-white-silk', cat:'Sleep', colour:'White Silk', hex:'#f8f6f2', bg:'bg-ivory', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
+  {id:41, name:'The Pant', shopifyHandle:'sleep-pant-black-silk', cat:'Sleep', colour:'Black Silk', hex:'#181610', bg:'bg-black-p', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
   
-  {id:42, name:'The Shirt', shopifyHandle:'sleep-shirt-carmine-silk', cat:'Sleep', colour:'Carmine Silk', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
-  {id:46, name:'The Pant', shopifyHandle:'sleep-pant-carmine-silk', cat:'Sleep', colour:'Carmine Silk', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:43, name:'The Shirt', shopifyHandle:'sleep-shirt-petal-silk', cat:'Sleep', colour:'Petal Silk', hex:'#f0c8c0', bg:'bg-ecru', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
-  {id:47, name:'The Pant', shopifyHandle:'sleep-pant-petal-silk', cat:'Sleep', colour:'Petal Silk', hex:'#f0c8c0', bg:'bg-ecru', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:44, name:'The Shirt', shopifyHandle:'sleep-shirt-sky-silk', cat:'Sleep', colour:'Sky Silk', hex:'#b0c8e0', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
-  {id:48, name:'The Pant', shopifyHandle:'sleep-pant-sky-silk', cat:'Sleep', colour:'Sky Silk', hex:'#b0c8e0', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:45, name:'The Shirt', shopifyHandle:'sleep-shirt-navy-silk', cat:'Sleep', colour:'Navy Silk', hex:'#1a2740', bg:'bg-black-p', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
-  {id:49, name:'The Pant', shopifyHandle:'sleep-pant-navy-silk', cat:'Sleep', colour:'Navy Silk', hex:'#1a2740', bg:'bg-black-p', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:31, name:'Rosario Dress', shopifyHandle:'rosario-dress', cat:'Dresses', colour:'Midnight Blue', hex:'#1a2340', bg:'bg-black-p', section:'women', price:890, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'rosario-1.jpg', photos:['rosario-1.jpg','rosario-2.jpg','rosario-3.jpg','rosario-4.jpg','rosario-5.jpg','rosario-6.jpg'], desc:'Maxi dress with puffed sleeves and a round neckline. High-waisted, with a self-tie sash and deeply pleated skirt that falls to the floor. Mother-of-pearl buttons through the front.'},
+  {id:42, name:'The Shirt', shopifyHandle:'sleep-shirt-carmine-silk', cat:'Sleep', colour:'Carmine Silk', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
+  {id:46, name:'The Pant', shopifyHandle:'sleep-pant-carmine-silk', cat:'Sleep', colour:'Carmine Silk', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
+  {id:43, name:'The Shirt', shopifyHandle:'sleep-shirt-petal-silk', cat:'Sleep', colour:'Petal Silk', hex:'#f0c8c0', bg:'bg-ecru', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
+  {id:47, name:'The Pant', shopifyHandle:'sleep-pant-petal-silk', cat:'Sleep', colour:'Petal Silk', hex:'#f0c8c0', bg:'bg-ecru', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
+  {id:44, name:'The Shirt', shopifyHandle:'sleep-shirt-sky-silk', cat:'Sleep', colour:'Sky Silk', hex:'#b0c8e0', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
+  {id:48, name:'The Pant', shopifyHandle:'sleep-pant-sky-silk', cat:'Sleep', colour:'Sky Silk', hex:'#b0c8e0', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
+  {id:45, name:'The Shirt', shopifyHandle:'sleep-shirt-navy-silk', cat:'Sleep', colour:'Navy Silk', hex:'#1a2740', bg:'bg-black-p', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
+  {id:49, name:'The Pant', shopifyHandle:'sleep-pant-navy-silk', cat:'Sleep', colour:'Navy Silk', hex:'#1a2740', bg:'bg-black-p', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
+  {id:31, name:'Rosario Dress', shopifyHandle:'rosario-dress', cat:'Dresses', colour:'Midnight Blue', hex:'#1a2340', bg:'bg-black-p', section:'women', price:890, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'rosario-1.jpg', photos:['rosario-1.jpg','rosario-2.jpg','rosario-3.jpg','rosario-4.jpg','rosario-5.jpg','rosario-6.jpg'], desc:'Maxi dress with puffed sleeves and a round neckline. High-waisted, with a self-tie sash and deeply pleated skirt that falls to the floor. Mother-of-pearl buttons through the front.'},
 ];
 
 /* Gallery photos */
@@ -2394,6 +2401,107 @@ function sendWhatsAppCart(){
   const msg = 'Hola, me gustaría hacer un pedido:\n\n' + lines.join('\n');
   window.open('https://wa.me/34650565927?text=' + encodeURIComponent(msg), '_blank');
 }
+
+
+
+/* ── GITHUB PAGES REDIRECT HANDLER ── */
+(function(){
+  var redirect = new URLSearchParams(window.location.search).get('redirect');
+  if(redirect){
+    history.replaceState(null, '', redirect);
+  }
+})();
+
+/* ── HISTORY API — back/forward/refresh support ── */
+function pushState(path, state){
+  history.pushState(state, '', path);
+}
+
+// Override showPage to push history
+const _showPage = showPage;
+showPage = function(id){
+  _showPage(id);
+  const paths = {
+    'home': '/',
+    'home-section': '/home',
+    'women': '/women',
+    'galerie': '/gallery',
+    'saved': '/saved',
+    'checkout': '/checkout',
+  };
+  const path = paths[id] || '/';
+  history.pushState({page: id}, '', path);
+};
+
+// Override goProd to push history
+const _goProd = goProd;
+goProd = function(id){
+  _goProd(id);
+  const p = PRODUCTS.find(x => x.id === id);
+  if(p) history.pushState({page: 'product', id: id}, '', '/product/' + p.shopifyHandle);
+};
+
+// Override filterCat to push history
+const _filterCat = filterCat;
+filterCat = function(cat){
+  _filterCat(cat);
+  const slug = cat.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  history.pushState({page: 'women', cat: cat}, '', '/women/' + slug);
+};
+
+// Handle back/forward
+window.addEventListener('popstate', function(e){
+  const s = e.state;
+  if(!s){
+    _showPage('home');
+    return;
+  }
+  if(s.page === 'product'){
+    _goProd(s.id);
+  } else if(s.page === 'women' && s.cat){
+    wf.cat = s.cat;
+    wVisible = applyLogic();
+    renderWomenGrid();
+    document.getElementById('womenCatLabel').textContent = s.cat;
+    const catAsset = CAT_IMAGES[s.cat] || 'women-cat.jpg';
+    const catEl = document.getElementById('womenCatImg');
+    if(catAsset && typeof catAsset === 'object' && catAsset.video){
+      catEl.innerHTML = `<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><source src="${catAsset.video}" type="video/mp4"></video><img src="${catAsset.img}" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:none">`;
+    } else {
+      const src = typeof catAsset === 'object' ? catAsset.img : catAsset;
+      catEl.innerHTML = `<img src="${src}" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;">`;
+    }
+    _showPage('women');
+  } else if(s.page){
+    _showPage(s.page);
+  }
+});
+
+// Handle direct URL on load/refresh
+(function(){
+  const path = window.location.pathname;
+  if(path === '/' || path === '') return;
+  
+  if(path.startsWith('/product/')){
+    const handle = path.replace('/product/', '');
+    const p = PRODUCTS.find(x => x.shopifyHandle === handle);
+    if(p){ _goProd(p.id); return; }
+  }
+  if(path.startsWith('/women/')){
+    const slug = path.replace('/women/', '');
+    const catMap = {
+      'dresses':'Dresses','shirts-tops':'Shirts & Tops','pants-shorts':'Pants & Shorts',
+      'skirts':'Skirts','swim':'Swim','sleep':'Sleep','ready-to-wear':'Ready to Wear'
+    };
+    const cat = catMap[slug];
+    if(cat){ filterCat(cat); return; }
+    _showPage('women'); return;
+  }
+  if(path === '/home'){ _showPage('home-section'); return; }
+  if(path === '/women'){ goWomen(); return; }
+  if(path === '/gallery'){ goGalerie(); return; }
+  if(path === '/saved'){ goSaved(); return; }
+})();
 
 </script>
 
