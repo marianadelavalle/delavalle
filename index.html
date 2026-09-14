@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>de Lavalle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preload" as="video" href="hero-desktop.mp4" type="video/mp4" media="(min-width:768px)">
+  <link rel="preload" as="image" href="home-hero.jpg">
+  <link rel="dns-prefetch" href="https://wa.me">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
 /* ─────────────────────────────────────
@@ -807,6 +813,9 @@ header.scrolled .logo-text {
 
 .mobile-nav-item{border-bottom:1px solid var(--border)}
 .mobile-nav-parent{font-family:var(--sans);font-size:18px;font-weight:300;letter-spacing:0.02em;color:var(--black);padding:20px 0;cursor:pointer;width:100%}
+
+img{image-rendering:auto;content-visibility:auto}
+.prod-img-wrap{contain:layout style paint}
 </style>
 </head>
 <body>
@@ -845,7 +854,7 @@ header.scrolled .logo-text {
 <!-- ══════════ LANDING ══════════ -->
 <div class="page active" id="page-home">
   <div class="hero">
-    <video autoplay muted loop playsinline preload="auto" webkit-playsinline id="heroDesktop" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.8s ease">
+    <video autoplay muted loop playsinline preload="auto" webkit-playsinline id="heroDesktop" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.8s ease;will-change:opacity">
       <source src="hero-desktop.mp4" type="video/mp4">
     </video>
     <video autoplay muted loop playsinline preload="auto" webkit-playsinline id="heroMobile" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.8s ease;opacity:0">
@@ -893,7 +902,7 @@ header.scrolled .logo-text {
     <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" onerror="this.style.display='none';document.getElementById('homeSecImg').style.display='block'">
       <source src="home-hero.mp4" type="video/mp4">
     </video>
-    <img src="home-hero.jpg" id="homeSecImg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:none" onerror="this.style.display='none'">
+    <img src="home-hero.jpg" id="homeSecImg" fetchpriority="high" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:none" onerror="this.style.display='none'">
     <div class="home-sec-dots"><button class="dot on"></button><button class="dot"></button></div>
   </div>
 
@@ -1489,7 +1498,7 @@ function goProd(id){
   if(p.photos && p.photos.length>1){
     thumbsRow.innerHTML=p.photos.map((src,i)=>`
       <div class="g-thumb${i===0?' on':''}" onclick="pickThumb(this,'${p.bg}','${src}')">
-        <img src="${src}" style="width:100%;height:100%;object-fit:contain" onerror="this.closest('.g-thumb').style.display='none'">
+        <img src="${src}" style="width:100%;height:100%;object-fit:contain" loading="lazy" decoding="async" onerror="this.closest('.g-thumb').style.display='none'">
       </div>`).join('');
     thumbsRow.style.display='flex';
   } else {
@@ -1588,7 +1597,7 @@ function makeCard(p){
   else if(p.badge==='New' && !isSleep) badge=`<span class="stock-badge badge-new">New In</span>`;
   return`<div class="prod-card${isSleep?' coming-soon':''}" ${isSleep?'':'onclick="goProd('+p.id+')"'}>
     <div class="prod-img-wrap">
-      ${p.photo?`<img src="${p.photo}" alt="${p.name}" onerror="this.style.display='none'">`:`<div class="prod-img-swatch ${p.bg}"></div>`}
+      ${p.photo?`<img src="${p.photo}" alt="${p.name}" loading="lazy" decoding="async" onerror="this.style.display='none'">`:`<div class="prod-img-swatch ${p.bg}"></div>`}
       ${isSleep?`<div class="coming-soon-overlay"><span class="coming-soon-label">Coming Soon</span></div>`:badge}
       ${isSleep||so?'':'<button class="quick-add-btn" onclick="event.stopPropagation();quickAdd('+p.id+')">Quick Add</button>'}
     </div>
