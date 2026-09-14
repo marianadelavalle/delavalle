@@ -173,10 +173,10 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 .quick-add-btn:hover{background:rgba(17,17,16,1)}
 
 /* Stock badges */
-.stock-badge{position:absolute;top:12px;left:12px;font-size:10px;letter-spacing:0.06em;font-weight:300;padding:3px 8px;line-height:1.4}
-.badge-sold{background:rgba(255,255,255,0.92);color:var(--black)}
-.badge-low{background:rgba(17,17,16,0.82);color:var(--white)}
-.badge-new{background:transparent;color:var(--grey)}
+.stock-badge{position:absolute;top:12px;left:12px;font-size:10px;letter-spacing:0.06em;font-weight:300;padding:0;line-height:1.4;background:none}
+.badge-sold{color:var(--black)}
+.badge-low{color:var(--black)}
+.badge-new{color:var(--grey)}
 
 .prod-info{padding:12px 4px 0}
 .prod-name{font-size:12px;font-weight:300;letter-spacing:0.04em;margin-bottom:3px}
@@ -1354,7 +1354,7 @@ const PRODUCTS = [{id:9, name:'The Carrier',      shopifyHandle:'the-carrier',  
   {id:54, name:'The Swimsuit', shopifyHandle:'swimsuit-red-polka', cat:'Swim', colour:'Red Polka Dot', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-red-polka-1.jpg', photos:['swim-red-polka-1.jpg','swim-red-polka-2.jpg','swim-red-polka-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:55, name:'The Swimsuit', shopifyHandle:'swimsuit-black-polka', cat:'Swim', colour:'Black Polka Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-white-black-polka-1.jpg', photos:['swim-white-black-polka-1.jpg','swim-white-black-polka-2.jpg','swim-white-black-polka-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:56, name:'The Swimsuit', shopifyHandle:'swimsuit-navy-blue', cat:'Swim', colour:'Navy Blue', hex:'#1a2740', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-navy-1.jpg', photos:['swim-navy-1.jpg','swim-navy-2.jpg','swim-navy-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:57, name:'The Swimsuit', shopifyHandle:'swimsuit-awning-stripe', cat:'Swim', colour:'Awning Stripe', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-red-marine-1.jpg', photos:['swim-red-marine-1.jpg','swim-red-marine-2.jpg','swim-red-marine-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:57, name:'The Swimsuit', shopifyHandle:'swimsuit-awning-stripe', cat:'Swim', colour:'Candy Cane', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-red-marine-1.jpg', photos:['swim-red-marine-1.jpg','swim-red-marine-2.jpg','swim-red-marine-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:30, name:'The Swimsuit', shopifyHandle:'swimsuit-red-pin-dot', cat:'Swim', colour:'Red Pin Dot', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'', photo:'swim-red-dot.jpg', photos:['swim-red-dot.jpg','swim-red-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:32, name:'The Shirt', shopifyHandle:'sleep-shirt-marina-stripe', cat:'Sleep', colour:'Marina Stripe', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
   {id:33, name:'The Shirt', shopifyHandle:'sleep-shirt-baby-blue-dobby', cat:'Sleep', colour:'Baby Blue Dobby', hex:'#b8ccd8', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
@@ -1482,14 +1482,14 @@ function goProd(id){
   const careEl = document.getElementById('accCare');
   if(careEl) careEl.textContent = copy.care || '';
   const gd=document.getElementById('galleryDisplay');
-  if(p.photo){gd.innerHTML=`<img src="${p.photo}" style="width:100%;height:100%;object-fit:contain">`;gd.className='prod-display';}
+  if(p.photo){gd.innerHTML=`<img src="${p.photo}" style="width:100%;height:100%;object-fit:contain" onerror="this.parentElement.className='prod-display ${p.bg}';this.remove()">`;gd.className='prod-display';}
   else{gd.className='prod-display '+p.bg;gd.innerHTML='';}
   // Render thumbnails if product has multiple photos
   const thumbsRow=document.getElementById('galleryThumbs');
   if(p.photos && p.photos.length>1){
     thumbsRow.innerHTML=p.photos.map((src,i)=>`
       <div class="g-thumb${i===0?' on':''}" onclick="pickThumb(this,'${p.bg}','${src}')">
-        <img src="${src}" style="width:100%;height:100%;object-fit:contain">
+        <img src="${src}" style="width:100%;height:100%;object-fit:contain" onerror="this.closest('.g-thumb').style.display='none'">
       </div>`).join('');
     thumbsRow.style.display='flex';
   } else {
@@ -1588,7 +1588,7 @@ function makeCard(p){
   else if(p.badge==='New' && !isSleep) badge=`<span class="stock-badge badge-new">New In</span>`;
   return`<div class="prod-card${isSleep?' coming-soon':''}" ${isSleep?'':'onclick="goProd('+p.id+')"'}>
     <div class="prod-img-wrap">
-      ${p.photo?`<img src="${p.photo}" alt="${p.name}">`:`<div class="prod-img-swatch ${p.bg}"></div>`}
+      ${p.photo?`<img src="${p.photo}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=\"prod-img-swatch ${p.bg}\"></div>'">`:`<div class="prod-img-swatch ${p.bg}"></div>`}
       ${isSleep?`<div class="coming-soon-overlay"><span class="coming-soon-label">Coming Soon</span></div>`:badge}
       ${isSleep||so?'':'<button class="quick-add-btn" onclick="event.stopPropagation();quickAdd('+p.id+')">Quick Add</button>'}
     </div>
