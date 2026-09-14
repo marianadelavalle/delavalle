@@ -1588,7 +1588,7 @@ function makeCard(p){
   else if(p.badge==='New' && !isSleep) badge=`<span class="stock-badge badge-new">New In</span>`;
   return`<div class="prod-card${isSleep?' coming-soon':''}" ${isSleep?'':'onclick="goProd('+p.id+')"'}>
     <div class="prod-img-wrap">
-      ${p.photo?`<img src="${p.photo}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=\"prod-img-swatch ${p.bg}\"></div>'">`:`<div class="prod-img-swatch ${p.bg}"></div>`}
+      ${p.photo?`<img src="${p.photo}" alt="${p.name}" onerror="this.style.display='none'">`:`<div class="prod-img-swatch ${p.bg}"></div>`}
       ${isSleep?`<div class="coming-soon-overlay"><span class="coming-soon-label">Coming Soon</span></div>`:badge}
       ${isSleep||so?'':'<button class="quick-add-btn" onclick="event.stopPropagation();quickAdd('+p.id+')">Quick Add</button>'}
     </div>
