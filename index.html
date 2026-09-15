@@ -179,7 +179,7 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 .quick-add-btn:hover{background:rgba(17,17,16,1)}
 
 /* Stock badges */
-.stock-badge{position:absolute;top:12px;left:12px;font-size:10px;letter-spacing:0.06em;font-weight:300;padding:0;line-height:1.4;background:none}
+.stock-badge{position:absolute;top:12px;left:12px;font-size:10px;letter-spacing:0.06em;font-weight:400;padding:0;line-height:1.4;background:none;font-family:'Arimo',sans-serif}
 .badge-sold{color:var(--black)}
 .badge-low{color:var(--black)}
 .badge-new{color:var(--grey)}
@@ -816,6 +816,23 @@ header.scrolled .logo-text {
 
 img{image-rendering:auto;content-visibility:auto}
 .prod-img-wrap{contain:layout style paint}
+
+/* ── SIMILAR PRODUCTS ── */
+.similar-section{padding:60px 32px 48px;border-top:1px solid var(--border);margin-top:0}
+.similar-title{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);font-weight:300;margin-bottom:32px}
+.similar-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.similar-card{cursor:pointer}
+.similar-card:hover .similar-img{transform:scale(1.02);transition:transform 0.4s ease}
+.similar-img-wrap{aspect-ratio:2/3;overflow:hidden;margin-bottom:12px}
+.similar-img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease}
+.similar-swatch{width:100%;height:100%;display:block}
+.similar-name{font-size:12px;font-weight:300;color:var(--black);margin-bottom:3px}
+.similar-meta{font-size:11px;color:var(--grey);font-weight:300;margin-bottom:3px}
+.similar-price{font-size:12px;font-weight:300;color:var(--black)}
+@media(max-width:768px){
+  .similar-section{padding:40px 16px 40px}
+  .similar-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+}
 </style>
 </head>
 <body>
@@ -1107,6 +1124,12 @@ img{image-rendering:auto;content-visibility:auto}
       <div class="acc"><button class="acc-btn" onclick="toggleAcc(this)">Material &amp; Care <span class="acc-icon">+</span></button><div class="acc-body" id="accCare"></div></div>
       <div class="acc"><button class="acc-btn" onclick="toggleAcc(this)"data-i18n-btn="prod_shipping">Shipping &amp; Returns <span class="acc-icon">+</span></button><div class="acc-body"><span data-i18n="prod_shipping_body">Shipping cost calculated at checkout. Returns accepted within 14 days of receipt in original condition.</span></div></div>
     </div>
+  </div>
+
+  <!-- Similar Products -->
+  <div class="similar-section" id="similarSection">
+    <p class="similar-title">Similar Items</p>
+    <div class="similar-grid" id="similarGrid"></div>
   </div>
 </div>
 
@@ -1545,6 +1568,7 @@ const variants = PRODUCTS.filter(x => x.name === p.name && x.section === p.secti
   }).join('');
   updateStockInfo(firstAvail||p.sizes[0]);
   showPage('product');
+  renderSimilar(p);
   updateSaveBtnState();
 }
 
@@ -2498,6 +2522,46 @@ window.addEventListener('popstate', function(e){
   if(path==='/gallery'){goGalerie();return;}
   if(path==='/saved'){goSaved();return;}
 })();
+
+
+/* ── SIMILAR PRODUCTS ── */
+function renderSimilar(p){
+  const section = document.getElementById('similarSection');
+  const grid = document.getElementById('similarGrid');
+  if(!section || !grid) return;
+
+  // Get candidates: same category first, then same section, exclude current
+  let candidates = PRODUCTS.filter(x =>
+    x.id !== p.id &&
+    x.section === 'women' &&
+    x.cat !== 'Sleep' // don't show coming soon
+  );
+
+  // Sort: same category first
+  candidates.sort((a,b) => {
+    if(a.cat === p.cat && b.cat !== p.cat) return -1;
+    if(b.cat === p.cat && a.cat !== p.cat) return 1;
+    return 0;
+  });
+
+  // Take 4
+  const picks = candidates.slice(0, 4);
+
+  if(picks.length === 0){ section.style.display='none'; return; }
+  section.style.display='block';
+
+  grid.innerHTML = picks.map(item => {
+    const imgContent = item.photo
+      ? `<img class="similar-img" src="${item.photo}" alt="${item.name}" onerror="this.style.display='none'">`
+      : `<div class="similar-swatch ${item.bg}"></div>`;
+    return `<div class="similar-card" onclick="goProd(${item.id})">
+      <div class="similar-img-wrap">${imgContent}</div>
+      <p class="similar-name">${item.name}</p>
+      <p class="similar-meta">${item.colour}</p>
+      <p class="similar-price">S/ ${item.price.toLocaleString()}</p>
+    </div>`;
+  }).join('');
+}
 
 </script>
 
