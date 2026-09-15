@@ -1568,7 +1568,8 @@ const variants = PRODUCTS.filter(x => x.name === p.name && x.section === p.secti
   }).join('');
   updateStockInfo(firstAvail||p.sizes[0]);
   showPage('product');
-  renderSimilar(p);
+  window.scrollTo(0,0);
+  setTimeout(()=>renderSimilar(p), 50);
   updateSaveBtnState();
 }
 
