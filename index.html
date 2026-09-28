@@ -48,7 +48,7 @@ header.scrolled .nav-btn,header.scrolled .logo-text{color:var(--black);text-shad
 .nav-btn{font-size:13px;letter-spacing:0.05em;font-weight:300;color:var(--black);padding:0;white-space:nowrap;transition:opacity 0.2s}
 .nav-btn:hover{opacity:0.5}
 .logo-wrap{display:flex;align-items:center;justify-content:center;cursor:pointer}
-.logo-text{font-family:var(--serif);font-size:21px;font-weight:200;letter-spacing:0.2em;text-transform:none;color:var(--black);white-space:nowrap;padding-right:0.2em;transition:color 0.3s}
+.logo-text{font-family:var(--serif);font-size:23px;font-weight:200;letter-spacing:0.24em;text-transform:none;color:var(--black);white-space:nowrap;padding-right:0.24em;transition:color 0.3s}
 header.transparent .logo-text{color:var(--white);text-shadow:0 1px 3px rgba(0,0,0,0.3)}
 header.scrolled .logo-text{color:var(--black);text-shadow:none}
 
@@ -56,7 +56,7 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
    DROPDOWN
 ───────────────────────────────────── */
 .dropdown{display:none;position:absolute;top:56px;left:0;right:0;background:rgba(255,255,255,0.5);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,0.3);border-bottom:1px solid rgba(255,255,255,0.3);z-index:250}
-.dropdown.transparent{background:transparent;border-color:transparent;backdrop-filter:none}
+.dropdown.transparent{background:rgba(0,0,0,0.35);border-color:transparent;backdrop-filter:blur(12px)}
 .dropdown.open{display:block;animation:fd 0.16s ease}
 @keyframes fd{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 .drop-inner{display:grid;grid-template-columns:280px 1fr;min-height:260px;max-height:340px}
@@ -67,8 +67,10 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 .drop-cat-link:hover{color:var(--black)}
 .drop-image{position:relative;overflow:hidden;background:transparent}
 .dropdown.transparent .drop-cat-title,
-.dropdown.transparent .drop-cat-link{color:var(--black)}
-.dropdown.transparent .drop-cat-link:hover{color:var(--black);opacity:0.5}
+.dropdown.transparent .drop-cat-link{color:var(--white)}
+.dropdown.transparent .drop-cat-link:hover{color:var(--white);opacity:0.6}
+.dropdown.transparent .drop-col h4{color:var(--white)}
+.dropdown.transparent .drop-col a{color:rgba(255,255,255,0.7)}
 .drop-cols{display:flex;gap:52px}
 .drop-col h4{font-size:12px;font-weight:400;letter-spacing:0.06em;margin-bottom:13px;cursor:pointer}
 .drop-col h4:hover{text-decoration:underline;text-underline-offset:3px}
@@ -588,8 +590,8 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:38px 3
     align-self: center;
   }
   .logo-text {
-    font-size: 21px;
-    letter-spacing: 0.2em;
+    font-size: 23px;
+    letter-spacing: 0.24em;
   }
 
   /* Hero video — full screen, fixed header floats above */
