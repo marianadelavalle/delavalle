@@ -10,7 +10,7 @@
   <link rel="dns-prefetch" href="https://wa.me">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
 /* ─────────────────────────────────────
    RESET & TOKENS
@@ -48,7 +48,7 @@ header.scrolled .nav-btn,header.scrolled .logo-text{color:var(--black);text-shad
 .nav-btn{font-size:13px;letter-spacing:0.05em;font-weight:300;color:var(--black);padding:0;white-space:nowrap;transition:opacity 0.2s}
 .nav-btn:hover{opacity:0.5}
 .logo-wrap{display:flex;align-items:center;justify-content:center;cursor:pointer}
-.logo-text{font-family:var(--sans);font-size:17px;font-weight:200;letter-spacing:0.42em;text-transform:uppercase;color:var(--black);white-space:nowrap;padding-right:0.42em;transition:color 0.3s}
+.logo-text{font-family:var(--serif);font-size:21px;font-weight:200;letter-spacing:0.2em;text-transform:none;color:var(--black);white-space:nowrap;padding-right:0.2em;transition:color 0.3s}
 header.transparent .logo-text{color:var(--white);text-shadow:0 1px 3px rgba(0,0,0,0.3)}
 header.scrolled .logo-text{color:var(--black);text-shadow:none}
 
@@ -280,7 +280,7 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 .checkout-wrap{display:grid;grid-template-columns:56% 44%;min-height:calc(100vh - 56px)}
 .ch-left{padding:52px 54px 52px 48px;border-right:1px solid var(--border)}
 .ch-right{padding:50px 46px;background:var(--bg)}
-.ch-logo{font-family:var(--sans);font-size:13px;font-weight:200;letter-spacing:0.42em;text-transform:uppercase;color:var(--black);margin-bottom:30px;display:block;cursor:pointer;padding-right:0.42em}
+.ch-logo{font-family:var(--serif);font-size:15px;font-weight:300;letter-spacing:0.2em;text-transform:none;color:var(--black);margin-bottom:30px;display:block;cursor:pointer;padding-right:0.2em}
 .ch-steps{display:flex;gap:6px;font-size:11px;font-weight:300;color:var(--grey);margin-bottom:34px;align-items:center}
 .ch-step{cursor:pointer}
 .ch-step:hover,.ch-step.on{color:var(--black)}
@@ -460,7 +460,7 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:38px 3
 .auth-panel.open{transform:translateX(0)}
 .auth-close{position:absolute;top:20px;right:24px;background:none;border:none;font-size:22px;font-weight:200;cursor:pointer;color:var(--black);line-height:1;padding:4px}
 .auth-inner{padding:72px 48px 48px;flex:1;display:flex;flex-direction:column}
-.auth-logo{font-family:var(--sans);font-size:12px;font-weight:200;letter-spacing:0.38em;text-transform:uppercase;color:var(--black);margin-bottom:40px}
+.auth-logo{font-family:var(--serif);font-size:15px;font-weight:300;letter-spacing:0.2em;text-transform:none;color:var(--black);margin-bottom:40px}
 .auth-title{font-family:var(--serif);font-size:28px;font-weight:300;color:var(--black);margin-bottom:8px;letter-spacing:0.01em}
 .auth-sub{font-size:12px;font-weight:300;color:var(--grey);margin-bottom:36px;line-height:1.6}
 .auth-field{margin-bottom:20px}
@@ -588,8 +588,8 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:38px 3
     align-self: center;
   }
   .logo-text {
-    font-size: 17px;
-    letter-spacing: 0.42em;
+    font-size: 21px;
+    letter-spacing: 0.2em;
   }
 
   /* Hero video — full screen, fixed header floats above */
@@ -1375,11 +1375,11 @@ const PRODUCTS = [{id:9, name:'The Carrier',      shopifyHandle:'the-carrier',  
   {id:17, name:'María Trousers', cat:'Pants & Shorts', colour:'Ivory', hex:'#f5f0e8', bg:'bg-ivory', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines1.jpg', photos:['ines1.jpg','ines2.jpg','ines3.jpg','ines4.jpg','ines5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
   {id:18, name:'María Trousers', cat:'Pants & Shorts', colour:'Beige', hex:'#d4c4a8', bg:'bg-sand', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines-beige2.jpg', photos:['ines-beige2.jpg','ines-beige1.jpg','ines-beige3.jpg','ines-beige4.jpg','ines-beige5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
   {id:19, name:'María Trousers', cat:'Pants & Shorts', colour:'Light Blue', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines-blue2.jpg', photos:['ines-blue2.jpg','ines-blue1.jpg','ines-blue3.jpg','ines-blue4.jpg','ines-blue5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
-  {id:25, name:'The Swimsuit', shopifyHandle:'swimsuit-red-stripe', cat:'Swim', colour:'Red Stripe', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:5,M:0,L:0}, badge:'', photo:'swim-red-stripe.jpg', photos:['swim-red-stripe.jpg','swim-red-stripe-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:25, name:'The Swimsuit', shopifyHandle:'swimsuit-red-stripe', cat:'Swim', colour:'Red Stripe', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'', photo:'swim-red-stripe.jpg', photos:['swim-red-stripe.jpg','swim-red-stripe-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:26, name:'The Swimsuit', shopifyHandle:'swimsuit-navy-stripe', cat:'Swim', colour:'Navy Stripe', hex:'#1a2740', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'', photo:'swim-navy-stripe.jpg', photos:['swim-navy-stripe.jpg','swim-navy-stripe-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:27, name:'The Swimsuit', shopifyHandle:'swimsuit-white-polka', cat:'Swim', colour:'White Polka Dot', hex:'#f5f5f5', bg:'bg-ivory', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'', photo:'swim-white-polka.jpg', photos:['swim-white-polka.jpg','swim-white-polka-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:28, name:'The Swimsuit', shopifyHandle:'swimsuit-black-mini-dot', cat:'Swim', colour:'Black Mini Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:5,M:0,L:0}, badge:'', photo:'swim-black-mini-dot.jpg', photos:['swim-black-mini-dot.jpg','swim-black-mini-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:29, name:'The Swimsuit', shopifyHandle:'swimsuit-black-pin-dot', cat:'Swim', colour:'Black Pin Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:5,M:0,L:0}, badge:'', photo:'swim-black-dot.jpg', photos:['swim-black-dot.jpg','swim-black-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:28, name:'The Swimsuit', shopifyHandle:'swimsuit-black-mini-dot', cat:'Swim', colour:'Black Mini Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'', photo:'swim-black-mini-dot.jpg', photos:['swim-black-mini-dot.jpg','swim-black-mini-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:29, name:'The Swimsuit', shopifyHandle:'swimsuit-black-pin-dot', cat:'Swim', colour:'Black Pin Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:1,S:5,M:0,L:0}, badge:'', photo:'swim-black-dot.jpg', photos:['swim-black-dot.jpg','swim-black-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:51, name:'The Swimsuit', shopifyHandle:'swimsuit-black', cat:'Swim', colour:'Black', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:null, desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:52, name:'The Swimsuit', shopifyHandle:'swimsuit-red', cat:'Swim', colour:'Red', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-red-1.jpg', photos:['swim-red-1.jpg','swim-red-2.jpg','swim-red-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:53, name:'The Swimsuit', shopifyHandle:'swimsuit-ivory', cat:'Swim', colour:'Ivory', hex:'#f0ece0', bg:'bg-ivory', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-ivory-1.jpg', photos:['swim-ivory-1.jpg','swim-ivory-2.jpg','swim-ivory-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
@@ -1387,7 +1387,7 @@ const PRODUCTS = [{id:9, name:'The Carrier',      shopifyHandle:'the-carrier',  
   {id:55, name:'The Swimsuit', shopifyHandle:'swimsuit-black-polka', cat:'Swim', colour:'Black Polka Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-white-black-polka-1.jpg', photos:['swim-white-black-polka-1.jpg','swim-white-black-polka-2.jpg','swim-white-black-polka-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:56, name:'The Swimsuit', shopifyHandle:'swimsuit-navy-blue', cat:'Swim', colour:'Navy Blue', hex:'#1a2740', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-navy-1.jpg', photos:['swim-navy-1.jpg','swim-navy-2.jpg','swim-navy-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:57, name:'The Swimsuit', shopifyHandle:'swimsuit-awning-stripe', cat:'Swim', colour:'Candy Cane', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-red-marine-1.jpg', photos:['swim-red-marine-1.jpg','swim-red-marine-2.jpg','swim-red-marine-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:30, name:'The Swimsuit', shopifyHandle:'swimsuit-red-pin-dot', cat:'Swim', colour:'Red Pin Dot', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'', photo:'swim-red-dot.jpg', photos:['swim-red-dot.jpg','swim-red-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:30, name:'The Swimsuit', shopifyHandle:'swimsuit-red-pin-dot', cat:'Swim', colour:'Red Pin Dot', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:1,S:0,M:0,L:0}, badge:'', photo:'swim-red-dot.jpg', photos:['swim-red-dot.jpg','swim-red-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:32, name:'The Shirt', shopifyHandle:'sleep-shirt-marina-stripe', cat:'Sleep', colour:'Marina Stripe', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
   {id:33, name:'The Shirt', shopifyHandle:'sleep-shirt-baby-blue-dobby', cat:'Sleep', colour:'Baby Blue Dobby', hex:'#b8ccd8', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
   {id:34, name:'The Shirt', shopifyHandle:'sleep-shirt-riviera-stripe', cat:'Sleep', colour:'Riviera Stripe', hex:'#d0e4f0', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:null, desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs.'},
@@ -1717,6 +1717,7 @@ function updateStockInfo(sz){
   if(!currentProd)return;
   const q=currentProd.stock[sz]||0,info=document.getElementById('stockInfoLine'),btn=document.getElementById('addBagBtn');
   if(q===0){info.textContent='';btn.disabled=true;btn.textContent='Add to Bag';}
+  else if(q===1){info.textContent='Only 1 left';btn.disabled=false;btn.textContent='Add to Bag';}
   else{info.textContent='';btn.disabled=false;btn.textContent='Add to Bag';}
 }
 function pickThumb(el,bg,src){document.querySelectorAll('.g-thumb').forEach(t=>t.classList.remove('on'));el.classList.add('on');const gd=document.getElementById('galleryDisplay');if(src){gd.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:contain">`;gd.className='prod-display';}else{gd.className='prod-display '+bg;gd.innerHTML='';}}
@@ -2535,7 +2536,8 @@ function renderSimilar(p){
   let candidates = PRODUCTS.filter(x =>
     x.id !== p.id &&
     x.section === 'women' &&
-    x.cat !== 'Sleep' // don't show coming soon
+    x.cat !== 'Sleep' && // don't show coming soon
+    Object.values(x.stock || {}).some(v => v > 0) // only products with available stock
   );
 
   // Sort: same category first
