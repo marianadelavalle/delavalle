@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+  var path = window.location.pathname + window.location.search;
+  var encoded = encodeURIComponent(path);
+  window.location.replace('/?' + encoded);
+</script>
+</head>
+<body></body>
+</html>
