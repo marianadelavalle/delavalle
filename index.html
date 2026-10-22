@@ -807,18 +807,15 @@ header.scrolled .logo-text {
 .prod-card.coming-soon .prod-img-wrap{position:relative}
 .prod-card.coming-soon .quick-add-btn{display:none}
 
-.sg-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:600;display:none;align-items:center;justify-content:center}
-.sg-overlay.open{display:flex}
-.sg-modal{background:var(--white);max-width:560px;width:90%;max-height:90vh;overflow-y:auto;position:relative;padding:40px}
-.sg-close{position:absolute;top:16px;right:20px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--grey)}
-.sg-img{width:100%;height:auto;display:block}
-.sg-placeholder{width:100%;aspect-ratio:3/4;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey)}
-
 .mobile-nav-item{border-bottom:1px solid var(--border)}
 .mobile-nav-parent{font-family:var(--sans);font-size:18px;font-weight:300;letter-spacing:0.02em;color:var(--black);padding:20px 0;cursor:pointer;width:100%}
 
 img{image-rendering:auto;content-visibility:auto}
 .prod-img-wrap{contain:layout style paint}
+.prod-img-wrap.no-photo{cursor:default}
+.prod-img-wrap.no-photo .quick-add-btn{display:none!important}
+.coming-soon-overlay{display:none;position:absolute;inset:0;background:rgba(255,255,255,0.55);align-items:center;justify-content:center;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink);font-weight:400;pointer-events:none}
+.prod-img-wrap.no-photo .coming-soon-overlay{display:flex}
 
 /* ── SIMILAR PRODUCTS ── */
 .similar-section{padding:60px 32px 48px;border-top:1px solid var(--border);margin-top:0}
@@ -1048,7 +1045,7 @@ img{image-rendering:auto;content-visibility:auto}
   <div class="women-layout">
     <div class="women-cat-img-col">
       <div class="women-cat-img-fill" id="womenCatImg">
-        <img src="women-cat.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;">
+        <img src="women-cat.jpg" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;">
       </div>
       <span class="women-cat-label-corner" id="womenCatImgLabel" data-i18n="women_new_collection">women · new collection</span>
     </div>
@@ -1115,7 +1112,7 @@ img{image-rendering:auto;content-visibility:auto}
       <div class="colour-row" id="colourRow">
         <span class="colour-lbl" id="colourLbl">—</span>
       </div>
-      <div class="size-hd"><p class="f-label" style="margin:0" data-i18n="prod_size">Size</p><span class="size-guide-lnk" data-i18n="prod_size_guide" onclick="openSizeGuide()">Size Guide</span></div>
+      <div class="size-hd"><p class="f-label" style="margin:0" data-i18n="prod_size">Size</p></div>
       <div class="size-grid" id="sizeGrid"></div>
       <div class="stock-info-line" id="stockInfoLine"></div>
       <button class="add-bag-btn" id="addBagBtn" onclick="addToBag()" data-i18n="prod_add_bag">Add to Bag</button>
@@ -1378,11 +1375,12 @@ const PRODUCTS = [{id:9, name:'The Carrier',      shopifyHandle:'the-carrier',  
   {id:17, name:'María Trousers', cat:'Pants & Shorts', colour:'Ivory', hex:'#f5f0e8', bg:'bg-ivory', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines1.jpg', photos:['ines1.jpg','ines2.jpg','ines3.jpg','ines4.jpg','ines5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
   {id:18, name:'María Trousers', cat:'Pants & Shorts', colour:'Beige', hex:'#d4c4a8', bg:'bg-sand', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines-beige2.jpg', photos:['ines-beige2.jpg','ines-beige1.jpg','ines-beige3.jpg','ines-beige4.jpg','ines-beige5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
   {id:19, name:'María Trousers', cat:'Pants & Shorts', colour:'Light Blue', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines-blue2.jpg', photos:['ines-blue2.jpg','ines-blue1.jpg','ines-blue3.jpg','ines-blue4.jpg','ines-blue5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
+  {id:60, name:'The Swimsuit', shopifyHandle:'swimsuit-black-polka-dot', cat:'Swim', colour:'Black Polka Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-black-polka-dot-1.jpg', photos:['swim-black-polka-dot-1.jpg','swim-black-polka-dot-2.jpg','swim-black-polka-dot-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:57, name:'The Swimsuit', shopifyHandle:'swimsuit-awning-stripe', cat:'Swim', colour:'Candy Cane', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-red-marine-1.jpg', photos:['swim-red-marine-1.jpg','swim-red-marine-2.jpg','swim-red-marine-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:52, name:'The Swimsuit', shopifyHandle:'swimsuit-red', cat:'Swim', colour:'Red', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-red-1.jpg', photos:['swim-red-1.jpg','swim-red-2.jpg','swim-red-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:53, name:'The Swimsuit', shopifyHandle:'swimsuit-ivory', cat:'Swim', colour:'Ivory', hex:'#f0ece0', bg:'bg-ivory', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-ivory-1.jpg', photos:['swim-ivory-1.jpg','swim-ivory-2.jpg','swim-ivory-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:56, name:'The Swimsuit', shopifyHandle:'swimsuit-navy-blue', cat:'Swim', colour:'Navy Blue', hex:'#1a2740', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-navy-1.jpg', photos:['swim-navy-1.jpg','swim-navy-2.jpg','swim-navy-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:55, name:'The Swimsuit', shopifyHandle:'swimsuit-black-polka', cat:'Swim', colour:'Black Polka Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-white-black-polka-1.jpg', photos:['swim-white-black-polka-1.jpg','swim-white-black-polka-2.jpg','swim-white-black-polka-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:55, name:'The Swimsuit', shopifyHandle:'swimsuit-black-polka', cat:'Swim', colour:'White Mini Polka Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-white-black-polka-1.jpg', photos:['swim-white-black-polka-1.jpg','swim-white-black-polka-2.jpg','swim-white-black-polka-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:51, name:'The Swimsuit', shopifyHandle:'swimsuit-black', cat:'Swim', colour:'Black', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-black-1.jpg', photos:['swim-black-1.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:54, name:'The Swimsuit', shopifyHandle:'swimsuit-red-polka', cat:'Swim', colour:'Red Polka Dot', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'swim-red-polka-1.jpg', photos:['swim-red-polka-1.jpg','swim-red-polka-2.jpg','swim-red-polka-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:30, name:'The Swimsuit', shopifyHandle:'swimsuit-red-pin-dot', cat:'Swim', colour:'Red Pin Dot', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'Sold Out', photo:'swim-red-dot.jpg', photos:['swim-red-dot.jpg','swim-red-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
@@ -1630,10 +1628,10 @@ function filterCat(cat){
   if(catAsset && typeof catAsset === 'object' && catAsset.video){
     const imgSrc = catAsset.img;
     const vidSrc = catAsset.video;
-    catEl.innerHTML=`<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><source src="${vidSrc}" type="video/mp4"></video><img src="${imgSrc}" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:none">`;
+    catEl.innerHTML=`<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><source src="${vidSrc}" type="video/mp4"></video><img src="${imgSrc}" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:none">`;
   } else {
     const src = typeof catAsset === 'object' ? catAsset.img : catAsset;
-    catEl.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;">`;
+    catEl.innerHTML=`<img src="${src}" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;">`;
   }
   showPage('women');
 }
@@ -1645,10 +1643,14 @@ function makeCard(p){
   let badge='';
   if(so) badge=`<span class="stock-badge badge-sold">Sold Out</span>`;
   else if(p.badge==='New') badge=`<span class="stock-badge badge-new">New In</span>`;
-  return`<div class="prod-card" onclick="goProd(${p.id})">
+  const imgHtml = p.photo
+    ? `<img src="${p.photo}" alt="${p.name}" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.classList.add('no-photo')">`
+    : `<div class="prod-img-swatch ${p.bg}"></div>`;
+  return`<div class="prod-card" onclick="var w=this.querySelector('.prod-img-wrap');if(!w.classList.contains('no-photo'))goProd(${p.id})">
     <div class="prod-img-wrap">
-      ${p.photo?`<img src="${p.photo}" alt="${p.name}" onerror="this.style.display='none'">`:`<div class="prod-img-swatch ${p.bg}"></div>`}
+      ${imgHtml}
       ${badge}
+      <span class="coming-soon-overlay">Coming Soon</span>
       ${so?'':'<button class="quick-add-btn" onclick="event.stopPropagation();quickAdd('+p.id+')">Quick Add</button>'}
     </div>
     <div class="prod-info">
@@ -2438,17 +2440,6 @@ document.getElementById('galleryDisplay').parentElement.addEventListener('mousem
 });
 
 
-/* ── SIZE GUIDE ── */
-function openSizeGuide(){
-  if(!currentProd || currentProd.cat !== 'Swim') return;
-  document.getElementById('sgOverlay').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeSizeGuide(){
-  document.getElementById('sgOverlay').classList.remove('open');
-  document.body.style.overflow='';
-}
-document.addEventListener('keydown',e=>{if(e.key==='Escape') closeSizeGuide();});
 
 
 /* ── WHATSAPP CART ── */
@@ -2765,13 +2756,5 @@ function renderSimilar(p){
 </div>
 
 
-<!-- SIZE GUIDE MODAL -->
-<div class="sg-overlay" id="sgOverlay" onclick="if(event.target===this)closeSizeGuide()">
-  <div class="sg-modal">
-    <button class="sg-close" onclick="closeSizeGuide()">×</button>
-    <img src="size-guide-swim.jpg" class="sg-img" onerror="this.style.display='none';document.getElementById('sgPlaceholder').style.display='flex'" alt="Size Guide">
-    <div class="sg-placeholder" id="sgPlaceholder" style="display:none">Size Guide — Upload size-guide-swim.jpg</div>
-  </div>
-</div>
 </body>
 </html>
