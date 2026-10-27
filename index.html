@@ -1389,7 +1389,7 @@ const PRODUCTS = [{id:9, name:'The Carrier',      shopifyHandle:'the-carrier',  
   {id:25, name:'The Swimsuit', shopifyHandle:'swimsuit-red-stripe', cat:'Swim', colour:'Red Stripe', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'', photo:'swim-red-stripe.jpg', photos:['swim-red-stripe.jpg','swim-red-stripe-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:26, name:'The Swimsuit', shopifyHandle:'swimsuit-navy-stripe', cat:'Swim', colour:'Navy Stripe', hex:'#1a2740', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-navy-stripe.jpg', photos:['swim-navy-stripe.jpg','swim-navy-stripe-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:27, name:'The Swimsuit', shopifyHandle:'swimsuit-white-polka', cat:'Swim', colour:'White Polka Dot', hex:'#f5f5f5', bg:'bg-ivory', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'', photo:'swim-white-polka.jpg', photos:['swim-white-polka.jpg','swim-white-polka-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:28, name:'The Swimsuit', shopifyHandle:'swimsuit-black-mini-dot', cat:'Swim', colour:'Black Mini Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'', photo:'swim-black-mini-dot.jpg', photos:['swim-black-mini-dot.jpg','swim-black-mini-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:28, name:'The Swimsuit', shopifyHandle:'swimsuit-black-mini-dot', cat:'Swim', colour:'Black Mini Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:1,S:0,M:0,L:0}, badge:'', photo:'swim-black-mini-dot.jpg', photos:['swim-black-mini-dot.jpg','swim-black-mini-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:58, name:'The Shirt', shopifyHandle:'sleep-shirt-sky-dobby-stripe', cat:'Sleep', colour:'Sky Dobby Stripe', hex:'#a8c4d8', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'sleep-shirt-sky-dobby-stripe-1.jpg', photos:['sleep-shirt-sky-dobby-stripe-1.jpg','sleep-shirt-sky-dobby-stripe-2.jpg','sleep-shirt-sky-dobby-stripe-3.jpg','sleep-shirt-sky-dobby-stripe-4.jpg'], desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
   {id:59, name:'The Pant', shopifyHandle:'sleep-pant-sky-dobby-stripe', cat:'Sleep', colour:'Sky Dobby Stripe', hex:'#a8c4d8', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'New', photo:'sleep-pant-sky-dobby-stripe-1.jpg', photos:['sleep-pant-sky-dobby-stripe-1.jpg','sleep-pant-sky-dobby-stripe-2.jpg','sleep-pant-sky-dobby-stripe-3.jpg'], desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
   {id:32, name:'The Shirt', shopifyHandle:'sleep-shirt-marina-stripe', cat:'Sleep', colour:'Marina Stripe', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'sleep-shirt-marina-stripe-1.jpg', photos:['sleep-shirt-marina-stripe-1.jpg','sleep-shirt-marina-stripe-2.jpg','sleep-shirt-marina-stripe-3.jpg'], desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
@@ -1644,15 +1644,16 @@ function makeCard(p){
   let badge='';
   if(so) badge=`<span class="stock-badge badge-sold">Sold Out</span>`;
   else if(p.badge==='New') badge=`<span class="stock-badge badge-new">New In</span>`;
+  const noPhoto = !p.photo && !so;
   const imgHtml = p.photo
-    ? `<img src="${p.photo}" alt="${p.name}" loading="lazy" decoding="async" onerror="this.style.display='none';${so?'':'this.parentElement.classList.add(\'no-photo\')'}">`
+    ? `<img src="${p.photo}" alt="${p.name}" loading="lazy" decoding="async">`
     : `<div class="prod-img-swatch ${p.bg}"></div>`;
-  return`<div class="prod-card" onclick="var w=this.querySelector('.prod-img-wrap');if(!w.classList.contains('no-photo'))goProd(${p.id})">
-    <div class="prod-img-wrap">
+  return`<div class="prod-card" onclick="if(!${noPhoto})goProd(${p.id})">
+    <div class="prod-img-wrap${noPhoto?' no-photo':''}">
       ${imgHtml}
       ${badge}
       <span class="coming-soon-overlay">Coming Soon</span>
-      ${so?'':'<button class="quick-add-btn" onclick="event.stopPropagation();quickAdd('+p.id+')">Quick Add</button>'}
+      ${so||noPhoto?'':'<button class="quick-add-btn" onclick="event.stopPropagation();quickAdd('+p.id+')">Quick Add</button>'}
     </div>
     <div class="prod-info">
       <p class="prod-name">${p.name}</p>
