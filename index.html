@@ -1692,7 +1692,7 @@ function makeCard(p){
   else if(p.badge==='New') badge=`<span class="stock-badge badge-new">New In</span>`;
   const noPhoto = !p.photo && !so;
   const imgHtml = p.photo
-    ? `<img src="${p.photo}" alt="${p.name}" loading="lazy" decoding="async">`
+    ? `<img src="${p.photo}" alt="${p.name}" decoding="async">`
     : `<div class="prod-img-swatch ${p.bg}"></div>`;
   return`<div class="prod-card" onclick="if(!${noPhoto})goProd(${p.id})">
     <div class="prod-img-wrap${noPhoto?' no-photo':''}">
