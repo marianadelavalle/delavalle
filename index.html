@@ -635,16 +635,42 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:48px 5
   .hero { height: 100svh; margin-top: 0; }
   .hero video { object-position: center center; }
 
-  /* Women page */
-  .women-layout { grid-template-columns: 1fr !important; }
-  .women-cat-img-col { display: none !important; }
-  .women-grid { grid-template-columns: repeat(2, 1fr) !important; padding: 8px !important; gap: 2px !important; }
-  .women-grid-full { grid-template-columns: repeat(2, 1fr) !important; padding: 8px !important; gap: 2px !important; margin-top: 0 !important; }
-  .women-topbar { padding: 10px 16px; flex-wrap: wrap; gap: 8px; }
-  .women-bc { font-size: 11px; }
-  .prod-count { font-size: 11px; padding: 8px 16px; }
-  .filter-inner { padding: 12px 16px; }
-  .chip { font-size: 10px; padding: 6px 12px; }
+  /* Women page — mobile only */
+  .women-topbar { display: none !important; }
+  .women-layout { display: none !important; }
+  .women-grid-full {
+    grid-template-columns: repeat(2, 1fr) !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    margin-top: 44px !important;
+    background: var(--white) !important;
+  }
+  .women-grid-full .prod-card {
+    padding: 0 0 20px 0 !important;
+    border-bottom: none !important;
+    background: var(--white) !important;
+  }
+  .women-grid-full .prod-img-wrap {
+    aspect-ratio: 3/4 !important;
+    background: var(--bg) !important;
+  }
+  .women-grid-full .prod-info {
+    padding: 10px 10px 0 !important;
+  }
+  .women-grid-full .prod-name {
+    font-size: 12px !important;
+    font-weight: 300 !important;
+    margin-bottom: 2px !important;
+  }
+  .women-grid-full .prod-meta {
+    font-size: 11px !important;
+    margin-bottom: 2px !important;
+  }
+  .women-grid-full .prod-price-tag {
+    font-size: 12px !important;
+    color: var(--black) !important;
+  }
+  .prod-count { display: none !important; }
 
   /* Product page */
   .product-layout { grid-template-columns: 1fr !important; display: block !important; }
@@ -1448,10 +1474,10 @@ const PRODUCTS = [{id:9, name:'The Carrier',      shopifyHandle:'the-carrier',  
   {id:45, name:'The Shirt', shopifyHandle:'sleep-shirt-navy-silk', cat:'Sleep', colour:'Navy Silk', hex:'#1a2740', bg:'bg-black-p', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'sleep-shirt-navy-silk-1.jpg', photos:['sleep-shirt-navy-silk-1.jpg','sleep-shirt-navy-silk-2.jpg','sleep-shirt-navy-silk-3.jpg'], desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
   {id:49, name:'The Pant', shopifyHandle:'sleep-pant-navy-silk', cat:'Sleep', colour:'Navy Silk', hex:'#1a2740', bg:'bg-black-p', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'sleep-pant-navy-silk-1.jpg', photos:['sleep-pant-navy-silk-1.jpg','sleep-pant-navy-silk-2.jpg','sleep-pant-navy-silk-3.jpg'], desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
   {id:31, name:'Rosario Dress', shopifyHandle:'rosario-dress', cat:'Dresses', colour:'Midnight Blue', hex:'#1a2340', bg:'bg-black-p', section:'women', price:890, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'rosario-1.jpg', photos:['rosario-1.jpg','rosario-2.jpg','rosario-3.jpg','rosario-4.jpg','rosario-5.jpg','rosario-6.jpg'], desc:'Maxi dress with puffed sleeves and a round neckline. High-waisted, with a self-tie sash and deeply pleated skirt that falls to the floor. Mother-of-pearl buttons through the front.'},
-  {id:61, name:'Summer Dress', shopifyHandle:'summer-dress-sky-stripe', cat:'Dresses', colour:'Sky Stripe', hex:'#8cadd4', bg:'bg-stone', section:'women', price:420, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'summer-dress-sky-stripe-1.jpg', photos:['summer-dress-sky-stripe-1.jpg','summer-dress-sky-stripe-2.jpg','summer-dress-sky-stripe-3.jpg'], desc:'Mini dress in 100% cotton. Straight neckline with tie-shoulder straps. A-line skirt with a long self-tie belt at the waist.'},
-  {id:62, name:'Summer Dress', shopifyHandle:'summer-dress-black-silk', cat:'Dresses', colour:'Black Silk', hex:'#181610', bg:'bg-black-p', section:'women', price:420, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'summer-dress-black-silk-1.jpg', photos:['summer-dress-black-silk-1.jpg','summer-dress-black-silk-2.jpg','summer-dress-black-silk-3.jpg'], desc:'Mini dress in 100% cotton. Straight neckline with tie-shoulder straps. A-line skirt with a long self-tie belt at the waist.'},
-  {id:63, name:'Summer Dress', shopifyHandle:'summer-dress-pink-silk', cat:'Dresses', colour:'Pink Silk', hex:'#f0c8c0', bg:'bg-ecru', section:'women', price:420, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'summer-dress-pink-silk-1.jpg', photos:['summer-dress-pink-silk-1.jpg','summer-dress-pink-silk-2.jpg','summer-dress-pink-silk-3.jpg'], desc:'Mini dress in 100% cotton. Straight neckline with tie-shoulder straps. A-line skirt with a long self-tie belt at the waist.'},
-  {id:64, name:'Summer Dress', shopifyHandle:'summer-dress-white-cloque', cat:'Dresses', colour:'White Cloqué', hex:'#f5f2ec', bg:'bg-ivory', section:'women', price:420, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'summer-dress-white-cloque-1.jpg', photos:['summer-dress-white-cloque-1.jpg','summer-dress-white-cloque-2.jpg','summer-dress-white-cloque-3.jpg'], desc:'Mini dress in 100% cotton. Straight neckline with tie-shoulder straps. A-line skirt with a long self-tie belt at the waist.'},
+  {id:61, name:'Summer Dress', shopifyHandle:'summer-dress-sky-stripe', cat:'Dresses', colour:'Sky Stripe', hex:'#8cadd4', bg:'bg-stone', section:'women', price:420, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'summer-dress-sky-stripe-1.jpg', photos:['summer-dress-sky-stripe-1.jpg','summer-dress-sky-stripe-2.jpg','summer-dress-sky-stripe-3.jpg'], video:'summer-dress-sky-stripe.mp4', desc:'Mini dress in 100% cotton. Straight neckline with tie-shoulder straps. A-line skirt with a long self-tie belt at the waist.'},
+  {id:62, name:'Summer Dress', shopifyHandle:'summer-dress-black-silk', cat:'Dresses', colour:'Black Silk', hex:'#181610', bg:'bg-black-p', section:'women', price:420, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'summer-dress-black-silk-1.jpg', photos:['summer-dress-black-silk-1.jpg','summer-dress-black-silk-2.jpg','summer-dress-black-silk-3.jpg'], video:'summer-dress-black-silk.mp4', desc:'Mini dress in 100% cotton. Straight neckline with tie-shoulder straps. A-line skirt with a long self-tie belt at the waist.'},
+  {id:63, name:'Summer Dress', shopifyHandle:'summer-dress-pink-silk', cat:'Dresses', colour:'Pink Silk', hex:'#f0c8c0', bg:'bg-ecru', section:'women', price:420, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'summer-dress-pink-silk-1.jpg', photos:['summer-dress-pink-silk-1.jpg','summer-dress-pink-silk-2.jpg','summer-dress-pink-silk-3.jpg'], video:'summer-dress-pink-silk.mp4', desc:'Mini dress in 100% cotton. Straight neckline with tie-shoulder straps. A-line skirt with a long self-tie belt at the waist.'},
+  {id:64, name:'Summer Dress', shopifyHandle:'summer-dress-white-cloque', cat:'Dresses', colour:'White Cloqué', hex:'#f5f2ec', bg:'bg-ivory', section:'women', price:420, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'summer-dress-white-cloque-1.jpg', photos:['summer-dress-white-cloque-1.jpg','summer-dress-white-cloque-2.jpg','summer-dress-white-cloque-3.jpg'], video:'summer-dress-white-cloque.mp4', desc:'Mini dress in 100% cotton. Straight neckline with tie-shoulder straps. A-line skirt with a long self-tie belt at the waist.'},
   {id:65, name:'Summer Dress', shopifyHandle:'summer-dress-white-broderie', cat:'Dresses', colour:'White Broderie', hex:'#f5f2ec', bg:'bg-ivory', section:'women', price:420, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'summer-dress-white-broderie-1.jpg', photos:['summer-dress-white-broderie-1.jpg','summer-dress-white-broderie-2.jpg','summer-dress-white-broderie-3.jpg'], desc:'Mini dress in 100% cotton. Straight neckline with tie-shoulder straps. A-line skirt with a long self-tie belt at the waist.'},
 ];
 
@@ -1563,15 +1589,35 @@ function goProd(id){
   const careEl = document.getElementById('accCare');
   if(careEl) careEl.textContent = copy.care || '';
   const gd=document.getElementById('galleryDisplay');
-  if(p.photo){gd.innerHTML=`<img src="${p.photo}" style="width:100%;height:100%;object-fit:contain" onerror="this.parentElement.className='prod-display ${p.bg}';this.remove()">`;gd.className='prod-display';}
-  else{gd.className='prod-display '+p.bg;gd.innerHTML='';}
-  // Render thumbnails if product has multiple photos
+  if(p.video){
+    gd.innerHTML=`<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;display:block"><source src="${p.video}" type="video/mp4"></video>`;
+    gd.className='prod-display';
+  } else if(p.photo){
+    gd.innerHTML=`<img src="${p.photo}" style="width:100%;height:100%;object-fit:contain" onerror="this.parentElement.className='prod-display ${p.bg}';this.remove()">`;
+    gd.className='prod-display';
+  } else {
+    gd.className='prod-display '+p.bg;gd.innerHTML='';
+  }
+  // Render thumbnails — video first, then photos
   const thumbsRow=document.getElementById('galleryThumbs');
-  if(p.photos && p.photos.length>1){
-    thumbsRow.innerHTML=p.photos.map((src,i)=>`
-      <div class="g-thumb${i===0?' on':''}" onclick="pickThumb(this,'${p.bg}','${src}')">
-        <img src="${src}" style="width:100%;height:100%;object-fit:contain" onerror="this.closest('.g-thumb').style.display='none'">
-      </div>`).join('');
+  const hasMultiple = (p.video && p.photos && p.photos.length>0) || (p.photos && p.photos.length>1);
+  if(hasMultiple){
+    let thumbsHtml = '';
+    if(p.video){
+      thumbsHtml += `<div class="g-thumb on" onclick="pickThumbVideo(this,'${p.video}')">
+        <video muted loop playsinline style="width:100%;height:100%;object-fit:contain;pointer-events:none"><source src="${p.video}" type="video/mp4"></video>
+      </div>`;
+      thumbsHtml += (p.photos||[]).map(src=>`
+        <div class="g-thumb" onclick="pickThumb(this,'${p.bg}','${src}')">
+          <img src="${src}" style="width:100%;height:100%;object-fit:contain" onerror="this.closest('.g-thumb').style.display='none'">
+        </div>`).join('');
+    } else {
+      thumbsHtml = p.photos.map((src,i)=>`
+        <div class="g-thumb${i===0?' on':''}" onclick="pickThumb(this,'${p.bg}','${src}')">
+          <img src="${src}" style="width:100%;height:100%;object-fit:contain" onerror="this.closest('.g-thumb').style.display='none'">
+        </div>`).join('');
+    }
+    thumbsRow.innerHTML=thumbsHtml;
     thumbsRow.style.display='flex';
   } else {
     thumbsRow.innerHTML='';
@@ -1779,6 +1825,7 @@ function updateStockInfo(sz){
   else if(q===1){info.textContent='Only 1 left';btn.disabled=false;btn.textContent='Add to Bag';}
   else{info.textContent='';btn.disabled=false;btn.textContent='Add to Bag';}
 }
+function pickThumbVideo(el,src){document.querySelectorAll('.g-thumb').forEach(t=>t.classList.remove('on'));el.classList.add('on');const gd=document.getElementById('galleryDisplay');gd.innerHTML=`<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;display:block"><source src="${src}" type="video/mp4"></video>`;gd.className='prod-display';}
 function pickThumb(el,bg,src){document.querySelectorAll('.g-thumb').forEach(t=>t.classList.remove('on'));el.classList.add('on');const gd=document.getElementById('galleryDisplay');if(src){gd.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:contain">`;gd.className='prod-display';}else{gd.className='prod-display '+bg;gd.innerHTML='';}}
 function toggleAcc(btn){const b=btn.nextElementSibling,i=btn.querySelector('.acc-icon');b.classList.toggle('open');i.textContent=b.classList.contains('open')?'−':'+';}
 function addToBag(){
