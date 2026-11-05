@@ -1776,15 +1776,14 @@ function renderWomenGrid(){
     if(soA!==soB) return soA-soB;
     return 0;
   });
-  // Always render all to womenGrid first (mobile-safe)
-  gTop.innerHTML='';
-  g.innerHTML=sorted.map(makeCard).join('');
-  // Desktop only: move first 4 into womenGridTop beside the cat image
-  if(!window.matchMedia('(max-width:768px)').matches){
-    const top=sorted.slice(0,4);
-    const rest=sorted.slice(4);
-    gTop.innerHTML=top.map(makeCard).join('');
-    g.innerHTML=rest.map(makeCard).join('');
+  const top=sorted.slice(0,4);
+  const rest=sorted.slice(4);
+  gTop.innerHTML=top.map(makeCard).join('');
+  g.innerHTML=rest.map(makeCard).join('');
+  // On mobile, move all cards to womenGrid (womenGridTop is hidden on mobile)
+  if(window.matchMedia('(max-width:768px)').matches){
+    gTop.innerHTML='';
+    g.innerHTML=sorted.map(makeCard).join('');
   }
 }
 renderWomenGrid();
