@@ -1776,10 +1776,16 @@ function renderWomenGrid(){
     if(soA!==soB) return soA-soB;
     return 0;
   });
-  const top=sorted.slice(0,4);
-  const rest=sorted.slice(4);
-  gTop.innerHTML=top.map(makeCard).join('');
-  g.innerHTML=rest.map(makeCard).join('');
+  const isMobile = window.innerWidth <= 768;
+  if(isMobile){
+    gTop.innerHTML='';
+    g.innerHTML=sorted.map(makeCard).join('');
+  } else {
+    const top=sorted.slice(0,4);
+    const rest=sorted.slice(4);
+    gTop.innerHTML=top.map(makeCard).join('');
+    g.innerHTML=rest.map(makeCard).join('');
+  }
 }
 renderWomenGrid();
 
