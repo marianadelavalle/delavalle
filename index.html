@@ -159,8 +159,8 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 
 /* Women split layout — same 4-col grid throughout */
 .women-layout{display:grid;grid-template-columns:2fr 1fr 1fr;align-items:start;column-gap:24px;row-gap:0;padding:0 32px}
-.women-cat-img-col{overflow:hidden;background:var(--bg);grid-row:1/3}
-.women-cat-img-fill{width:100%;height:100%;object-fit:cover}
+.women-cat-img-col{overflow:hidden;background:var(--bg);grid-row:1/3;min-height:600px;align-self:stretch}
+.women-cat-img-fill{width:100%;height:100%;min-height:600px;object-fit:cover}
 .women-cat-label-corner{position:absolute;bottom:32px;left:32px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.6);font-weight:300}
 
 /* Product grid — right panel matches full grid columns */
@@ -1708,7 +1708,7 @@ const CAT_IMAGES={
   'Pants & Shorts':'cat-pants.jpg',
   'Skirts':'cat-skirts.jpg',
   'Swim':'cat-swim.jpg',
-  'Sleep':{img:'cat-sleep.jpg', video:'cat-sleep.mp4'},
+  'Sleep':'cat-sleep.jpg',
 };
 function filterCat(cat){
   hideDrop();
@@ -1721,10 +1721,10 @@ function filterCat(cat){
   if(catAsset && typeof catAsset === 'object' && catAsset.video){
     const imgSrc = catAsset.img;
     const vidSrc = catAsset.video;
-    catEl.innerHTML=`<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><source src="${vidSrc}" type="video/mp4"></video><img src="${imgSrc}" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:none">`;
+    catEl.innerHTML=`<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><source src="${vidSrc}" type="video/mp4" onerror="this.parentElement.style.display='none';this.parentElement.nextElementSibling.style.display='block'"></video><img src="${imgSrc}" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:none" onerror="this.src='women-cat.jpg'">`;
   } else {
     const src = typeof catAsset === 'object' ? catAsset.img : catAsset;
-    catEl.innerHTML=`<img src="${src}" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;">`;
+    catEl.innerHTML=`<img src="${src}" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;" onerror="this.src='women-cat.jpg'">`;
   }
   showPage('women');
 }
@@ -2694,8 +2694,8 @@ window.addEventListener('popstate', function(e){
     document.getElementById('womenCatLabel').textContent=s.cat;
     const ca=CAT_IMAGES[s.cat]||'women-cat.jpg';
     const ce=document.getElementById('womenCatImg');
-    if(ca&&typeof ca==='object'&&ca.video){ce.innerHTML=`<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block"><source src="${ca.video}" type="video/mp4"></video>`;}
-    else{const src=typeof ca==='object'?ca.img:ca;ce.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:cover;display:block">`;}
+    if(ca&&typeof ca==='object'&&ca.video){ce.innerHTML=`<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><source src="${ca.video}" type="video/mp4" onerror="this.parentElement.style.display='none';this.parentElement.nextElementSibling.style.display='block'"></video><img src="${ca.img}" style="width:100%;height:100%;object-fit:cover;display:none" onerror="this.src='women-cat.jpg'">`;}
+    else{const src=typeof ca==='object'?ca.img:ca;ce.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.src='women-cat.jpg'">`;}
     _showPage('women');
   } else if(s.page==='women'){goWomen();}
   else if(s.page==='galerie'){goGalerie();}
