@@ -1776,11 +1776,11 @@ function renderWomenGrid(){
     if(soA!==soB) return soA-soB;
     return 0;
   });
-  const isMobile = window.innerWidth <= 768;
-  if(isMobile){
-    gTop.innerHTML='';
-    g.innerHTML=sorted.map(makeCard).join('');
-  } else {
+  // Always render all to womenGrid first (mobile-safe)
+  gTop.innerHTML='';
+  g.innerHTML=sorted.map(makeCard).join('');
+  // Desktop only: move first 4 into womenGridTop beside the cat image
+  if(!window.matchMedia('(max-width:768px)').matches){
     const top=sorted.slice(0,4);
     const rest=sorted.slice(4);
     gTop.innerHTML=top.map(makeCard).join('');
@@ -1788,6 +1788,7 @@ function renderWomenGrid(){
   }
 }
 renderWomenGrid();
+window.matchMedia('(max-width:768px)').addEventListener('change', renderWomenGrid);
 
 function quickAdd(id){
   const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
