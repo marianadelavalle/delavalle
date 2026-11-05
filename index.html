@@ -1736,10 +1736,12 @@ function makeCard(p){
   let badge='';
   if(so) badge=`<span class="stock-badge badge-sold">Sold Out</span>`;
   else if(p.badge==='New') badge=`<span class="stock-badge badge-new">New In</span>`;
-  const noPhoto = !p.photo && !so;
-  const imgHtml = p.photo
-    ? `<img src="${p.photo}" alt="${p.name}" decoding="async">`
-    : `<div class="prod-img-swatch ${p.bg}"></div>`;
+  const noPhoto = !p.photo && !p.video && !so;
+  const imgHtml = p.video
+    ? `<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block"${p.photo?' poster="'+p.photo+'"':''}><source src="${p.video}" type="video/mp4"></video>`
+    : p.photo
+      ? `<img src="${p.photo}" alt="${p.name}" decoding="async">`
+      : `<div class="prod-img-swatch ${p.bg}"></div>`;
   return`<div class="prod-card" onclick="if(!${noPhoto})goProd(${p.id})">
     <div class="prod-img-wrap${noPhoto?' no-photo':''}">
       ${imgHtml}
