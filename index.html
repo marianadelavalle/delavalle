@@ -2659,8 +2659,8 @@ document.getElementById('feForm').addEventListener('submit', function(e){
     headers: { 'Accept': 'application/json' }
   }).then(r => {
     if(r.ok){
-      document.getElementById('feFormWrap').style.display = 'none';
-      document.getElementById('feSuccess').style.display = 'block';
+      document.getElementById('page-first-edition').style.display = 'none';
+      document.getElementById('feThankYou').style.display = 'flex';
     } else {
       throw new Error();
     }
@@ -3077,8 +3077,16 @@ function renderSimilar(p){
       </form>
       <p style="font-family:var(--serif);font-size:12px;font-weight:300;color:var(--grey);letter-spacing:0.04em;line-height:1.8;margin-top:28px;text-align:center">One piece per client. Limited to 50 pieces, subject to availability.<br>Valid for purchases made before December 1st, 2026. Subject to verification.</p>
     </div>
-    <div id="feSuccess" style="display:none;font-family:var(--serif);font-size:22px;font-weight:300;color:var(--black);letter-spacing:0.08em;line-height:2;padding:64px 0;text-align:center">Thank you.<br><span style="font-family:var(--serif);font-size:15px;font-weight:300;letter-spacing:0.06em;color:var(--grey)">We will be in touch shortly.</span></div>
+    <div id="feSuccess"></div>
   </div>
+</div>
+
+<!-- ══ FIRST EDITION THANK YOU ══ -->
+<div id="feThankYou" style="display:none;position:fixed;inset:0;background:var(--white);z-index:500;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px">
+  <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:var(--grey);margin-bottom:40px">First Edition</p>
+  <h2 style="font-family:var(--serif);font-size:clamp(28px,5vw,44px);font-weight:200;letter-spacing:0.18em;color:var(--black);margin-bottom:24px;line-height:1.4">Thank you.</h2>
+  <p style="font-family:var(--sans);font-size:14px;font-weight:200;line-height:2;color:var(--grey);letter-spacing:0.04em;max-width:360px;margin-bottom:64px">We have received your request and will be in touch with you personally.</p>
+  <p style="font-family:var(--serif);font-size:13px;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:var(--black)">de Lavalle</p>
 </div>
 
 <!-- ══ REGION MODAL ══ -->
