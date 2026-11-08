@@ -2689,7 +2689,7 @@ showPage = function(id){
   const paths = {
     'home':'/', 'home-section':'/home', 'women':'/women',
     'galerie':'/gallery', 'saved':'/saved', 'checkout':'/checkout',
-    'about':'/about', 'collections':'/collections', 'first-edition':'/#first-edition',
+    'about':'/about', 'collections':'/collections', 'first-edition':'#first-edition',
   };
   const p = paths[id] || '/';
   history.pushState({page:id}, '', p);
@@ -3025,19 +3025,19 @@ function renderSimilar(p){
             <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:16px">Model of your new swimsuit</p>
             <div style="display:flex;flex-direction:column;gap:10px">
               <label style="cursor:pointer;display:flex;align-items:center;gap:14px">
-                <input type="radio" name="original_purchase" value="Ivory" required style="display:none" onchange="document.querySelectorAll('.fe-model-opt').forEach(el=>{el.style.borderColor='var(--border)';el.style.color='var(--grey)'});this.parentElement.querySelector('span').style.borderColor='var(--black)';this.parentElement.querySelector('span').style.color='var(--black)'">
+                <input type="radio" name="original_purchase" value="Ivory" required style="position:absolute;opacity:0;width:0;height:0" onchange="document.querySelectorAll('.fe-model-opt').forEach(el=>{el.style.borderColor='var(--border)';el.style.color='var(--grey)'});this.parentElement.querySelector('span').style.borderColor='var(--black)';this.parentElement.querySelector('span').style.color='var(--black)'">
                 <span class="fe-model-opt" style="font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.08em;color:var(--grey);border-bottom:1px solid var(--border);padding-bottom:2px;transition:all 0.15s">Ivory</span>
               </label>
               <label style="cursor:pointer;display:flex;align-items:center;gap:14px">
-                <input type="radio" name="original_purchase" value="Red" style="display:none" onchange="document.querySelectorAll('.fe-model-opt').forEach(el=>{el.style.borderColor='var(--border)';el.style.color='var(--grey)'});this.parentElement.querySelector('span').style.borderColor='var(--black)';this.parentElement.querySelector('span').style.color='var(--black)'">
+                <input type="radio" name="original_purchase" value="Red" style="position:absolute;opacity:0;width:0;height:0" onchange="document.querySelectorAll('.fe-model-opt').forEach(el=>{el.style.borderColor='var(--border)';el.style.color='var(--grey)'});this.parentElement.querySelector('span').style.borderColor='var(--black)';this.parentElement.querySelector('span').style.color='var(--black)'">
                 <span class="fe-model-opt" style="font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.08em;color:var(--grey);border-bottom:1px solid var(--border);padding-bottom:2px;transition:all 0.15s">Red</span>
               </label>
               <label style="cursor:pointer;display:flex;align-items:center;gap:14px">
-                <input type="radio" name="original_purchase" value="Navy Blue" style="display:none" onchange="document.querySelectorAll('.fe-model-opt').forEach(el=>{el.style.borderColor='var(--border)';el.style.color='var(--grey)'});this.parentElement.querySelector('span').style.borderColor='var(--black)';this.parentElement.querySelector('span').style.color='var(--black)'">
+                <input type="radio" name="original_purchase" value="Navy Blue" style="position:absolute;opacity:0;width:0;height:0" onchange="document.querySelectorAll('.fe-model-opt').forEach(el=>{el.style.borderColor='var(--border)';el.style.color='var(--grey)'});this.parentElement.querySelector('span').style.borderColor='var(--black)';this.parentElement.querySelector('span').style.color='var(--black)'">
                 <span class="fe-model-opt" style="font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.08em;color:var(--grey);border-bottom:1px solid var(--border);padding-bottom:2px;transition:all 0.15s">Navy Blue</span>
               </label>
               <label style="cursor:pointer;display:flex;align-items:center;gap:14px">
-                <input type="radio" name="original_purchase" value="Black Polka Dot" style="display:none" onchange="document.querySelectorAll('.fe-model-opt').forEach(el=>{el.style.borderColor='var(--border)';el.style.color='var(--grey)'});this.parentElement.querySelector('span').style.borderColor='var(--black)';this.parentElement.querySelector('span').style.color='var(--black)'">
+                <input type="radio" name="original_purchase" value="Black Polka Dot" style="position:absolute;opacity:0;width:0;height:0" onchange="document.querySelectorAll('.fe-model-opt').forEach(el=>{el.style.borderColor='var(--border)';el.style.color='var(--grey)'});this.parentElement.querySelector('span').style.borderColor='var(--black)';this.parentElement.querySelector('span').style.color='var(--black)'">
                 <span class="fe-model-opt" style="font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.08em;color:var(--grey);border-bottom:1px solid var(--border);padding-bottom:2px;transition:all 0.15s">Black Polka Dot</span>
               </label>
             </div>
@@ -3048,19 +3048,19 @@ function renderSimilar(p){
             <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:16px">Size for your new swimsuit</p>
             <div style="display:flex;gap:12px">
               <label style="flex:1;cursor:pointer">
-                <input type="radio" name="new_size" value="XS" required style="display:none" onchange="document.querySelectorAll('.fe-size-opt').forEach(el=>el.style.borderColor='var(--border)');this.parentElement.querySelector('span').style.borderColor='var(--black)'">
+                <input type="radio" name="new_size" value="XS" required style="position:absolute;opacity:0;width:0;height:0" onchange="document.querySelectorAll('.fe-size-opt').forEach(el=>el.style.borderColor='var(--border)');this.parentElement.querySelector('span').style.borderColor='var(--black)'">
                 <span class="fe-size-opt" style="display:block;text-align:center;font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.1em;color:var(--black);border:1px solid var(--border);padding:12px 0;transition:border-color 0.15s">XS</span>
               </label>
               <label style="flex:1;cursor:pointer">
-                <input type="radio" name="new_size" value="S" style="display:none" onchange="document.querySelectorAll('.fe-size-opt').forEach(el=>el.style.borderColor='var(--border)');this.parentElement.querySelector('span').style.borderColor='var(--black)'">
+                <input type="radio" name="new_size" value="S" style="position:absolute;opacity:0;width:0;height:0" onchange="document.querySelectorAll('.fe-size-opt').forEach(el=>el.style.borderColor='var(--border)');this.parentElement.querySelector('span').style.borderColor='var(--black)'">
                 <span class="fe-size-opt" style="display:block;text-align:center;font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.1em;color:var(--black);border:1px solid var(--border);padding:12px 0;transition:border-color 0.15s">S</span>
               </label>
               <label style="flex:1;cursor:pointer">
-                <input type="radio" name="new_size" value="M" style="display:none" onchange="document.querySelectorAll('.fe-size-opt').forEach(el=>el.style.borderColor='var(--border)');this.parentElement.querySelector('span').style.borderColor='var(--black)'">
+                <input type="radio" name="new_size" value="M" style="position:absolute;opacity:0;width:0;height:0" onchange="document.querySelectorAll('.fe-size-opt').forEach(el=>el.style.borderColor='var(--border)');this.parentElement.querySelector('span').style.borderColor='var(--black)'">
                 <span class="fe-size-opt" style="display:block;text-align:center;font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.1em;color:var(--black);border:1px solid var(--border);padding:12px 0;transition:border-color 0.15s">M</span>
               </label>
               <label style="flex:1;cursor:pointer">
-                <input type="radio" name="new_size" value="L" style="display:none" onchange="document.querySelectorAll('.fe-size-opt').forEach(el=>el.style.borderColor='var(--border)');this.parentElement.querySelector('span').style.borderColor='var(--black)'">
+                <input type="radio" name="new_size" value="L" style="position:absolute;opacity:0;width:0;height:0" onchange="document.querySelectorAll('.fe-size-opt').forEach(el=>el.style.borderColor='var(--border)');this.parentElement.querySelector('span').style.borderColor='var(--black)'">
                 <span class="fe-size-opt" style="display:block;text-align:center;font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.1em;color:var(--black);border:1px solid var(--border);padding:12px 0;transition:border-color 0.15s">L</span>
               </label>
             </div>
