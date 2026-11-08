@@ -917,6 +917,7 @@ img{image-rendering:auto;content-visibility:auto}
       <button class="nav-btn" onclick="goHomePage()" data-i18n="nav_home">Home</button>
       
       <button class="nav-btn" onclick="goGalerie()" data-i18n="nav_gallery">Gallery</button>
+      <button class="nav-btn" onclick="goFirstEdition()">First Edition</button>
     </nav>
     <div class="logo-wrap" onclick="goLanding()">
       <span class="logo-text">de Lavalle</span>
@@ -2639,6 +2640,38 @@ function sendWhatsAppCart(){
 
 
 
+/* ── FIRST EDITION ── */
+function goFirstEdition(){
+  showPage('first-edition');
+}
+document.getElementById('feForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const btn = document.getElementById('feSubmitBtn');
+  const err = document.getElementById('feError');
+  btn.textContent = 'Sending…';
+  btn.style.opacity = '0.5';
+  btn.disabled = true;
+  err.style.display = 'none';
+  const data = new FormData(this);
+  fetch('https://formspree.io/f/mvkkndjr', {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).then(r => {
+    if(r.ok){
+      document.getElementById('feFormWrap').style.display = 'none';
+      document.getElementById('feSuccess').style.display = 'block';
+    } else {
+      throw new Error();
+    }
+  }).catch(() => {
+    btn.textContent = 'Request my piece';
+    btn.style.opacity = '1';
+    btn.disabled = false;
+    err.style.display = 'block';
+  });
+});
+
 /* ── ROUTER — clean URLs via GitHub Pages 404 trick ── */
 (function(){
   // Pick up path encoded by 404.html redirect
@@ -2656,7 +2689,7 @@ showPage = function(id){
   const paths = {
     'home':'/', 'home-section':'/home', 'women':'/women',
     'galerie':'/gallery', 'saved':'/saved', 'checkout':'/checkout',
-    'about':'/about', 'collections':'/collections',
+    'about':'/about', 'collections':'/collections', 'first-edition':'/#first-edition',
   };
   const p = paths[id] || '/';
   history.pushState({page:id}, '', p);
@@ -2717,7 +2750,12 @@ window.addEventListener('popstate', function(e){
   if(path==='/saved'){goSaved();return;}
   if(path==='/about'){goAbout();return;}
   if(path==='/collections'){goCollections();return;}
+  // Hash-based route for First Edition (hidden page)
+  if(window.location.hash==='#first-edition'){goFirstEdition();return;}
 })();
+
+// Also handle direct hash on load
+if(window.location.hash==='#first-edition') goFirstEdition();
 
 
 /* ── SIMILAR PRODUCTS ── */
@@ -2919,6 +2957,7 @@ function renderSimilar(p){
     </div>
     <button onclick="closeMobileMenu();goHomePage()">Home</button>
     <button onclick="closeMobileMenu();goGalerie()">Gallery</button>
+    <button onclick="closeMobileMenu();goFirstEdition()">First Edition</button>
   </nav>
   <div class="mobile-nav-bottom">
     <button onclick="closeMobileMenu();openSearch()">Search</button>
@@ -2936,6 +2975,108 @@ function renderSimilar(p){
         de Lavalle was established in 2025 by Mariana de Lavalle. Rooted in the belief that clothing should be made with care and made to last, the brand produces each piece locally in Peru — by hand, in-house. de Lavalle's collections explore the quiet strength of a simple wardrobe: pieces without excess, cut to outlast seasons and resist the pull of trends.
       </p>
     </div>
+  </div>
+</div>
+
+<!-- ══════════ FIRST EDITION ══════════ -->
+<div class="page" id="page-first-edition">
+  <div style="width:100%;height:70vh;overflow:hidden;position:relative;background:var(--bg)">
+    <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block">
+      <source src="first-edition.mp4" type="video/mp4">
+    </video>
+    <div style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;animation:feScroll 1.8s ease-in-out infinite">
+      <span style="font-family:var(--sans);font-size:9px;font-weight:300;letter-spacing:0.2em;text-transform:uppercase;color:var(--white);opacity:0.8">Scroll</span>
+      <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="white" stroke-width="1.2" stroke-opacity="0.8"/></svg>
+    </div>
+  </div>
+  <style>@keyframes feScroll{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(5px)}}</style>
+  <div style="max-width:560px;margin:0 auto;padding:96px 24px 120px;text-align:center">
+    <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:var(--grey);margin-bottom:4px">Only available for our first customers</p>
+    <p style="font-family:var(--serif);font-size:10px;font-weight:300;letter-spacing:0.08em;color:var(--grey);margin-bottom:20px;opacity:0.7">For purchases made before December 1st</p>
+    <h1 style="font-family:var(--serif);font-size:clamp(32px,5vw,48px);font-weight:200;letter-spacing:0.22em;color:var(--black);margin-bottom:40px;text-transform:none">First Edition</h1>
+    <p style="font-family:var(--sans);font-size:14px;font-weight:200;line-height:2;color:var(--black);letter-spacing:0.03em;margin-bottom:64px">To those who were with us from the beginning: a new piece is yours for S/ 80, as a token of gratitude for your trust. You keep the original.<br><br>Leave your details below and we will write to you personally.</p>
+
+    <!-- Form -->
+    <div id="feFormWrap">
+      <form id="feForm">
+        <div style="border:1px solid var(--border);padding:40px 36px 32px;text-align:left">
+
+          <!-- Row 1: Full name -->
+          <div style="margin-bottom:0;padding-bottom:28px;border-bottom:1px solid var(--border)">
+            <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:10px">Full name</p>
+            <input name="name" type="text" required placeholder="Your full name" style="width:100%;border:none;background:transparent;font-family:var(--serif);font-size:18px;font-weight:300;color:var(--black);padding:6px 0 0;outline:none;letter-spacing:0.04em">
+          </div>
+
+          <!-- Row 2: Email -->
+          <div style="padding:28px 0;border-bottom:1px solid var(--border)">
+            <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:10px">Email</p>
+            <input name="email" type="email" required placeholder="your@email.com" style="width:100%;border:none;background:transparent;font-family:var(--serif);font-size:18px;font-weight:300;color:var(--black);padding:6px 0 0;outline:none;letter-spacing:0.04em">
+          </div>
+
+          <!-- Row 3: Phone -->
+          <div style="padding:28px 0;border-bottom:1px solid var(--border)">
+            <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:10px">Phone</p>
+            <input name="phone" type="tel" required placeholder="+51" style="width:100%;border:none;background:transparent;font-family:var(--serif);font-size:18px;font-weight:300;color:var(--black);padding:6px 0 0;outline:none;letter-spacing:0.04em">
+          </div>
+
+          <!-- Row 4: Model -->
+          <div style="padding:28px 0;border-bottom:1px solid var(--border)">
+            <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:16px">Model of your new swimsuit</p>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <label style="cursor:pointer;display:flex;align-items:center;gap:14px">
+                <input type="radio" name="original_purchase" value="Ivory" required style="display:none" onchange="document.querySelectorAll('.fe-model-opt').forEach(el=>{el.style.borderColor='var(--border)';el.style.color='var(--grey)'});this.parentElement.querySelector('span').style.borderColor='var(--black)';this.parentElement.querySelector('span').style.color='var(--black)'">
+                <span class="fe-model-opt" style="font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.08em;color:var(--grey);border-bottom:1px solid var(--border);padding-bottom:2px;transition:all 0.15s">Ivory</span>
+              </label>
+              <label style="cursor:pointer;display:flex;align-items:center;gap:14px">
+                <input type="radio" name="original_purchase" value="Red" style="display:none" onchange="document.querySelectorAll('.fe-model-opt').forEach(el=>{el.style.borderColor='var(--border)';el.style.color='var(--grey)'});this.parentElement.querySelector('span').style.borderColor='var(--black)';this.parentElement.querySelector('span').style.color='var(--black)'">
+                <span class="fe-model-opt" style="font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.08em;color:var(--grey);border-bottom:1px solid var(--border);padding-bottom:2px;transition:all 0.15s">Red</span>
+              </label>
+              <label style="cursor:pointer;display:flex;align-items:center;gap:14px">
+                <input type="radio" name="original_purchase" value="Navy Blue" style="display:none" onchange="document.querySelectorAll('.fe-model-opt').forEach(el=>{el.style.borderColor='var(--border)';el.style.color='var(--grey)'});this.parentElement.querySelector('span').style.borderColor='var(--black)';this.parentElement.querySelector('span').style.color='var(--black)'">
+                <span class="fe-model-opt" style="font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.08em;color:var(--grey);border-bottom:1px solid var(--border);padding-bottom:2px;transition:all 0.15s">Navy Blue</span>
+              </label>
+              <label style="cursor:pointer;display:flex;align-items:center;gap:14px">
+                <input type="radio" name="original_purchase" value="Black Polka Dot" style="display:none" onchange="document.querySelectorAll('.fe-model-opt').forEach(el=>{el.style.borderColor='var(--border)';el.style.color='var(--grey)'});this.parentElement.querySelector('span').style.borderColor='var(--black)';this.parentElement.querySelector('span').style.color='var(--black)'">
+                <span class="fe-model-opt" style="font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.08em;color:var(--grey);border-bottom:1px solid var(--border);padding-bottom:2px;transition:all 0.15s">Black Polka Dot</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Row 5: Size -->
+          <div style="padding:28px 0 4px">
+            <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:16px">Size for your new swimsuit</p>
+            <div style="display:flex;gap:12px">
+              <label style="flex:1;cursor:pointer">
+                <input type="radio" name="new_size" value="XS" required style="display:none" onchange="document.querySelectorAll('.fe-size-opt').forEach(el=>el.style.borderColor='var(--border)');this.parentElement.querySelector('span').style.borderColor='var(--black)'">
+                <span class="fe-size-opt" style="display:block;text-align:center;font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.1em;color:var(--black);border:1px solid var(--border);padding:12px 0;transition:border-color 0.15s">XS</span>
+              </label>
+              <label style="flex:1;cursor:pointer">
+                <input type="radio" name="new_size" value="S" style="display:none" onchange="document.querySelectorAll('.fe-size-opt').forEach(el=>el.style.borderColor='var(--border)');this.parentElement.querySelector('span').style.borderColor='var(--black)'">
+                <span class="fe-size-opt" style="display:block;text-align:center;font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.1em;color:var(--black);border:1px solid var(--border);padding:12px 0;transition:border-color 0.15s">S</span>
+              </label>
+              <label style="flex:1;cursor:pointer">
+                <input type="radio" name="new_size" value="M" style="display:none" onchange="document.querySelectorAll('.fe-size-opt').forEach(el=>el.style.borderColor='var(--border)');this.parentElement.querySelector('span').style.borderColor='var(--black)'">
+                <span class="fe-size-opt" style="display:block;text-align:center;font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.1em;color:var(--black);border:1px solid var(--border);padding:12px 0;transition:border-color 0.15s">M</span>
+              </label>
+              <label style="flex:1;cursor:pointer">
+                <input type="radio" name="new_size" value="L" style="display:none" onchange="document.querySelectorAll('.fe-size-opt').forEach(el=>el.style.borderColor='var(--border)');this.parentElement.querySelector('span').style.borderColor='var(--black)'">
+                <span class="fe-size-opt" style="display:block;text-align:center;font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.1em;color:var(--black);border:1px solid var(--border);padding:12px 0;transition:border-color 0.15s">L</span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+        <input type="hidden" name="_subject" value="First Edition – new request">
+
+        <div style="text-align:center;margin-top:32px">
+          <button type="submit" id="feSubmitBtn" style="font-family:var(--serif);font-size:14px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);background:var(--black);border:none;padding:18px 56px;cursor:pointer;transition:opacity 0.2s;width:100%">Request my piece</button>
+        </div>
+        <p id="feError" style="display:none;font-family:var(--serif);font-size:13px;font-weight:300;color:#c00;text-align:center;margin-top:16px;letter-spacing:0.03em">Something went wrong. Please try again.</p>
+      </form>
+      <p style="font-family:var(--serif);font-size:12px;font-weight:300;color:var(--grey);letter-spacing:0.04em;line-height:1.8;margin-top:28px;text-align:center">One piece per client. Limited to 50 pieces, subject to availability.<br>Valid for purchases made before December 1st, 2026. Subject to verification.</p>
+    </div>
+    <div id="feSuccess" style="display:none;font-family:var(--serif);font-size:22px;font-weight:300;color:var(--black);letter-spacing:0.08em;line-height:2;padding:64px 0;text-align:center">Thank you.<br><span style="font-family:var(--serif);font-size:15px;font-weight:300;letter-spacing:0.06em;color:var(--grey)">We will be in touch shortly.</span></div>
   </div>
 </div>
 
