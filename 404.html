@@ -3,10 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <script>
-  // GitHub Pages SPA redirect trick
-  // Encodes the path and redirects to index.html with it as a query param
-  var path = window.location.pathname + window.location.search + window.location.hash;
-  window.location.replace('/?' + encodeURIComponent(path));
+  var l = window.location;
+  var path = l.pathname + l.search;
+  // Only redirect if it's a real path (not root)
+  if(path && path !== '/' && path !== '/index.html'){
+    l.replace('/' + '?p=' + encodeURIComponent(path) + (l.hash || ''));
+  } else {
+    l.replace('/');
+  }
 </script>
 </head>
 <body></body>

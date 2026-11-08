@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!-- v2026.11.08 -->
+<!-- v2026.11.08c -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <base href="/">
 <title>de Lavalle — Women's Ready to Wear, Lima</title>
@@ -2665,11 +2665,11 @@ function submitFirstEdition(){
 /* ── ROUTER — clean URLs via GitHub Pages 404 trick ── */
 (function(){
   // Pick up path encoded by 404.html redirect
-  const q = window.location.search;
-  if(q){
-    const encoded = q.slice(1); // remove '?'
+  const params = new URLSearchParams(window.location.search);
+  const encoded = params.get('p');
+  if(encoded){
     const path = decodeURIComponent(encoded);
-    history.replaceState(null,'',path||'/');
+    history.replaceState(null,'', path||'/');
   }
 })();
 
@@ -2747,9 +2747,16 @@ window.addEventListener('popstate', function(e){
   if(window.location.hash==='#first-edition'){goFirstEdition();return;}
 })();
 
-// Handle hash on direct load — deferred so DOM is ready
-document.addEventListener('DOMContentLoaded', function(){
-  if(window.location.hash==='#first-edition') goFirstEdition();
+// Handle hash on direct load — multiple fallbacks
+window.addEventListener('load', function(){
+  if(window.location.hash==='#first-edition'){
+    goFirstEdition();
+    return;
+  }
+  // If no page is active, show home
+  if(!document.querySelector('.page.active')){
+    showPage('home');
+  }
 });
 
 
