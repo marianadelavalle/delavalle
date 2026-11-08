@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<!-- v2026.11.07b -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <base href="/">
 <title>de Lavalle — Women's Ready to Wear, Lima</title>
@@ -2644,19 +2645,22 @@ function sendWhatsAppCart(){
 function goFirstEdition(){
   showPage('first-edition');
 }
-document.getElementById('feForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  const name = this.querySelector('[name="name"]').value.trim();
-  const email = this.querySelector('[name="email"]').value.trim();
-  const phone = this.querySelector('[name="phone"]').value.trim();
-  const model = (this.querySelector('[name="original_purchase"]:checked') || {}).value || '';
-  const size = (this.querySelector('[name="new_size"]:checked') || {}).value || '';
-  const msg = `Hola, me gustaría solicitar mi pieza de First Edition.\n\nNombre: ${name}\nEmail: ${email}\nTeléfono: ${phone}\nModelo: ${model}\nTalla: ${size}`;
-  const url = 'https://wa.me/34650565927?text=' + encodeURIComponent(msg);
-  window.open(url, '_blank');
+function submitFirstEdition(){
+  const f = document.getElementById('feForm');
+  const name = f.querySelector('[name="name"]').value.trim();
+  const email = f.querySelector('[name="email"]').value.trim();
+  const phone = f.querySelector('[name="phone"]').value.trim();
+  const modelEl = f.querySelector('[name="original_purchase"]:checked');
+  const sizeEl = f.querySelector('[name="new_size"]:checked');
+  if(!name || !email || !phone || !modelEl || !sizeEl){
+    alert('Please fill in all fields before submitting.');
+    return;
+  }
+  const msg = `Hola, me gustaría solicitar mi pieza de First Edition.\n\nNombre: ${name}\nEmail: ${email}\nTeléfono: ${phone}\nModelo: ${modelEl.value}\nTalla: ${sizeEl.value}\n\nGracias`;
+  window.open('https://wa.me/34650565927?text=' + encodeURIComponent(msg), '_blank');
   document.getElementById('page-first-edition').style.display = 'none';
   document.getElementById('feThankYou').style.display = 'flex';
-});
+}
 
 /* ── ROUTER — clean URLs via GitHub Pages 404 trick ── */
 (function(){
@@ -3055,7 +3059,7 @@ function renderSimilar(p){
         </div>
 
         <div style="text-align:center;margin-top:32px">
-          <button type="submit" id="feSubmitBtn" style="font-family:var(--serif);font-size:14px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);background:var(--black);border:none;padding:18px 56px;cursor:pointer;transition:opacity 0.2s;width:100%">Request my piece</button>
+          <button type="button" onclick="submitFirstEdition()" id="feSubmitBtn" style="font-family:var(--serif);font-size:14px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);background:var(--black);border:none;padding:18px 56px;cursor:pointer;transition:opacity 0.2s;width:100%">Request my piece</button>
         </div>
       </form>
       <p style="font-family:var(--serif);font-size:12px;font-weight:300;color:var(--grey);letter-spacing:0.04em;line-height:1.8;margin-top:28px;text-align:center">One piece per client. Limited to 50 pieces, subject to availability.<br>Valid for purchases made before December 1st, 2026. Subject to verification.</p>
