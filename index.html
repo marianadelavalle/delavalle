@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!-- v2026.11.07b -->
+<!-- v2026.11.08 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <base href="/">
 <title>de Lavalle — Women's Ready to Wear, Lima</title>
@@ -2721,7 +2721,10 @@ window.addEventListener('popstate', function(e){
 // Restore state on direct link / refresh
 (function(){
   const path = window.location.pathname;
-  if(!path||path==='/'||path==='/index.html') return;
+  if(!path||path==='/'||path==='/index.html'){
+    if(window.location.hash==='#first-edition'){goFirstEdition();}
+    return;
+  }
   if(path.startsWith('/product/')){
     const handle=path.replace('/product/','');
     const p=PRODUCTS.find(x=>x.shopifyHandle===handle);
@@ -2744,8 +2747,10 @@ window.addEventListener('popstate', function(e){
   if(window.location.hash==='#first-edition'){goFirstEdition();return;}
 })();
 
-// Also handle direct hash on load
-if(window.location.hash==='#first-edition') goFirstEdition();
+// Handle hash on direct load — deferred so DOM is ready
+document.addEventListener('DOMContentLoaded', function(){
+  if(window.location.hash==='#first-edition') goFirstEdition();
+});
 
 
 /* ── SIMILAR PRODUCTS ── */
