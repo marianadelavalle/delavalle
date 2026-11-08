@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!-- v2026.11.08d -->
+<!-- v2026.11.08e -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <base href="/">
 <title>de Lavalle — Women's Ready to Wear, Lima</title>
@@ -2747,14 +2747,6 @@ window.addEventListener('popstate', function(e){
   if(window.location.hash==='#first-edition'){goFirstEdition();return;}
 })();
 
-// Handle hash on direct load — runs immediately at end of script
-(function(){
-  if(window.location.hash==='#first-edition'){
-    goFirstEdition();
-  } else if(!document.querySelector('.page.active')){
-    showPage('home');
-  }
-})();
 
 
 /* ── SIMILAR PRODUCTS ── */
@@ -3116,5 +3108,13 @@ function renderSimilar(p){
   </div>
 </div>
 
+<script>
+// Final hash check — runs after ALL HTML is in the DOM
+if(window.location.hash==='#first-edition'){
+  goFirstEdition();
+} else if(!document.querySelector('.page.active')){
+  showPage('home');
+}
+</script>
 </body>
 </html>
