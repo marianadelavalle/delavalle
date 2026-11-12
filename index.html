@@ -995,12 +995,11 @@ img{image-rendering:auto;content-visibility:auto}
 
   <div style="padding:0 32px 48px">
     <div class="home-cat-strip">
-      <div class="home-cat-item">
+      <div class="home-cat-item" onclick="goProd(9)" style="cursor:pointer">
         <div class="home-cat-img" style="position:relative;overflow:hidden"><video src="wood-carrier.mp4" poster="wood-carrier.jpg" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video></div>
         <div class="home-cat-info">
           <p class="home-cat-label">Wood Carrier</p>
           <p class="home-cat-name">The Carrier</p>
-          <p class="home-cat-price" style="color:var(--grey);letter-spacing:0.1em;font-size:10px;text-transform:uppercase">Coming Soon</p>
         </div>
       </div>
       <div class="home-cat-item coming-soon" style="pointer-events:none;opacity:0.7">
@@ -1418,7 +1417,7 @@ function fmtPrice(penPrice){
    - product.price
    Fetch via: /products/{handle}.json
 ══════════════════════════════════════ */
-const PRODUCTS = [{id:9, name:'The Carrier',      shopifyHandle:'the-carrier',      cat:'Wood',        colour:'Natural',hex:'#c8b898', bg:'bg-wood',    section:'home',  price:320,  sizes:['One size'],            stock:{'One size':4},           badge:'',          photo:null, desc:'Firewood carrier in heavy-duty canvas with full-grain leather handles and brass rivets.'},
+const PRODUCTS = [{id:9, name:'The Carrier',      shopifyHandle:'the-carrier',      cat:'Wood',        colour:'Gingham',hex:'#7a3b4a', bg:'bg-wood',    section:'home',  price:320,  sizes:['One size'],            stock:{'One size':4},           badge:'',          photo:null, desc:'Firewood carrier in heavy-duty canvas with full-grain leather handles and brass rivets.'},
   {id:10, name:'The Blanket', shopifyHandle:'the-blanket', cat:'Alpaca', colour:'Ivory', hex:'#e0d8cc', bg:'bg-alpaca-p', section:'home', price:580, sizes:['90×200cm'], stock:{'90×200cm':6}, badge:'',          photo:null, desc:'100% Baby Alpaca. Hand-woven in Peru. Extraordinarily soft.'},
   {id:13, name:'The Short', shopifyHandle:'the-short-gingham', cat:'Pants & Shorts', colour:'Gingham', hex:'#7a3b4a', bg:'bg-ecru', section:'women', price:160, sizes:['XS','S','M','L'], stock:{XS:3,S:5,M:4,L:2}, badge:'', photo:'gingham2.jpg', photos:['gingham2.jpg','gingham3.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
   {id:20, name:'The Short', shopifyHandle:'the-short-chocolate', cat:'Pants & Shorts', colour:'Chocolate', hex:'#3b2416', bg:'bg-wood', section:'women', price:160, sizes:['XS','S','M','L'], stock:{XS:3,S:5,M:4,L:2}, badge:'', photo:'short-chocolate-1.jpg', photos:['short-chocolate-1.jpg','short-chocolate-2.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
@@ -1650,7 +1649,10 @@ const variants = PRODUCTS.filter(x => x.name === p.name && x.section === p.secti
       return `<div class="swatch${v.colour === p.colour ? ' on' : ''}" style="${swatchStyle}" onclick="pickColour(this,'${v.colour}','${v.bg}')"></div>`;
     }).join('') + `<span class="colour-lbl" id="colourLbl">${p.colour}</span>`;
   } else {
-    cr.innerHTML = `<div class="swatch on" style="background:${p.hex}"></div><span class="colour-lbl" id="colourLbl">${p.colour}</span>`;
+    const single = p.shopifyHandle === 'the-carrier'
+      ? 'background:repeating-linear-gradient(90deg,rgba(40,40,46,.45) 0 2px,transparent 2px 22px),repeating-linear-gradient(0deg,rgba(40,40,46,.45) 0 2px,transparent 2px 22px),repeating-linear-gradient(90deg,rgba(190,184,178,.55) 0 10px,transparent 10px 22px),repeating-linear-gradient(0deg,rgba(190,184,178,.55) 0 10px,transparent 10px 22px),#8e2d3d'
+      : `background:${p.hex}`;
+    cr.innerHTML = `<div class="swatch on" style="${single}"></div><span class="colour-lbl" id="colourLbl">${p.colour}</span>`;
   }
   const firstAvail=p.sizes.find(s=>(p.stock[s]||0)>0);
   document.getElementById('sizeGrid').innerHTML=p.sizes.map(s=>{
