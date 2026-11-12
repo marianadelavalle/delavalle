@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!-- v2026.11.08e -->
+<!-- v2026.11.12c -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <base href="/">
 <title>de Lavalle — Women's Ready to Wear, Lima</title>
@@ -919,6 +919,7 @@ img{image-rendering:auto;content-visibility:auto}
       
       <button class="nav-btn" onclick="goGalerie()" data-i18n="nav_gallery">Gallery</button>
       <button class="nav-btn" onclick="goFirstEdition()">First Edition</button>
+      <button class="nav-btn" onclick="goMadeToMeasure()">Made to Measure</button>
     </nav>
     <div class="logo-wrap" onclick="goLanding()">
       <span class="logo-text">de Lavalle</span>
@@ -2231,7 +2232,7 @@ const TRANSLATIONS = {
     about_brand:'About the Brand', contact_us:'Contact Us',
   },
   es: {
-    nav_women:'Mujer', nav_home:'Inicio', nav_gallery:'Galería',
+    nav_women:'Mujer', nav_home:'Casa', nav_gallery:'Galería',
     nav_search:'Buscar', nav_saved:'Guardado', nav_login:'Iniciar sesión',
     footer_about:'Sobre la Marca', footer_contact:'Contáctanos',
     lang_label:'Idioma', country_label:'País',
@@ -2662,6 +2663,32 @@ function submitFirstEdition(){
   document.getElementById('feThankYou').style.display = 'flex';
 }
 
+/* ── MADE TO MEASURE ── */
+function goMadeToMeasure(){
+  showPage('made-to-measure');
+}
+function submitMadeToMeasure(){
+  const f = document.getElementById('mtmForm');
+  const name = f.querySelector('[name="name"]').value.trim();
+  const email = f.querySelector('[name="email"]').value.trim();
+  const phone = f.querySelector('[name="phone"]').value.trim();
+  const date = f.querySelector('[name="date"]').value;
+  const notes = f.querySelector('[name="notes"]').value.trim();
+  if(!name || !email || !phone){
+    alert('Please fill in all required fields before submitting.');
+    return;
+  }
+  const msg = `Hola, me gustaría sacar una cita en el taller para una prenda a medida.\n\nNombre: ${name}\nEmail: ${email}\nTeléfono: ${phone}\nFecha preferida: ${date || 'Por confirmar'}\nComentarios: ${notes || '-'}\n\nGracias`;
+  window.open('https://wa.me/34650565927?text=' + encodeURIComponent(msg), '_blank');
+  document.getElementById('page-made-to-measure').style.display = 'none';
+  document.getElementById('mtmThankYou').style.display = 'flex';
+}
+function closeMtmThankYou(){
+  document.getElementById('mtmThankYou').style.display = 'none';
+  document.getElementById('page-made-to-measure').style.display = '';
+  goHomePage();
+}
+
 /* ── ROUTER — clean URLs via GitHub Pages 404 trick ── */
 (function(){
   // Pick up path encoded by 404.html redirect
@@ -2680,6 +2707,7 @@ showPage = function(id){
     'home':'/', 'home-section':'/home', 'women':'/women',
     'galerie':'/gallery', 'saved':'/saved', 'checkout':'/checkout',
     'about':'/about', 'collections':'/collections', 'first-edition':'#first-edition',
+    'made-to-measure':'#made-to-measure',
   };
   const p = paths[id] || '/';
   history.pushState({page:id}, '', p);
@@ -2722,7 +2750,6 @@ window.addEventListener('popstate', function(e){
 (function(){
   const path = window.location.pathname;
   if(!path||path==='/'||path==='/index.html'){
-    if(window.location.hash==='#first-edition'){goFirstEdition();}
     return;
   }
   if(path.startsWith('/product/')){
@@ -2743,8 +2770,7 @@ window.addEventListener('popstate', function(e){
   if(path==='/saved'){goSaved();return;}
   if(path==='/about'){goAbout();return;}
   if(path==='/collections'){goCollections();return;}
-  // Hash-based route for First Edition (hidden page)
-  if(window.location.hash==='#first-edition'){goFirstEdition();return;}
+  // First Edition hash route is handled at the end of <body>, after its markup exists
 })();
 
 
@@ -2949,6 +2975,7 @@ function renderSimilar(p){
     <button onclick="closeMobileMenu();goHomePage()">Home</button>
     <button onclick="closeMobileMenu();goGalerie()">Gallery</button>
     <button onclick="closeMobileMenu();goFirstEdition()">First Edition</button>
+    <button onclick="closeMobileMenu();goMadeToMeasure()">Made to Measure</button>
   </nav>
   <div class="mobile-nav-bottom">
     <button onclick="closeMobileMenu();openSearch()">Search</button>
@@ -3069,6 +3096,59 @@ function renderSimilar(p){
   </div>
 </div>
 
+<!-- ══ MADE TO MEASURE ══ -->
+<div class="page" id="page-made-to-measure">
+  <div style="max-width:560px;margin:0 auto;padding:140px 24px 120px;text-align:center">
+    <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:var(--grey);margin-bottom:20px">Made to Measure</p>
+    <h1 style="font-family:var(--serif);font-size:clamp(32px,5vw,48px);font-weight:200;letter-spacing:0.22em;color:var(--black);margin-bottom:40px">Book a fitting</h1>
+    <p style="font-family:var(--sans);font-size:14px;font-weight:200;line-height:2;color:var(--black);letter-spacing:0.03em;margin-bottom:64px">Leave your details below and we will confirm your appointment at our workshop, personally.</p>
+
+    <form id="mtmForm" onsubmit="return false">
+      <div style="border:1px solid var(--border);padding:40px 36px 32px;text-align:left">
+
+        <div style="padding-bottom:28px;border-bottom:1px solid var(--border)">
+          <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:10px">Full name</p>
+          <input name="name" type="text" required placeholder="Your full name" style="width:100%;border:none;background:transparent;font-family:var(--serif);font-size:18px;font-weight:300;color:var(--black);padding:6px 0 0;outline:none;letter-spacing:0.04em">
+        </div>
+
+        <div style="padding:28px 0;border-bottom:1px solid var(--border)">
+          <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:10px">Email</p>
+          <input name="email" type="email" required placeholder="your@email.com" style="width:100%;border:none;background:transparent;font-family:var(--serif);font-size:18px;font-weight:300;color:var(--black);padding:6px 0 0;outline:none;letter-spacing:0.04em">
+        </div>
+
+        <div style="padding:28px 0;border-bottom:1px solid var(--border)">
+          <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:10px">Phone</p>
+          <input name="phone" type="tel" required placeholder="+51" style="width:100%;border:none;background:transparent;font-family:var(--serif);font-size:18px;font-weight:300;color:var(--black);padding:6px 0 0;outline:none;letter-spacing:0.04em">
+        </div>
+
+        <div style="padding:28px 0;border-bottom:1px solid var(--border)">
+          <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:10px">Preferred date (optional)</p>
+          <input name="date" type="date" style="width:100%;border:none;background:transparent;font-family:var(--serif);font-size:18px;font-weight:300;color:var(--black);padding:6px 0 0;outline:none;letter-spacing:0.04em">
+        </div>
+
+        <div style="padding:28px 0 4px">
+          <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:10px">Comments (optional)</p>
+          <textarea name="notes" rows="3" placeholder="Tell us what you have in mind" style="width:100%;border:none;background:transparent;font-family:var(--serif);font-size:16px;font-weight:300;color:var(--black);padding:6px 0 0;outline:none;letter-spacing:0.04em;resize:none"></textarea>
+        </div>
+
+      </div>
+
+      <div style="text-align:center;margin-top:32px">
+        <button type="button" onclick="submitMadeToMeasure()" style="font-family:var(--serif);font-size:14px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);background:var(--black);border:none;padding:18px 56px;cursor:pointer;width:100%">Request an appointment</button>
+      </div>
+    </form>
+    <p style="font-family:var(--serif);font-size:12px;font-weight:300;color:var(--grey);letter-spacing:0.04em;line-height:1.8;margin-top:28px;text-align:center">Appointments are confirmed by us, subject to availability.</p>
+  </div>
+</div>
+
+<!-- ══ MADE TO MEASURE THANK YOU ══ -->
+<div id="mtmThankYou" style="display:none;position:fixed;inset:0;background:var(--white);z-index:500;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px">
+  <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:var(--grey);margin-bottom:40px">Made to Measure</p>
+  <h2 style="font-family:var(--serif);font-size:clamp(28px,5vw,44px);font-weight:200;letter-spacing:0.18em;color:var(--black);margin-bottom:24px;line-height:1.4">Thank you.</h2>
+  <p style="font-family:var(--sans);font-size:14px;font-weight:200;line-height:2;color:var(--grey);letter-spacing:0.04em;max-width:360px;margin-bottom:64px">We have received your request and will confirm your appointment with you personally.</p>
+  <button onclick="closeMtmThankYou()" style="font-family:var(--serif);font-size:13px;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:var(--black);background:none;border:1px solid var(--black);padding:14px 40px;cursor:pointer">Back to de Lavalle</button>
+</div>
+
 <!-- ══ FIRST EDITION THANK YOU ══ -->
 <div id="feThankYou" style="display:none;position:fixed;inset:0;background:var(--white);z-index:500;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px">
   <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:var(--grey);margin-bottom:40px">First Edition</p>
@@ -3112,6 +3192,8 @@ function renderSimilar(p){
 // Final hash check — runs after ALL HTML is in the DOM
 if(window.location.hash==='#first-edition'){
   goFirstEdition();
+} else if(window.location.hash==='#made-to-measure'){
+  goMadeToMeasure();
 } else if(!document.querySelector('.page.active')){
   showPage('home');
 }
