@@ -2681,7 +2681,7 @@ function submitMadeToMeasure(){
     alert('Please fill in all required fields before submitting.');
     return;
   }
-  const msg = `Hola, me gustaría sacar una cita en el taller para una prenda a medida.\n\nNombre: ${name}\nEmail: ${email}\nTeléfono: ${phone}\nFecha preferida: ${date || 'Por confirmar'}\nComentarios: ${notes || '-'}\n\nGracias`;
+  const msg = `Hola, me gustaría sacar una cita en el taller.\n\nNombre: ${name}\nEmail: ${email}\nTeléfono: ${phone}\nFecha preferida: ${date || 'Por confirmar'}\nComentarios: ${notes || '-'}\n\nGracias`;
   window.open('https://wa.me/34650565927?text=' + encodeURIComponent(msg), '_blank');
   document.getElementById('page-made-to-measure').style.display = 'none';
   document.getElementById('mtmThankYou').style.display = 'flex';
