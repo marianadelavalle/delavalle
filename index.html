@@ -219,6 +219,16 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 .prod-display{width:100%;max-width:480px;aspect-ratio:2/3;transition:background 0.35s;flex-shrink:0}
 .prod-display img{width:100%;height:100%;object-fit:contain;display:block}
 .gallery-thumbs-row{display:flex;justify-content:center;gap:8px;padding:14px 20px}
+.gallery-main{position:relative}
+.g-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:64px;border:0;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--black);opacity:0.55;transition:opacity 0.2s;z-index:2;padding:0}
+.g-arrow:hover{opacity:1}
+.g-arrow svg{width:14px;height:26px;stroke:currentColor;fill:none;stroke-width:1}
+.g-arrow.prev{left:8px}.g-arrow.next{right:8px}
+.gallery-main.single .g-arrow{display:none}
+#galleryDisplay{touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab}
+#galleryDisplay:active{cursor:grabbing}
+#galleryDisplay img{-webkit-user-drag:none;user-drag:none;pointer-events:none;transition:opacity 0.18s}
+@media(max-width:767px){.g-arrow{display:none}}
 .g-thumb{width:46px;height:60px;cursor:pointer;border:1px solid transparent;transition:border-color 0.2s;flex-shrink:0;overflow:hidden}
 .g-thumb.on{border-color:var(--black)}
 .g-thumb img{width:100%;height:100%;object-fit:cover}
@@ -1154,7 +1164,9 @@ img{image-rendering:auto;content-visibility:auto}
   <div class="product-layout">
     <div class="gallery-col">
       <div class="gallery-main">
+        <button class="g-arrow prev" aria-label="Previous photo" onclick="galleryStep(-1)"><svg viewBox="0 0 14 26"><path d="M13 1L1 13l12 12"/></svg></button>
         <div class="prod-display bg-ecru" id="galleryDisplay"></div>
+        <button class="g-arrow next" aria-label="Next photo" onclick="galleryStep(1)"><svg viewBox="0 0 14 26"><path d="M1 1l12 12L1 25"/></svg></button>
       </div>
       <div class="gallery-thumbs-row" id="galleryThumbs">
         <div class="g-thumb bg-ecru on" onclick="pickThumb(this,'bg-ecru',null)"></div>
@@ -1625,9 +1637,11 @@ function goProd(id){
     }
     thumbsRow.innerHTML=thumbsHtml;
     thumbsRow.style.display='flex';
+    document.querySelector('#page-product .gallery-main').classList.remove('single');
   } else {
     thumbsRow.innerHTML='';
     thumbsRow.style.display='none';
+    document.querySelector('#page-product .gallery-main').classList.add('single');
   }
   // Build colour swatches from all variants of same product name
   document.getElementById('colourLbl').textContent = p.colour;
@@ -1908,6 +1922,37 @@ function updateStockInfo(sz){
   else if(q===1){info.textContent='Only 1 left';btn.disabled=false;btn.textContent='Add to Bag';}
   else{info.textContent='';btn.disabled=false;btn.textContent='Add to Bag';}
 }
+
+/* ── Product gallery: arrows, swipe, drag, keyboard ── */
+function galleryStep(dir){
+  const thumbs=[...document.querySelectorAll('#galleryThumbs .g-thumb')].filter(t=>t.style.display!=='none');
+  if(thumbs.length<2) return;
+  let i=thumbs.findIndex(t=>t.classList.contains('on')); if(i<0) i=0;
+  const n=(i+dir+thumbs.length)%thumbs.length;
+  thumbs[n].click();
+}
+(function(){
+  const gd=document.getElementById('galleryDisplay'); if(!gd) return;
+  let sx=null,sy=null,done=false;
+  const start=(x,y)=>{sx=x;sy=y;done=false;};
+  const finish=(x,y)=>{
+    if(sx===null||done) return;
+    const dx=x-sx, dy=y-sy; done=true; sx=null;
+    if(Math.abs(dx)>40 && Math.abs(dx)>Math.abs(dy)*1.2) galleryStep(dx<0?1:-1);
+  };
+  gd.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;start(e.clientX,e.clientY);});
+  gd.addEventListener('pointerup',e=>finish(e.clientX,e.clientY));
+  gd.addEventListener('touchstart',e=>start(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
+  gd.addEventListener('touchend',e=>{const t=e.changedTouches[0];finish(t.clientX,t.clientY);},{passive:true});
+  gd.addEventListener('dragstart',e=>e.preventDefault());
+  document.addEventListener('keydown',e=>{
+    const pg=document.getElementById('page-product');
+    if(!pg||!pg.classList.contains('active')) return;
+    if(/INPUT|TEXTAREA|SELECT/.test((document.activeElement||{}).tagName||'')) return;
+    if(e.key==='ArrowRight') galleryStep(1);
+    if(e.key==='ArrowLeft') galleryStep(-1);
+  });
+})();
 function pickThumbVideo(el,src){document.querySelectorAll('.g-thumb').forEach(t=>t.classList.remove('on'));el.classList.add('on');const gd=document.getElementById('galleryDisplay');gd.innerHTML=`<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;display:block"><source src="${src}" type="video/mp4"></video>`;gd.className='prod-display';}
 function pickThumb(el,bg,src){document.querySelectorAll('.g-thumb').forEach(t=>t.classList.remove('on'));el.classList.add('on');const gd=document.getElementById('galleryDisplay');if(src){gd.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:contain">`;gd.className='prod-display';}else{gd.className='prod-display '+bg;gd.innerHTML='';}}
 function toggleAcc(btn){const b=btn.nextElementSibling,i=btn.querySelector('.acc-icon');b.classList.toggle('open');i.textContent=b.classList.contains('open')?'−':'+';}
