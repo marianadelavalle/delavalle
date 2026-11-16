@@ -69,7 +69,7 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
    DROPDOWN
 ───────────────────────────────────── */
 .dropdown{display:none;position:absolute;top:56px;left:0;right:0;background:rgba(255,255,255,0.5);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,0.3);border-bottom:1px solid rgba(255,255,255,0.3);z-index:250}
-.dropdown.transparent{background:rgba(255,255,255,0.08);border-color:transparent;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.dropdown.transparent{background:rgba(255,255,255,0.6);border-color:transparent;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 .dropdown.open{display:block;animation:fd 0.16s ease}
 @keyframes fd{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 .drop-inner{display:grid;grid-template-columns:280px 1fr;min-height:260px;max-height:340px}
@@ -80,10 +80,11 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 .drop-cat-link:hover{color:var(--black)}
 .drop-image{position:relative;overflow:hidden;background:transparent}
 .dropdown.transparent .drop-cat-title,
-.dropdown.transparent .drop-cat-link{color:var(--white)}
-.dropdown.transparent .drop-cat-link:hover{color:var(--white);opacity:0.6}
-.dropdown.transparent .drop-col h4{color:var(--white)}
-.dropdown.transparent .drop-col a{color:rgba(255,255,255,0.7)}
+.dropdown.transparent .drop-cat-link,
+.dropdown.transparent .drop-col h4{color:var(--black)}
+.dropdown.transparent .drop-cat-link:hover{color:var(--black);opacity:0.5}
+.dropdown.transparent .drop-col a{color:var(--black);opacity:0.75}
+.dropdown.transparent .drop-col a:hover{opacity:1}
 .drop-cols{display:flex;gap:52px}
 .drop-col h4{font-size:12px;font-weight:400;letter-spacing:0.06em;margin-bottom:13px;cursor:pointer}
 .drop-col h4:hover{text-decoration:underline;text-underline-offset:3px}
@@ -1765,18 +1766,35 @@ function filterCat(cat){
 }
 
 /* ── WOMEN GRID ── */
+function photoGood(img,list){
+  const bad=(img.dataset.bad||'').split(',');
+  return list.filter(x=>!bad.includes(x));
+}
 function scrubPhoto(img,e){
   const list=img.dataset.photos.split('|');
   if(list.length<2)return;
   const r=img.getBoundingClientRect();
   const x=Math.min(Math.max((e.clientX-r.left)/r.width,0),0.999);
-  const src=list[Math.floor(x*list.length)];
+  const good=photoGood(img,list);
+  if(!good.length)return;
+  let src=list[Math.floor(x*list.length)];
+  if(!good.includes(src)) src=good[Math.min(good.length-1,Math.floor(x*good.length))];
   if(img.dataset.cur!==src){img.dataset.cur=src;img.src=src;}
+}
+function photoFail(img){
+  const list=img.dataset.photos.split('|');
+  const failed=img.dataset.cur||img.getAttribute('src').split('/').pop();
+  img.dataset.bad=((img.dataset.bad?img.dataset.bad+',':'')+failed);
+  const good=photoGood(img,list);
+  if(!good.length||good[0]===failed){img.onerror=null;return;}
+  img.dataset.cur=good[0]; img.src=good[0];
 }
 function resetPhoto(img){
   const list=img.dataset.photos.split('|');
-  img.dataset.cur=list[0];
-  if(img.getAttribute('src')!==list[0])img.src=list[0];
+  const good=photoGood(img,list);
+  const first=good[0]||list[0];
+  img.dataset.cur=first;
+  if(img.getAttribute('src')!==first)img.src=first;
 }
 function makeCard(p){
   const so=Object.values(p.stock).every(v=>v===0);
@@ -1788,7 +1806,7 @@ function makeCard(p){
   const imgHtml = p.video
     ? `<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block"${p.photo?' poster="'+p.photo+'"':''}><source src="${p.video}" type="video/mp4"></video>`
     : p.photo
-      ? `<img src="${p.photo}" alt="${p.name} in ${p.colour}" decoding="async" data-photos="${(p.photos&&p.photos.length?p.photos:[p.photo]).join('|')}" onmousemove="scrubPhoto(this,event)" ontouchmove="scrubPhoto(this,event.touches[0])" onmouseleave="resetPhoto(this)">`
+      ? `<img src="${p.photo}" alt="${p.name} in ${p.colour}" decoding="async" data-photos="${(p.photos&&p.photos.length?p.photos:[p.photo]).join('|')}" onmousemove="scrubPhoto(this,event)" ontouchmove="scrubPhoto(this,event.touches[0])" onmouseleave="resetPhoto(this)" onerror="photoFail(this)">`
       : `<div class="prod-img-swatch ${p.bg}"></div>`;
   return`<div class="prod-card" onclick="if(!${noPhoto})goProd(${p.id})">
     <div class="prod-img-wrap${noPhoto?' no-photo':''}">
@@ -2736,6 +2754,7 @@ function closeMtmThankYou(){
   }
 })();
 
+if('scrollRestoration' in history) history.scrollRestoration='manual';
 const _showPage = showPage;
 showPage = function(id){
   _showPage(id);
@@ -2750,8 +2769,15 @@ showPage = function(id){
 };
 
 const _goProd = goProd;
+function resetProdScroll(){
+  window.scrollTo(0,0);
+  document.querySelectorAll('#page-product .gallery-col, #page-product .info-col').forEach(el=>{el.scrollTop=0;});
+}
 goProd = function(id){
   _goProd(id);
+  resetProdScroll();
+  setTimeout(resetProdScroll,120);
+  setTimeout(resetProdScroll,400);
   const p = PRODUCTS.find(x=>x.id===id);
   if(p) history.pushState({page:'product',id:id}, '', '/product/'+p.shopifyHandle);
 };
