@@ -150,6 +150,9 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 .breadcrumb span:hover{opacity:0.5}
 .breadcrumb .cur{color:var(--black)}
 .breadcrumb .sep{color:var(--black);font-weight:300}
+.swim-tabs{display:flex;gap:28px;padding:0 32px 14px;font-family:var(--sans);font-size:11px;letter-spacing:0.14em;text-transform:uppercase}
+.swim-tab{background:none;border:0;padding:6px 0;cursor:pointer;color:var(--grey);border-bottom:1px solid transparent;font:inherit;letter-spacing:inherit}
+.swim-tab.on{color:var(--black);border-bottom-color:var(--black)}
 .topbar-right{display:flex;align-items:center;gap:20px}
 .sort-sel{font-family:var(--sans);font-size:11px;font-weight:300;letter-spacing:0.04em;outline:none;cursor:pointer;color:var(--black);-webkit-appearance:none;background:none;border:none}
 .filter-toggle-btn{font-size:11px;font-weight:300;letter-spacing:0.04em;display:flex;align-items:center;gap:5px;color:var(--black)}
@@ -649,6 +652,7 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:48px 5
 
   /* Women page — mobile only */
   .women-topbar { display: none !important; }
+  .swim-tabs { margin-top: 44px !important; padding: 14px 20px !important; gap: 22px !important; background: var(--white); }
   .women-layout { display: none !important; }
   .women-grid-full {
     grid-template-columns: repeat(2, 1fr) !important;
@@ -918,7 +922,6 @@ img{image-rendering:auto;content-visibility:auto}
       <button class="nav-btn" onclick="goHomePage()" data-i18n="nav_home">Home</button>
       
       <button class="nav-btn" onclick="goGalerie()" data-i18n="nav_gallery">Gallery</button>
-      <button class="nav-btn" onclick="goFirstEdition()">First Edition</button>
       <button class="nav-btn" onclick="goMadeToMeasure()">Made to Measure</button>
     </nav>
     <div class="logo-wrap" onclick="goLanding()">
@@ -1043,7 +1046,7 @@ img{image-rendering:auto;content-visibility:auto}
   <div class="women-topbar">
     <div class="breadcrumb">
       <span onclick="goLanding()" data-i18n="nav_women">Women</span><span class="sep">·</span>
-      <span style="cursor:default">Ready to Wear</span><span class="sep">·</span>
+      <span id="womenMidLabel" style="cursor:default">Ready to Wear</span><span class="sep">·</span>
       <span class="cur" id="womenCatLabel">All</span>
     </div>
     <div class="topbar-right">
@@ -1055,6 +1058,12 @@ img{image-rendering:auto;content-visibility:auto}
       </select>
       <button class="filter-toggle-btn" onclick="toggleFilters()"data-i18n-filter="filter_by">Filter By <span id="filterIcon">+</span></button>
     </div>
+  </div>
+
+  <div class="swim-tabs" id="swimTabs" style="display:none">
+    <button class="swim-tab on" onclick="pickSwimSub(this,'All')">All</button>
+    <button class="swim-tab" onclick="pickSwimSub(this,'The Bikini')">The Bikini</button>
+    <button class="swim-tab" onclick="pickSwimSub(this,'The Swimsuit')">The Swimsuit</button>
   </div>
 
   <div class="filter-drawer" id="filterDrawer">
@@ -1413,32 +1422,34 @@ function fmtPrice(penPrice){
    - product.price
    Fetch via: /products/{handle}.json
 ══════════════════════════════════════ */
-const PRODUCTS = [{id:9, name:'The Carrier',      shopifyHandle:'the-carrier',      cat:'Wood',        colour:'Gingham',hex:'#7a3b4a', bg:'bg-wood',    section:'home',  price:320,  sizes:['One size'],            stock:{'One size':4},           badge:'',          photo:null, video:'wood-carrier.mp4', desc:'Firewood carrier in heavy-duty canvas with full-grain leather handles and brass rivets.'},
+const PRODUCTS = [{id:9, name:'The Carrier',      shopifyHandle:'the-carrier',      cat:'Wood',        colour:'Gingham',hex:'#7a3b4a', bg:'bg-wood',    section:'home',  price:450,  sizes:['One size'],            stock:{'One size':4},           badge:'',          photo:null, video:'wood-carrier.mp4', desc:'Firewood carrier in heavy-duty canvas with full-grain leather handles and brass rivets.'},
   {id:10, name:'The Blanket', shopifyHandle:'the-blanket', cat:'Alpaca', colour:'Ivory', hex:'#e0d8cc', bg:'bg-alpaca-p', section:'home', price:580, sizes:['90×200cm'], stock:{'90×200cm':6}, badge:'',          photo:null, desc:'100% Baby Alpaca. Hand-woven in Peru. Extraordinarily soft.'},
-  {id:13, name:'The Short', shopifyHandle:'the-short-gingham', cat:'Pants & Shorts', colour:'Gingham', hex:'#7a3b4a', bg:'bg-ecru', section:'women', price:160, sizes:['XS','S','M','L'], stock:{XS:3,S:5,M:4,L:2}, badge:'', photo:'gingham2.jpg', photos:['gingham2.jpg','gingham3.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
-  {id:20, name:'The Short', shopifyHandle:'the-short-chocolate', cat:'Pants & Shorts', colour:'Chocolate', hex:'#3b2416', bg:'bg-wood', section:'women', price:160, sizes:['XS','S','M','L'], stock:{XS:3,S:5,M:4,L:2}, badge:'', photo:'short-chocolate-1.jpg', photos:['short-chocolate-1.jpg','short-chocolate-2.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
-  {id:21, name:'The Short', shopifyHandle:'the-short-swissdot', cat:'Pants & Shorts', colour:'White Polka Swiss Dot', hex:'#f5f5f5', bg:'bg-ivory', section:'women', price:160, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'', photo:'short-swissdot-1.jpg', photos:['short-swissdot-1.jpg','short-swissdot-2.jpg','short-swissdot-3.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
-  {id:22, name:'The Short', shopifyHandle:'the-short-linen', cat:'Pants & Shorts', colour:'Ivory Linen', hex:'#ede8df', bg:'bg-ivory', section:'women', price:160, sizes:['XS','S','M','L'], stock:{XS:3,S:5,M:4,L:2}, badge:'', photo:'short-linen-1.jpg', photos:['short-linen-1.jpg','short-linen-2.jpg','short-linen-3.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
+  {id:13, name:'The Short', shopifyHandle:'the-short-gingham', cat:'Pants & Shorts', colour:'Gingham', hex:'#7a3b4a', bg:'bg-ecru', section:'women', price:180, sizes:['XS','S','M','L'], stock:{XS:3,S:5,M:4,L:2}, badge:'', photo:'gingham2.jpg', photos:['gingham2.jpg','gingham3.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
+  {id:20, name:'The Short', shopifyHandle:'the-short-chocolate', cat:'Pants & Shorts', colour:'Chocolate', hex:'#3b2416', bg:'bg-wood', section:'women', price:180, sizes:['XS','S','M','L'], stock:{XS:3,S:5,M:4,L:2}, badge:'', photo:'short-chocolate-1.jpg', photos:['short-chocolate-1.jpg','short-chocolate-2.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
+  {id:21, name:'The Short', shopifyHandle:'the-short-swissdot', cat:'Pants & Shorts', colour:'White Polka Swiss Dot', hex:'#f5f5f5', bg:'bg-ivory', section:'women', price:180, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'', photo:'short-swissdot-1.jpg', photos:['short-swissdot-1.jpg','short-swissdot-2.jpg','short-swissdot-3.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
+  {id:22, name:'The Short', shopifyHandle:'the-short-linen', cat:'Pants & Shorts', colour:'Ivory Linen', hex:'#ede8df', bg:'bg-ivory', section:'women', price:180, sizes:['XS','S','M','L'], stock:{XS:3,S:5,M:4,L:2}, badge:'', photo:'short-linen-1.jpg', photos:['short-linen-1.jpg','short-linen-2.jpg','short-linen-3.jpg'], desc:'A simple short with an elasticated waist and easy, relaxed leg. Sits at the hip.'},
   {id:14, name:'Inés Shirt', cat:'Shirts & Tops', colour:'Ivory', hex:'#f5f0e8', bg:'bg-ivory', section:'women', price:290, sizes:['S','M','L'], stock:{S:5,M:5,L:5}, badge:'', photo:'ines1.jpg', photos:['ines1.jpg','ines2.jpg','ines3.jpg','ines4.jpg','ines5.jpg'], desc:'Relaxed-fit shirt cut in a breathable cotton-linen blend, finished with a soft, structured collar.'},
   {id:15, name:'Inés Shirt', cat:'Shirts & Tops', colour:'Beige', hex:'#d4c4a8', bg:'bg-sand', section:'women', price:290, sizes:['S','M','L'], stock:{S:5,M:5,L:5}, badge:'', photo:'ines-beige1.jpg', photos:['ines-beige1.jpg','ines-beige2.jpg','ines-beige3.jpg','ines-beige4.jpg','ines-beige5.jpg'], desc:'Relaxed-fit shirt cut in a breathable cotton-linen blend, finished with a soft, structured collar.'},
   {id:16, name:'Inés Shirt', cat:'Shirts & Tops', colour:'Light Blue', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:290, sizes:['S','M','L'], stock:{S:5,M:5,L:5}, badge:'', photo:'ines-blue1.jpg', photos:['ines-blue1.jpg','ines-blue2.jpg','ines-blue3.jpg','ines-blue4.jpg','ines-blue5.jpg'], desc:'Relaxed-fit shirt cut in a breathable cotton-linen blend, finished with a soft, structured collar.'},
   {id:17, name:'María Trousers', cat:'Pants & Shorts', colour:'Ivory', hex:'#f5f0e8', bg:'bg-ivory', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines1.jpg', photos:['ines1.jpg','ines2.jpg','ines3.jpg','ines4.jpg','ines5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
   {id:18, name:'María Trousers', cat:'Pants & Shorts', colour:'Beige', hex:'#d4c4a8', bg:'bg-sand', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines-beige1.jpg', photos:['ines-beige1.jpg','ines-beige2.jpg','ines-beige3.jpg','ines-beige4.jpg','ines-beige5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
   {id:19, name:'María Trousers', cat:'Pants & Shorts', colour:'Light Blue', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines-blue1.jpg', photos:['ines-blue1.jpg','ines-blue2.jpg','ines-blue3.jpg','ines-blue4.jpg','ines-blue5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
-  {id:60, name:'The Swimsuit', shopifyHandle:'swimsuit-black-polka-dot', cat:'Swim', colour:'Black Polka Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-black-polka-dot-1.jpg', photos:['swim-black-polka-dot-1.jpg','swim-black-polka-dot-2.jpg','swim-black-polka-dot-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:57, name:'The Swimsuit', shopifyHandle:'swimsuit-awning-stripe', cat:'Swim', colour:'Candy Cane', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-red-marine-1.jpg', photos:['swim-red-marine-1.jpg','swim-red-marine-2.jpg','swim-red-marine-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:52, name:'The Swimsuit', shopifyHandle:'swimsuit-red', cat:'Swim', colour:'Red', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-red-1.jpg', photos:['swim-red-1.jpg','swim-red-2.jpg','swim-red-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:53, name:'The Swimsuit', shopifyHandle:'swimsuit-ivory', cat:'Swim', colour:'Ivory', hex:'#f0ece0', bg:'bg-ivory', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-ivory-1.jpg', photos:['swim-ivory-1.jpg','swim-ivory-2.jpg','swim-ivory-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:56, name:'The Swimsuit', shopifyHandle:'swimsuit-navy-blue', cat:'Swim', colour:'Navy Blue', hex:'#1a2740', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-navy-1.jpg', photos:['swim-navy-1.jpg','swim-navy-2.jpg','swim-navy-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:55, name:'The Swimsuit', shopifyHandle:'swimsuit-black-polka', cat:'Swim', colour:'White Mini Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-white-black-polka-1.jpg', photos:['swim-white-black-polka-1.jpg','swim-white-black-polka-2.jpg','swim-white-black-polka-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:51, name:'The Swimsuit', shopifyHandle:'swimsuit-black', cat:'Swim', colour:'Black', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-black-1.jpg', photos:['swim-black-1.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:54, name:'The Swimsuit', shopifyHandle:'swimsuit-red-polka', cat:'Swim', colour:'Red Polka Dot', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-red-polka-1.jpg', photos:['swim-red-polka-1.jpg','swim-red-polka-2.jpg','swim-red-polka-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:30, name:'The Swimsuit', shopifyHandle:'swimsuit-red-pin-dot', cat:'Swim', colour:'Red Pin Dot', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'Sold Out', photo:'swim-red-dot.jpg', photos:['swim-red-dot.jpg','swim-red-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:29, name:'The Swimsuit', shopifyHandle:'swimsuit-black-pin-dot', cat:'Swim', colour:'Black Pin Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'Sold Out', photo:'swim-black-dot.jpg', photos:['swim-black-dot.jpg','swim-black-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:25, name:'The Swimsuit', shopifyHandle:'swimsuit-red-stripe', cat:'Swim', colour:'Red Stripe', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'Sold Out', photo:'swim-red-stripe.jpg', photos:['swim-red-stripe.jpg','swim-red-stripe-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:26, name:'The Swimsuit', shopifyHandle:'swimsuit-navy-stripe', cat:'Swim', colour:'Navy Stripe', hex:'#1a2740', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-navy-stripe.jpg', photos:['swim-navy-stripe.jpg','swim-navy-stripe-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:27, name:'The Swimsuit', shopifyHandle:'swimsuit-white-polka', cat:'Swim', colour:'White Polka Dot', hex:'#f5f5f5', bg:'bg-ivory', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:0,S:0,M:0,L:0}, badge:'Sold Out', photo:'swim-white-polka.jpg', photos:['swim-white-polka.jpg','swim-white-polka-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:28, name:'The Swimsuit', shopifyHandle:'swimsuit-black-mini-dot', cat:'Swim', colour:'Black Mini Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:1,S:0,M:0,L:0}, badge:'', photo:'swim-black-mini-dot.jpg', photos:['swim-black-mini-dot.jpg','swim-black-mini-dot-2.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:71, name:'The Bikini', shopifyHandle:'bikini-ivory', cat:'Swim', sub:'The Bikini', colour:'Ivory', hex:'#f0ece0', bg:'bg-ivory', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Bikini in Ivory.'},
+  {id:72, name:'The Bikini', shopifyHandle:'bikini-red', cat:'Swim', sub:'The Bikini', colour:'Red', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'bikini-red-1.jpg', photos:['bikini-red-1.jpg'], desc:'Bikini in Red.'},
+  {id:73, name:'The Bikini', shopifyHandle:'bikini-candy-cane', cat:'Swim', sub:'The Bikini', colour:'Candy Cane', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'bikini-candy-cane-1.jpg', photos:['bikini-candy-cane-1.jpg'], desc:'Bikini in Candy Cane.'},
+  {id:74, name:'The Bikini', shopifyHandle:'bikini-red-polka-dot', cat:'Swim', sub:'The Bikini', colour:'Red Polka Dot', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'bikini-red-polka-dot-1.jpg', photos:['bikini-red-polka-dot-1.jpg','bikini-red-polka-dot-2.jpg','bikini-red-polka-dot-3.jpg'], desc:'Bikini in Red Polka Dot.'},
+  {id:75, name:'The Bikini', shopifyHandle:'bikini-navy-blue', cat:'Swim', sub:'The Bikini', colour:'Navy Blue', hex:'#1a2740', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'bikini-navy-blue-1.jpg', photos:['bikini-navy-blue-1.jpg','bikini-navy-blue-2.jpg','bikini-navy-blue-3.jpg','bikini-navy-blue-4.jpg'], desc:'Bikini in Navy Blue.'},
+  {id:76, name:'The Bikini', shopifyHandle:'bikini-blue-pin-dot', cat:'Swim', sub:'The Bikini', colour:'Blue Pin Dot', hex:'#1a2740', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'bikini-blue-pin-dot-1.jpg', photos:['bikini-blue-pin-dot-1.jpg','bikini-blue-pin-dot-2.jpg','bikini-blue-pin-dot-3.jpg','bikini-blue-pin-dot-4.jpg'], desc:'Bikini in Blue Pin Dot.'},
+  {id:77, name:'The Bikini', shopifyHandle:'bikini-black', cat:'Swim', sub:'The Bikini', colour:'Black', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'bikini-black-1.jpg', photos:['bikini-black-1.jpg','bikini-black-2.jpg','bikini-black-3.jpg','bikini-black-4.jpg'], desc:'Bikini in Black.'},
+  {id:78, name:'The Bikini', shopifyHandle:'bikini-black-polka-dot', cat:'Swim', sub:'The Bikini', colour:'Black Polka Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'bikini-black-polka-dot-1.jpg', photos:['bikini-black-polka-dot-1.jpg'], desc:'Bikini in Black Polka Dot.'},
+  {id:79, name:'The Swimsuit', shopifyHandle:'swimsuit-blue-pin-dot', cat:'Swim', sub:'The Swimsuit', colour:'Blue Pin Dot', hex:'#1a2740', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-blue-pin-dot.jpg', photos:['swim-blue-pin-dot.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:60, name:'The Swimsuit', shopifyHandle:'swimsuit-black-polka-dot', cat:'Swim', sub:'The Swimsuit', colour:'Black Polka Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-black-polka-dot-1.jpg', photos:['swim-black-polka-dot-1.jpg','swim-black-polka-dot-2.jpg','swim-black-polka-dot-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:57, name:'The Swimsuit', shopifyHandle:'swimsuit-awning-stripe', cat:'Swim', sub:'The Swimsuit', colour:'Candy Cane', hex:'#b83232', bg:'bg-ecru', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-red-marine-1.jpg', photos:['swim-red-marine-1.jpg','swim-red-marine-2.jpg','swim-red-marine-3.jpg','swim-red-marine-4.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:52, name:'The Swimsuit', shopifyHandle:'swimsuit-red', cat:'Swim', sub:'The Swimsuit', colour:'Red', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-red-1.jpg', photos:['swim-red-1.jpg','swim-red-2.jpg','swim-red-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:53, name:'The Swimsuit', shopifyHandle:'swimsuit-ivory', cat:'Swim', sub:'The Swimsuit', colour:'Ivory', hex:'#f0ece0', bg:'bg-ivory', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-ivory-1.jpg', photos:['swim-ivory-1.jpg','swim-ivory-2.jpg','swim-ivory-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:56, name:'The Swimsuit', shopifyHandle:'swimsuit-navy-blue', cat:'Swim', sub:'The Swimsuit', colour:'Navy Blue', hex:'#1a2740', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-navy-1.jpg', photos:['swim-navy-1.jpg','swim-navy-2.jpg','swim-navy-3.jpg','swim-navy-4.jpg','swim-navy-5.jpg','swim-navy-6.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:51, name:'The Swimsuit', shopifyHandle:'swimsuit-black', cat:'Swim', sub:'The Swimsuit', colour:'Black', hex:'#181610', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-black-1.jpg', photos:['swim-black-1.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:54, name:'The Swimsuit', shopifyHandle:'swimsuit-red-polka', cat:'Swim', sub:'The Swimsuit', colour:'Red Polka Dot', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-red-polka-1.jpg', photos:['swim-red-polka-1.jpg','swim-red-polka-2.jpg','swim-red-polka-3.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:58, name:'The Shirt', shopifyHandle:'sleep-shirt-sky-dobby-stripe', cat:'Sleep', colour:'Sky Dobby Stripe', hex:'#a8c4d8', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'sleep-shirt-sky-dobby-stripe-1.jpg', photos:['sleep-shirt-sky-dobby-stripe-1.jpg','sleep-shirt-sky-dobby-stripe-2.jpg','sleep-shirt-sky-dobby-stripe-3.jpg','sleep-shirt-sky-dobby-stripe-4.jpg'], desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
   {id:59, name:'The Pant', shopifyHandle:'sleep-pant-sky-dobby-stripe', cat:'Sleep', colour:'Sky Dobby Stripe', hex:'#a8c4d8', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'sleep-pant-sky-dobby-stripe-1.jpg', photos:['sleep-pant-sky-dobby-stripe-1.jpg','sleep-pant-sky-dobby-stripe-2.jpg','sleep-pant-sky-dobby-stripe-3.jpg'], desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
   {id:32, name:'The Shirt', shopifyHandle:'sleep-shirt-marina-stripe', cat:'Sleep', colour:'Marina Stripe', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
@@ -1494,7 +1505,7 @@ const PHOTOS = [
 /* ── STATE ── */
 let cart=[], currentProd=null, lbPhotos=[], lbIdx=0;
 let wVisible=PRODUCTS.filter(p=>p.section==='women'&&(p.photo||p.video));
-let wf={cat:'All',col:[],sz:[],avail:'All'};
+let wf={cat:'All',col:[],sz:[],avail:'All',sub:'All'};
 
 /* ── NAV ── */
 function showPage(id){
@@ -1651,11 +1662,22 @@ const variants = PRODUCTS.filter(x => x.name === p.name && x.section === p.secti
     cr.innerHTML = `<div class="swatch on" style="${single}"></div><span class="colour-lbl" id="colourLbl">${p.colour}</span>`;
   }
   const firstAvail=p.sizes.find(s=>(p.stock[s]||0)>0);
+  if(p.name==='The Bikini'){
+    const part=(label,key)=>`<p class="f-label" style="margin:14px 0 8px">${label}</p><div style="display:flex;gap:8px;flex-wrap:wrap">`+p.sizes.map(s=>{
+      const q=p.stock[s]||0,oos=q===0;
+      return`<button class="sz${s===firstAvail?' on':''}${oos?' oos':''}"${oos?' disabled':''} onclick="pickBikiniSz(this,'${key}')" data-part="${key}">${s}</button>`;
+    }).join('')+'</div>';
+    const sg=document.getElementById('sizeGrid');sg.style.display='block';sg.innerHTML=part('Top','top')+part('Bottom','bottom');
+    document.getElementById('stockInfoLine').textContent='';
+    document.getElementById('addBagBtn').disabled=false;
+  } else {
+  document.getElementById('sizeGrid').style.display='';
   document.getElementById('sizeGrid').innerHTML=p.sizes.map(s=>{
     const q=p.stock[s]||0,oos=q===0;
     return`<button class="sz${s===firstAvail?' on':''}${oos?' oos':''}"${oos?' disabled':''} onclick="pickSz(this,'${s}')">${s}</button>`;
   }).join('');
   updateStockInfo(firstAvail||p.sizes[0]);
+  }
   showPage('product');
   window.scrollTo(0,0);
   setTimeout(()=>renderSimilar(p), 50);
@@ -1704,12 +1726,25 @@ const CAT_IMAGES={
   'Swim':'cat-swim.jpg',
   'Sleep':'cat-sleep.jpg',
 };
+function pickSwimSub(el, sub){
+  wf.sub = sub;
+  document.querySelectorAll('.swim-tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  wVisible = applyLogic();
+  renderWomenGrid();
+  document.getElementById('womenCatLabel').textContent = sub;
+}
 function filterCat(cat){
   hideDrop();
   wf.cat = (cat === 'Ready to Wear') ? 'All' : cat;
+  wf.sub = 'All';
   wVisible = applyLogic();
   renderWomenGrid();
-  document.getElementById('womenCatLabel').textContent = (cat === 'Ready to Wear') ? 'All' : cat;
+  const isSwim = cat === 'Swim';
+  document.getElementById('swimTabs').style.display = isSwim ? 'flex' : 'none';
+  document.querySelectorAll('.swim-tab').forEach((t,i)=>t.classList.toggle('on', i===0));
+  document.getElementById('womenMidLabel').textContent = isSwim ? 'Swim' : 'Ready to Wear';
+  document.getElementById('womenCatLabel').textContent = isSwim ? 'All' : (cat === 'Ready to Wear' ? 'All' : cat);
   const catAsset=CAT_IMAGES[cat]||'women-cat.jpg';
   const catEl=document.getElementById('womenCatImg');
   if(catAsset && typeof catAsset === 'object' && catAsset.video){
@@ -1760,7 +1795,10 @@ function renderWomenGrid(){
     return;
   }
   const isSoldOut=p=>Object.values(p.stock).every(v=>v===0);
+  const SWIM_ORDER=['Ivory', 'Red', 'Candy Cane', 'Red Polka Dot', 'Navy Blue', 'Blue Pin Dot', 'Black', 'Black Polka Dot'];
+  const swimRank=p=>{const i=SWIM_ORDER.indexOf(p.colour);return (i<0?100:i)*2+(p.sub==='The Bikini'?0:1);};
   const sorted=[...wVisible].sort((a,b)=>{
+    if(wf.cat==='Swim'){const d=swimRank(a)-swimRank(b); if(d) return d;}
     const soA=isSoldOut(a)?1:0, soB=isSoldOut(b)?1:0;
     if(soA!==soB) return soA-soB;
     return 0;
@@ -1782,7 +1820,7 @@ function quickAdd(id){
   const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
   const sz=p.sizes.find(s=>(p.stock[s]||0)>0);
   if(!sz){toast('This item is sold out');return}
-  pushCart(p,sz);toast('Added — '+p.name);openCart();
+  pushCart(p,p.name==='The Bikini'?`Top ${sz} / Bottom ${sz}`:sz);toast('Added — '+p.name);openCart();
 }
 
 /* ── FILTERS ── */
@@ -1796,15 +1834,16 @@ function applyLogic(){
     if(p.section!=='women')return false;
     if(!p.photo && !p.video)return false;
     const catOk=wf.cat==='All'||p.cat===wf.cat||p.name.includes(wf.cat);
+    const subOk=!wf.sub||wf.sub==='All'||p.sub===wf.sub;
     const colOk=!wf.col.length||wf.col.includes(p.colour);
     const szOk=!wf.sz.length||p.sizes.some(s=>wf.sz.includes(s));
     const so=Object.values(p.stock).every(v=>v===0);
     const availOk=wf.avail==='All'||(wf.avail==='In Stock'&&!so)||(wf.avail==='New In'&&p.badge==='New');
-    return catOk&&colOk&&szOk&&availOk;
+    return catOk&&subOk&&colOk&&szOk&&availOk;
   });
 }
 function applyFilters(){wVisible=applyLogic();renderWomenGrid();toggleFilters();toast('Filters applied')}
-function clearFilters(){wf={cat:'All',col:[],sz:[],avail:'All'};wVisible=PRODUCTS.filter(p=>p.section==='women'&&(p.photo||p.video));document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));document.querySelectorAll('.chips').forEach(g=>{const f=g.querySelector('.chip');if(f)f.classList.add('on')});renderWomenGrid()}
+function clearFilters(){wf={cat:'All',col:[],sz:[],avail:'All',sub:'All'};document.getElementById('swimTabs').style.display='none';wVisible=PRODUCTS.filter(p=>p.section==='women'&&(p.photo||p.video));document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));document.querySelectorAll('.chips').forEach(g=>{const f=g.querySelector('.chip');if(f)f.classList.add('on')});renderWomenGrid()}
 function sortWomen(v){if(v==='price-asc')wVisible.sort((a,b)=>a.price-b.price);if(v==='price-desc')wVisible.sort((a,b)=>b.price-a.price);if(v==='name')wVisible.sort((a,b)=>a.name.localeCompare(b.name));renderWomenGrid()}
 
 /* ── PRODUCT ── */
@@ -1820,6 +1859,10 @@ function pickColour(el, colourName, bg){
     document.getElementById('colourLbl').textContent = colourName;
   }
 }
+function pickBikiniSz(el,part){
+  document.querySelectorAll(`.sz[data-part="${part}"]`).forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+}
 function pickSz(el,sz){document.querySelectorAll('.sz').forEach(s=>s.classList.remove('on'));el.classList.add('on');updateStockInfo(sz)}
 function updateStockInfo(sz){
   if(!currentProd)return;
@@ -1833,6 +1876,12 @@ function pickThumb(el,bg,src){document.querySelectorAll('.g-thumb').forEach(t=>t
 function toggleAcc(btn){const b=btn.nextElementSibling,i=btn.querySelector('.acc-icon');b.classList.toggle('open');i.textContent=b.classList.contains('open')?'−':'+';}
 function addToBag(){
   if(!currentProd)return;
+  if(currentProd.name==='The Bikini'){
+    const top=document.querySelector('.sz.on[data-part="top"]'),bot=document.querySelector('.sz.on[data-part="bottom"]');
+    if(!top||!bot){toast('Please select a size for top and bottom');return}
+    pushCart(currentProd,`Top ${top.textContent} / Bottom ${bot.textContent}`);openCart();toast('Added to bag');
+    return;
+  }
   const sel=document.querySelector('.sz.on');
   if(!sel||sel.disabled){toast('Please select a size');return}
   pushCart(currentProd,sel.textContent);openCart();toast('Added to bag');
@@ -2641,26 +2690,6 @@ function sendWhatsAppCart(){
 
 
 
-/* ── FIRST EDITION ── */
-function goFirstEdition(){
-  showPage('first-edition');
-}
-function submitFirstEdition(){
-  const f = document.getElementById('feForm');
-  const name = f.querySelector('[name="name"]').value.trim();
-  const email = f.querySelector('[name="email"]').value.trim();
-  const phone = f.querySelector('[name="phone"]').value.trim();
-  const modelEl = f.querySelector('[name="original_purchase"]:checked');
-  const sizeEl = f.querySelector('[name="new_size"]:checked');
-  if(!name || !email || !phone || !modelEl || !sizeEl){
-    alert('Please fill in all fields before submitting.');
-    return;
-  }
-  const msg = `Hola, me gustaría solicitar mi pieza de First Edition.\n\nNombre: ${name}\nEmail: ${email}\nTeléfono: ${phone}\nModelo: ${modelEl.value}\nTalla: ${sizeEl.value}\n\nGracias`;
-  window.open('https://wa.me/34650565927?text=' + encodeURIComponent(msg), '_blank');
-  document.getElementById('page-first-edition').style.display = 'none';
-  document.getElementById('feThankYou').style.display = 'flex';
-}
 
 /* ── MADE TO MEASURE ── */
 function goMadeToMeasure(){
@@ -2705,7 +2734,7 @@ showPage = function(id){
   const paths = {
     'home':'/', 'home-section':'/home', 'women':'/women',
     'galerie':'/gallery', 'saved':'/saved', 'checkout':'/checkout',
-    'about':'/about', 'collections':'/collections', 'first-edition':'#first-edition',
+    'about':'/about', 'collections':'/collections',
     'made-to-measure':'#made-to-measure',
   };
   const p = paths[id] || '/';
@@ -2769,7 +2798,6 @@ window.addEventListener('popstate', function(e){
   if(path==='/saved'){goSaved();return;}
   if(path==='/about'){goAbout();return;}
   if(path==='/collections'){goCollections();return;}
-  // First Edition hash route is handled at the end of <body>, after its markup exists
 })();
 
 
@@ -2973,7 +3001,6 @@ function renderSimilar(p){
     </div>
     <button onclick="closeMobileMenu();goHomePage()">Home</button>
     <button onclick="closeMobileMenu();goGalerie()">Gallery</button>
-    <button onclick="closeMobileMenu();goFirstEdition()">First Edition</button>
     <button onclick="closeMobileMenu();goMadeToMeasure()">Made to Measure</button>
   </nav>
   <div class="mobile-nav-bottom">
@@ -2995,105 +3022,6 @@ function renderSimilar(p){
   </div>
 </div>
 
-<!-- ══════════ FIRST EDITION ══════════ -->
-<div class="page" id="page-first-edition">
-  <div style="width:100%;height:70vh;overflow:hidden;position:relative;background:var(--bg)">
-    <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block">
-      <source src="first-edition.mp4" type="video/mp4">
-    </video>
-    <div style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;animation:feScroll 1.8s ease-in-out infinite">
-      <span style="font-family:var(--sans);font-size:9px;font-weight:300;letter-spacing:0.2em;text-transform:uppercase;color:var(--white);opacity:0.8">Scroll</span>
-      <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="white" stroke-width="1.2" stroke-opacity="0.8"/></svg>
-    </div>
-  </div>
-  <style>@keyframes feScroll{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(5px)}}</style>
-  <div style="max-width:560px;margin:0 auto;padding:96px 24px 120px;text-align:center">
-    <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:var(--grey);margin-bottom:4px">Only available for our first customers</p>
-    <p style="font-family:var(--serif);font-size:10px;font-weight:300;letter-spacing:0.08em;color:var(--grey);margin-bottom:20px;opacity:0.7">A gesture of gratitude for those who chose The Swimsuit before December 1st</p>
-    <h1 style="font-family:var(--serif);font-size:clamp(32px,5vw,48px);font-weight:200;letter-spacing:0.22em;color:var(--black);margin-bottom:40px;text-transform:none">First Edition</h1>
-    <p style="font-family:var(--serif);font-size:13px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:28px">The Swimsuit</p>
-    <p style="font-family:var(--sans);font-size:14px;font-weight:200;line-height:2;color:var(--black);letter-spacing:0.03em;margin-bottom:64px">To those who were with us from the beginning: a new swimsuit is yours for S/ 80, as a token of gratitude for your trust.<br><br>Leave your details below and we will write to you personally.</p>
-
-    <!-- Form -->
-    <div id="feFormWrap">
-      <form id="feForm">
-        <div style="border:1px solid var(--border);padding:40px 36px 32px;text-align:left">
-
-          <!-- Row 1: Full name -->
-          <div style="margin-bottom:0;padding-bottom:28px;border-bottom:1px solid var(--border)">
-            <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:10px">Full name</p>
-            <input name="name" type="text" required placeholder="Your full name" style="width:100%;border:none;background:transparent;font-family:var(--serif);font-size:18px;font-weight:300;color:var(--black);padding:6px 0 0;outline:none;letter-spacing:0.04em">
-          </div>
-
-          <!-- Row 2: Email -->
-          <div style="padding:28px 0;border-bottom:1px solid var(--border)">
-            <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:10px">Email</p>
-            <input name="email" type="email" required placeholder="your@email.com" style="width:100%;border:none;background:transparent;font-family:var(--serif);font-size:18px;font-weight:300;color:var(--black);padding:6px 0 0;outline:none;letter-spacing:0.04em">
-          </div>
-
-          <!-- Row 3: Phone -->
-          <div style="padding:28px 0;border-bottom:1px solid var(--border)">
-            <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:10px">Phone</p>
-            <input name="phone" type="tel" required placeholder="+51" style="width:100%;border:none;background:transparent;font-family:var(--serif);font-size:18px;font-weight:300;color:var(--black);padding:6px 0 0;outline:none;letter-spacing:0.04em">
-          </div>
-
-          <!-- Row 4: Model -->
-          <div style="padding:28px 0;border-bottom:1px solid var(--border)">
-            <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:16px">Model of your new swimsuit</p>
-            <div style="display:flex;flex-direction:column;gap:10px">
-              <label style="cursor:pointer;display:flex;align-items:center;gap:14px">
-                <input type="radio" name="original_purchase" value="Ivory" required style="position:absolute;opacity:0;width:0;height:0" onchange="document.querySelectorAll('.fe-model-opt').forEach(el=>{el.style.borderColor='var(--border)';el.style.color='var(--grey)'});this.parentElement.querySelector('span').style.borderColor='var(--black)';this.parentElement.querySelector('span').style.color='var(--black)'">
-                <span class="fe-model-opt" style="font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.08em;color:var(--grey);border-bottom:1px solid var(--border);padding-bottom:2px;transition:all 0.15s">Ivory</span>
-              </label>
-              <label style="cursor:pointer;display:flex;align-items:center;gap:14px">
-                <input type="radio" name="original_purchase" value="Red" style="position:absolute;opacity:0;width:0;height:0" onchange="document.querySelectorAll('.fe-model-opt').forEach(el=>{el.style.borderColor='var(--border)';el.style.color='var(--grey)'});this.parentElement.querySelector('span').style.borderColor='var(--black)';this.parentElement.querySelector('span').style.color='var(--black)'">
-                <span class="fe-model-opt" style="font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.08em;color:var(--grey);border-bottom:1px solid var(--border);padding-bottom:2px;transition:all 0.15s">Red</span>
-              </label>
-              <label style="cursor:pointer;display:flex;align-items:center;gap:14px">
-                <input type="radio" name="original_purchase" value="Navy Blue" style="position:absolute;opacity:0;width:0;height:0" onchange="document.querySelectorAll('.fe-model-opt').forEach(el=>{el.style.borderColor='var(--border)';el.style.color='var(--grey)'});this.parentElement.querySelector('span').style.borderColor='var(--black)';this.parentElement.querySelector('span').style.color='var(--black)'">
-                <span class="fe-model-opt" style="font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.08em;color:var(--grey);border-bottom:1px solid var(--border);padding-bottom:2px;transition:all 0.15s">Navy Blue</span>
-              </label>
-              <label style="cursor:pointer;display:flex;align-items:center;gap:14px">
-                <input type="radio" name="original_purchase" value="Black Polka Dot" style="position:absolute;opacity:0;width:0;height:0" onchange="document.querySelectorAll('.fe-model-opt').forEach(el=>{el.style.borderColor='var(--border)';el.style.color='var(--grey)'});this.parentElement.querySelector('span').style.borderColor='var(--black)';this.parentElement.querySelector('span').style.color='var(--black)'">
-                <span class="fe-model-opt" style="font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.08em;color:var(--grey);border-bottom:1px solid var(--border);padding-bottom:2px;transition:all 0.15s">Black Polka Dot</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- Row 5: Size -->
-          <div style="padding:28px 0 4px">
-            <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey);margin-bottom:16px">Size for your new swimsuit</p>
-            <div style="display:flex;gap:12px">
-              <label style="flex:1;cursor:pointer">
-                <input type="radio" name="new_size" value="XS" required style="position:absolute;opacity:0;width:0;height:0" onchange="document.querySelectorAll('.fe-size-opt').forEach(el=>el.style.borderColor='var(--border)');this.parentElement.querySelector('span').style.borderColor='var(--black)'">
-                <span class="fe-size-opt" style="display:block;text-align:center;font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.1em;color:var(--black);border:1px solid var(--border);padding:12px 0;transition:border-color 0.15s">XS</span>
-              </label>
-              <label style="flex:1;cursor:pointer">
-                <input type="radio" name="new_size" value="S" style="position:absolute;opacity:0;width:0;height:0" onchange="document.querySelectorAll('.fe-size-opt').forEach(el=>el.style.borderColor='var(--border)');this.parentElement.querySelector('span').style.borderColor='var(--black)'">
-                <span class="fe-size-opt" style="display:block;text-align:center;font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.1em;color:var(--black);border:1px solid var(--border);padding:12px 0;transition:border-color 0.15s">S</span>
-              </label>
-              <label style="flex:1;cursor:pointer">
-                <input type="radio" name="new_size" value="M" style="position:absolute;opacity:0;width:0;height:0" onchange="document.querySelectorAll('.fe-size-opt').forEach(el=>el.style.borderColor='var(--border)');this.parentElement.querySelector('span').style.borderColor='var(--black)'">
-                <span class="fe-size-opt" style="display:block;text-align:center;font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.1em;color:var(--black);border:1px solid var(--border);padding:12px 0;transition:border-color 0.15s">M</span>
-              </label>
-              <label style="flex:1;cursor:pointer">
-                <input type="radio" name="new_size" value="L" style="position:absolute;opacity:0;width:0;height:0" onchange="document.querySelectorAll('.fe-size-opt').forEach(el=>el.style.borderColor='var(--border)');this.parentElement.querySelector('span').style.borderColor='var(--black)'">
-                <span class="fe-size-opt" style="display:block;text-align:center;font-family:var(--serif);font-size:16px;font-weight:300;letter-spacing:0.1em;color:var(--black);border:1px solid var(--border);padding:12px 0;transition:border-color 0.15s">L</span>
-              </label>
-            </div>
-          </div>
-
-        </div>
-
-        <div style="text-align:center;margin-top:32px">
-          <button type="button" onclick="submitFirstEdition()" id="feSubmitBtn" style="font-family:var(--serif);font-size:14px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);background:var(--black);border:none;padding:18px 56px;cursor:pointer;transition:opacity 0.2s;width:100%">Request my piece</button>
-        </div>
-      </form>
-      <p style="font-family:var(--serif);font-size:12px;font-weight:300;color:var(--grey);letter-spacing:0.04em;line-height:1.8;margin-top:28px;text-align:center">One piece per client. Limited to 50 pieces, subject to availability.<br>Valid for purchases made before December 1st, 2026. Subject to verification.</p>
-    </div>
-    <div id="feSuccess"></div>
-  </div>
-</div>
 
 <!-- ══ MADE TO MEASURE ══ -->
 <div class="page" id="page-made-to-measure">
@@ -3148,13 +3076,6 @@ function renderSimilar(p){
   <button onclick="closeMtmThankYou()" style="font-family:var(--serif);font-size:13px;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:var(--black);background:none;border:1px solid var(--black);padding:14px 40px;cursor:pointer">Back to de Lavalle</button>
 </div>
 
-<!-- ══ FIRST EDITION THANK YOU ══ -->
-<div id="feThankYou" style="display:none;position:fixed;inset:0;background:var(--white);z-index:500;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px">
-  <p style="font-family:var(--serif);font-size:11px;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:var(--grey);margin-bottom:40px">First Edition</p>
-  <h2 style="font-family:var(--serif);font-size:clamp(28px,5vw,44px);font-weight:200;letter-spacing:0.18em;color:var(--black);margin-bottom:24px;line-height:1.4">Thank you.</h2>
-  <p style="font-family:var(--sans);font-size:14px;font-weight:200;line-height:2;color:var(--grey);letter-spacing:0.04em;max-width:360px;margin-bottom:64px">We have received your request and will be in touch with you personally.</p>
-  <p style="font-family:var(--serif);font-size:13px;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:var(--black)">de Lavalle</p>
-</div>
 
 <!-- ══ REGION MODAL ══ -->
 <div class="region-modal-ov" id="regionOv" onclick="closeRegionModal()"></div>
@@ -3189,9 +3110,7 @@ function renderSimilar(p){
 
 <script>
 // Final hash check — runs after ALL HTML is in the DOM
-if(window.location.hash==='#first-edition'){
-  goFirstEdition();
-} else if(window.location.hash==='#made-to-measure'){
+if(window.location.hash==='#made-to-measure'){
   goMadeToMeasure();
 } else if(!document.querySelector('.page.active')){
   showPage('home');
