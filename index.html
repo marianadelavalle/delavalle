@@ -68,7 +68,7 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 /* ─────────────────────────────────────
    DROPDOWN
 ───────────────────────────────────── */
-.dropdown{display:none;position:absolute;top:56px;left:0;right:0;background:rgba(255,255,255,0.5);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,0.3);border-bottom:1px solid rgba(255,255,255,0.3);z-index:250}
+.dropdown{display:none;position:absolute;top:56px;left:0;right:0;background:rgba(255,255,255,0.6);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,0.3);border-bottom:1px solid rgba(255,255,255,0.3);z-index:250}
 .dropdown.transparent{background:rgba(255,255,255,0.6);border-color:transparent;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 .dropdown.open{display:block;animation:fd 0.16s ease}
 @keyframes fd{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
@@ -76,8 +76,8 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 .drop-cats{padding:28px 40px;display:flex;flex-direction:column;justify-content:flex-start}
 .drop-cat-title{font-size:11px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:18px;color:var(--black);cursor:pointer}
 .drop-cat-title:hover{opacity:0.5}
-.drop-cat-link{display:block;font-size:13px;font-weight:300;color:var(--grey);margin-bottom:11px;cursor:pointer;transition:color 0.15s;letter-spacing:0.02em}
-.drop-cat-link:hover{color:var(--black)}
+.drop-cat-link{display:block;font-size:13px;font-weight:300;color:var(--black);margin-bottom:11px;cursor:pointer;transition:color 0.15s;letter-spacing:0.02em}
+.drop-cat-link:hover{color:var(--black);opacity:0.5}
 .drop-image{position:relative;overflow:hidden;background:transparent}
 .dropdown.transparent .drop-cat-title,
 .dropdown.transparent .drop-cat-link,
@@ -88,7 +88,7 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 .drop-cols{display:flex;gap:52px}
 .drop-col h4{font-size:12px;font-weight:400;letter-spacing:0.06em;margin-bottom:13px;cursor:pointer}
 .drop-col h4:hover{text-decoration:underline;text-underline-offset:3px}
-.drop-col a{display:block;font-size:12px;font-weight:300;color:var(--grey);margin-bottom:8px;cursor:pointer;transition:color 0.15s}
+.drop-col a{display:block;font-size:12px;font-weight:300;color:var(--black);margin-bottom:8px;cursor:pointer;transition:color 0.15s}
 .drop-col a:hover{color:var(--black)}
 
 /* ─────────────────────────────────────
