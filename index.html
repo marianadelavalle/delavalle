@@ -256,7 +256,7 @@ header.scrolled .logo-text{color:var(--black);text-shadow:none}
 .sz{border:1px solid var(--border);font-family:var(--sans);font-size:12px;font-weight:300;padding:9px 14px;cursor:pointer;transition:all 0.15s;min-width:46px;text-align:center;background:none;color:var(--black)}
 .sz:hover:not(.oos){border-color:var(--black)}
 .sz.on{background:var(--black);color:var(--white);border-color:var(--black)}
-.sz.oos{color:var(--mid);cursor:default;text-decoration:line-through}
+.sz.oos{color:var(--mid);cursor:default;text-decoration:none;background-image:linear-gradient(to top right,transparent calc(50% - 0.5px),var(--mid) calc(50% - 0.5px),var(--mid) calc(50% + 0.5px),transparent calc(50% + 0.5px))}
 .stock-info-line{font-size:11px;font-weight:300;color:#8b3a2a;margin-bottom:16px;min-height:18px}
 .add-bag-btn{width:100%;border:1px solid var(--black);background:transparent;font-family:var(--sans);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;padding:16px;margin:6px 0 8px;transition:all 0.2s;font-weight:400;color:var(--black)}
 .add-bag-btn:hover:not(:disabled){background:var(--black);color:var(--white)}
@@ -792,6 +792,27 @@ header.scrolled .logo-text {
   text-shadow: none;
 }
 
+
+.gallery-col{position:sticky}
+.prod-back{position:absolute;top:18px;left:32px;z-index:3;display:flex;align-items:center;gap:8px;background:none;border:0;padding:4px 0;cursor:pointer;font-family:var(--sans);font-size:12px;font-weight:300;letter-spacing:0.04em;color:var(--black)}
+.prod-back svg{width:16px;height:10px;fill:none;stroke:currentColor;stroke-width:1}
+.prod-back:hover{opacity:0.5}
+@media screen and (max-width:768px){
+  .prod-back{top:12px;left:20px}
+  #page-product .gallery-col{padding-top:48px !important}
+}
+/* Mobile header icons (search, bag) */
+.mobile-icons{display:none}
+@media screen and (max-width: 768px){
+  .header-inner{grid-template-columns:72px 1fr 72px !important}
+  .mobile-icons{display:flex;grid-column:3;grid-row:1;justify-self:end;align-items:center;gap:14px}
+  .mobile-icon{position:relative;width:24px;height:24px;padding:0;border:0;background:none;color:var(--black);display:flex;align-items:center;justify-content:center;cursor:pointer}
+  .mobile-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.2}
+  .mobile-bag-count{position:absolute;top:-5px;right:-7px;font-size:9px;line-height:1;letter-spacing:0;font-weight:400}
+  .mobile-bag-count:empty{display:none}
+  header.transparent .mobile-icon{color:var(--white);filter:drop-shadow(0 1px 2px rgba(0,0,0,0.3))}
+  header.scrolled .mobile-icon{color:var(--black);filter:none}
+}
 /* ══ MOBILE MENU — Full screen like The Row ══ */
 .mobile-overlay{display:none;position:fixed;inset:0;background:var(--white);z-index:490}
 .mobile-overlay.open{display:block}
@@ -937,6 +958,7 @@ img{image-rendering:auto;content-visibility:auto}
   <div class="header-inner">
     <nav class="nav-left">
       <button class="nav-btn" onmouseenter="showDrop('women')" onclick="goWomen()" data-i18n="nav_women">Women</button>
+      <button class="nav-btn" onmouseenter="showDrop('men')" onclick="goMen()" data-i18n="nav_men">Men</button>
       <button class="nav-btn" onclick="goHomePage()" data-i18n="nav_home">Home</button>
       
       <button class="nav-btn" onclick="goGalerie()" data-i18n="nav_gallery">Gallery</button>
@@ -946,6 +968,10 @@ img{image-rendering:auto;content-visibility:auto}
       <span class="logo-text">de Lavalle</span>
     </div>
     <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="openMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="mobile-icons">
+      <button class="mobile-icon" onclick="openSearch()" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg></button>
+      <button class="mobile-icon" onclick="openCart()" aria-label="Bag"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="mobile-bag-count" id="bagCountMobile"></span></button>
+    </div>
     <nav class="nav-right">
       <button class="nav-btn" onclick="openSearch()" data-i18n="nav_search">Search</button>
       
@@ -1063,7 +1089,7 @@ img{image-rendering:auto;content-visibility:auto}
 <div class="page" id="page-women">
   <div class="women-topbar">
     <div class="breadcrumb">
-      <span onclick="goLanding()" data-i18n="nav_women">Women</span><span class="sep">·</span>
+      <span id="shopGenderLabel" onclick="goShopRoot()" data-i18n="nav_women">Women</span><span class="sep">·</span>
       <span id="womenMidLabel" style="cursor:default">Ready to Wear</span><span class="sep">·</span>
       <span class="cur" id="womenCatLabel">All</span>
     </div>
@@ -1170,6 +1196,7 @@ img{image-rendering:auto;content-visibility:auto}
 <div class="page" id="page-product">
   <div class="product-layout">
     <div class="gallery-col">
+      <button class="prod-back" onclick="prodBack()" aria-label="Back"><svg viewBox="0 0 16 10"><path d="M5 1L1 5l4 4M1 5h14"/></svg><span data-i18n="prod_back">Back</span></button>
       <div class="gallery-main">
         <button class="g-arrow prev" aria-label="Previous photo" onclick="galleryStep(-1)"><svg viewBox="0 0 14 26"><path d="M13 1L1 13l12 12"/></svg></button>
         <div class="prod-display bg-ecru" id="galleryDisplay"></div>
@@ -1464,7 +1491,7 @@ const PRODUCTS = [{id:9, name:'The Carrier',      shopifyHandle:'the-carrier',  
   {id:79, name:'The Swimsuit', shopifyHandle:'swimsuit-blue-pin-dot', cat:'Swim', sub:'The Swimsuit', colour:'Blue Pin Dot', hex:'#1a2740', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-blue-pin-dot-1.jpg', photos:['swim-blue-pin-dot-1.jpg','swim-blue-pin-dot-2.jpg','swim-blue-pin-dot-3.jpg','swim-blue-pin-dot-4.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:60, name:'The Swimsuit', shopifyHandle:'swimsuit-black-polka-dot', cat:'Swim', sub:'The Swimsuit', colour:'Black Polka Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-black-polka-dot-1.jpg', photos:['swim-black-polka-dot-1.jpg','swim-black-polka-dot-2.jpg','swim-black-polka-dot-3.jpg','swim-black-polka-dot-4.jpg','swim-black-polka-dot-5.jpg','swim-black-polka-dot-6.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:57, name:'The Swimsuit', shopifyHandle:'swimsuit-awning-stripe', cat:'Swim', sub:'The Swimsuit', colour:'Candy Cane', hex:'#b83232', bg:'bg-ecru', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-red-marine-1.jpg', photos:['swim-red-marine-1.jpg','swim-red-marine-2.jpg','swim-red-marine-3.jpg','swim-red-marine-4.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:52, name:'The Swimsuit', shopifyHandle:'swimsuit-red', cat:'Swim', sub:'The Swimsuit', colour:'Red', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-red-1.jpg', photos:['swim-red-1.jpg','swim-red-2.jpg','swim-red-3.jpg','swim-red-4.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:52, name:'The Swimsuit', shopifyHandle:'swimsuit-red', cat:'Swim', sub:'The Swimsuit', colour:'Red', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:0,M:5,L:5}, badge:'', photo:'swim-red-1.jpg', photos:['swim-red-1.jpg','swim-red-2.jpg','swim-red-3.jpg','swim-red-4.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:56, name:'The Swimsuit', shopifyHandle:'swimsuit-navy-blue', cat:'Swim', sub:'The Swimsuit', colour:'Navy Blue', hex:'#1a2740', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-navy-1.jpg', photos:['swim-navy-1.jpg','swim-navy-2.jpg','swim-navy-3.jpg','swim-navy-4.jpg','swim-navy-5.jpg','swim-navy-6.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:51, name:'The Swimsuit', shopifyHandle:'swimsuit-black', cat:'Swim', sub:'The Swimsuit', colour:'Black', hex:'#181610', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'', photos:[], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:54, name:'The Swimsuit', shopifyHandle:'swimsuit-red-polka', cat:'Swim', sub:'The Swimsuit', colour:'Red Polka Dot', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-red-polka-1.jpg', photos:['swim-red-polka-1.jpg','swim-red-polka-2.jpg','swim-red-polka-3.jpg','swim-red-polka-4.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
@@ -1537,7 +1564,8 @@ function showPage(id){
 }
 function goLanding(){showPage('home')}
 function goHomePage(){showPage('home-section')}
-function goWomen(){renderWomenGrid();showPage('women')}
+function goWomen(){setShopGender('women');renderWomenGrid();showPage('women')}
+function goMen(){filterCat('Sleep','men')}
 function goGalerie(){renderGalerie();showPage('galerie')}
 function goCollections(){showPage('collections')}
 function goAbout(){showPage('about')}
@@ -1726,6 +1754,8 @@ let heroResizeTimer;
 window.addEventListener('resize',()=>{clearTimeout(heroResizeTimer);heroResizeTimer=setTimeout(setHeroVideo,100)});
 const DROP={women:[
   {head:'Ready to Wear',sub:['Dresses','Shirts & Tops','Pants & Shorts','Skirts','Swim','Sleep']},
+],men:[
+  {head:'Ready to Wear',sub:['Sleep']},
 ]};
 let dt;
 function showDrop(k){
@@ -1733,8 +1763,9 @@ function showDrop(k){
   const d=DROP[k];
   if(!d)return;
   const cats=d[0];
-  let html=`<p class="drop-cat-title" onclick="filterCat('${cats.head}')">${cats.head}</p>`;
-  html+=cats.sub.map(s=>`<a class="drop-cat-link" onclick="filterCat('${s}')">${s}</a>`).join('');
+  const headCat = k==='men' ? cats.sub[0] : cats.head;
+  let html=`<p class="drop-cat-title" onclick="filterCat('${headCat}','${k}')">${cats.head}</p>`;
+  html+=cats.sub.map(s=>`<a class="drop-cat-link" onclick="filterCat('${s}','${k}')">${s}</a>`).join('');
   document.getElementById('dropCols').innerHTML=html;
   // dropImage is intentionally always empty - DO NOT SET innerHTML here
   const dd=document.getElementById('dropdown');
@@ -1762,8 +1793,20 @@ function pickSwimSub(el, sub){
   renderWomenGrid();
   document.getElementById('womenCatLabel').textContent = sub;
 }
-function filterCat(cat){
+let shopGender='women';
+function setShopGender(g){
+  shopGender = g==='men' ? 'men' : 'women';
+  const el=document.getElementById('shopGenderLabel');
+  if(!el) return;
+  const key = shopGender==='men' ? 'nav_men' : 'nav_women';
+  el.setAttribute('data-i18n', key);
+  const lang=(typeof currentLang!=='undefined'&&typeof TRANSLATIONS!=='undefined'&&TRANSLATIONS[currentLang])?TRANSLATIONS[currentLang]:null;
+  el.textContent = (lang&&lang[key]) || (shopGender==='men'?'Men':'Women');
+}
+function goShopRoot(){ if(shopGender==='men') goMen(); else goLanding(); }
+function filterCat(cat, gender){
   hideDrop();
+  setShopGender(gender);
   wf.cat = (cat === 'Ready to Wear') ? 'All' : cat;
   wf.sub = 'All';
   wVisible = applyLogic();
@@ -2001,6 +2044,7 @@ renderGalerie();
 function pushCart(p,sz){const ex=cart.find(i=>i.id===p.id&&i.sz===sz);if(ex)ex.qty++;else cart.push({...p,sz,qty:1});updateCartUI()}
 function updateCartUI(){
   document.getElementById('bagCount').textContent=cart.reduce((s,i)=>s+i.qty,0);
+  {const n=cart.reduce((s,i)=>s+i.qty,0);const m=document.getElementById('bagCountMobile');if(m)m.textContent=n?n:'';}
   const body=document.getElementById('cartBody'),ft=document.getElementById('cartFt');
   if(!cart.length){body.innerHTML='<p class="cart-empty">Your bag is empty</p>';ft.style.display='none';return}
   ft.style.display='block';
@@ -2350,7 +2394,7 @@ function toggleMobileSub(el){
 ══════════════════════════════════════ */
 const TRANSLATIONS = {
   en: {
-    nav_women:'Women', nav_home:'Home', nav_gallery:'Gallery',
+    nav_women:'Women', nav_men:'Men', prod_back:'Back', men_soon:'Coming soon.', nav_home:'Home', nav_gallery:'Gallery',
     nav_search:'Search', nav_saved:'Saved', nav_login:'Login',
     footer_about:'About the Brand', footer_contact:'Contact Us',
     lang_label:'Language', country_label:'Country',
@@ -2370,7 +2414,7 @@ const TRANSLATIONS = {
     about_brand:'About the Brand', contact_us:'Contact Us',
   },
   es: {
-    nav_women:'Mujer', nav_home:'Casa', nav_gallery:'Galería',
+    nav_women:'Mujer', nav_men:'Hombre', prod_back:'Volver', men_soon:'Próximamente.', nav_home:'Casa', nav_gallery:'Galería',
     nav_search:'Buscar', nav_saved:'Guardado', nav_login:'Iniciar sesión',
     footer_about:'Sobre la Marca', footer_contact:'Contáctanos',
     lang_label:'Idioma', country_label:'País',
@@ -2389,7 +2433,7 @@ const TRANSLATIONS = {
     quick_add:'Añadir rápido',
   },
   fr: {
-    nav_women:'Femme', nav_home:'Accueil', nav_gallery:'Galerie',
+    nav_women:'Femme', nav_men:'Homme', prod_back:'Retour', men_soon:'Bientôt disponible.', nav_home:'Accueil', nav_gallery:'Galerie',
     nav_search:'Rechercher', nav_saved:'Sauvegardé', nav_login:'Connexion',
     footer_about:'À propos', footer_contact:'Nous contacter',
     lang_label:'Langue', country_label:'Pays',
@@ -2408,7 +2452,7 @@ const TRANSLATIONS = {
     quick_add:'Ajout rapide',
   },
   it: {
-    nav_women:'Donna', nav_home:'Home', nav_gallery:'Galleria',
+    nav_women:'Donna', nav_men:'Uomo', prod_back:'Indietro', men_soon:'Prossimamente.', nav_home:'Home', nav_gallery:'Galleria',
     nav_search:'Cerca', nav_saved:'Salvati', nav_login:'Accedi',
     footer_about:'Sul brand', footer_contact:'Contattaci',
     lang_label:'Lingua', country_label:'Paese',
@@ -2427,7 +2471,7 @@ const TRANSLATIONS = {
     quick_add:'Aggiungi rapido',
   },
   de: {
-    nav_women:'Damen', nav_home:'Startseite', nav_gallery:'Galerie',
+    nav_women:'Damen', nav_men:'Herren', prod_back:'Zurück', men_soon:'Demnächst.', nav_home:'Startseite', nav_gallery:'Galerie',
     nav_search:'Suchen', nav_saved:'Gespeichert', nav_login:'Anmelden',
     footer_about:'Über die Marke', footer_contact:'Kontakt',
     lang_label:'Sprache', country_label:'Land',
@@ -2446,7 +2490,7 @@ const TRANSLATIONS = {
     quick_add:'Schnell hinzufügen',
   },
   pt: {
-    nav_women:'Mulher', nav_home:'Início', nav_gallery:'Galeria',
+    nav_women:'Mulher', nav_men:'Homem', prod_back:'Voltar', men_soon:'Em breve.', nav_home:'Início', nav_gallery:'Galeria',
     nav_search:'Pesquisar', nav_saved:'Guardado', nav_login:'Entrar',
     footer_about:'Sobre a marca', footer_contact:'Fale connosco',
     lang_label:'Idioma', country_label:'País',
@@ -2465,7 +2509,7 @@ const TRANSLATIONS = {
     quick_add:'Adicionar rápido',
   },
   zh: {
-    nav_women:'女装', nav_home:'主页', nav_gallery:'画廊',
+    nav_women:'女装', nav_men:'男装', prod_back:'返回', men_soon:'即将推出。', nav_home:'主页', nav_gallery:'画廊',
     nav_search:'搜索', nav_saved:'已保存', nav_login:'登录',
     footer_about:'关于品牌', footer_contact:'联系我们',
     lang_label:'语言', country_label:'国家',
@@ -2484,7 +2528,7 @@ const TRANSLATIONS = {
     quick_add:'快速添加',
   },
   ja: {
-    nav_women:'ウィメンズ', nav_home:'ホーム', nav_gallery:'ギャラリー',
+    nav_women:'ウィメンズ', nav_men:'メンズ', prod_back:'戻る', men_soon:'近日公開。', nav_home:'ホーム', nav_gallery:'ギャラリー',
     nav_search:'検索', nav_saved:'保存済み', nav_login:'ログイン',
     footer_about:'ブランドについて', footer_contact:'お問い合わせ',
     lang_label:'言語', country_label:'国',
@@ -2503,7 +2547,7 @@ const TRANSLATIONS = {
     quick_add:'クイック追加',
   },
   ko: {
-    nav_women:'여성', nav_home:'홈', nav_gallery:'갤러리',
+    nav_women:'여성', nav_men:'남성', prod_back:'뒤로', men_soon:'곧 출시됩니다.', nav_home:'홈', nav_gallery:'갤러리',
     nav_search:'검색', nav_saved:'저장됨', nav_login:'로그인',
     footer_about:'브랜드 소개', footer_contact:'문의하기',
     lang_label:'언어', country_label:'국가',
@@ -2522,7 +2566,7 @@ const TRANSLATIONS = {
     quick_add:'빠른 추가',
   },
   ar: {
-    nav_women:'نساء', nav_home:'الرئيسية', nav_gallery:'معرض',
+    nav_women:'نساء', nav_men:'رجال', prod_back:'رجوع', men_soon:'قريبًا.', nav_home:'الرئيسية', nav_gallery:'معرض',
     nav_search:'بحث', nav_saved:'المحفوظة', nav_login:'تسجيل الدخول',
     footer_about:'عن العلامة', footer_contact:'تواصل معنا',
     lang_label:'اللغة', country_label:'الدولة',
@@ -2541,7 +2585,7 @@ const TRANSLATIONS = {
     quick_add:'إضافة سريعة',
   },
   ru: {
-    nav_women:'Женщинам', nav_home:'Главная', nav_gallery:'Галерея',
+    nav_women:'Женщинам', nav_men:'Мужчинам', prod_back:'Назад', men_soon:'Скоро.', nav_home:'Главная', nav_gallery:'Галерея',
     nav_search:'Поиск', nav_saved:'Сохранённое', nav_login:'Войти',
     footer_about:'О бренде', footer_contact:'Связаться с нами',
     lang_label:'Язык', country_label:'Страна',
@@ -2820,37 +2864,48 @@ showPage = function(id){
     'about':'/about', 'collections':'/collections',
     'made-to-measure':'#made-to-measure',
   };
+  if(window._noPush) return;
   const p = paths[id] || '/';
-  history.pushState({page:id}, '', p);
+  history.pushState({page:id}, '', p); if(window._userActive) window._navDepth++;
 };
 
+
+function prodBack(){
+  if(window._navDepth>0){ history.back(); return; }
+  const p=currentProd;
+  if(p && p.cat){ filterCat(p.cat); } else { goWomen(); }
+}
+window._navDepth=0; window._userActive=false;
+['pointerdown','keydown','touchstart'].forEach(ev=>window.addEventListener(ev,()=>{window._userActive=true;},{capture:true,passive:true}));
 const _goProd = goProd;
 function resetProdScroll(){
   window.scrollTo(0,0);
   document.querySelectorAll('#page-product .gallery-col, #page-product .info-col').forEach(el=>{el.scrollTop=0;});
 }
 goProd = function(id){
-  _goProd(id);
+  window._noPush=true; try{ _goProd(id); } finally { window._noPush=false; }
   resetProdScroll();
   setTimeout(resetProdScroll,120);
   setTimeout(resetProdScroll,400);
   const p = PRODUCTS.find(x=>x.id===id);
-  if(p) history.pushState({page:'product',id:id}, '', '/product/'+p.shopifyHandle);
+  if(p){ history.pushState({page:'product',id:id}, '', '/product/'+p.shopifyHandle); if(window._userActive) window._navDepth++; }
 };
 
 const _filterCat = filterCat;
-filterCat = function(cat){
-  _filterCat(cat);
+filterCat = function(cat, gender){
+  window._noPush=true; try{ _filterCat(cat, gender); } finally { window._noPush=false; }
   const slug = cat.toLowerCase().replace(/[^a-z0-9]+/g,'-');
-  history.pushState({page:'women',cat:cat}, '', '/women/'+slug);
+  const g = gender==='men' ? 'men' : 'women';
+  history.pushState({page:'women',cat:cat,gender:g}, '', '/'+g+'/'+slug); if(window._userActive) window._navDepth++;
 };
 
+window.addEventListener('popstate', ()=>{window._noPush=true; window._navDepth=Math.max(0,(window._navDepth||0)-1);});
 window.addEventListener('popstate', function(e){
   const s = e.state;
   if(!s){_showPage('home');return;}
   if(s.page==='product'&&s.id) _goProd(s.id);
   else if(s.page==='women'&&s.cat){
-    wf.cat=s.cat;wVisible=applyLogic();renderWomenGrid();
+    setShopGender(s.gender);wf.cat=s.cat;wVisible=applyLogic();renderWomenGrid();
     document.getElementById('womenCatLabel').textContent=s.cat;
     const ca=CAT_IMAGES[s.cat]||'women-cat.jpg';
     const ce=document.getElementById('womenCatImg');
@@ -2863,6 +2918,7 @@ window.addEventListener('popstate', function(e){
   else if(s.page==='collections'){goCollections();}
   else if(s.page) _showPage(s.page);
 });
+window.addEventListener('popstate', ()=>{window._noPush=false;});
 
 // Restore state on direct link / refresh
 (function(){
@@ -2874,6 +2930,9 @@ window.addEventListener('popstate', function(e){
     const handle=path.replace('/product/','');
     const p=PRODUCTS.find(x=>x.shopifyHandle===handle);
     if(p){_goProd(p.id);return;}
+  }
+  if(path.startsWith('/men')){
+    filterCat('Sleep','men');return;
   }
   if(path.startsWith('/women/')){
     const slug=path.replace('/women/','');
@@ -3088,6 +3147,10 @@ function renderSimilar(p){
     <div class="mobile-nav-item">
       <div class="mobile-nav-parent" onclick="toggleMobileSub(this.parentElement)">Women</div>
       <div class="mobile-sub"><button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Dresses')">Dresses</button><button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Shirts &amp; Tops')">Shirts &amp; Tops</button><button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Pants &amp; Shorts')">Pants &amp; Shorts</button><button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Skirts')">Skirts</button><button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Swim')">Swim</button><button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Sleep')">Sleep</button></div>
+    </div>
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-parent" onclick="toggleMobileSub(this.parentElement)" data-i18n="nav_men">Men</div>
+      <div class="mobile-sub"><button class="mobile-sub-item" onclick="closeMobileMenu();filterCat('Sleep','men')">Sleep</button></div>
     </div>
     <button onclick="closeMobileMenu();goHomePage()">Home</button>
     <button onclick="closeMobileMenu();goGalerie()">Gallery</button>
