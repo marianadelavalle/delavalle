@@ -801,6 +801,48 @@ header.scrolled .logo-text {
   .prod-back{top:12px;left:20px}
   #page-product .gallery-col{padding-top:48px !important}
 }
+
+/* Bikini sizing guide */
+.sg-ov{position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:500;display:none;align-items:center;justify-content:center}
+.sg-ov.open{display:flex}
+.sg-box{background:var(--white);width:min(640px,100%);max-height:92vh;overflow-y:auto;padding:44px 48px 40px;position:relative;font-family:var(--sans);color:var(--black);text-align:center}
+.sg-close{position:absolute;top:18px;right:20px;background:none;border:0;cursor:pointer;padding:6px}
+.sg-close svg{width:16px;height:16px;stroke:var(--black);stroke-width:1;fill:none}
+.sg-title{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:400;margin:0 0 22px}
+.sg-q{font-size:13px;font-weight:300;margin:0 0 22px}
+.sg-tabs{display:flex;justify-content:center;gap:44px;margin-bottom:28px}
+.sg-tab{background:none;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:var(--sans);font-size:12px;font-weight:300;letter-spacing:0.04em;color:var(--black);padding:0 0 6px;border-bottom:1px solid transparent;opacity:0.5}
+.sg-tab.on{border-bottom-color:var(--black);opacity:1}
+.sg-tab svg{width:58px;height:38px;fill:none;stroke:var(--black);stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+.sg-sub{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;font-weight:400;margin:0 0 6px}
+.sg-note{font-size:12px;font-weight:300;color:var(--grey);margin:0 0 20px;line-height:1.6}
+.sg-cov{display:inline-flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:300;margin-bottom:24px;border-bottom:1px solid var(--black);padding-bottom:6px}
+.sg-cov svg{width:46px;height:30px;fill:none;stroke:var(--black);stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.sg-unit{display:inline-flex;border:1px solid var(--border);margin-bottom:26px}
+.sg-unit button{background:none;border:0;cursor:pointer;font-family:var(--sans);font-size:11px;letter-spacing:0.08em;padding:8px 14px;color:var(--mid)}
+.sg-unit button.on{color:var(--black)}
+.sg-table{width:100%;border-collapse:collapse;font-size:12px;font-weight:300}
+.sg-table th{font-weight:400;padding:14px 6px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.sg-table td{padding:14px 6px;border-bottom:1px solid var(--border)}
+.sg-how-old{font-size:11px;font-weight:300;color:var(--grey);line-height:1.7;margin:22px 0 0;text-align:left}
+.sg-h{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:400;margin:40px 0 18px;text-align:start}
+.sg-step{display:flex;gap:28px;align-items:center;padding:0 0 22px;margin-bottom:22px;border-bottom:1px solid var(--border);text-align:start}
+.sg-step:last-of-type{border-bottom:0}
+.sg-step-txt{flex:1}
+.sg-step-t{font-size:12px;font-weight:400;margin:0 0 10px;display:flex;align-items:center;gap:12px}
+.sg-step-d{font-size:12px;font-weight:300;line-height:1.75;color:var(--grey);margin:0}
+.sg-num{flex:0 0 22px;width:22px;height:22px;border:1px solid var(--black);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:400;color:var(--black)}
+.sg-illu svg{width:130px;height:94px;fill:none;stroke:var(--black);stroke-width:1.1;stroke-linejoin:round;stroke-linecap:round}
+.sg-illu .dash{stroke-dasharray:5 4}
+.sg-tips{list-style:none;padding:0;margin:0;text-align:start}
+.sg-tips li{display:flex;gap:12px;align-items:flex-start;font-size:12px;font-weight:300;line-height:1.7;color:var(--grey);margin-bottom:14px}
+.sg-tips li .sg-num{margin-top:1px}
+.sg-sw-hero svg{width:64px;height:102px;fill:none;stroke:var(--black);stroke-width:1.1;stroke-linejoin:round;stroke-linecap:round;margin:0 0 26px}
+.sg-illu-sw svg{width:80px;height:128px}
+.sg-help{display:block;margin-top:34px;background:var(--black);color:var(--white);text-decoration:none;font-family:var(--sans);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:400;padding:17px 20px;text-align:center;transition:opacity 0.2s}
+.sg-help:hover{opacity:0.8}
+@media(max-width:768px){.sg-step{flex-direction:column-reverse;align-items:flex-start;gap:14px}.sg-illu svg{width:96px;height:76px}}
+@media(max-width:768px){.sg-ov{align-items:flex-end}.sg-box{padding:40px 20px 32px;max-height:88vh}.sg-tabs{gap:32px}}
 /* Mobile header icons (search, bag) */
 .mobile-icons{display:none}
 @media screen and (max-width: 768px){
@@ -1216,7 +1258,7 @@ img{image-rendering:auto;content-visibility:auto}
       <div class="colour-row" id="colourRow">
         <span class="colour-lbl" id="colourLbl">—</span>
       </div>
-      <div class="size-hd"><p class="f-label" style="margin:0" data-i18n="prod_size">Size</p></div>
+      <div class="size-hd"><p class="f-label" style="margin:0" data-i18n="prod_size">Size</p><span class="size-guide-lnk" id="sizeGuideLnk" style="display:none" onclick="openSizing()" data-i18n="prod_size_guide">Size Guide</span></div>
       <div class="size-grid" id="sizeGrid"></div>
       <div class="stock-info-line" id="stockInfoLine"></div>
       <button class="add-bag-btn" id="addBagBtn" onclick="addToBag()" data-i18n="prod_add_bag">Add to Bag</button>
@@ -1481,39 +1523,39 @@ const PRODUCTS = [{id:9, name:'The Carrier',      shopifyHandle:'the-carrier',  
   {id:17, name:'María Trousers', cat:'Pants & Shorts', colour:'Ivory', hex:'#f5f0e8', bg:'bg-ivory', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines1.jpg', photos:['ines1.jpg','ines2.jpg','ines3.jpg','ines4.jpg','ines5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
   {id:18, name:'María Trousers', cat:'Pants & Shorts', colour:'Beige', hex:'#d4c4a8', bg:'bg-sand', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines-beige1.jpg', photos:['ines-beige1.jpg','ines-beige2.jpg','ines-beige3.jpg','ines-beige4.jpg','ines-beige5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
   {id:19, name:'María Trousers', cat:'Pants & Shorts', colour:'Light Blue', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines-blue1.jpg', photos:['ines-blue1.jpg','ines-blue2.jpg','ines-blue3.jpg','ines-blue4.jpg','ines-blue5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
-  {id:72, name:'The Bikini', shopifyHandle:'bikini-red', cat:'Swim', sub:'The Bikini', colour:'Red', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'bikini-red-1.jpg', photos:['bikini-red-1.jpg','bikini-red-2.jpg','bikini-red-3.jpg','bikini-red-4.jpg'], desc:'Triangle top with tie straps at the neck and back. Tie sides at the bottom.'},
-  {id:73, name:'The Bikini', shopifyHandle:'bikini-candy-cane', cat:'Swim', sub:'The Bikini', colour:'Candy Cane', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'bikini-candy-cane-1.jpg', photos:['bikini-candy-cane-1.jpg','bikini-candy-cane-2.jpg','bikini-candy-cane-3.jpg'], desc:'Triangle top with tie straps at the neck and back. Tie sides at the bottom.'},
-  {id:74, name:'The Bikini', shopifyHandle:'bikini-red-polka-dot', cat:'Swim', sub:'The Bikini', colour:'Red Polka Dot', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'bikini-red-polka-dot-1.jpg', photos:['bikini-red-polka-dot-1.jpg','bikini-red-polka-dot-2.jpg','bikini-red-polka-dot-3.jpg'], desc:'Triangle top with tie straps at the neck and back. Tie sides at the bottom.'},
-  {id:75, name:'The Bikini', shopifyHandle:'bikini-navy-blue', cat:'Swim', sub:'The Bikini', colour:'Navy Blue', hex:'#1a2740', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'bikini-navy-blue-1.jpg', photos:['bikini-navy-blue-1.jpg','bikini-navy-blue-2.jpg','bikini-navy-blue-3.jpg','bikini-navy-blue-4.jpg','bikini-navy-blue-5.jpg'], desc:'Triangle top with tie straps at the neck and back. Tie sides at the bottom.'},
-  {id:76, name:'The Bikini', shopifyHandle:'bikini-blue-pin-dot', cat:'Swim', sub:'The Bikini', colour:'Blue Pin Dot', hex:'#1a2740', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'bikini-blue-pin-dot-1.jpg', photos:['bikini-blue-pin-dot-1.jpg','bikini-blue-pin-dot-2.jpg','bikini-blue-pin-dot-3.jpg','bikini-blue-pin-dot-4.jpg'], desc:'Triangle top with tie straps at the neck and back. Tie sides at the bottom.'},
-  {id:77, name:'The Bikini', shopifyHandle:'bikini-black', cat:'Swim', sub:'The Bikini', colour:'Black', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'bikini-black-1.jpg', photos:['bikini-black-1.jpg','bikini-black-2.jpg','bikini-black-3.jpg','bikini-black-4.jpg'], desc:'Triangle top with tie straps at the neck and back. Tie sides at the bottom.'},
-  {id:78, name:'The Bikini', shopifyHandle:'bikini-black-polka-dot', cat:'Swim', sub:'The Bikini', colour:'Black Polka Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'bikini-black-polka-dot-1.jpg', photos:['bikini-black-polka-dot-1.jpg','bikini-black-polka-dot-2.jpg','bikini-black-polka-dot-3.jpg'], desc:'Triangle top with tie straps at the neck and back. Tie sides at the bottom.'},
-  {id:79, name:'The Swimsuit', shopifyHandle:'swimsuit-blue-pin-dot', cat:'Swim', sub:'The Swimsuit', colour:'Blue Pin Dot', hex:'#1a2740', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-blue-pin-dot-1.jpg', photos:['swim-blue-pin-dot-1.jpg','swim-blue-pin-dot-2.jpg','swim-blue-pin-dot-3.jpg','swim-blue-pin-dot-4.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:60, name:'The Swimsuit', shopifyHandle:'swimsuit-black-polka-dot', cat:'Swim', sub:'The Swimsuit', colour:'Black Polka Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-black-polka-dot-1.jpg', photos:['swim-black-polka-dot-1.jpg','swim-black-polka-dot-2.jpg','swim-black-polka-dot-3.jpg','swim-black-polka-dot-4.jpg','swim-black-polka-dot-5.jpg','swim-black-polka-dot-6.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:57, name:'The Swimsuit', shopifyHandle:'swimsuit-awning-stripe', cat:'Swim', sub:'The Swimsuit', colour:'Candy Cane', hex:'#b83232', bg:'bg-ecru', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-red-marine-1.jpg', photos:['swim-red-marine-1.jpg','swim-red-marine-2.jpg','swim-red-marine-3.jpg','swim-red-marine-4.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:52, name:'The Swimsuit', shopifyHandle:'swimsuit-red', cat:'Swim', sub:'The Swimsuit', colour:'Red', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:0,M:5,L:5}, badge:'', photo:'swim-red-1.jpg', photos:['swim-red-1.jpg','swim-red-2.jpg','swim-red-3.jpg','swim-red-4.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:56, name:'The Swimsuit', shopifyHandle:'swimsuit-navy-blue', cat:'Swim', sub:'The Swimsuit', colour:'Navy Blue', hex:'#1a2740', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-navy-1.jpg', photos:['swim-navy-1.jpg','swim-navy-2.jpg','swim-navy-3.jpg','swim-navy-4.jpg','swim-navy-5.jpg','swim-navy-6.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:51, name:'The Swimsuit', shopifyHandle:'swimsuit-black', cat:'Swim', sub:'The Swimsuit', colour:'Black', hex:'#181610', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'', photos:[], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:54, name:'The Swimsuit', shopifyHandle:'swimsuit-red-polka', cat:'Swim', sub:'The Swimsuit', colour:'Red Polka Dot', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'swim-red-polka-1.jpg', photos:['swim-red-polka-1.jpg','swim-red-polka-2.jpg','swim-red-polka-3.jpg','swim-red-polka-4.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:58, name:'The Shirt', shopifyHandle:'sleep-shirt-sky-dobby-stripe', cat:'Sleep', colour:'Sky Dobby Stripe', hex:'#a8c4d8', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'sleep-shirt-sky-dobby-stripe-1.jpg', photos:['sleep-shirt-sky-dobby-stripe-1.jpg','sleep-shirt-sky-dobby-stripe-2.jpg','sleep-shirt-sky-dobby-stripe-3.jpg','sleep-shirt-sky-dobby-stripe-4.jpg'], desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
+  {id:72, name:'The Bikini', shopifyHandle:'bikini-red', cat:'Swim', sub:'The Bikini', colour:'Red', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'bikini-red-1.jpg', photos:['bikini-red-1.jpg','bikini-red-2.jpg','bikini-red-3.jpg','bikini-red-4.jpg'], desc:'Triangle top with tie straps at the neck and back. Tie sides at the bottom.'},
+  {id:73, name:'The Bikini', shopifyHandle:'bikini-candy-cane', cat:'Swim', sub:'The Bikini', colour:'Candy Cane', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'bikini-candy-cane-1.jpg', photos:['bikini-candy-cane-1.jpg','bikini-candy-cane-2.jpg','bikini-candy-cane-3.jpg'], desc:'Triangle top with tie straps at the neck and back. Tie sides at the bottom.'},
+  {id:74, name:'The Bikini', shopifyHandle:'bikini-red-polka-dot', cat:'Swim', sub:'The Bikini', colour:'Red Polka Dot', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'bikini-red-polka-dot-1.jpg', photos:['bikini-red-polka-dot-1.jpg','bikini-red-polka-dot-2.jpg','bikini-red-polka-dot-3.jpg'], desc:'Triangle top with tie straps at the neck and back. Tie sides at the bottom.'},
+  {id:75, name:'The Bikini', shopifyHandle:'bikini-navy-blue', cat:'Swim', sub:'The Bikini', colour:'Navy Blue', hex:'#1a2740', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'bikini-navy-blue-1.jpg', photos:['bikini-navy-blue-1.jpg','bikini-navy-blue-2.jpg','bikini-navy-blue-3.jpg','bikini-navy-blue-4.jpg','bikini-navy-blue-5.jpg'], desc:'Triangle top with tie straps at the neck and back. Tie sides at the bottom.'},
+  {id:76, name:'The Bikini', shopifyHandle:'bikini-blue-pin-dot', cat:'Swim', sub:'The Bikini', colour:'Blue Pin Dot', hex:'#1a2740', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'bikini-blue-pin-dot-1.jpg', photos:['bikini-blue-pin-dot-1.jpg','bikini-blue-pin-dot-2.jpg','bikini-blue-pin-dot-3.jpg','bikini-blue-pin-dot-4.jpg'], desc:'Triangle top with tie straps at the neck and back. Tie sides at the bottom.'},
+  {id:77, name:'The Bikini', shopifyHandle:'bikini-black', cat:'Swim', sub:'The Bikini', colour:'Black', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'bikini-black-1.jpg', photos:['bikini-black-1.jpg','bikini-black-2.jpg','bikini-black-3.jpg','bikini-black-4.jpg'], desc:'Triangle top with tie straps at the neck and back. Tie sides at the bottom.'},
+  {id:78, name:'The Bikini', shopifyHandle:'bikini-black-polka-dot', cat:'Swim', sub:'The Bikini', colour:'Black Polka Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'bikini-black-polka-dot-1.jpg', photos:['bikini-black-polka-dot-1.jpg','bikini-black-polka-dot-2.jpg','bikini-black-polka-dot-3.jpg'], desc:'Triangle top with tie straps at the neck and back. Tie sides at the bottom.'},
+  {id:79, name:'The Swimsuit', shopifyHandle:'swimsuit-blue-pin-dot', cat:'Swim', sub:'The Swimsuit', colour:'Blue Pin Dot', hex:'#1a2740', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'swim-blue-pin-dot-1.jpg', photos:['swim-blue-pin-dot-1.jpg','swim-blue-pin-dot-2.jpg','swim-blue-pin-dot-3.jpg','swim-blue-pin-dot-4.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:60, name:'The Swimsuit', shopifyHandle:'swimsuit-black-polka-dot', cat:'Swim', sub:'The Swimsuit', colour:'Black Polka Dot', hex:'#181610', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'swim-black-polka-dot-1.jpg', photos:['swim-black-polka-dot-1.jpg','swim-black-polka-dot-2.jpg','swim-black-polka-dot-3.jpg','swim-black-polka-dot-4.jpg','swim-black-polka-dot-5.jpg','swim-black-polka-dot-6.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:57, name:'The Swimsuit', shopifyHandle:'swimsuit-awning-stripe', cat:'Swim', sub:'The Swimsuit', colour:'Candy Cane', hex:'#b83232', bg:'bg-ecru', section:'women', price:320, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'swim-red-marine-1.jpg', photos:['swim-red-marine-1.jpg','swim-red-marine-2.jpg','swim-red-marine-3.jpg','swim-red-marine-4.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:52, name:'The Swimsuit', shopifyHandle:'swimsuit-red', cat:'Swim', sub:'The Swimsuit', colour:'Red', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M'], stock:{XS:5,S:0,M:5}, badge:'', photo:'swim-red-1.jpg', photos:['swim-red-1.jpg','swim-red-2.jpg','swim-red-3.jpg','swim-red-4.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:56, name:'The Swimsuit', shopifyHandle:'swimsuit-navy-blue', cat:'Swim', sub:'The Swimsuit', colour:'Navy Blue', hex:'#1a2740', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'swim-navy-1.jpg', photos:['swim-navy-1.jpg','swim-navy-2.jpg','swim-navy-3.jpg','swim-navy-4.jpg','swim-navy-5.jpg','swim-navy-6.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:51, name:'The Swimsuit', shopifyHandle:'swimsuit-black', cat:'Swim', sub:'The Swimsuit', colour:'Black', hex:'#181610', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'', photos:[], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:54, name:'The Swimsuit', shopifyHandle:'swimsuit-red-polka', cat:'Swim', sub:'The Swimsuit', colour:'Red Polka Dot', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'swim-red-polka-1.jpg', photos:['swim-red-polka-1.jpg','swim-red-polka-2.jpg','swim-red-polka-3.jpg','swim-red-polka-4.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
+  {id:58, name:'The Shirt', shopifyHandle:'sleep-shirt-sky-dobby-stripe', cat:'Sleep', colour:'Sky Dobby Stripe', hex:'#a8c4d8', bg:'bg-stone', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'sleep-shirt-sky-dobby-stripe-1.jpg', photos:['sleep-shirt-sky-dobby-stripe-1.jpg','sleep-shirt-sky-dobby-stripe-2.jpg','sleep-shirt-sky-dobby-stripe-3.jpg','sleep-shirt-sky-dobby-stripe-4.jpg'], desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
   {id:59, name:'The Pant', shopifyHandle:'sleep-pant-sky-dobby-stripe', cat:'Sleep', colour:'Sky Dobby Stripe', hex:'#a8c4d8', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'sleep-pant-sky-dobby-stripe-1.jpg', photos:['sleep-pant-sky-dobby-stripe-1.jpg','sleep-pant-sky-dobby-stripe-2.jpg','sleep-pant-sky-dobby-stripe-3.jpg'], desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:32, name:'The Shirt', shopifyHandle:'sleep-shirt-marina-stripe', cat:'Sleep', colour:'Marina Stripe', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
+  {id:32, name:'The Shirt', shopifyHandle:'sleep-shirt-marina-stripe', cat:'Sleep', colour:'Marina Stripe', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
   {id:37, name:'The Pant', shopifyHandle:'sleep-pant-marina-stripe', cat:'Sleep', colour:'Marina Stripe', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:33, name:'The Shirt', shopifyHandle:'sleep-shirt-baby-blue-dobby', cat:'Sleep', colour:'Baby Blue Dobby', hex:'#b8ccd8', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
+  {id:33, name:'The Shirt', shopifyHandle:'sleep-shirt-baby-blue-dobby', cat:'Sleep', colour:'Baby Blue Dobby', hex:'#b8ccd8', bg:'bg-stone', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
   {id:38, name:'The Pant', shopifyHandle:'sleep-pant-baby-blue-dobby', cat:'Sleep', colour:'Baby Blue Dobby', hex:'#b8ccd8', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:34, name:'The Shirt', shopifyHandle:'sleep-shirt-riviera-stripe', cat:'Sleep', colour:'Riviera Stripe', hex:'#d0e4f0', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
+  {id:34, name:'The Shirt', shopifyHandle:'sleep-shirt-riviera-stripe', cat:'Sleep', colour:'Riviera Stripe', hex:'#d0e4f0', bg:'bg-stone', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
   {id:39, name:'The Pant', shopifyHandle:'sleep-pant-riviera-stripe', cat:'Sleep', colour:'Riviera Stripe', hex:'#d0e4f0', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:35, name:'The Shirt', shopifyHandle:'sleep-shirt-white-silk', cat:'Sleep', colour:'White Silk', hex:'#f8f6f2', bg:'bg-ivory', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
+  {id:35, name:'The Shirt', shopifyHandle:'sleep-shirt-white-silk', cat:'Sleep', colour:'White Silk', hex:'#f8f6f2', bg:'bg-ivory', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
   {id:40, name:'The Pant', shopifyHandle:'sleep-pant-white-silk', cat:'Sleep', colour:'White Silk', hex:'#f8f6f2', bg:'bg-ivory', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:36, name:'The Shirt', shopifyHandle:'sleep-shirt-black-silk', cat:'Sleep', colour:'Black Silk', hex:'#181610', bg:'bg-black-p', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
+  {id:36, name:'The Shirt', shopifyHandle:'sleep-shirt-black-silk', cat:'Sleep', colour:'Black Silk', hex:'#181610', bg:'bg-black-p', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
   {id:41, name:'The Pant', shopifyHandle:'sleep-pant-black-silk', cat:'Sleep', colour:'Black Silk', hex:'#181610', bg:'bg-black-p', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:42, name:'The Shirt', shopifyHandle:'sleep-shirt-carmine-silk', cat:'Sleep', colour:'Carmine Silk', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
+  {id:42, name:'The Shirt', shopifyHandle:'sleep-shirt-carmine-silk', cat:'Sleep', colour:'Carmine Silk', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
   {id:46, name:'The Pant', shopifyHandle:'sleep-pant-carmine-silk', cat:'Sleep', colour:'Carmine Silk', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:43, name:'The Shirt', shopifyHandle:'sleep-shirt-petal-silk', cat:'Sleep', colour:'Petal Silk', hex:'#f0c8c0', bg:'bg-ecru', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
+  {id:43, name:'The Shirt', shopifyHandle:'sleep-shirt-petal-silk', cat:'Sleep', colour:'Petal Silk', hex:'#f0c8c0', bg:'bg-ecru', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
   {id:47, name:'The Pant', shopifyHandle:'sleep-pant-petal-silk', cat:'Sleep', colour:'Petal Silk', hex:'#f0c8c0', bg:'bg-ecru', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:44, name:'The Shirt', shopifyHandle:'sleep-shirt-sky-silk', cat:'Sleep', colour:'Sky Silk', hex:'#b0c8e0', bg:'bg-stone', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
+  {id:44, name:'The Shirt', shopifyHandle:'sleep-shirt-sky-silk', cat:'Sleep', colour:'Sky Silk', hex:'#b0c8e0', bg:'bg-stone', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
   {id:48, name:'The Pant', shopifyHandle:'sleep-pant-sky-silk', cat:'Sleep', colour:'Sky Silk', hex:'#b0c8e0', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:45, name:'The Shirt', shopifyHandle:'sleep-shirt-navy-silk', cat:'Sleep', colour:'Navy Silk', hex:'#1a2740', bg:'bg-black-p', section:'women', price:220, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
+  {id:45, name:'The Shirt', shopifyHandle:'sleep-shirt-navy-silk', cat:'Sleep', colour:'Navy Silk', hex:'#1a2740', bg:'bg-black-p', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
   {id:49, name:'The Pant', shopifyHandle:'sleep-pant-navy-silk', cat:'Sleep', colour:'Navy Silk', hex:'#1a2740', bg:'bg-black-p', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
   {id:31, name:'Rosario Dress', shopifyHandle:'rosario-dress', cat:'Dresses', colour:'Midnight Blue', hex:'#1a2340', bg:'bg-black-p', section:'women', price:890, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'rosario-1.jpg', photos:['rosario-1.jpg','rosario-2.jpg','rosario-3.jpg','rosario-4.jpg','rosario-5.jpg','rosario-6.jpg'], desc:'Maxi dress with puffed sleeves and a round neckline. High-waisted, with a self-tie sash and deeply pleated skirt that falls to the floor. Mother-of-pearl buttons through the front.'},
   {id:61, name:'Summer Dress', shopifyHandle:'summer-dress-sky-stripe', cat:'Dresses', colour:'Sky Stripe', hex:'#8cadd4', bg:'bg-stone', section:'women', price:420, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'summer-dress-sky-stripe-1.jpg', photos:['summer-dress-sky-stripe-1.jpg','summer-dress-sky-stripe-2.jpg','summer-dress-sky-stripe-3.jpg'], video:'summer-dress-sky-stripe.mp4', desc:'Mini dress in 100% cotton. Straight neckline with tie-shoulder straps. A-line skirt with a long self-tie belt at the waist. Fully lined in the same fabric.'},
@@ -1601,7 +1643,7 @@ function goProd(id){
     },
     'The Swimsuit': {
       details: '80% Polyamide, 20% Elastane.\nMade in Lima, Perú.',
-      sizeFit: 'Fitted. Model is 5\'9" and wears a size XS. True to size.',
+      sizeFit: 'Fitted. Model is 5\'9" and wears a size XS. If between sizes, size down.',
       care: 'A smooth, supportive stretch fabric that holds its shape in and out of the water. Rinse in cold water after each wear. Do not machine wash, tumble dry, or wring; lay flat to dry away from direct sunlight.'
     },
     'The Bikini': {
@@ -1718,6 +1760,7 @@ const variants = PRODUCTS.filter(x => x.name === p.name && x.section === p.secti
     cr.innerHTML = `<div class="swatch on" style="${single}"></div><span class="colour-lbl" id="colourLbl">${p.colour}</span>`;
   }
   const firstAvail=p.sizes.find(s=>(p.stock[s]||0)>0);
+  document.getElementById('sizeGuideLnk').style.display = (p.name==='The Bikini'||p.name==='The Swimsuit') ? '' : 'none';
   if(p.name==='The Bikini'){
     const part=(label,key)=>`<p class="f-label" style="margin:14px 0 8px">${label}</p><div style="display:flex;gap:8px;flex-wrap:wrap">`+p.sizes.map(s=>{
       const q=p.stock[s]||0,oos=q===0;
@@ -1972,6 +2015,210 @@ function updateStockInfo(sz){
   else if(q===1){info.textContent='Only 1 left';btn.disabled=false;btn.textContent='Add to Bag';}
   else{info.textContent='';btn.disabled=false;btn.textContent='Add to Bag';}
 }
+
+
+/* ── Bikini sizing guide ── */
+const SIZING_TXT={
+en:{title:'Sizing',q:'Are you looking for sizing for bikini tops or bottoms?',tops:'Tops',bottoms:'Bottoms',coverage:'Coverage',
+ topNote:'Our bikini top is a triangle cut. The measurements below are for triangle coverage.',triangle:'Triangle',
+ botNote:'Our bikini bottom is a cheeky cut. For cheekier coverage, it can be worn back to front.',cheeky:'Cheeky',
+ size:'Size',cup:'Cup Size',underbust:'Underbust',overbust:'Bust',waist:'Waist',hip:'Hip',
+ how:'How to Measure',tipsT:'Tips for the Perfect Fit',
+ topSteps:[['Finding your underbust measurement','Wrap the tape around your ribcage, directly beneath your bust, where a bra band would sit. Keep it parallel to the floor with your arms relaxed at your sides. Exhale, draw the tape snug and note the measurement.'],
+           ['Finding your bust measurement','With your arms at your sides, wrap the tape across your back and around the fullest part of your bust, keeping it level. Hold it lightly, without pressing. Use both measurements to find your size in the chart above.']],
+ botSteps:[['Finding your waist measurement','Wrap the tape around the narrowest part of your waist, usually just above the navel. Keep it level and comfortably snug.'],
+           ['Finding your hip measurement','Stand with your feet together and wrap the tape around the fullest part of your hips, keeping it parallel to the floor. Use both measurements to find your size in the chart above.']],
+ topTips:['Measure over bare skin or an unpadded bra.','The triangles should lie flat against the bust; a gap suggests a smaller size.','Tie the neck and back straps so they feel secure but not tight.',"The fabric should cover the bust fully; if it spills at the sides or top, choose a larger size.","If you are between sizes, choose the larger for more coverage or the smaller for a closer fit."],
+ botTips:['Adjust the side ties for a secure, comfortable fit.','The bottom should sit smoothly at the hip without digging in.',"The front should lie flat against the body without gaping.","If you are between sizes, choose the larger for more coverage or the smaller for a closer fit."],help:"Need more help?",helpMsg:"Hello, I would like help choosing my bikini size.",swSteps:[["Finding your bust measurement", "With your arms at your sides, wrap the tape across your back and around the fullest part of your bust, keeping it level. Hold it lightly, without pressing."], ["Finding your waist measurement", "Wrap the tape around the narrowest part of your waist, usually just above the navel. Keep it level and comfortably snug."], ["Finding your hip measurement", "Stand with your feet together and wrap the tape around the fullest part of your hips, keeping it parallel to the floor. Use all three measurements to find your size in the chart above."]],swTips:["Measure over bare skin or close-fitting underwear.", "If you are between sizes, choose the smaller size.", "The straps should rest flat on the shoulders without digging in.", "The swimsuit should lie smoothly against the body, with no gaping at the neckline or the back."],swMsg:"Hello, I would like help choosing my swimsuit size."},
+es:{title:'Guía de tallas',q:'¿Busca la guía de tallas para tops o bottoms?',tops:'Tops',bottoms:'Bottoms',coverage:'Cobertura',
+ topNote:'Nuestro top es de corte triángulo. Las medidas a continuación corresponden a esta cobertura.',triangle:'Triángulo',
+ botNote:'Nuestro bottom es de corte cheeky. Para una cobertura aún más cheeky, puede usarse al revés.',cheeky:'Cheeky',
+ size:'Talla',cup:'Copa',underbust:'Bajo busto',overbust:'Busto',waist:'Cintura',hip:'Cadera',
+ how:'Cómo medirse',tipsT:'Consejos para un ajuste perfecto',
+ topSteps:[['Medida de bajo busto','Rodee la caja torácica con la cinta, justo debajo del busto, donde iría la banda del sostén. Manténgala paralela al suelo, con los brazos relajados a los costados. Exhale, ajuste la cinta y anote la medida.'],
+           ['Medida de busto','Con los brazos a los costados, pase la cinta por la espalda y alrededor de la parte más amplia del busto, manteniéndola nivelada. Sujétela con suavidad, sin presionar. Con ambas medidas, busque su talla en la tabla.']],
+ botSteps:[['Medida de cintura','Rodee con la cinta la parte más estrecha de la cintura, normalmente justo encima del ombligo. Manténgala nivelada y cómodamente ajustada.'],
+           ['Medida de cadera','De pie y con los pies juntos, rodee con la cinta la parte más amplia de la cadera, paralela al suelo. Con ambas medidas, busque su talla en la tabla.']],
+ topTips:['Mídase sobre la piel o con un sostén sin relleno.','Los triángulos deben quedar planos sobre el busto; si se separan, conviene una talla menor.','Ate los tirantes del cuello y la espalda de modo que queden firmes pero no apretados.',"La tela debe cubrir el busto por completo; si se sale por los lados o por arriba, elija una talla mayor.","Si está entre dos tallas, elija la mayor para más cobertura o la menor para un ajuste más ceñido."],
+ botTips:['Ajuste los lazos laterales para un calce firme y cómodo.','El bottom debe asentarse sobre la cadera sin marcar la piel.',"La parte delantera debe quedar plana sobre el cuerpo, sin separarse.","Si está entre dos tallas, elija la mayor para más cobertura o la menor para un ajuste más ceñido."],help:"¿Necesita ayuda?",helpMsg:"Hola, quisiera ayuda para elegir mi talla de bikini.",swSteps:[["Medida de busto", "Con los brazos a los costados, pase la cinta por la espalda y alrededor de la parte más amplia del busto, manteniéndola nivelada. Sujétela con suavidad, sin presionar."], ["Medida de cintura", "Rodee con la cinta la parte más estrecha de la cintura, normalmente justo encima del ombligo. Manténgala nivelada y cómodamente ajustada."], ["Medida de cadera", "De pie y con los pies juntos, rodee con la cinta la parte más amplia de la cadera, paralela al suelo. Con las tres medidas, busque su talla en la tabla."]],swTips:["Mídase sobre la piel o con ropa interior ajustada.", "Si está entre dos tallas, elija la menor.", "Los tirantes deben apoyarse planos sobre los hombros, sin marcar la piel.", "La ropa de baño debe asentarse lisa sobre el cuerpo, sin separarse en el escote ni en la espalda."],swMsg:"Hola, quisiera ayuda para elegir mi talla de ropa de baño."},
+fr:{title:'Guide des tailles',q:'Recherchez-vous les tailles des hauts ou des bas de bikini ?',tops:'Hauts',bottoms:'Bas',coverage:'Couvrance',
+ topNote:'Notre haut de bikini est une coupe triangle. Les mesures ci-dessous correspondent à cette couvrance.',triangle:'Triangle',
+ botNote:'Notre bas de bikini est une coupe échancrée (cheeky). Pour une couvrance encore plus réduite, il peut se porter à l’envers.',cheeky:'Cheeky',
+ size:'Taille',cup:'Bonnet',underbust:'Tour de dessous de poitrine',overbust:'Tour de poitrine',waist:'Tour de taille',hip:'Tour de hanches',
+ how:'Comment prendre vos mesures',tipsT:'Conseils pour un ajustement parfait',
+ topSteps:[['Tour de dessous de poitrine','Placez le mètre ruban autour de la cage thoracique, juste sous la poitrine, à l’endroit où repose la bande d’un soutien-gorge. Gardez-le parallèle au sol, les bras détendus le long du corps. Expirez, ajustez le ruban et notez la mesure.'],
+           ['Tour de poitrine','Les bras le long du corps, passez le ruban dans le dos et autour de la partie la plus forte de la poitrine, bien à l’horizontale. Tenez-le légèrement, sans serrer. Reportez vos deux mesures dans le tableau ci-dessus pour trouver votre taille.']],
+ botSteps:[['Tour de taille','Placez le ruban autour de la partie la plus étroite de la taille, généralement juste au-dessus du nombril. Gardez-le horizontal et confortablement ajusté.'],
+           ['Tour de hanches','Debout, pieds joints, placez le ruban autour de la partie la plus forte des hanches, parallèle au sol. Reportez vos deux mesures dans le tableau ci-dessus pour trouver votre taille.']],
+ topTips:['Mesurez-vous à même la peau ou avec un soutien-gorge non rembourré.','Les triangles doivent reposer à plat sur la poitrine ; un espace indique qu’une taille plus petite convient mieux.','Nouez les attaches du cou et du dos pour qu’elles tiennent sans serrer.',"Le tissu doit couvrir entièrement la poitrine ; s’il déborde sur les côtés ou en haut, choisissez la taille au-dessus.","Si vous hésitez entre deux tailles, choisissez la plus grande pour plus de couvrance ou la plus petite pour un ajustement plus près du corps."],
+ botTips:['Ajustez les liens sur les côtés pour un maintien sûr et confortable.','Le bas doit épouser les hanches sans marquer la peau.',"L’avant doit reposer à plat contre le corps, sans bâiller.","Si vous hésitez entre deux tailles, choisissez la plus grande pour plus de couvrance ou la plus petite pour un ajustement plus près du corps."],help:"Besoin d’aide ?",helpMsg:"Bonjour, j’aimerais de l’aide pour choisir ma taille de bikini.",swSteps:[["Tour de poitrine", "Les bras le long du corps, passez le ruban dans le dos et autour de la partie la plus forte de la poitrine, bien à l’horizontale. Tenez-le légèrement, sans serrer."], ["Tour de taille", "Placez le ruban autour de la partie la plus étroite de la taille, généralement juste au-dessus du nombril. Gardez-le horizontal et confortablement ajusté."], ["Tour de hanches", "Debout, pieds joints, placez le ruban autour de la partie la plus forte des hanches, parallèle au sol. Reportez vos trois mesures dans le tableau ci-dessus pour trouver votre taille."]],swTips:["Mesurez-vous à même la peau ou avec des sous-vêtements ajustés.", "Si vous hésitez entre deux tailles, choisissez la plus petite.", "Les bretelles doivent reposer à plat sur les épaules sans marquer la peau.", "Le maillot doit épouser le corps sans bâiller à l’encolure ni dans le dos."],swMsg:"Bonjour, j’aimerais de l’aide pour choisir ma taille de maillot de bain."},
+it:{title:'Guida alle taglie',q:'Cerchi le taglie per i top o per gli slip del bikini?',tops:'Top',bottoms:'Slip',coverage:'Copertura',
+ topNote:'Il nostro top è a triangolo. Le misure qui sotto si riferiscono a questa copertura.',triangle:'Triangolo',
+ botNote:'Il nostro slip ha un taglio sgambato (cheeky). Per una copertura ancora più ridotta, si può indossare al contrario.',cheeky:'Cheeky',
+ size:'Taglia',cup:'Coppa',underbust:'Sottoseno',overbust:'Seno',waist:'Vita',hip:'Fianchi',
+ how:'Come prendere le misure',tipsT:'Consigli per la vestibilità perfetta',
+ topSteps:[['Misura del sottoseno','Avvolgi il metro intorno alla gabbia toracica, subito sotto il seno, dove poggerebbe la fascia del reggiseno. Tienilo parallelo al pavimento, con le braccia rilassate lungo i fianchi. Espira, stringi il metro e annota la misura.'],
+           ['Misura del seno','Con le braccia lungo i fianchi, passa il metro dietro la schiena e intorno al punto più pieno del seno, mantenendolo orizzontale. Tienilo leggero, senza stringere. Con entrambe le misure, trova la tua taglia nella tabella qui sopra.']],
+ botSteps:[['Misura della vita','Avvolgi il metro intorno al punto più stretto della vita, di solito appena sopra l’ombelico. Tienilo orizzontale e comodamente aderente.'],
+           ['Misura dei fianchi','In piedi, con i piedi uniti, avvolgi il metro intorno al punto più ampio dei fianchi, parallelo al pavimento. Con entrambe le misure, trova la tua taglia nella tabella qui sopra.']],
+ topTips:['Prendi le misure sulla pelle o con un reggiseno non imbottito.','I triangoli devono aderire al seno; se si staccano, è meglio una taglia più piccola.','Annoda i lacci al collo e sulla schiena in modo che siano saldi ma non stretti.',"Il tessuto deve coprire completamente il seno; se fuoriesce ai lati o in alto, scegli una taglia più grande.","Se sei tra due taglie, scegli la più grande per una maggiore copertura o la più piccola per una vestibilità più aderente."],
+ botTips:['Regola i lacci laterali per una vestibilità sicura e comoda.','Lo slip deve appoggiarsi sui fianchi senza segnare la pelle.',"La parte anteriore deve aderire al corpo senza aprirsi.","Se sei tra due taglie, scegli la più grande per una maggiore copertura o la più piccola per una vestibilità più aderente."],help:"Hai bisogno di aiuto?",helpMsg:"Buongiorno, vorrei un aiuto per scegliere la taglia del bikini.",swSteps:[["Misura del seno", "Con le braccia lungo i fianchi, passa il metro dietro la schiena e intorno al punto più pieno del seno, mantenendolo orizzontale. Tienilo leggero, senza stringere."], ["Misura della vita", "Avvolgi il metro intorno al punto più stretto della vita, di solito appena sopra l’ombelico. Tienilo orizzontale e comodamente aderente."], ["Misura dei fianchi", "In piedi, con i piedi uniti, avvolgi il metro intorno al punto più ampio dei fianchi, parallelo al pavimento. Con le tre misure, trova la tua taglia nella tabella qui sopra."]],swTips:["Prendi le misure sulla pelle o con biancheria aderente.", "Se sei tra due taglie, scegli la più piccola.", "Le spalline devono appoggiarsi piatte sulle spalle senza segnare la pelle.", "Il costume deve aderire al corpo senza aprirsi sullo scollo né sulla schiena."],swMsg:"Buongiorno, vorrei un aiuto per scegliere la taglia del costume intero."},
+de:{title:'Größentabelle',q:'Suchen Sie die Größen für Bikinioberteile oder -hosen?',tops:'Oberteile',bottoms:'Hosen',coverage:'Bedeckung',
+ topNote:'Unser Bikinioberteil hat einen Triangel-Schnitt. Die folgenden Maße gelten für diese Bedeckung.',triangle:'Triangel',
+ botNote:'Unsere Bikinihose hat einen Cheeky-Schnitt. Für noch weniger Bedeckung kann sie verkehrt herum getragen werden.',cheeky:'Cheeky',
+ size:'Größe',cup:'Cup',underbust:'Unterbrustweite',overbust:'Brustumfang',waist:'Taille',hip:'Hüfte',
+ how:'So messen Sie richtig',tipsT:'Tipps für die perfekte Passform',
+ topSteps:[['Unterbrustweite messen','Legen Sie das Maßband direkt unter der Brust um den Brustkorb, dort, wo das Unterbrustband eines BHs sitzt. Halten Sie es parallel zum Boden, die Arme locker an der Seite. Atmen Sie aus, ziehen Sie das Maßband straff und notieren Sie den Wert.'],
+           ['Brustumfang messen','Legen Sie das Maßband bei herabhängenden Armen über den Rücken und um die vollste Stelle der Brust, waagerecht. Halten Sie es locker, ohne einzuschnüren. Ermitteln Sie mit beiden Maßen Ihre Größe in der Tabelle oben.']],
+ botSteps:[['Taille messen','Legen Sie das Maßband um die schmalste Stelle der Taille, meist knapp über dem Bauchnabel. Halten Sie es waagerecht und angenehm straff.'],
+           ['Hüfte messen','Stellen Sie die Füße zusammen und legen Sie das Maßband um die breiteste Stelle der Hüfte, parallel zum Boden. Ermitteln Sie mit beiden Maßen Ihre Größe in der Tabelle oben.']],
+ topTips:['Messen Sie auf der Haut oder über einem ungepolsterten BH.','Die Dreiecke sollten flach auf der Brust aufliegen; stehen sie ab, ist eine kleinere Größe besser.','Binden Sie die Bänder an Nacken und Rücken so, dass sie sicher halten, aber nicht einschneiden.',"Der Stoff sollte die Brust vollständig bedecken; quillt sie seitlich oder oben heraus, wählen Sie eine Größe größer.","Wenn Sie zwischen zwei Größen liegen, wählen Sie die größere für mehr Bedeckung oder die kleinere für einen enganliegenden Sitz."],
+ botTips:['Passen Sie die seitlichen Bänder für einen sicheren, bequemen Sitz an.','Die Hose sollte glatt auf der Hüfte sitzen, ohne einzuschneiden.',"Die Vorderseite sollte flach am Körper anliegen, ohne abzustehen.","Wenn Sie zwischen zwei Größen liegen, wählen Sie die größere für mehr Bedeckung oder die kleinere für einen enganliegenden Sitz."],help:"Brauchen Sie Hilfe?",helpMsg:"Hallo, ich hätte gern Hilfe bei der Wahl meiner Bikinigröße.",swSteps:[["Brustumfang messen", "Legen Sie das Maßband bei herabhängenden Armen über den Rücken und um die vollste Stelle der Brust, waagerecht. Halten Sie es locker, ohne einzuschnüren."], ["Taille messen", "Legen Sie das Maßband um die schmalste Stelle der Taille, meist knapp über dem Bauchnabel. Halten Sie es waagerecht und angenehm straff."], ["Hüfte messen", "Stellen Sie die Füße zusammen und legen Sie das Maßband um die breiteste Stelle der Hüfte, parallel zum Boden. Ermitteln Sie mit allen drei Maßen Ihre Größe in der Tabelle oben."]],swTips:["Messen Sie auf der Haut oder über enganliegender Unterwäsche.", "Wenn Sie zwischen zwei Größen liegen, wählen Sie die kleinere.", "Die Träger sollten flach auf den Schultern liegen, ohne einzuschneiden.", "Der Badeanzug sollte glatt am Körper anliegen und weder am Ausschnitt noch am Rücken abstehen."],swMsg:"Hallo, ich hätte gern Hilfe bei der Wahl meiner Badeanzuggröße."},
+pt:{title:'Guia de tamanhos',q:'Procura os tamanhos de tops ou calcinhas de biquíni?',tops:'Tops',bottoms:'Calcinhas',coverage:'Cobertura',
+ topNote:'O nosso top é de corte triângulo. As medidas abaixo correspondem a esta cobertura.',triangle:'Triângulo',
+ botNote:'A nossa calcinha tem corte cheeky. Para uma cobertura ainda menor, pode ser usada ao contrário.',cheeky:'Cheeky',
+ size:'Tamanho',cup:'Copa',underbust:'Abaixo do busto',overbust:'Busto',waist:'Cintura',hip:'Quadril',
+ how:'Como tirar as medidas',tipsT:'Dicas para o ajuste perfeito',
+ topSteps:[['Medida abaixo do busto','Passe a fita métrica à volta das costelas, logo abaixo do busto, onde ficaria a faixa do sutiã. Mantenha-a paralela ao chão, com os braços relaxados ao lado do corpo. Expire, ajuste a fita e anote a medida.'],
+           ['Medida do busto','Com os braços ao lado do corpo, passe a fita pelas costas e à volta da parte mais cheia do busto, mantendo-a nivelada. Segure-a com leveza, sem apertar. Com as duas medidas, encontre o seu tamanho na tabela acima.']],
+ botSteps:[['Medida da cintura','Passe a fita à volta da parte mais estreita da cintura, normalmente logo acima do umbigo. Mantenha-a nivelada e confortavelmente ajustada.'],
+           ['Medida do quadril','De pé e com os pés juntos, passe a fita à volta da parte mais larga do quadril, paralela ao chão. Com as duas medidas, encontre o seu tamanho na tabela acima.']],
+ topTips:['Tire as medidas sobre a pele ou com um sutiã sem enchimento.','Os triângulos devem assentar planos sobre o busto; se ficarem afastados, prefira um tamanho menor.','Amarre as alças do pescoço e das costas de forma firme, mas sem apertar.',"O tecido deve cobrir totalmente o busto; se sobrar nas laterais ou em cima, escolha um tamanho maior.","Se estiver entre dois tamanhos, escolha o maior para mais cobertura ou o menor para um ajuste mais justo."],
+ botTips:['Ajuste as amarrações laterais para um encaixe firme e confortável.','A calcinha deve assentar no quadril sem marcar a pele.',"A frente deve assentar plana sobre o corpo, sem se afastar.","Se estiver entre dois tamanhos, escolha o maior para mais cobertura ou o menor para um ajuste mais justo."],help:"Precisa de ajuda?",helpMsg:"Olá, gostaria de ajuda para escolher o meu tamanho de biquíni.",swSteps:[["Medida do busto", "Com os braços ao lado do corpo, passe a fita pelas costas e à volta da parte mais cheia do busto, mantendo-a nivelada. Segure-a com leveza, sem apertar."], ["Medida da cintura", "Passe a fita à volta da parte mais estreita da cintura, normalmente logo acima do umbigo. Mantenha-a nivelada e confortavelmente ajustada."], ["Medida do quadril", "De pé e com os pés juntos, passe a fita à volta da parte mais larga do quadril, paralela ao chão. Com as três medidas, encontre o seu tamanho na tabela acima."]],swTips:["Tire as medidas sobre a pele ou com roupa interior justa.", "Se estiver entre dois tamanhos, escolha o menor.", "As alças devem assentar planas nos ombros, sem marcar a pele.", "O maiô deve assentar liso sobre o corpo, sem se afastar no decote nem nas costas."],swMsg:"Olá, gostaria de ajuda para escolher o meu tamanho de maiô."},
+zh:{title:'尺码指南',q:'您需要比基尼上装还是下装的尺码？',tops:'上装',bottoms:'下装',coverage:'包覆款式',
+ topNote:'我们的比基尼上装为三角杯款式，以下尺码适用于三角杯。',triangle:'三角杯',
+ botNote:'我们的比基尼下装为半包臀款式。如需更少包覆，可前后反穿。',cheeky:'半包臀',
+ size:'尺码',cup:'罩杯',underbust:'下胸围',overbust:'胸围',waist:'腰围',hip:'臀围',
+ how:'测量方法',tipsT:'完美合身小贴士',
+ topSteps:[['测量下胸围','将软尺绕过胸腔，紧贴胸部下方、即文胸底围所在的位置。保持软尺与地面平行，双臂自然垂于身侧。呼气，拉紧软尺并记录数值。'],
+           ['测量胸围','双臂自然下垂，将软尺绕过背部及胸部最丰满处，保持水平。轻轻拉住，不要勒紧。根据两项尺寸，在上方表格中找到您的尺码。']],
+ botSteps:[['测量腰围','将软尺绕过腰部最细处，通常在肚脐上方。保持水平，松紧适中。'],
+           ['测量臀围','双脚并拢站立，将软尺绕过臀部最宽处，并与地面平行。根据两项尺寸，在上方表格中找到您的尺码。']],
+ topTips:['请贴身测量，或穿着无衬垫文胸测量。','三角杯应平贴胸部；如有空隙，建议选择小一码。','系好颈部和背部系带，以稳固但不紧勒为宜。',"面料应完全包覆胸部；如从两侧或上方溢出，请选择大一码。","如介于两个尺码之间，想要更多包覆请选大一码，想要更贴身请选小一码。"],
+ botTips:['调整两侧系带，确保稳固舒适。','下装应平顺贴合臀部，不勒压皮肤。',"前片应平贴身体，不应翘起。","如介于两个尺码之间，想要更多包覆请选大一码，想要更贴身请选小一码。"],help:"需要更多帮助？",helpMsg:"您好，我想请您帮我选择比基尼尺码。",swSteps:[["测量胸围", "双臂自然下垂，将软尺绕过背部及胸部最丰满处，保持水平。轻轻拉住，不要勒紧。"], ["测量腰围", "将软尺绕过腰部最细处，通常在肚脐上方。保持水平，松紧适中。"], ["测量臀围", "双脚并拢站立，将软尺绕过臀部最宽处，并与地面平行。根据三项尺寸，在上方表格中找到您的尺码。"]],swTips:["请贴身测量，或穿着贴身内衣测量。", "如介于两个尺码之间，请选择小一码。", "肩带应平贴肩部，不勒压皮肤。", "泳衣应平顺贴合身体，领口和背部不应翘起。"],swMsg:"您好，我想请您帮我选择连体泳衣的尺码。"},
+ja:{title:'サイズガイド',q:'ビキニトップとボトム、どちらのサイズをお探しですか？',tops:'トップ',bottoms:'ボトム',coverage:'カバー範囲',
+ topNote:'ビキニトップはトライアングルカットです。以下のサイズはトライアングル用です。',triangle:'トライアングル',
+ botNote:'ビキニボトムはチーキーカットです。より浅めのカバーにしたい場合は、前後逆に着用することもできます。',cheeky:'チーキー',
+ size:'サイズ',cup:'カップ',underbust:'アンダーバスト',overbust:'バスト',waist:'ウエスト',hip:'ヒップ',
+ how:'採寸方法',tipsT:'ぴったりフィットのコツ',
+ topSteps:[['アンダーバストの測り方','ブラジャーのアンダーベルトが当たる位置、バストのすぐ下にメジャーを一周させます。床と平行に保ち、腕は体の横に自然に下ろします。息を吐いてメジャーを締め、数値を記録します。'],
+           ['バストの測り方','腕を体の横に下ろし、背中からバストの最も高い位置にメジャーを水平に一周させます。締め付けず、軽く添える程度にします。両方の数値をもとに、上の表でサイズをお選びください。']],
+ botSteps:[['ウエストの測り方','ウエストの最も細い位置（通常はおへその少し上）にメジャーを一周させます。水平に保ち、ほどよくフィットさせます。'],
+           ['ヒップの測り方','足をそろえて立ち、ヒップの最も広い位置にメジャーを床と平行に一周させます。両方の数値をもとに、上の表でサイズをお選びください。']],
+ topTips:['素肌、またはパッドなしのブラジャーの上から測ってください。','トライアングルはバストに沿って平らに収まるのが理想です。浮く場合はワンサイズ小さめをお選びください。','首と背中のストラップは、しっかりと、しかし締め付けすぎないように結んでください。',"生地がバストをしっかり覆うのが理想です。脇や上からはみ出す場合は、ワンサイズ大きめをお選びください。","サイズで迷う場合は、カバー力を重視するなら大きめ、フィット感を重視するなら小さめをお選びください。"],
+ botTips:['サイドのリボンで、安定した心地よいフィットに調整してください。','ボトムは肌に食い込まず、ヒップになめらかに沿うのが理想です。',"前面が浮かずに、体に平らに沿うのが理想です。","サイズで迷う場合は、カバー力を重視するなら大きめ、フィット感を重視するなら小さめをお選びください。"],help:"お困りですか？",helpMsg:"こんにちは。ビキニのサイズ選びについて相談したいです。",swSteps:[["バストの測り方", "腕を体の横に下ろし、背中からバストの最も高い位置にメジャーを水平に一周させます。締め付けず、軽く添える程度にします。"], ["ウエストの測り方", "ウエストの最も細い位置（通常はおへその少し上）にメジャーを一周させます。水平に保ち、ほどよくフィットさせます。"], ["ヒップの測り方", "足をそろえて立ち、ヒップの最も広い位置にメジャーを床と平行に一周させます。3つの数値をもとに、上の表でサイズをお選びください。"]],swTips:["素肌、または体にフィットする下着の上から測ってください。", "サイズで迷う場合は、小さいほうをお選びください。", "ストラップは肩に平らに沿い、食い込まないのが理想です。", "水着は体になめらかに沿い、胸元や背中が浮かないのが理想です。"],swMsg:"こんにちは。水着のサイズ選びについて相談したいです。"},
+ko:{title:'사이즈 가이드',q:'비키니 상의와 하의 중 어떤 사이즈를 찾으시나요?',tops:'상의',bottoms:'하의',coverage:'커버리지',
+ topNote:'저희 비키니 상의는 트라이앵글 컷입니다. 아래 치수는 트라이앵글 커버리지 기준입니다.',triangle:'트라이앵글',
+ botNote:'저희 비키니 하의는 치키 컷입니다. 더 과감한 커버리지를 원하시면 앞뒤를 바꿔 착용하실 수 있습니다.',cheeky:'치키',
+ size:'사이즈',cup:'컵',underbust:'밑가슴둘레',overbust:'가슴둘레',waist:'허리둘레',hip:'엉덩이둘레',
+ how:'치수 재는 방법',tipsT:'완벽한 핏을 위한 팁',
+ topSteps:[['밑가슴둘레 재기','브라 밑밴드가 닿는 위치, 가슴 바로 아래 흉곽에 줄자를 두릅니다. 바닥과 평행하게 유지하고 팔은 몸 옆에 편하게 내립니다. 숨을 내쉬며 줄자를 밀착시킨 뒤 치수를 기록합니다.'],
+           ['가슴둘레 재기','팔을 몸 옆에 내린 상태에서 줄자를 등 뒤로 돌려 가슴의 가장 풍만한 부분을 수평으로 감쌉니다. 조이지 말고 가볍게 대어 주세요. 두 치수를 바탕으로 위 표에서 사이즈를 확인하세요.']],
+ botSteps:[['허리둘레 재기','허리의 가장 가는 부분, 보통 배꼽 바로 위에 줄자를 두릅니다. 수평을 유지하고 편안하게 밀착시킵니다.'],
+           ['엉덩이둘레 재기','발을 모으고 서서 엉덩이의 가장 넓은 부분에 줄자를 바닥과 평행하게 두릅니다. 두 치수를 바탕으로 위 표에서 사이즈를 확인하세요.']],
+ topTips:['맨살이나 패드 없는 브라 위에서 재 주세요.','트라이앵글은 가슴에 평평하게 밀착되어야 합니다. 들뜬다면 한 사이즈 작은 것을 권합니다.','목과 등의 끈은 단단하되 조이지 않게 묶어 주세요.',"원단이 가슴을 완전히 감싸야 합니다. 옆이나 위로 넘친다면 한 사이즈 큰 것을 선택하세요.","두 사이즈 사이라면, 더 넉넉한 커버리지를 원하시면 큰 사이즈를, 더 밀착된 핏을 원하시면 작은 사이즈를 선택하세요."],
+ botTips:['양옆 끈으로 안정적이고 편안하게 조절하세요.','하의는 피부를 파고들지 않고 엉덩이에 매끄럽게 맞아야 합니다.',"앞판이 들뜨지 않고 몸에 평평하게 밀착되어야 합니다.","두 사이즈 사이라면, 더 넉넉한 커버리지를 원하시면 큰 사이즈를, 더 밀착된 핏을 원하시면 작은 사이즈를 선택하세요."],help:"도움이 필요하신가요?",helpMsg:"안녕하세요, 비키니 사이즈 선택에 도움을 받고 싶습니다.",swSteps:[["가슴둘레 재기", "팔을 몸 옆에 내린 상태에서 줄자를 등 뒤로 돌려 가슴의 가장 풍만한 부분을 수평으로 감쌉니다. 조이지 말고 가볍게 대어 주세요."], ["허리둘레 재기", "허리의 가장 가는 부분, 보통 배꼽 바로 위에 줄자를 두릅니다. 수평을 유지하고 편안하게 밀착시킵니다."], ["엉덩이둘레 재기", "발을 모으고 서서 엉덩이의 가장 넓은 부분에 줄자를 바닥과 평행하게 두릅니다. 세 치수를 바탕으로 위 표에서 사이즈를 확인하세요."]],swTips:["맨살이나 몸에 맞는 속옷 위에서 재 주세요.", "두 사이즈 사이라면 작은 사이즈를 선택하세요.", "어깨끈은 피부를 파고들지 않고 어깨에 평평하게 놓여야 합니다.", "수영복은 몸에 매끄럽게 밀착되어야 하며, 네크라인이나 등이 들뜨지 않아야 합니다."],swMsg:"안녕하세요, 수영복 사이즈 선택에 도움을 받고 싶습니다."},
+ar:{title:'دليل المقاسات',q:'هل تبحثين عن مقاسات الجزء العلوي أم السفلي من البيكيني؟',tops:'الجزء العلوي',bottoms:'الجزء السفلي',coverage:'التغطية',
+ topNote:'الجزء العلوي من البيكيني بقصّة مثلثة. المقاسات أدناه خاصة بهذه التغطية.',triangle:'مثلث',
+ botNote:'الجزء السفلي من البيكيني بقصّة «تشيكي». لتغطية أقل، يمكن ارتداؤه معكوسًا من الأمام إلى الخلف.',cheeky:'تشيكي',
+ size:'المقاس',cup:'الكوب',underbust:'محيط أسفل الصدر',overbust:'محيط الصدر',waist:'الخصر',hip:'الورك',
+ how:'طريقة أخذ المقاسات',tipsT:'نصائح للحصول على المقاس المثالي',
+ topSteps:[['قياس محيط أسفل الصدر','لفّي شريط القياس حول القفص الصدري مباشرة أسفل الصدر، حيث يستقر حزام حمالة الصدر. أبقيه موازيًا للأرض وذراعاك مسترخيتان إلى جانبيك. ازفري، ثم شدّي الشريط برفق وسجّلي القياس.'],
+           ['قياس محيط الصدر','مع إبقاء ذراعيك إلى جانبيك، مرّري الشريط حول الظهر وحول أعرض جزء من الصدر بشكل أفقي. أمسكيه بخفة دون ضغط. استخدمي القياسين لمعرفة مقاسك في الجدول أعلاه.']],
+ botSteps:[['قياس الخصر','لفّي الشريط حول أضيق جزء من الخصر، وعادةً ما يكون فوق السرّة مباشرة. أبقيه أفقيًا ومشدودًا بشكل مريح.'],
+           ['قياس الورك','قفي والقدمان متلاصقتان، ولفّي الشريط حول أعرض جزء من الوركين موازيًا للأرض. استخدمي القياسين لمعرفة مقاسك في الجدول أعلاه.']],
+ topTips:['خذي القياس على البشرة مباشرة أو فوق حمالة صدر بلا حشوة.','يجب أن يستقر المثلثان بشكل مسطح على الصدر؛ وإذا ظهرت فجوة فالأنسب مقاس أصغر.','اربطي أشرطة الرقبة والظهر بحيث تكون ثابتة دون أن تضغط.',"يجب أن يغطي القماش الصدر بالكامل؛ وإذا برز من الجانبين أو من الأعلى، فاختاري مقاسًا أكبر.","إذا كنتِ بين مقاسين، فاختاري الأكبر لتغطية أكثر أو الأصغر لمقاس أكثر إحكامًا."],
+ botTips:['اضبطي الأربطة الجانبية للحصول على ثبات وراحة.','يجب أن يستقر الجزء السفلي على الورك بسلاسة دون أن يضغط على البشرة.',"يجب أن تستقر الواجهة الأمامية بشكل مسطح على الجسم دون أن تنفصل عنه.","إذا كنتِ بين مقاسين، فاختاري الأكبر لتغطية أكثر أو الأصغر لمقاس أكثر إحكامًا."],help:"هل تحتاجين إلى مساعدة؟",helpMsg:"مرحبًا، أودّ المساعدة في اختيار مقاس البيكيني.",swSteps:[["قياس محيط الصدر", "مع إبقاء ذراعيك إلى جانبيك، مرّري الشريط حول الظهر وحول أعرض جزء من الصدر بشكل أفقي. أمسكيه بخفة دون ضغط."], ["قياس الخصر", "لفّي الشريط حول أضيق جزء من الخصر، وعادةً ما يكون فوق السرّة مباشرة. أبقيه أفقيًا ومشدودًا بشكل مريح."], ["قياس الورك", "قفي والقدمان متلاصقتان، ولفّي الشريط حول أعرض جزء من الوركين موازيًا للأرض. استخدمي القياسات الثلاثة لمعرفة مقاسك في الجدول أعلاه."]],swTips:["خذي القياس على البشرة مباشرة أو فوق ملابس داخلية ملاصقة للجسم.", "إذا كنتِ بين مقاسين، فاختاري المقاس الأصغر.", "يجب أن تستقر الحمالات بشكل مسطح على الكتفين دون أن تضغط على البشرة.", "يجب أن يستقر لباس السباحة بسلاسة على الجسم، دون أن ينفصل عند فتحة العنق أو الظهر."],swMsg:"مرحبًا، أودّ المساعدة في اختيار مقاس لباس السباحة."},
+ru:{title:'Таблица размеров',q:'Вам нужны размеры верха или низа бикини?',tops:'Верх',bottoms:'Низ',coverage:'Покрой',
+ topNote:'Верх бикини — треугольного кроя. Мерки ниже указаны для этого покроя.',triangle:'Треугольник',
+ botNote:'Низ бикини — кроя чики (cheeky). Для более открытой посадки его можно носить задом наперёд.',cheeky:'Чики',
+ size:'Размер',cup:'Чашка',underbust:'Обхват под грудью',overbust:'Обхват груди',waist:'Талия',hip:'Бёдра',
+ how:'Как снять мерки',tipsT:'Советы для идеальной посадки',
+ topSteps:[['Обхват под грудью','Оберните сантиметровую ленту вокруг грудной клетки сразу под грудью, там, где проходит лента бюстгальтера. Держите её параллельно полу, руки свободно опущены. Выдохните, слегка натяните ленту и запишите результат.'],
+           ['Обхват груди','Опустив руки, проведите ленту по спине и вокруг самой выступающей части груди, строго горизонтально. Держите ленту свободно, не затягивая. По двум меркам найдите свой размер в таблице выше.']],
+ botSteps:[['Обхват талии','Оберните ленту вокруг самой узкой части талии, обычно чуть выше пупка. Держите её горизонтально, без сильного натяжения.'],
+           ['Обхват бёдер','Встаньте, сомкнув ступни, и оберните ленту вокруг самой широкой части бёдер параллельно полу. По двум меркам найдите свой размер в таблице выше.']],
+ topTips:['Снимайте мерки по обнажённому телу или поверх бюстгальтера без поролона.','Треугольники должны плотно прилегать к груди; если они отходят, лучше выбрать размер меньше.','Завязывайте завязки на шее и спине так, чтобы они надёжно держали, но не стягивали.',"Ткань должна полностью закрывать грудь; если грудь выступает по бокам или сверху, выберите размер больше.","Если вы между двумя размерами, выберите больший для большего покрытия или меньший для более плотной посадки."],
+ botTips:['Отрегулируйте боковые завязки для надёжной и удобной посадки.','Низ должен ровно сидеть на бёдрах, не врезаясь в кожу.',"Передняя часть должна плотно прилегать к телу, не отходя от него.","Если вы между двумя размерами, выберите больший для большего покрытия или меньший для более плотной посадки."],help:"Нужна помощь?",helpMsg:"Здравствуйте, помогите, пожалуйста, подобрать размер бикини.",swSteps:[["Обхват груди", "Опустив руки, проведите ленту по спине и вокруг самой выступающей части груди, строго горизонтально. Держите ленту свободно, не затягивая."], ["Обхват талии", "Оберните ленту вокруг самой узкой части талии, обычно чуть выше пупка. Держите её горизонтально, без сильного натяжения."], ["Обхват бёдер", "Встаньте, сомкнув ступни, и оберните ленту вокруг самой широкой части бёдер параллельно полу. По трём меркам найдите свой размер в таблице выше."]],swTips:["Снимайте мерки по обнажённому телу или поверх облегающего белья.", "Если вы между двумя размерами, выберите меньший.", "Бретели должны ровно лежать на плечах, не врезаясь в кожу.", "Купальник должен гладко прилегать к телу, не отходя в вырезе и на спине."],swMsg:"Здравствуйте, помогите, пожалуйста, подобрать размер купальника."}
+};
+
+const SIZING_ROWS={
+  swimsuit:{cm:[['XS','83 – 88','64 – 70','95 – 100'],['S','89 – 94','71 – 77','101 – 106'],['M','95 – 100','78 – 84','107 – 112']],
+        in:[['XS','32.5 – 34.5','25 – 27.5','37.5 – 39.5'],['S','35 – 37','28 – 30','40 – 41.5'],['M','37.5 – 39.5','30.5 – 33','42 – 44']]},
+  tops:{cm:[['XS','A – D','75 – 80','83 – 87'],['S','B – D','80 – 86','87 – 95'],['M','C – DD','86 – 92','95 – 100']],
+        in:[['XS','A – D','30 – 32','33 – 35'],['S','B – D','32 – 34','35 – 37'],['M','C – DD','34 – 36','37 – 39']]},
+  bottoms:{cm:[['XS','59 – 62','85 – 89'],['S','63 – 66','90 – 94'],['M','67 – 70','95 – 99']],
+        in:[['XS','23 – 24.5','33.5 – 35'],['S','25 – 26','35.5 – 37'],['M','27 – 28','37.5 – 39']]}
+};
+const SG_TOP_D='<path d="M33 22 L41 3"/><path d="M67 22 L59 3"/><path d="M33 22 C27 33 20 44 13 55 C24 59 38 59 49 55 C45 44 39 33 33 22 Z"/><path d="M67 22 C73 33 80 44 87 55 C76 59 62 59 51 55 C55 44 61 33 67 22 Z"/><path d="M49 55 L51 55"/><path d="M13 55 L2 58"/><path d="M87 55 L98 58"/>';
+const SG_BOT_D='<path d="M26 24 L74 24 L53.5 59 Q50 62 46.5 59 Z"/><path d="M26 24 L10 18"/><path d="M74 24 L90 18"/><path d="M10 18 C7 13 4 12 4.5 15 C5 17.5 8 18 10 18"/><path d="M10 18 C7.5 23 6 29 5 36"/><path d="M10 18 C9.5 24 9 30 9.5 37"/><path d="M90 18 C93 13 96 12 95.5 15 C95 17.5 92 18 90 18"/><path d="M90 18 C92.5 23 94 29 95 36"/><path d="M90 18 C90.5 24 91 30 90.5 37"/>';
+const SG_SW_D='<path d="M15 2 L20 2 L20 19 C20 32 40 32 40 19 L40 2 L45 2 L45 16 C46 22 48 24 48 28 C47.5 40 45 48 45 52 C45 58 47 62 47 64 C42 70 35 82 32.5 93 Q30 94.5 27.5 93 C25 82 18 70 13 64 C13 62 15 58 15 52 C15 48 12.5 40 12 28 C12 24 14 22 15 16 Z"/>';
+const SG_ICON={
+  tops:`<svg viewBox="0 0 100 62">${SG_TOP_D}</svg>`,
+  bottoms:`<svg viewBox="0 9 100 54">${SG_BOT_D}</svg>`,
+  triangle:`<svg viewBox="0 0 100 62">${SG_TOP_D}</svg>`,
+  cheeky:`<svg viewBox="0 9 100 54">${SG_BOT_D}</svg>`
+};
+const SG_ARROW=(y)=>`<path class="dash" d="M2 ${y} H94"/><path d="M91 ${y-3} L95 ${y} L91 ${y+3}"/>`;
+const SG_ARROW_SW=(y)=>`<path class="dash" d="M2 ${y} H56"/><path d="M53 ${y-2.5} L57 ${y} L53 ${y+2.5}"/>`;
+const SG_SW_SVG=(extra)=>`<svg viewBox="0 -1 60 97" class="sg-sw">${SG_SW_D}${extra||''}</svg>`;
+const SG_ILLU={
+  swimsuit:[SG_SW_SVG(SG_ARROW_SW(30)),SG_SW_SVG(SG_ARROW_SW(50)),SG_SW_SVG(SG_ARROW_SW(62))],
+  tops:[`<svg viewBox="0 0 100 72">${SG_TOP_D}${SG_ARROW(66)}</svg>`,
+        `<svg viewBox="0 0 100 72">${SG_TOP_D}${SG_ARROW(44)}</svg>`],
+  bottoms:[`<svg viewBox="0 2 100 62">${SG_BOT_D}${SG_ARROW(8)}</svg>`,
+           `<svg viewBox="0 2 100 62">${SG_BOT_D}${SG_ARROW(30)}</svg>`]
+};
+let sgTab='tops', sgUnit='cm', sgMode='bikini';
+function renderSizing(){
+  const T=SIZING_TXT[currentLang]||SIZING_TXT.en;
+  const box=document.getElementById('sgBox'); if(!box) return;
+  box.setAttribute('dir', currentLang==='ar' ? 'rtl' : 'ltr');
+  box.setAttribute('aria-label', T.title);
+  if(sgMode==='swimsuit'){ renderSizingSwim(T,box); return; }
+  const isTop=sgTab==='tops';
+  const cols=isTop?[T.size,T.cup,T.underbust,T.overbust]:[T.size,T.waist,T.hip];
+  const rows=SIZING_ROWS[sgTab][sgUnit];
+  const steps=isTop?T.topSteps:T.botSteps, tips=isTop?T.topTips:T.botTips, ill=SG_ILLU[sgTab];
+  document.getElementById('sgContent').innerHTML=`
+    <p class="sg-title">${T.title}</p>
+    <p class="sg-q">${T.q}</p>
+    <div class="sg-tabs">
+      <button class="sg-tab${isTop?' on':''}" onclick="sizingTab('tops')">${SG_ICON.tops}${T.tops}</button>
+      <button class="sg-tab${!isTop?' on':''}" onclick="sizingTab('bottoms')">${SG_ICON.bottoms}${T.bottoms}</button>
+    </div>
+    <p class="sg-sub">${T.coverage}</p>
+    <p class="sg-note">${isTop?T.topNote:T.botNote}</p>
+    <div class="sg-cov">${isTop?SG_ICON.triangle:SG_ICON.cheeky}${isTop?T.triangle:T.cheeky}</div>
+    <div><div class="sg-unit"><button class="${sgUnit==='cm'?'on':''}" onclick="sizingUnit('cm')">CM</button><button class="${sgUnit==='in'?'on':''}" onclick="sizingUnit('in')">IN</button></div></div>
+    <table class="sg-table"><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead>
+      <tbody>${rows.map(r=>'<tr>'+r.map(c=>`<td><bdi dir="ltr">${c}</bdi></td>`).join('')+'</tr>').join('')}</tbody></table>
+    <p class="sg-h">${T.how}</p>
+    ${steps.map((st,i)=>`<div class="sg-step"><div class="sg-step-txt"><p class="sg-step-t"><span class="sg-num">${i+1}</span>${st[0]}</p><p class="sg-step-d">${st[1]}</p></div><div class="sg-illu">${ill[i]}</div></div>`).join('')}
+    <p class="sg-h">${T.tipsT}</p>
+    <ol class="sg-tips">${tips.map((t,i)=>`<li><span class="sg-num">${i+1}</span>${t}</li>`).join('')}</ol>
+    <a class="sg-help" href="https://wa.me/34650565927?text=${encodeURIComponent(T.helpMsg)}" target="_blank" rel="noopener">${T.help}</a>`;
+}
+function renderSizingSwim(T,box){
+  const cols=[T.size,T.overbust,T.waist,T.hip];
+  const rows=SIZING_ROWS.swimsuit[sgUnit], ill=SG_ILLU.swimsuit;
+  document.getElementById('sgContent').innerHTML=`
+    <p class="sg-title">${T.title}</p>
+    <div class="sg-sw-hero">${SG_SW_SVG('')}</div>
+    <div><div class="sg-unit"><button class="${sgUnit==='cm'?'on':''}" onclick="sizingUnit('cm')">CM</button><button class="${sgUnit==='in'?'on':''}" onclick="sizingUnit('in')">IN</button></div></div>
+    <table class="sg-table"><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead>
+      <tbody>${rows.map(r=>'<tr>'+r.map(c=>`<td><bdi dir="ltr">${c}</bdi></td>`).join('')+'</tr>').join('')}</tbody></table>
+    <p class="sg-h">${T.how}</p>
+    ${T.swSteps.map((st,i)=>`<div class="sg-step"><div class="sg-step-txt"><p class="sg-step-t"><span class="sg-num">${i+1}</span>${st[0]}</p><p class="sg-step-d">${st[1]}</p></div><div class="sg-illu sg-illu-sw">${ill[i]}</div></div>`).join('')}
+    <p class="sg-h">${T.tipsT}</p>
+    <ol class="sg-tips">${T.swTips.map((t,i)=>`<li><span class="sg-num">${i+1}</span>${t}</li>`).join('')}</ol>
+    <a class="sg-help" href="https://wa.me/34650565927?text=${encodeURIComponent(T.swMsg)}" target="_blank" rel="noopener">${T.help}</a>`;
+}
+function sizingTab(t){sgTab=t;renderSizing();}
+function sizingUnit(u){sgUnit=u;renderSizing();}
+function openSizing(mode){sgMode=mode||((window.currentProd&&currentProd.name==='The Swimsuit')?'swimsuit':'bikini');sgTab='tops';renderSizing();const o=document.getElementById('sizingOv');o.classList.add('open');o.querySelector('.sg-box').scrollTop=0;document.body.style.overflow='hidden';}
+function closeSizing(){document.getElementById('sizingOv').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const o=document.getElementById('sizingOv');if(o&&o.classList.contains('open'))closeSizing();}});
 
 /* ── Product gallery: arrows, swipe, drag, keyboard ── */
 function galleryStep(dir){
@@ -2475,7 +2722,7 @@ const TRANSLATIONS = {
     nav_search:'Suchen', nav_saved:'Gespeichert', nav_login:'Anmelden',
     footer_about:'Über die Marke', footer_contact:'Kontakt',
     lang_label:'Sprache', country_label:'Land',
-    prod_colour:'Farbe', prod_size:'Größe', prod_size_guide:'Größenguide',
+    prod_colour:'Farbe', prod_size:'Größe', prod_size_guide:'Größentabelle',
     prod_add_bag:'In die Tasche', prod_save:'Speichern',
     prod_details:'Details', prod_size_fit:'Größe & Passform', prod_shipping:'Versand & Rückgabe',
     prod_shipping_body:'Kostenloser Versand auf alle Bestellungen. Rückgaben innerhalb von 14 Tagen möglich.',
@@ -2589,7 +2836,7 @@ const TRANSLATIONS = {
     nav_search:'Поиск', nav_saved:'Сохранённое', nav_login:'Войти',
     footer_about:'О бренде', footer_contact:'Связаться с нами',
     lang_label:'Язык', country_label:'Страна',
-    prod_colour:'Цвет', prod_size:'Размер', prod_size_guide:'Гид по размерам',
+    prod_colour:'Цвет', prod_size:'Размер', prod_size_guide:'Таблица размеров',
     prod_add_bag:'Добавить в сумку', prod_save:'Сохранить',
     prod_details:'Детали', prod_size_fit:'Размер и посадка', prod_shipping:'Доставка и возврат',
     prod_shipping_body:'Бесплатная доставка для всех заказов. Возврат принимается в течение 14 дней.',
@@ -2614,6 +2861,7 @@ let currentLang = 'en';
 
 function applyTranslations(lang){
   const t = TRANSLATIONS[lang] || TRANSLATIONS.en;
+  try{ const o=document.getElementById('sizingOv'); if(o && o.classList.contains('open')) renderSizing(); }catch(e){}
   // Static data-i18n elements
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
@@ -3162,6 +3410,13 @@ function renderSimilar(p){
     <button onclick="closeMobileMenu();openAuth()">Login</button>
     <a href="https://wa.me/34650565927" target="_blank" data-i18n="footer_contact">Contact Us</a>
     <a href="https://www.instagram.com/de.lavalle/" target="_blank">Instagram</a>
+  </div>
+</div>
+<!-- ══════════ BIKINI SIZING ══════════ -->
+<div class="sg-ov" id="sizingOv" onclick="if(event.target===this)closeSizing()">
+  <div class="sg-box" role="dialog" aria-label="Sizing" id="sgBox">
+    <button class="sg-close" onclick="closeSizing()" aria-label="Close"><svg viewBox="0 0 16 16"><path d="M1 1l14 14M15 1L1 15"/></svg></button>
+    <div id="sgContent"></div>
   </div>
 </div>
 <!-- ══════════ ABOUT ══════════ -->
