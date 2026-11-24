@@ -1268,7 +1268,7 @@ img{image-rendering:auto;content-visibility:auto}
       <div class="acc"><button class="acc-btn" onclick="toggleAcc(this)"data-i18n-btn="prod_details">Details <span class="acc-icon">+</span></button><div class="acc-body" id="accDetails"></div></div>
       <div class="acc"><button class="acc-btn" onclick="toggleAcc(this)"data-i18n-btn="prod_size_fit">Size &amp; Fit <span class="acc-icon">+</span></button><div class="acc-body" id="accSizeFit"></div></div>
       <div class="acc"><button class="acc-btn" onclick="toggleAcc(this)">Material &amp; Care <span class="acc-icon">+</span></button><div class="acc-body" id="accCare"></div></div>
-      <div class="acc"><button class="acc-btn" onclick="toggleAcc(this)"data-i18n-btn="prod_shipping">Shipping &amp; Returns <span class="acc-icon">+</span></button><div class="acc-body"><span data-i18n="prod_shipping_body">Shipping cost calculated at checkout. Returns are not accepted. Exchanges are available for size and colour.</span></div></div>
+      <div class="acc"><button class="acc-btn" onclick="toggleAcc(this)"data-i18n-btn="prod_shipping">Shipping &amp; Returns <span class="acc-icon">+</span></button><div class="acc-body"><span data-i18n="prod_shipping_body">Delivery is available for S/ 15, or you may collect your order at our workshop at no charge. Returns are not accepted. Exchanges are available for size and colour.</span></div></div>
     </div>
   </div>
 
@@ -1374,8 +1374,8 @@ img{image-rendering:auto;content-visibility:auto}
       <div class="form-row full"><div class="fg"><label>Country</label><select><option>Peru</option><option>Colombia</option><option>Chile</option><option>Argentina</option><option>Spain</option><option>United States</option></select></div></div>
       <p class="ch-sec">Shipping method</p>
       <div class="ship-opts">
-        <div class="ship-opt" onclick="pickShip(this)"><div class="ship-left"><div class="radio on"><div class="radio-dot"></div></div><div><div class="ship-name">Standard Shipping</div><div class="ship-est">3–5 business days</div></div></div><div class="ship-price">Complimentary</div></div>
-        <div class="ship-opt" onclick="pickShip(this)"><div class="ship-left"><div class="radio"><div class="radio-dot"></div></div><div><div class="ship-name">Express Shipping</div><div class="ship-est">1–2 business days</div></div></div><div class="ship-price">S/ 25</div></div>
+        <div class="ship-opt" data-fee="15" onclick="pickShip(this)"><div class="ship-left"><div class="radio"><div class="radio-dot"></div></div><div><div class="ship-name" data-i18n="ship_delivery">Delivery</div><div class="ship-est" data-i18n="ship_delivery_est">Delivered to your address</div></div></div><div class="ship-price">S/ 15</div></div>
+        <div class="ship-opt" data-fee="0" onclick="pickShip(this)"><div class="ship-left"><div class="radio on"><div class="radio-dot"></div></div><div><div class="ship-name" data-i18n="ship_pickup">Workshop pickup</div><div class="ship-est" data-i18n="ship_pickup_est">Collect your order at our workshop. We will send you the address after your order.</div></div></div><div class="ship-price" data-i18n="ship_free">No charge</div></div>
       </div>
       <p class="ch-sec">Payment</p>
 
@@ -1428,7 +1428,7 @@ img{image-rendering:auto;content-visibility:auto}
       <div class="promo-wrap"><input type="text" placeholder="Discount code"><button class="promo-apply">Apply</button></div>
       <hr class="sum-div">
       <div class="sum-line"><span class="lbl">Subtotal</span><span id="sumSub">S/ 0</span></div>
-      <div class="sum-line"><span class="lbl">Shipping</span><span>Complimentary</span></div>
+      <div class="sum-line"><span class="lbl" data-i18n="ch_shipping">Shipping</span><span id="sumShip">—</span></div>
       <div class="sum-line"><span class="lbl">Taxes</span><span>Included</span></div>
       <div class="sum-total"><span>Total</span><span id="sumTotal">S/ 0</span></div>
     </div>
@@ -1485,7 +1485,8 @@ let fxRates = {};
 let fxLoaded = false;
 
 function roundPrice(amount, currency){
-  // Always round to nearest 10 — no ugly decimals
+  // Soles are shown exactly (e.g. S/ 15 delivery); converted currencies round to the nearest 10
+  if(currency === 'PEN') return Math.round(amount);
   return Math.round(amount / 10) * 10;
 }
 function fmtPrice(penPrice){
@@ -1520,9 +1521,9 @@ const PRODUCTS = [{id:9, name:'The Carrier',      shopifyHandle:'the-carrier',  
   {id:14, name:'Inés Shirt', cat:'Shirts & Tops', colour:'Ivory', hex:'#f5f0e8', bg:'bg-ivory', section:'women', price:290, sizes:['S','M','L'], stock:{S:5,M:5,L:5}, badge:'', photo:'ines1.jpg', photos:['ines1.jpg','ines2.jpg','ines3.jpg','ines4.jpg','ines5.jpg'], desc:'Relaxed-fit shirt cut in a breathable cotton-linen blend, finished with a soft, structured collar.'},
   {id:15, name:'Inés Shirt', cat:'Shirts & Tops', colour:'Beige', hex:'#d4c4a8', bg:'bg-sand', section:'women', price:290, sizes:['S','M','L'], stock:{S:5,M:5,L:5}, badge:'', photo:'ines-beige1.jpg', photos:['ines-beige1.jpg','ines-beige2.jpg','ines-beige3.jpg','ines-beige4.jpg','ines-beige5.jpg'], desc:'Relaxed-fit shirt cut in a breathable cotton-linen blend, finished with a soft, structured collar.'},
   {id:16, name:'Inés Shirt', cat:'Shirts & Tops', colour:'Light Blue', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:290, sizes:['S','M','L'], stock:{S:5,M:5,L:5}, badge:'', photo:'ines-blue1.jpg', photos:['ines-blue1.jpg','ines-blue2.jpg','ines-blue3.jpg','ines-blue4.jpg','ines-blue5.jpg'], desc:'Relaxed-fit shirt cut in a breathable cotton-linen blend, finished with a soft, structured collar.'},
-  {id:17, name:'María Trousers', cat:'Pants & Shorts', colour:'Ivory', hex:'#f5f0e8', bg:'bg-ivory', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines1.jpg', photos:['ines1.jpg','ines2.jpg','ines3.jpg','ines4.jpg','ines5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
-  {id:18, name:'María Trousers', cat:'Pants & Shorts', colour:'Beige', hex:'#d4c4a8', bg:'bg-sand', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines-beige1.jpg', photos:['ines-beige1.jpg','ines-beige2.jpg','ines-beige3.jpg','ines-beige4.jpg','ines-beige5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
-  {id:19, name:'María Trousers', cat:'Pants & Shorts', colour:'Light Blue', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:280, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines-blue1.jpg', photos:['ines-blue1.jpg','ines-blue2.jpg','ines-blue3.jpg','ines-blue4.jpg','ines-blue5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
+  {id:17, name:'María Trousers', cat:'Pants & Shorts', colour:'Ivory', hex:'#f5f0e8', bg:'bg-ivory', section:'women', price:220, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines1.jpg', photos:['ines1.jpg','ines2.jpg','ines3.jpg','ines4.jpg','ines5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
+  {id:18, name:'María Trousers', cat:'Pants & Shorts', colour:'Beige', hex:'#d4c4a8', bg:'bg-sand', section:'women', price:220, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines-beige1.jpg', photos:['ines-beige1.jpg','ines-beige2.jpg','ines-beige3.jpg','ines-beige4.jpg','ines-beige5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
+  {id:19, name:'María Trousers', cat:'Pants & Shorts', colour:'Light Blue', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:220, sizes:['S','M','L'],      stock:{S:5,M:5,L:5}, badge:'', photo:'ines-blue1.jpg', photos:['ines-blue1.jpg','ines-blue2.jpg','ines-blue3.jpg','ines-blue4.jpg','ines-blue5.jpg'], desc:'Relaxed, straight-leg trousers in crisp cotton-linen. Soft, elastic waistband with a clean front. Deep side pockets and a tall turned hem.'},
   {id:72, name:'The Bikini', shopifyHandle:'bikini-red', cat:'Swim', sub:'The Bikini', colour:'Red', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'bikini-red-1.jpg', photos:['bikini-red-1.jpg','bikini-red-2.jpg','bikini-red-3.jpg','bikini-red-4.jpg'], desc:'Triangle top with tie straps at the neck and back. Tie sides at the bottom.'},
   {id:73, name:'The Bikini', shopifyHandle:'bikini-candy-cane', cat:'Swim', sub:'The Bikini', colour:'Candy Cane', hex:'#b83232', bg:'bg-ecru', section:'women', price:280, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'bikini-candy-cane-1.jpg', photos:['bikini-candy-cane-1.jpg','bikini-candy-cane-2.jpg','bikini-candy-cane-3.jpg'], desc:'Triangle top with tie straps at the neck and back. Tie sides at the bottom.'},
   {id:74, name:'The Bikini', shopifyHandle:'bikini-red-polka-dot', cat:'Swim', sub:'The Bikini', colour:'Red Polka Dot', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:280, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'bikini-red-polka-dot-1.jpg', photos:['bikini-red-polka-dot-1.jpg','bikini-red-polka-dot-2.jpg','bikini-red-polka-dot-3.jpg'], desc:'Triangle top with tie straps at the neck and back. Tie sides at the bottom.'},
@@ -1537,26 +1538,16 @@ const PRODUCTS = [{id:9, name:'The Carrier',      shopifyHandle:'the-carrier',  
   {id:56, name:'The Swimsuit', shopifyHandle:'swimsuit-navy-blue', cat:'Swim', sub:'The Swimsuit', colour:'Navy Blue', hex:'#1a2740', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'swim-navy-1.jpg', photos:['swim-navy-1.jpg','swim-navy-2.jpg','swim-navy-3.jpg','swim-navy-4.jpg','swim-navy-5.jpg','swim-navy-6.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:51, name:'The Swimsuit', shopifyHandle:'swimsuit-black', cat:'Swim', sub:'The Swimsuit', colour:'Black', hex:'#181610', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'', photos:[], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
   {id:54, name:'The Swimsuit', shopifyHandle:'swimsuit-red-polka', cat:'Swim', sub:'The Swimsuit', colour:'Red Polka Dot', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:320, sizes:['XS','S','M'], stock:{XS:5,S:5,M:5}, badge:'', photo:'swim-red-polka-1.jpg', photos:['swim-red-polka-1.jpg','swim-red-polka-2.jpg','swim-red-polka-3.jpg','swim-red-polka-4.jpg'], desc:'Scoop-neck one-piece with fixed wide straps and a high-cut leg. Deep open back. Fully lined through the front.'},
-  {id:58, name:'The Shirt', shopifyHandle:'sleep-shirt-sky-dobby-stripe', cat:'Sleep', colour:'Sky Dobby Stripe', hex:'#a8c4d8', bg:'bg-stone', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'sleep-shirt-sky-dobby-stripe-1.jpg', photos:['sleep-shirt-sky-dobby-stripe-1.jpg','sleep-shirt-sky-dobby-stripe-2.jpg','sleep-shirt-sky-dobby-stripe-3.jpg','sleep-shirt-sky-dobby-stripe-4.jpg'], desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
-  {id:59, name:'The Pant', shopifyHandle:'sleep-pant-sky-dobby-stripe', cat:'Sleep', colour:'Sky Dobby Stripe', hex:'#a8c4d8', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'sleep-pant-sky-dobby-stripe-1.jpg', photos:['sleep-pant-sky-dobby-stripe-1.jpg','sleep-pant-sky-dobby-stripe-2.jpg','sleep-pant-sky-dobby-stripe-3.jpg'], desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:32, name:'The Shirt', shopifyHandle:'sleep-shirt-marina-stripe', cat:'Sleep', colour:'Marina Stripe', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
-  {id:37, name:'The Pant', shopifyHandle:'sleep-pant-marina-stripe', cat:'Sleep', colour:'Marina Stripe', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:33, name:'The Shirt', shopifyHandle:'sleep-shirt-baby-blue-dobby', cat:'Sleep', colour:'Baby Blue Dobby', hex:'#b8ccd8', bg:'bg-stone', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
-  {id:38, name:'The Pant', shopifyHandle:'sleep-pant-baby-blue-dobby', cat:'Sleep', colour:'Baby Blue Dobby', hex:'#b8ccd8', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:34, name:'The Shirt', shopifyHandle:'sleep-shirt-riviera-stripe', cat:'Sleep', colour:'Riviera Stripe', hex:'#d0e4f0', bg:'bg-stone', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
-  {id:39, name:'The Pant', shopifyHandle:'sleep-pant-riviera-stripe', cat:'Sleep', colour:'Riviera Stripe', hex:'#d0e4f0', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:35, name:'The Shirt', shopifyHandle:'sleep-shirt-white-silk', cat:'Sleep', colour:'White Silk', hex:'#f8f6f2', bg:'bg-ivory', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
-  {id:40, name:'The Pant', shopifyHandle:'sleep-pant-white-silk', cat:'Sleep', colour:'White Silk', hex:'#f8f6f2', bg:'bg-ivory', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:36, name:'The Shirt', shopifyHandle:'sleep-shirt-black-silk', cat:'Sleep', colour:'Black Silk', hex:'#181610', bg:'bg-black-p', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
-  {id:41, name:'The Pant', shopifyHandle:'sleep-pant-black-silk', cat:'Sleep', colour:'Black Silk', hex:'#181610', bg:'bg-black-p', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:42, name:'The Shirt', shopifyHandle:'sleep-shirt-carmine-silk', cat:'Sleep', colour:'Carmine Silk', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
-  {id:46, name:'The Pant', shopifyHandle:'sleep-pant-carmine-silk', cat:'Sleep', colour:'Carmine Silk', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:43, name:'The Shirt', shopifyHandle:'sleep-shirt-petal-silk', cat:'Sleep', colour:'Petal Silk', hex:'#f0c8c0', bg:'bg-ecru', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
-  {id:47, name:'The Pant', shopifyHandle:'sleep-pant-petal-silk', cat:'Sleep', colour:'Petal Silk', hex:'#f0c8c0', bg:'bg-ecru', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:44, name:'The Shirt', shopifyHandle:'sleep-shirt-sky-silk', cat:'Sleep', colour:'Sky Silk', hex:'#b0c8e0', bg:'bg-stone', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
-  {id:48, name:'The Pant', shopifyHandle:'sleep-pant-sky-silk', cat:'Sleep', colour:'Sky Silk', hex:'#b0c8e0', bg:'bg-stone', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
-  {id:45, name:'The Shirt', shopifyHandle:'sleep-shirt-navy-silk', cat:'Sleep', colour:'Navy Silk', hex:'#1a2740', bg:'bg-black-p', section:'women', price:250, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Relaxed sleep shirt in 100% Pima cotton. Notch collar, center button placket, mother-of-pearl buttons, wide cuffs with slit opening.'},
-  {id:49, name:'The Pant', shopifyHandle:'sleep-pant-navy-silk', cat:'Sleep', colour:'Navy Silk', hex:'#1a2740', bg:'bg-black-p', section:'women', price:200, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Wide-leg sleep pant in 100% Pima cotton. Gathered elastic waistband, functional fly, side slits.'},
+  {id:58, name:'The Sleep Set', shopifyHandle:'sleep-set-sky-dobby-stripe', cat:'Sleep', colour:'Sky Dobby Stripe', hex:'#a8c4d8', bg:'bg-stone', section:'women', price:480, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'sleep-shirt-sky-dobby-stripe-1.jpg', photos:['sleep-shirt-sky-dobby-stripe-1.jpg','sleep-shirt-sky-dobby-stripe-2.jpg','sleep-shirt-sky-dobby-stripe-3.jpg','sleep-shirt-sky-dobby-stripe-4.jpg','sleep-pant-sky-dobby-stripe-1.jpg','sleep-pant-sky-dobby-stripe-2.jpg','sleep-pant-sky-dobby-stripe-3.jpg'], desc:'Two-piece sleep set in 100% Pima cotton. Relaxed shirt with notch collar, center button placket, mother-of-pearl buttons and wide cuffs with slit opening. Wide-leg pant with gathered elastic waistband, functional fly and side slits.'},
+  {id:32, name:'The Sleep Set', shopifyHandle:'sleep-set-marina-stripe', cat:'Sleep', colour:'Marina Stripe', hex:'#c8d8e8', bg:'bg-stone', section:'women', price:480, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Two-piece sleep set in 100% Pima cotton. Relaxed shirt with notch collar, center button placket, mother-of-pearl buttons and wide cuffs with slit opening. Wide-leg pant with gathered elastic waistband, functional fly and side slits.'},
+  {id:33, name:'The Sleep Set', shopifyHandle:'sleep-set-baby-blue-dobby', cat:'Sleep', colour:'Baby Blue Dobby', hex:'#b8ccd8', bg:'bg-stone', section:'women', price:480, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Two-piece sleep set in 100% Pima cotton. Relaxed shirt with notch collar, center button placket, mother-of-pearl buttons and wide cuffs with slit opening. Wide-leg pant with gathered elastic waistband, functional fly and side slits.'},
+  {id:34, name:'The Sleep Set', shopifyHandle:'sleep-set-riviera-stripe', cat:'Sleep', colour:'Riviera Stripe', hex:'#d0e4f0', bg:'bg-stone', section:'women', price:480, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Two-piece sleep set in 100% Pima cotton. Relaxed shirt with notch collar, center button placket, mother-of-pearl buttons and wide cuffs with slit opening. Wide-leg pant with gathered elastic waistband, functional fly and side slits.'},
+  {id:35, name:'The Sleep Set', shopifyHandle:'sleep-set-white-silk', cat:'Sleep', colour:'White Silk', hex:'#f8f6f2', bg:'bg-ivory', section:'women', price:480, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Two-piece sleep set in 100% Pima cotton. Relaxed shirt with notch collar, center button placket, mother-of-pearl buttons and wide cuffs with slit opening. Wide-leg pant with gathered elastic waistband, functional fly and side slits.'},
+  {id:36, name:'The Sleep Set', shopifyHandle:'sleep-set-black-silk', cat:'Sleep', colour:'Black Silk', hex:'#181610', bg:'bg-black-p', section:'women', price:480, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Two-piece sleep set in 100% Pima cotton. Relaxed shirt with notch collar, center button placket, mother-of-pearl buttons and wide cuffs with slit opening. Wide-leg pant with gathered elastic waistband, functional fly and side slits.'},
+  {id:42, name:'The Sleep Set', shopifyHandle:'sleep-set-carmine-silk', cat:'Sleep', colour:'Carmine Silk', hex:'#8B1A1A', bg:'bg-black-p', section:'women', price:480, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Two-piece sleep set in 100% Pima cotton. Relaxed shirt with notch collar, center button placket, mother-of-pearl buttons and wide cuffs with slit opening. Wide-leg pant with gathered elastic waistband, functional fly and side slits.'},
+  {id:43, name:'The Sleep Set', shopifyHandle:'sleep-set-petal-silk', cat:'Sleep', colour:'Petal Silk', hex:'#f0c8c0', bg:'bg-ecru', section:'women', price:480, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Two-piece sleep set in 100% Pima cotton. Relaxed shirt with notch collar, center button placket, mother-of-pearl buttons and wide cuffs with slit opening. Wide-leg pant with gathered elastic waistband, functional fly and side slits.'},
+  {id:44, name:'The Sleep Set', shopifyHandle:'sleep-set-sky-silk', cat:'Sleep', colour:'Sky Silk', hex:'#b0c8e0', bg:'bg-stone', section:'women', price:480, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Two-piece sleep set in 100% Pima cotton. Relaxed shirt with notch collar, center button placket, mother-of-pearl buttons and wide cuffs with slit opening. Wide-leg pant with gathered elastic waistband, functional fly and side slits.'},
+  {id:45, name:'The Sleep Set', shopifyHandle:'sleep-set-navy-silk', cat:'Sleep', colour:'Navy Silk', hex:'#1a2740', bg:'bg-black-p', section:'women', price:480, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', desc:'Two-piece sleep set in 100% Pima cotton. Relaxed shirt with notch collar, center button placket, mother-of-pearl buttons and wide cuffs with slit opening. Wide-leg pant with gathered elastic waistband, functional fly and side slits.'},
   {id:31, name:'Rosario Dress', shopifyHandle:'rosario-dress', cat:'Dresses', colour:'Midnight Blue', hex:'#1a2340', bg:'bg-black-p', section:'women', price:890, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'rosario-1.jpg', photos:['rosario-1.jpg','rosario-2.jpg','rosario-3.jpg','rosario-4.jpg','rosario-5.jpg','rosario-6.jpg'], desc:'Maxi dress with puffed sleeves and a round neckline. High-waisted, with a self-tie sash and deeply pleated skirt that falls to the floor. Mother-of-pearl buttons through the front.'},
   {id:61, name:'Summer Dress', shopifyHandle:'summer-dress-sky-stripe', cat:'Dresses', colour:'Sky Stripe', hex:'#8cadd4', bg:'bg-stone', section:'women', price:420, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'summer-dress-sky-stripe-1.jpg', photos:['summer-dress-sky-stripe-1.jpg','summer-dress-sky-stripe-2.jpg','summer-dress-sky-stripe-3.jpg'], video:'summer-dress-sky-stripe.mp4', desc:'Mini dress in 100% cotton. Straight neckline with tie-shoulder straps. A-line skirt with a long self-tie belt at the waist. Fully lined in the same fabric.'},
   {id:62, name:'Summer Dress', shopifyHandle:'summer-dress-black-silk', cat:'Dresses', colour:'Black Silk', hex:'#181610', bg:'bg-black-p', section:'women', price:420, sizes:['XS','S','M','L'], stock:{XS:5,S:5,M:5,L:5}, badge:'', photo:'summer-dress-black-silk-1.jpg', photos:['summer-dress-black-silk-1.jpg','summer-dress-black-silk-2.jpg','summer-dress-black-silk-3.jpg'], video:'summer-dress-black-silk.mp4', desc:'Mini dress in 100% cotton. Straight neckline with tie-shoulder straps. A-line skirt with a long self-tie belt at the waist. Fully lined in the same fabric.'},
@@ -1651,13 +1642,8 @@ function goProd(id){
       sizeFit: 'Model wears a size XS on top and S on bottom.',
       care: 'A smooth, supportive stretch fabric that holds its shape in and out of the water. Rinse in cold water after each wear. Do not machine wash, tumble dry, or wring; lay flat to dry away from direct sunlight.'
     },
-    'The Shirt': {
-      details: '100% Pima Cotton. Made in Lima, Perú.',
-      sizeFit: 'Relaxed fit. Model is 5\'9" and wears a size S. True to size.',
-      care: 'Extra-long staple pima cotton grown on the northern coast of Peru. Machine wash cold on a gentle cycle. Do not tumble dry, bleach, or iron on high heat. Lay flat to dry.'
-    },
-    'The Pant': {
-      details: '100% Pima Cotton. Made in Lima, Perú.',
+    'The Sleep Set': {
+      details: '100% Pima Cotton. Mother-of-pearl buttons.\nMade in Lima, Perú.',
       sizeFit: 'Relaxed fit. Model is 5\'9" and wears a size S. True to size.',
       care: 'Extra-long staple pima cotton grown on the northern coast of Peru. Machine wash cold on a gentle cycle. Do not tumble dry, bleach, or iron on high heat. Lay flat to dry.'
     },
@@ -2307,9 +2293,12 @@ function buildSummary(){
   const sub=cart.reduce((s,i)=>s+i.price*i.qty,0);
   document.getElementById('checkoutItems').innerHTML=cart.map(item=>`<div class="sum-item"><div class="sum-img" style="position:relative;overflow:hidden"><div class="${item.bg}" style="width:100%;height:100%;position:absolute;inset:0"></div>${item.photo?`<img src="${item.photo}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block" onerror="this.style.display='none'">`:''}<div class="sum-qty">${item.qty}</div></div><div class="sum-item-info"><p class="sum-name">${item.name}</p><p class="sum-detail">${item.colour} &middot; ${item.sz}</p></div><p class="sum-price">${fmtPrice(item.price*item.qty)}</p></div>`).join('');
   document.getElementById('sumSub').textContent=fmtPrice(sub);
-  document.getElementById('sumTotal').textContent=fmtPrice(sub);
+  const fee=shipFee();
+  document.getElementById('sumShip').textContent= fee ? fmtPrice(fee) : '—';
+  document.getElementById('sumTotal').textContent=fmtPrice(sub+fee);
 }
-function pickShip(el){document.querySelectorAll('.radio').forEach(r=>r.classList.remove('on'));el.querySelector('.radio').classList.add('on')}
+function shipFee(){const o=document.querySelector('.ship-opts .radio.on');return o?Number(o.closest('.ship-opt').dataset.fee||0):0;}
+function pickShip(el){document.querySelectorAll('.ship-opts .radio').forEach(r=>r.classList.remove('on'));el.querySelector('.radio').classList.add('on');buildSummary();}
 function placeOrder(){
   const btn = document.getElementById('orderBtn');
   const method = document.querySelector('.pay-tab.on')?.textContent || 'Card';
@@ -2336,7 +2325,8 @@ function placeOrder(){
       date: new Date().toLocaleDateString('en-GB'),
       items: [...cart],
       total: cart.reduce((s,i)=>s+(i.price*i.qty),0),
-      shipping: document.querySelector('.radio.on')?.closest('.ship-opt')?.querySelector('.ship-price')?.textContent || 'Complimentary',
+      shipping: shipFee(),
+      shipMethod: document.querySelector('.ship-opts .radio.on')?.closest('.ship-opt')?.querySelector('.ship-name')?.textContent || '',
       email: email,
       method: method,
     };
@@ -2365,7 +2355,7 @@ function showConfirmation(order){
     '<div class="conf-order-item"><span class="name">' + i.name + ' &middot; ' + i.sz + ' &times;' + i.qty + '</span><span>' + fmtPrice(i.price*i.qty) + '</span></div>'
   ).join('');
 
-  const shipping = order.shipping === 'Complimentary' ? 0 : 25;
+  const shipping = Number(order.shipping) || 0;
   document.getElementById('confTotal').textContent = fmtPrice(order.total + shipping);
 
   showPage('confirmation');
@@ -2648,7 +2638,7 @@ const TRANSLATIONS = {
     prod_colour:'Colour', prod_size:'Size', prod_size_guide:'Size Guide',
     prod_add_bag:'Add to Bag', prod_save:'Save',
     prod_details:'Details', prod_size_fit:'Size & Fit', prod_shipping:'Shipping & Returns',
-    prod_shipping_body:'Shipping cost calculated at checkout. Returns are not accepted. Exchanges are available for size and colour.',
+    prod_shipping_body:"Delivery is available for S/ 15, or you may collect your order at our workshop at no charge. Returns are not accepted. Exchanges are available for size and colour.", ship_delivery:"Delivery", ship_delivery_est:"Delivered to your address", ship_pickup:"Workshop pickup", ship_pickup_est:"Collect your order at our workshop. We will send you the address after your order.", ship_free:"No charge",
     filter_apply:'Apply', filter_clear:'Clear filters',
     filter_cat:'Category', filter_colour:'Colour', filter_size:'Size', filter_avail:'Availability',
     filter_by:'Filter By',
@@ -2668,7 +2658,7 @@ const TRANSLATIONS = {
     prod_colour:'Color', prod_size:'Talla', prod_size_guide:'Guía de tallas',
     prod_add_bag:'Añadir a la bolsa', prod_save:'Guardar',
     prod_details:'Detalles', prod_size_fit:'Talla y ajuste', prod_shipping:'Envío y devoluciones',
-    prod_shipping_body:'Envío gratuito en todos los pedidos. Devoluciones aceptadas en un plazo de 14 días.',
+    prod_shipping_body:"Delivery disponible por S/ 15, o puede recoger su pedido en nuestro taller sin costo. No se aceptan devoluciones. Se aceptan cambios de talla y color.", ship_delivery:"Delivery", ship_delivery_est:"Entrega en su dirección", ship_pickup:"Recojo en taller", ship_pickup_est:"Recoja su pedido en nuestro taller. Le enviaremos la dirección después de su compra.", ship_free:"Sin costo",
     filter_apply:'Aplicar', filter_clear:'Borrar filtros',
     filter_cat:'Categoría', filter_colour:'Color', filter_size:'Talla', filter_avail:'Disponibilidad',
     filter_by:'Filtrar por',
@@ -2687,7 +2677,7 @@ const TRANSLATIONS = {
     prod_colour:'Couleur', prod_size:'Taille', prod_size_guide:'Guide des tailles',
     prod_add_bag:'Ajouter au panier', prod_save:'Sauvegarder',
     prod_details:'Détails', prod_size_fit:'Taille & ajustement', prod_shipping:'Livraison & retours',
-    prod_shipping_body:'Livraison offerte sur toutes les commandes. Retours acceptés dans les 14 jours.',
+    prod_shipping_body:"Livraison disponible pour S/ 15, ou retrait gratuit de votre commande à notre atelier. Les retours ne sont pas acceptés. Les échanges de taille et de couleur sont possibles.", ship_delivery:"Livraison", ship_delivery_est:"Livrée à votre adresse", ship_pickup:"Retrait à l’atelier", ship_pickup_est:"Retirez votre commande à notre atelier. Nous vous enverrons l’adresse après votre commande.", ship_free:"Sans frais",
     filter_apply:'Appliquer', filter_clear:'Effacer les filtres',
     filter_cat:'Catégorie', filter_colour:'Couleur', filter_size:'Taille', filter_avail:'Disponibilité',
     filter_by:'Filtrer par',
@@ -2706,7 +2696,7 @@ const TRANSLATIONS = {
     prod_colour:'Colore', prod_size:'Taglia', prod_size_guide:'Guida alle taglie',
     prod_add_bag:'Aggiungi alla borsa', prod_save:'Salva',
     prod_details:'Dettagli', prod_size_fit:'Taglia & vestibilità', prod_shipping:'Spedizione & resi',
-    prod_shipping_body:'Spedizione gratuita su tutti gli ordini. Resi accettati entro 14 giorni.',
+    prod_shipping_body:"Consegna disponibile a S/ 15, oppure ritiro gratuito dell’ordine nel nostro laboratorio. Non si accettano resi. Sono possibili cambi di taglia e colore.", ship_delivery:"Consegna", ship_delivery_est:"Consegnata al tuo indirizzo", ship_pickup:"Ritiro in laboratorio", ship_pickup_est:"Ritira il tuo ordine nel nostro laboratorio. Ti invieremo l’indirizzo dopo l’ordine.", ship_free:"Senza costi",
     filter_apply:'Applica', filter_clear:'Cancella filtri',
     filter_cat:'Categoria', filter_colour:'Colore', filter_size:'Taglia', filter_avail:'Disponibilità',
     filter_by:'Filtra per',
@@ -2725,7 +2715,7 @@ const TRANSLATIONS = {
     prod_colour:'Farbe', prod_size:'Größe', prod_size_guide:'Größentabelle',
     prod_add_bag:'In die Tasche', prod_save:'Speichern',
     prod_details:'Details', prod_size_fit:'Größe & Passform', prod_shipping:'Versand & Rückgabe',
-    prod_shipping_body:'Kostenloser Versand auf alle Bestellungen. Rückgaben innerhalb von 14 Tagen möglich.',
+    prod_shipping_body:"Lieferung für S/ 15 oder kostenlose Abholung in unserem Atelier. Rückgaben sind nicht möglich. Ein Umtausch in Größe oder Farbe ist möglich.", ship_delivery:"Lieferung", ship_delivery_est:"Lieferung an Ihre Adresse", ship_pickup:"Abholung im Atelier", ship_pickup_est:"Holen Sie Ihre Bestellung in unserem Atelier ab. Die Adresse senden wir Ihnen nach Ihrer Bestellung.", ship_free:"Kostenlos",
     filter_apply:'Anwenden', filter_clear:'Filter löschen',
     filter_cat:'Kategorie', filter_colour:'Farbe', filter_size:'Größe', filter_avail:'Verfügbarkeit',
     filter_by:'Filtern nach',
@@ -2744,7 +2734,7 @@ const TRANSLATIONS = {
     prod_colour:'Cor', prod_size:'Tamanho', prod_size_guide:'Guia de tamanhos',
     prod_add_bag:'Adicionar à bolsa', prod_save:'Guardar',
     prod_details:'Detalhes', prod_size_fit:'Tamanho & ajuste', prod_shipping:'Envio & devoluções',
-    prod_shipping_body:'Envio gratuito em todos os pedidos. Devoluções aceites em 14 dias.',
+    prod_shipping_body:"Entrega disponível por S/ 15, ou levantamento gratuito no nosso ateliê. Não são aceites devoluções. São aceites trocas de tamanho e cor.", ship_delivery:"Entrega", ship_delivery_est:"Entregue na sua morada", ship_pickup:"Levantamento no ateliê", ship_pickup_est:"Levante a sua encomenda no nosso ateliê. Enviaremos a morada após a sua encomenda.", ship_free:"Sem custo",
     filter_apply:'Aplicar', filter_clear:'Limpar filtros',
     filter_cat:'Categoria', filter_colour:'Cor', filter_size:'Tamanho', filter_avail:'Disponibilidade',
     filter_by:'Filtrar por',
@@ -2763,7 +2753,7 @@ const TRANSLATIONS = {
     prod_colour:'颜色', prod_size:'尺码', prod_size_guide:'尺码指南',
     prod_add_bag:'加入购物袋', prod_save:'保存',
     prod_details:'详情', prod_size_fit:'尺码与版型', prod_shipping:'配送与退货',
-    prod_shipping_body:'所有订单免费配送。14天内接受退货。',
+    prod_shipping_body:"提供配送服务，运费 S/ 15；也可到我们的工作室免费自取。恕不退货，可更换尺码和颜色。", ship_delivery:"配送", ship_delivery_est:"送货上门", ship_pickup:"工作室自取", ship_pickup_est:"请到我们的工作室自取订单，下单后我们会将地址发送给您。", ship_free:"免费",
     filter_apply:'应用', filter_clear:'清除筛选',
     filter_cat:'类别', filter_colour:'颜色', filter_size:'尺码', filter_avail:'库存',
     filter_by:'筛选',
@@ -2782,7 +2772,7 @@ const TRANSLATIONS = {
     prod_colour:'カラー', prod_size:'サイズ', prod_size_guide:'サイズガイド',
     prod_add_bag:'バッグに追加', prod_save:'保存',
     prod_details:'詳細', prod_size_fit:'サイズとフィット', prod_shipping:'配送と返品',
-    prod_shipping_body:'全注文送料無料。14日以内の返品を受け付けます。',
+    prod_shipping_body:"配送は S/ 15、または当アトリエにて無料でお受け取りいただけます。返品は承っておりません。サイズ・カラーの交換は可能です。", ship_delivery:"配送", ship_delivery_est:"ご指定の住所へお届け", ship_pickup:"アトリエ受け取り", ship_pickup_est:"ご注文の品は当アトリエでお受け取りいただけます。住所はご注文後にお送りします。", ship_free:"無料",
     filter_apply:'適用', filter_clear:'フィルターをクリア',
     filter_cat:'カテゴリー', filter_colour:'カラー', filter_size:'サイズ', filter_avail:'在庫',
     filter_by:'絞り込み',
@@ -2801,7 +2791,7 @@ const TRANSLATIONS = {
     prod_colour:'색상', prod_size:'사이즈', prod_size_guide:'사이즈 가이드',
     prod_add_bag:'백에 추가', prod_save:'저장',
     prod_details:'상세정보', prod_size_fit:'사이즈 & 핏', prod_shipping:'배송 & 반품',
-    prod_shipping_body:'모든 주문 무료 배송. 14일 이내 반품 가능.',
+    prod_shipping_body:"배송은 S/ 15이며, 저희 작업실에서 무료로 수령하실 수도 있습니다. 반품은 불가하며, 사이즈 및 색상 교환은 가능합니다.", ship_delivery:"배송", ship_delivery_est:"지정 주소로 배송", ship_pickup:"작업실 수령", ship_pickup_est:"저희 작업실에서 주문품을 수령하실 수 있습니다. 주소는 주문 후 보내 드립니다.", ship_free:"무료",
     filter_apply:'적용', filter_clear:'필터 지우기',
     filter_cat:'카테고리', filter_colour:'색상', filter_size:'사이즈', filter_avail:'재고',
     filter_by:'필터',
@@ -2820,7 +2810,7 @@ const TRANSLATIONS = {
     prod_colour:'اللون', prod_size:'المقاس', prod_size_guide:'دليل المقاسات',
     prod_add_bag:'أضف إلى الحقيبة', prod_save:'حفظ',
     prod_details:'تفاصيل', prod_size_fit:'المقاس والملاءمة', prod_shipping:'الشحن والإرجاع',
-    prod_shipping_body:'شحن مجاني على جميع الطلبات. يُقبل الإرجاع خلال 14 يومًا.',
+    prod_shipping_body:"التوصيل متاح مقابل S/ 15، أو يمكنكِ استلام طلبكِ من مشغلنا دون رسوم. لا نقبل الإرجاع، ويمكن استبدال المقاس واللون.", ship_delivery:"التوصيل", ship_delivery_est:"التوصيل إلى عنوانكِ", ship_pickup:"الاستلام من المشغل", ship_pickup_est:"استلمي طلبكِ من مشغلنا. سنرسل إليكِ العنوان بعد الطلب.", ship_free:"دون رسوم",
     filter_apply:'تطبيق', filter_clear:'مسح الفلاتر',
     filter_cat:'الفئة', filter_colour:'اللون', filter_size:'المقاس', filter_avail:'التوفر',
     filter_by:'تصفية حسب',
@@ -2839,7 +2829,7 @@ const TRANSLATIONS = {
     prod_colour:'Цвет', prod_size:'Размер', prod_size_guide:'Таблица размеров',
     prod_add_bag:'Добавить в сумку', prod_save:'Сохранить',
     prod_details:'Детали', prod_size_fit:'Размер и посадка', prod_shipping:'Доставка и возврат',
-    prod_shipping_body:'Бесплатная доставка для всех заказов. Возврат принимается в течение 14 дней.',
+    prod_shipping_body:"Доставка — S/ 15, либо бесплатный самовывоз из нашей мастерской. Возврат не принимается. Возможен обмен размера и цвета.", ship_delivery:"Доставка", ship_delivery_est:"Доставка по вашему адресу", ship_pickup:"Самовывоз из мастерской", ship_pickup_est:"Заберите заказ в нашей мастерской. Адрес мы отправим после оформления заказа.", ship_free:"Бесплатно",
     filter_apply:'Применить', filter_clear:'Сбросить фильтры',
     filter_cat:'Категория', filter_colour:'Цвет', filter_size:'Размер', filter_avail:'Наличие',
     filter_by:'Фильтровать по',
