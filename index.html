@@ -991,9 +991,9 @@ img{image-rendering:auto;content-visibility:auto}
 }
 
 /* ══ CATÁLOGO SS 2027 (página nueva, estilos aislados en #page-catalogo) ══ */
-@font-face{font-family:"CatalogoCormorant";src:url("fonts/cormorant-400.woff") format("woff");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"CatalogoCormorant";src:url("fonts/cormorant-400-italic.woff") format("woff");font-weight:400;font-style:italic;font-display:swap}
-@font-face{font-family:"CatalogoCormorant";src:url("fonts/cormorant-700.woff") format("woff");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"CatalogoCormorant";src:url("cormorant-400.woff") format("woff");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"CatalogoCormorant";src:url("cormorant-400-italic.woff") format("woff");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"CatalogoCormorant";src:url("cormorant-700.woff") format("woff");font-weight:700;font-style:normal;font-display:swap}
 #page-catalogo{padding-top:56px;background:#f2efea;color:#1d1b19;font-family:"CatalogoCormorant","Cormorant Garamond",Garamond,"Times New Roman",serif;font-size:20px;line-height:1.5;letter-spacing:normal;min-height:100vh;text-align:left}
 #page-catalogo *,#page-catalogo *::before,#page-catalogo *::after{box-sizing:border-box}
 #page-catalogo button{font:inherit;color:inherit;cursor:pointer}
@@ -3317,10 +3317,10 @@ function renderSimilar(p){
     <div class="wrap">
       <div class="slider" data-kind="photos">
         <div class="slide-frame">
-          <img class="on" src="img/set-stripe.jpg" alt="The Summer Set, Blue and White Stripe">
-          <img src="img/set-white.jpg" alt="The Summer Set, White">
-          <img src="img/set-red.jpg" alt="The Summer Set, Red">
-          <img src="img/set-sky.jpg" alt="The Summer Set, Sky Blue">
+          <img class="on" src="set-stripe.jpg" alt="The Summer Set, Blue and White Stripe">
+          <img src="set-white.jpg" alt="The Summer Set, White">
+          <img src="set-red.jpg" alt="The Summer Set, Red">
+          <img src="set-sky.jpg" alt="The Summer Set, Sky Blue">
         </div>
         <div class="nav-row">
           <button type="button" class="big-btn prev" aria-label="Foto anterior">← Anterior</button>
@@ -3350,8 +3350,8 @@ function renderSimilar(p){
       <div class="slider" data-kind="video">
         <div class="slide-frame">
           <video id="dress-video" class="on" controls playsinline preload="metadata"
-                 poster="img/dress-sky-stripe-poster.jpg" aria-label="Video del Summer Mini Dress, color Sky Stripe">
-            <source src="videos/dress-sky-stripe.mp4" type="video/mp4">
+                 poster="dress-sky-stripe-poster.jpg" aria-label="Video del Summer Mini Dress, color Sky Stripe">
+            <source src="dress-sky-stripe.mp4" type="video/mp4">
           </video>
         </div>
         <p class="video-note">Toque el botón ▶ para ver el video.</p>
@@ -3364,11 +3364,11 @@ function renderSimilar(p){
 
         <p class="label">Elija un color</p>
         <div class="colors" role="group" aria-label="Colores">
-          <button type="button" data-video="videos/dress-sky-stripe.mp4" data-poster="img/dress-sky-stripe-poster.jpg" data-name="Sky Stripe" aria-pressed="true">Sky Stripe</button>
-          <button type="button" data-video="videos/dress-black-silk.mp4" data-poster="img/dress-black-silk-poster.jpg" data-name="Black Silk" aria-pressed="false">Black Silk</button>
-          <button type="button" data-video="videos/dress-pink-silk.mp4" data-poster="img/dress-pink-silk-poster.jpg" data-name="Pink Silk" aria-pressed="false">Pink Silk</button>
-          <button type="button" data-video="videos/dress-white-cloque.mp4" data-poster="img/dress-white-cloque-poster.jpg" data-name="White Cloqué" aria-pressed="false">White Cloqué</button>
-          <button type="button" data-video="videos/dress-white-broderie.mp4" data-poster="img/dress-white-broderie-poster.jpg" data-name="White Broderie" aria-pressed="false">White Broderie</button>
+          <button type="button" data-video="dress-sky-stripe.mp4" data-poster="dress-sky-stripe-poster.jpg" data-name="Sky Stripe" aria-pressed="true">Sky Stripe</button>
+          <button type="button" data-video="dress-black-silk.mp4" data-poster="dress-black-silk-poster.jpg" data-name="Black Silk" aria-pressed="false">Black Silk</button>
+          <button type="button" data-video="dress-pink-silk.mp4" data-poster="dress-pink-silk-poster.jpg" data-name="Pink Silk" aria-pressed="false">Pink Silk</button>
+          <button type="button" data-video="dress-white-cloque.mp4" data-poster="dress-white-cloque-poster.jpg" data-name="White Cloqué" aria-pressed="false">White Cloqué</button>
+          <button type="button" data-video="dress-white-broderie.mp4" data-poster="dress-white-broderie-poster.jpg" data-name="White Broderie" aria-pressed="false">White Broderie</button>
         </div>
 
         <ul class="facts">
@@ -3387,12 +3387,12 @@ function renderSimilar(p){
     <div class="wrap">
       <div class="slider" data-kind="photos">
         <div class="slide-frame">
-          <img class="on" src="img/suit-cobalt.jpg" alt="The Swimsuit, Cobalt">
-          <img src="img/suit-black-dot.jpg" alt="The Swimsuit, Black Polka Dot">
-          <img src="img/suit-red-dot.jpg" alt="The Swimsuit, Red Polka Dot">
-          <img src="img/suit-navy-dot.jpg" alt="The Swimsuit, Navy Micro Dot">
-          <img src="img/suit-red.jpg" alt="The Swimsuit, Red">
-          <img src="img/suit-red-stripe.jpg" alt="The Swimsuit, Red Stripe">
+          <img class="on" src="suit-cobalt.jpg" alt="The Swimsuit, Cobalt">
+          <img src="suit-black-dot.jpg" alt="The Swimsuit, Black Polka Dot">
+          <img src="suit-red-dot.jpg" alt="The Swimsuit, Red Polka Dot">
+          <img src="suit-navy-dot.jpg" alt="The Swimsuit, Navy Micro Dot">
+          <img src="suit-red.jpg" alt="The Swimsuit, Red">
+          <img src="suit-red-stripe.jpg" alt="The Swimsuit, Red Stripe">
         </div>
         <div class="nav-row">
           <button type="button" class="big-btn prev" aria-label="Foto anterior">← Anterior</button>
@@ -3420,13 +3420,13 @@ function renderSimilar(p){
     <div class="wrap">
       <div class="slider" data-kind="photos">
         <div class="slide-frame">
-          <img class="on" src="img/sleep-4.jpg" alt="The Sleep Set, de frente">
-          <img src="img/sleep-3.jpg" alt="The Sleep Set, de espalda">
-          <img src="img/sleep-2.jpg" alt="The Sleep Set, detalle del cuello">
-          <img src="img/sleep-1.jpg" alt="The Sleep Set, detalle del puño">
-          <img src="img/sleep-6.jpg" alt="The Sleep Set, pantalón de lado">
-          <img src="img/sleep-5.jpg" alt="The Sleep Set, detalle del dobladillo">
-          <img src="img/sleep-7.jpg" alt="The Sleep Set, detalle de la cintura">
+          <img class="on" src="sleep-4.jpg" alt="The Sleep Set, de frente">
+          <img src="sleep-3.jpg" alt="The Sleep Set, de espalda">
+          <img src="sleep-2.jpg" alt="The Sleep Set, detalle del cuello">
+          <img src="sleep-1.jpg" alt="The Sleep Set, detalle del puño">
+          <img src="sleep-6.jpg" alt="The Sleep Set, pantalón de lado">
+          <img src="sleep-5.jpg" alt="The Sleep Set, detalle del dobladillo">
+          <img src="sleep-7.jpg" alt="The Sleep Set, detalle de la cintura">
         </div>
         <div class="nav-row">
           <button type="button" class="big-btn prev" aria-label="Foto anterior">← Anterior</button>
