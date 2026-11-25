@@ -3287,6 +3287,18 @@ function renderSimilar(p){
 
 <!-- ══ CATÁLOGO SS 2027 ══ -->
 <div class="page" id="page-catalogo">
+  <!-- Contraseña del catálogo -->
+  <div id="catGate" style="position:fixed;inset:0;z-index:650;background:#f2efea;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;font-family:'CatalogoCormorant','Cormorant Garamond',Garamond,serif;color:#1d1b19">
+    <p style="font-size:44px;letter-spacing:.2em;margin:0 0 10px">de Lavalle</p>
+    <p style="font-size:20px;letter-spacing:.4em;color:#5a554e;margin:0 0 36px">catalog</p>
+    <form id="catGateForm" style="display:flex;flex-direction:column;gap:14px;width:min(320px,90vw)">
+      <label for="catPass" style="font-size:20px;color:#5a554e">Contraseña</label>
+      <input id="catPass" type="password" autocomplete="off" style="font:inherit;font-size:22px;padding:10px 4px;border:0;border-bottom:1px solid #1d1b19;background:transparent;text-align:center;color:#1d1b19;outline:none">
+      <button type="submit" style="min-height:56px;background:#1d1b19;color:#f2efea;border:0;font:inherit;font-size:20px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">Entrar</button>
+      <p id="catPassErr" style="display:none;margin:0;font-size:18px;color:#8b3a2a">Contraseña incorrecta.</p>
+    </form>
+  </div>
+
   <div class="cat-header" id="cat-top">
     <p class="wordmark">de Lavalle</p>
     <p class="season">catalog</p>
@@ -3767,6 +3779,27 @@ function goCatalogo(){ showPage('catalogo'); }
       video.load();
       colorName.textContent = btn.getAttribute('data-name');
     });
+  });
+})();
+</script>
+
+<script>
+/* Acceso al catálogo con contraseña */
+(function () {
+  var gate = document.getElementById('catGate');
+  if (!gate) return;
+  var KEY = 'catUnlocked';
+  try { if (sessionStorage.getItem(KEY) === '1') gate.style.display = 'none'; } catch (e) {}
+  document.getElementById('catGateForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var input = document.getElementById('catPass');
+    if (input.value.trim().toUpperCase() === 'CONCHO') {
+      gate.style.display = 'none';
+      try { sessionStorage.setItem(KEY, '1'); } catch (err) {}
+    } else {
+      document.getElementById('catPassErr').style.display = 'block';
+      input.select();
+    }
   });
 })();
 </script>
