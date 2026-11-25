@@ -989,6 +989,56 @@ img{image-rendering:auto;content-visibility:auto}
   .similar-section{padding:40px 16px 40px}
   .similar-grid{grid-template-columns:repeat(2,1fr);gap:12px}
 }
+
+/* ══ CATÁLOGO SS 2027 (página nueva, estilos aislados en #page-catalogo) ══ */
+@font-face{font-family:"CatalogoCormorant";src:url("fonts/cormorant-400.woff") format("woff");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"CatalogoCormorant";src:url("fonts/cormorant-400-italic.woff") format("woff");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"CatalogoCormorant";src:url("fonts/cormorant-700.woff") format("woff");font-weight:700;font-style:normal;font-display:swap}
+#page-catalogo{padding-top:56px;background:#f2efea;color:#1d1b19;font-family:"CatalogoCormorant","Cormorant Garamond",Garamond,"Times New Roman",serif;font-size:20px;line-height:1.5;letter-spacing:normal;min-height:100vh;text-align:left}
+#page-catalogo *,#page-catalogo *::before,#page-catalogo *::after{box-sizing:border-box}
+#page-catalogo button{font:inherit;color:inherit;cursor:pointer}
+#page-catalogo a{color:#1d1b19}
+#page-catalogo .cat-header{text-align:center;padding:56px 16px 40px}
+#page-catalogo .wordmark{font-size:52px;letter-spacing:.2em;margin:0;font-weight:400;line-height:1.1}
+#page-catalogo .season{font-size:20px;margin:10px 0 0;letter-spacing:.4em;color:#5a554e}
+#page-catalogo .tagline{font-size:19px;margin:28px 0 0;letter-spacing:.16em;text-transform:uppercase;color:#5a554e}
+#page-catalogo .cat-menu{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;max-width:900px;margin:0 auto;padding:0 16px 36px}
+#page-catalogo .cat-menu a{display:inline-flex;align-items:center;min-height:56px;padding:10px 6px;text-decoration:none;font-size:24px;letter-spacing:.04em;border-bottom:1px solid #1d1b19;cursor:pointer}
+#page-catalogo .cat-menu a:hover,#page-catalogo .cat-menu a:active{color:#5a554e;border-color:#5a554e}
+#page-catalogo .prod{padding:56px 16px;border-top:1px solid #d6d0c6;scroll-margin-top:12px}
+#page-catalogo .wrap{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:1.15fr 1fr;gap:48px;align-items:start}
+#page-catalogo .num{display:block;font-size:21px;margin:0 0 14px;color:#5a554e}
+#page-catalogo h2{font-weight:700;font-size:42px;line-height:1.15;margin:0 0 14px}
+#page-catalogo .price{font-size:28px;font-weight:700;margin:0 0 22px}
+#page-catalogo .desc{font-size:24px;margin:0 0 26px;text-align:justify;hyphens:auto}
+#page-catalogo .label{font-size:23px;font-style:italic;margin:22px 0 10px;color:#5a554e}
+#page-catalogo .facts{margin:0 0 6px;padding:0;list-style:none}
+#page-catalogo .facts li{font-size:24px;font-style:italic;line-height:1.6}
+#page-catalogo .sizes{margin:0;padding:0;list-style:none;font-size:24px;font-style:italic}
+#page-catalogo .sizes li{display:inline}
+#page-catalogo .sizes li+li::before{content:" · "}
+#page-catalogo .slider{position:relative}
+#page-catalogo .slide-frame{position:relative;background:#e7e1d8;padding:18px}
+#page-catalogo .slide-frame img,#page-catalogo .slide-frame video{display:none;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;background:#f2efea}
+#page-catalogo .slide-frame img.on,#page-catalogo .slide-frame video.on{display:block}
+#page-catalogo .nav-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
+#page-catalogo .big-btn{min-height:56px;min-width:56px;padding:10px 14px;background:transparent;border:1px solid #1d1b19;font-size:23px;letter-spacing:.04em}
+#page-catalogo .big-btn:hover,#page-catalogo .big-btn:active{background:#1d1b19;color:#f2efea}
+#page-catalogo .counter{font-size:23px;font-style:italic}
+#page-catalogo .colors{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0 0 6px}
+#page-catalogo .colors button{min-height:52px;padding:8px 2px;background:none;border:0;border-bottom:1px solid transparent;font-size:24px;font-style:italic}
+#page-catalogo .colors button[aria-pressed="true"]{font-weight:700;font-style:normal;border-bottom-color:#1d1b19}
+#page-catalogo .video-note{font-size:22px;font-style:italic;color:#5a554e;margin:14px 0 0}
+#page-catalogo .back-top{display:block;width:max-content;margin:8px auto 0;min-height:56px;padding:14px 20px;font-size:23px;letter-spacing:.08em;text-decoration:none;text-transform:uppercase;cursor:pointer}
+#page-catalogo .cat-footer{text-align:center;font-size:20px;color:#5a554e;padding:36px 16px 56px;letter-spacing:.14em;text-transform:uppercase;border-top:1px solid #d6d0c6}
+@media (max-width:760px){
+  #page-catalogo .cat-header{padding:40px 16px 30px}
+  #page-catalogo .wordmark{font-size:42px}
+  #page-catalogo .wrap{grid-template-columns:1fr;gap:28px}
+  #page-catalogo h2{font-size:38px}
+  #page-catalogo .price{font-size:28px}
+  #page-catalogo .cat-menu a{font-size:22px}
+}
 </style>
 </head>
 <body>
@@ -1004,6 +1054,7 @@ img{image-rendering:auto;content-visibility:auto}
       <button class="nav-btn" onclick="goHomePage()" data-i18n="nav_home">Home</button>
       
       <button class="nav-btn" onclick="goGalerie()" data-i18n="nav_gallery">Gallery</button>
+      <button class="nav-btn" onclick="goCatalogo()">Catalog</button>
       <button class="nav-btn" onclick="goMadeToMeasure()">Made to Measure</button>
     </nav>
     <div class="logo-wrap" onclick="goLanding()">
@@ -3101,6 +3152,7 @@ showPage = function(id){
     'galerie':'/gallery', 'saved':'/saved', 'checkout':'/checkout',
     'about':'/about', 'collections':'/collections',
     'made-to-measure':'#made-to-measure',
+    'catalogo':'/catalogo',
   };
   if(window._noPush) return;
   const p = paths[id] || '/';
@@ -3185,6 +3237,7 @@ window.addEventListener('popstate', ()=>{window._noPush=false;});
   if(path==='/saved'){goSaved();return;}
   if(path==='/about'){goAbout();return;}
   if(path==='/collections'){goCollections();return;}
+  if(path==='/catalogo'){_showPage('catalogo');return;}
 })();
 
 
@@ -3230,6 +3283,163 @@ function renderSimilar(p){
 }
 
 </script>
+
+
+<!-- ══ CATÁLOGO SS 2027 ══ -->
+<div class="page" id="page-catalogo">
+  <div class="cat-header" id="cat-top">
+    <p class="wordmark">de Lavalle</p>
+    <p class="season">catalog</p>
+    <p class="tagline">SS 2027 · Ethically made in Perú</p>
+  </div>
+
+  <div class="cat-menu">
+    <a data-go="cat-summer-set">The Summer Set</a>
+    <a data-go="cat-summer-dress">Summer Mini Dress</a>
+    <a data-go="cat-swimsuit">The Swimsuit</a>
+    <a data-go="cat-sleep-set">The Sleep Set</a>
+  </div>
+
+  <!-- THE SUMMER SET -->
+  <div class="prod" id="cat-summer-set">
+    <div class="wrap">
+      <div class="slider" data-kind="photos">
+        <div class="slide-frame">
+          <img class="on" src="img/set-stripe.jpg" alt="The Summer Set, Blue and White Stripe">
+          <img src="img/set-white.jpg" alt="The Summer Set, White">
+          <img src="img/set-red.jpg" alt="The Summer Set, Red">
+          <img src="img/set-sky.jpg" alt="The Summer Set, Sky Blue">
+        </div>
+        <div class="nav-row">
+          <button type="button" class="big-btn prev" aria-label="Foto anterior">← Anterior</button>
+          <span class="counter">1 / 4</span>
+          <button type="button" class="big-btn next" aria-label="Foto siguiente">Siguiente →</button>
+        </div>
+      </div>
+      <div class="info">
+        <span class="num">01</span>
+        <h2>The Summer Set</h2>
+        <p class="price">S/ 510</p>
+        <p class="desc">Vestido camisero relajado con cuello suave y estructurado, y botonadura oculta al frente. Mangas cortas con puños vueltos profundos. Cinturón anudado a la cintura y falda ligeramente acampanada. Se presenta con un short a juego.</p>
+        <ul class="facts">
+          <li>Tela: 100% algodón Pima</li>
+          <li>Colores: Blue and White Stripe, White, Red, Sky Blue</li>
+          <li>Producción: 1 semana</li>
+        </ul>
+        <p class="label">Tallas</p>
+        <ul class="sizes"><li>XS</li><li>S</li><li>M</li><li>L</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMER MINI DRESS -->
+  <div class="prod" id="cat-summer-dress">
+    <div class="wrap">
+      <div class="slider" data-kind="video">
+        <div class="slide-frame">
+          <video id="dress-video" class="on" controls playsinline preload="metadata"
+                 poster="img/dress-sky-stripe-poster.jpg" aria-label="Video del Summer Mini Dress, color Sky Stripe">
+            <source src="videos/dress-sky-stripe.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-note">Toque el botón ▶ para ver el video.</p>
+      </div>
+      <div class="info">
+        <span class="num">02</span>
+        <h2>Summer Mini Dress</h2>
+        <p class="price">S/ 420</p>
+        <p class="desc">Minivestido de 100% algodón. Escote recto con tirantes anudados en los hombros. Falda en A con cinturón largo anudado a la cintura. Forrado completamente en la misma tela.</p>
+
+        <p class="label">Elija un color</p>
+        <div class="colors" role="group" aria-label="Colores">
+          <button type="button" data-video="videos/dress-sky-stripe.mp4" data-poster="img/dress-sky-stripe-poster.jpg" data-name="Sky Stripe" aria-pressed="true">Sky Stripe</button>
+          <button type="button" data-video="videos/dress-black-silk.mp4" data-poster="img/dress-black-silk-poster.jpg" data-name="Black Silk" aria-pressed="false">Black Silk</button>
+          <button type="button" data-video="videos/dress-pink-silk.mp4" data-poster="img/dress-pink-silk-poster.jpg" data-name="Pink Silk" aria-pressed="false">Pink Silk</button>
+          <button type="button" data-video="videos/dress-white-cloque.mp4" data-poster="img/dress-white-cloque-poster.jpg" data-name="White Cloqué" aria-pressed="false">White Cloqué</button>
+          <button type="button" data-video="videos/dress-white-broderie.mp4" data-poster="img/dress-white-broderie-poster.jpg" data-name="White Broderie" aria-pressed="false">White Broderie</button>
+        </div>
+
+        <ul class="facts">
+          <li>Tela: 100% algodón</li>
+          <li>Color: <span id="dress-color">Sky Stripe</span></li>
+        </ul>
+
+        <p class="label">Tallas</p>
+        <ul class="sizes"><li>XS</li><li>S</li><li>M</li><li>L</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE SWIMSUIT -->
+  <div class="prod" id="cat-swimsuit">
+    <div class="wrap">
+      <div class="slider" data-kind="photos">
+        <div class="slide-frame">
+          <img class="on" src="img/suit-cobalt.jpg" alt="The Swimsuit, Cobalt">
+          <img src="img/suit-black-dot.jpg" alt="The Swimsuit, Black Polka Dot">
+          <img src="img/suit-red-dot.jpg" alt="The Swimsuit, Red Polka Dot">
+          <img src="img/suit-navy-dot.jpg" alt="The Swimsuit, Navy Micro Dot">
+          <img src="img/suit-red.jpg" alt="The Swimsuit, Red">
+          <img src="img/suit-red-stripe.jpg" alt="The Swimsuit, Red Stripe">
+        </div>
+        <div class="nav-row">
+          <button type="button" class="big-btn prev" aria-label="Foto anterior">← Anterior</button>
+          <span class="counter">1 / 6</span>
+          <button type="button" class="big-btn next" aria-label="Foto siguiente">Siguiente →</button>
+        </div>
+      </div>
+      <div class="info">
+        <span class="num">03</span>
+        <h2>The Swimsuit</h2>
+        <p class="price">S/ 320</p>
+        <p class="desc">Escote bajo en U y tirantes anchos. Corte alto en la pierna. Acabado con costuras de contraste en los bordes.</p>
+        <ul class="facts">
+          <li>Colores: Cobalt, Black Polka Dot, Red Polka Dot, Navy Micro Dot, Red, Red Stripe</li>
+          <li>Producción: Listo para enviar</li>
+        </ul>
+        <p class="label">Tallas</p>
+        <ul class="sizes"><li>XS</li><li>S</li><li>M</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE SLEEP SET -->
+  <div class="prod" id="cat-sleep-set">
+    <div class="wrap">
+      <div class="slider" data-kind="photos">
+        <div class="slide-frame">
+          <img class="on" src="img/sleep-4.jpg" alt="The Sleep Set, de frente">
+          <img src="img/sleep-3.jpg" alt="The Sleep Set, de espalda">
+          <img src="img/sleep-2.jpg" alt="The Sleep Set, detalle del cuello">
+          <img src="img/sleep-1.jpg" alt="The Sleep Set, detalle del puño">
+          <img src="img/sleep-6.jpg" alt="The Sleep Set, pantalón de lado">
+          <img src="img/sleep-5.jpg" alt="The Sleep Set, detalle del dobladillo">
+          <img src="img/sleep-7.jpg" alt="The Sleep Set, detalle de la cintura">
+        </div>
+        <div class="nav-row">
+          <button type="button" class="big-btn prev" aria-label="Foto anterior">← Anterior</button>
+          <span class="counter">1 / 7</span>
+          <button type="button" class="big-btn next" aria-label="Foto siguiente">Siguiente →</button>
+        </div>
+      </div>
+      <div class="info">
+        <span class="num">04</span>
+        <h2>The Sleep Set</h2>
+        <p class="price">S/ 480</p>
+        <p class="desc">Pijama de dos piezas. Camisa relajada con cuello de muesca, botonadura central, botones de nácar y puños anchos con abertura. Pantalón de pierna ancha con cintura elástica fruncida, bragueta funcional y aberturas laterales.</p>
+        <ul class="facts">
+          <li>Tela: 100% algodón Pima</li>
+          <li>Color: Sky Dobby Stripe</li>
+        </ul>
+        <p class="label">Tallas</p>
+        <ul class="sizes"><li>XS</li><li>S</li><li>M</li><li>L</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <a class="back-top" data-go="cat-top">↑ Volver arriba</a>
+  <div class="cat-footer">catalog SS 2027 · Ethically made in Perú</div>
+</div>
 
 <!-- ══ SAVED PAGE ══ -->
 <div class="page" id="page-saved">
@@ -3392,6 +3602,7 @@ function renderSimilar(p){
     </div>
     <button onclick="closeMobileMenu();goHomePage()">Home</button>
     <button onclick="closeMobileMenu();goGalerie()">Gallery</button>
+    <button onclick="closeMobileMenu();goCatalogo()">Catalog</button>
     <button onclick="closeMobileMenu();goMadeToMeasure()">Made to Measure</button>
   </nav>
   <div class="mobile-nav-bottom">
@@ -3513,6 +3724,51 @@ if(window.location.hash==='#made-to-measure'){
 } else if(!document.querySelector('.page.active')){
   showPage('home');
 }
+</script>
+
+<script>
+/* ══ CATÁLOGO SS 2027: navegación interna, fotos y colores ══ */
+function goCatalogo(){ showPage('catalogo'); }
+(function () {
+  var page = document.getElementById('page-catalogo');
+  if (!page) return;
+  // Enlaces internos: desplazan dentro de la página (no cambian de dirección)
+  page.querySelectorAll('[data-go]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var t = document.getElementById(a.getAttribute('data-go'));
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+  // Galerías de fotos
+  page.querySelectorAll('.slider[data-kind="photos"]').forEach(function (slider) {
+    var imgs = slider.querySelectorAll('.slide-frame img');
+    var counter = slider.querySelector('.counter');
+    var i = 0;
+    function show(n) {
+      imgs[i].classList.remove('on');
+      i = (n + imgs.length) % imgs.length;
+      imgs[i].classList.add('on');
+      counter.textContent = (i + 1) + ' / ' + imgs.length;
+    }
+    slider.querySelector('.prev').addEventListener('click', function () { show(i - 1); });
+    slider.querySelector('.next').addEventListener('click', function () { show(i + 1); });
+  });
+  // Vestido: cambiar de color cambia el video (sin reproducirlo solo)
+  var video = document.getElementById('dress-video');
+  var colorName = document.getElementById('dress-color');
+  var buttons = page.querySelectorAll('.colors button');
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+      video.poster = btn.getAttribute('data-poster');
+      video.setAttribute('aria-label', 'Video del Summer Mini Dress, color ' + btn.getAttribute('data-name'));
+      video.src = btn.getAttribute('data-video');
+      video.load();
+      colorName.textContent = btn.getAttribute('data-name');
+    });
+  });
+})();
 </script>
 </body>
 </html>
